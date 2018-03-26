@@ -1,7 +1,7 @@
-var worldArray = "01234567890ABCDEFGHIJKLMNOPQ"
+var worldArray = "00000001000001000001001"
 
 function world() {
-	console.log(worldArray[27])
+	console.log(worldArray[27] + "\n" + worldArray.length)
 }
 
 world();
