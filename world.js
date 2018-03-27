@@ -7,7 +7,7 @@ var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
 var topfacing = directionArray[4];
 var fieldOfViewBack = [currentLocation-Math.pow(x,2)*2-y,currentLocation-Math.pow(x,2)*2,currentLocation-Math.pow(x,2)*2+y,currentLocation-Math.pow(x,2)-y,currentLocation-Math.pow(x,2),currentLocation-Math.pow(x,2)+y,currentLocation-y,currentLocation,currentLocation+y];
-var fieldOfViewFront = []
+var fieldOfViewFront = [];
 var currentMoves = [];
 
 ////             y+ /z+
@@ -52,7 +52,6 @@ function generateWorld() {
 		else {
 			worldArray.push(0);	
 		}
-		
 	}
 }
 
