@@ -6,7 +6,7 @@ var currentLocation = 26;
 var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
 var topfacing = directionArray[4];
-var fieldOfViewBack = [currentLocation-Math.pow(x,2)*2-y,currentLocation-Math.pow(x,2)*2,currentLocation-Math.pow(x,2)*2+y,currentLocation-Math.pow(x,2)-y,currentLocation-Math.pow(x,2),currentLocation-Math.pow(x,2)+y,currentLocation-y,currentLocation,currentLocation+y];
+var fieldOfViewBack = [currentLocation-(x*x)*2-y,currentLocation-(x*x)*2,currentLocation-(x*x)*2+y,currentLocation-(x*x)-y,currentLocation-(x*x),currentLocation-(x*x)+y,currentLocation-y,currentLocation,currentLocation+y];
 var fieldOfViewFront = [];
 var currentMoves = [];
 
@@ -22,30 +22,68 @@ var currentMoves = [];
 
 document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 
-function fieldOfViewBasedOnFacingDirection() {
+function fieldOfViewBasedOnDirection() {
 	switch (direction) {
-		case "N":
-			y = 1;
-			break;
-		case "E":
-			y = x;
-			break;
-		case "S":
-			y = -1;
-			break;
-		case "W":
-			y = -x;
-			break;
-		default:
-			console.alert("Error");
+	case "N":
+		y = 1;
+		break;
+	case "E":
+		y = x;
+		break;
+	case "S":
+		y = -1;
+		break;
+	case "W":
+		y = -x;
+		break;
+	default:
+		console.alert("Error");
 	}
-	fieldOfViewBack = [currentLocation-Math.pow(x,2)*2-y,currentLocation-Math.pow(x,2)*2,currentLocation-Math.pow(x,2)*2+y,currentLocation-Math.pow(x,2)-y,currentLocation-Math.pow(x,2),currentLocation-Math.pow(x,2)+y,currentLocation-y,currentLocation,currentLocation+y];
+	fieldOfViewBack = [currentLocation-(x*x)*2-y,currentLocation-(x*x)*2,currentLocation-(x*x)*2+y,currentLocation-(x*x)-y,currentLocation-(x*x),currentLocation-(x*x)+y,currentLocation-y,currentLocation,currentLocation+y];
 }
 
-fieldOfViewBasedOnFacingDirection()
+function yaw(lr) {
+	if (lr == "left") {
+		switch (direction) {
+		case "N":
+			direction = directionArray[3];
+			break;
+		case "E":
+			direction = directionArray[0];
+			break;
+		case "S":
+			direction = directionArray[1];
+			break;
+		case "W":
+			direction = directionArray[2];
+			break;
+		}
+	}
+	if (lr == "right") {
+		switch (direction) {
+		case "N":
+			direction = directionArray[1];
+			break;
+		case "E":
+			direction = directionArray[2];
+			break;
+		case "S":
+			direction = directionArray[3];
+			break;
+		case "W":
+			direction = directionArray[0];
+			break;
+		}
+	}
+	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
+	fieldOfViewBasedOnDirection();
+	fieldOfView();
+}
+
+fieldOfViewBasedOnDirection()
 
 function generateWorld() {
-	for (i=0;i<Math.pow(x,3);i++) {
+	for (i=0;i<(x*x*x);i++) {
 		if (worldArray.length%6==0) {
 			worldArray.push(1);	
 		}
