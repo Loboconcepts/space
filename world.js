@@ -2,12 +2,10 @@ var worldArray = [];
 var orientation = "BACK";
 var x = 3;
 var y = 1;
-var currentLocation = 24;
-var yawArray = ["N","E","S","W"];
-var yaw = yawArray[3];
-var pitchArray = ["UP","F","DOWN"];
-var pitch = pitchArray[1];
-var rollArray = ["UPSIDEUP","RIGHT","UPSIDEDOWN","LEFT"]
+var currentLocation = 26;
+var directionArray = ["N","E","S","W","UP","DOWN"];
+var direction = directionArray[0];
+var topfacing = directionArray[4];
 var fieldOfViewBack = [currentLocation-Math.pow(x,2)*2-y,currentLocation-Math.pow(x,2)*2,currentLocation-Math.pow(x,2)*2+y,currentLocation-Math.pow(x,2)-y,currentLocation-Math.pow(x,2),currentLocation-Math.pow(x,2)+y,currentLocation-y,currentLocation,currentLocation+y];
 var fieldOfViewFront = []
 var currentMoves = [];
@@ -22,10 +20,10 @@ var currentMoves = [];
 
 
 
-document.querySelector("#compass").innerHTML = "Direction: " + yaw;
+document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 
 function fieldOfViewBasedOnFacingDirection() {
-	switch (yaw) {
+	switch (direction) {
 		case "N":
 			y = 1;
 			break;
