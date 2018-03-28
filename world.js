@@ -2,12 +2,13 @@ var worldArray = [];
 var orientation = "BACK";
 var x = 3;
 var y = 1;
-var currentLocation = 26;
+var z = x;
+var currentLocation = 23;
 var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
 var topfacing = directionArray[4];
 var fieldOfViewBack = [currentLocation-(x*x)*2-y,currentLocation-(x*x)*2,currentLocation-(x*x)*2+y,currentLocation-(x*x)-y,currentLocation-(x*x),currentLocation-(x*x)+y,currentLocation-y,currentLocation,currentLocation+y];
-var fieldOfViewFront = [];
+var fieldOfViewFront = [currentLocation-(z*2)-1,currentLocation-(z*2),currentLocation-(z*2)+1,currentLocation+(x/z)-1,currentLocation+(x/z),currentLocation+(x/z)-z,currentLocation-(x/z),currentLocation,currentLocation+(x/z)];
 var currentMoves = [];
 
 ////             y+ /z+
@@ -26,20 +27,25 @@ function fieldOfViewBasedOnDirection() {
 	switch (direction) {
 	case "N":
 		y = 1;
+		z = x;
 		break;
 	case "E":
 		y = x;
+		z = 1;
 		break;
 	case "S":
 		y = -1;
+		z = -x;
 		break;
 	case "W":
 		y = -x;
+		z = 1;
 		break;
 	default:
 		console.alert("Error");
 	}
 	fieldOfViewBack = [currentLocation-(x*x)*2-y,currentLocation-(x*x)*2,currentLocation-(x*x)*2+y,currentLocation-(x*x)-y,currentLocation-(x*x),currentLocation-(x*x)+y,currentLocation-y,currentLocation,currentLocation+y];
+	fieldOfViewFront = [currentLocation-(z*2)-1,currentLocation-(z*2),currentLocation-(z*2)+1,currentLocation+(x/z)-1,currentLocation+(x/z),currentLocation+(x/z)-z,currentLocation-(x/z),currentLocation,currentLocation+(x/z)];
 }
 
 function yaw(lr) {
@@ -117,15 +123,15 @@ function fieldOfView() {
 		tableView(2,2,fieldOfViewBack[8]); //27
 	}
 	if (orientation == "TOP") {
-		tableView(0,0,"1"); //19
-		tableView(0,1,"2"); //20
-		tableView(0,2,"3"); //21
-		tableView(1,0,"4"); //22
-		tableView(1,1,"5"); //23
-		tableView(1,2,"6"); //24
-		tableView(2,0,"7"); //25
+		tableView(0,0,fieldOfViewFront[0]); //19
+		tableView(0,1,fieldOfViewFront[1]); //20
+		tableView(0,2,fieldOfViewFront[2]); //21
+		tableView(1,0,fieldOfViewFront[3]); //22
+		tableView(1,1,fieldOfViewFront[4]); //23
+		tableView(1,2,fieldOfViewFront[5]); //24
+		tableView(2,0,fieldOfViewFront[6]); //25
 		tableView(2,1,"&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;"); //26
-		tableView(2,2,"9"); //27
+		tableView(2,2,fieldOfViewFront[8]); //27
 	}
 }
 
