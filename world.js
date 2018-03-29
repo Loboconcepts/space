@@ -1,9 +1,9 @@
 var worldArray = [];
 var i = 0;
-var x = 3;
-var y = 9;
+var x = 4;
+var y = x*x;
 var z = 1;
-var currentLocation = 23;
+var currentLocation = 64;
 var viewOrient = "BACK";
 var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
@@ -72,7 +72,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 			console.log("error");
 	};
 	switch (Math.abs(fm) + Math.abs(um)) {
-		case 12:
+		case (x+y):
 			if (fm*um < 0) {
 				lm = -z;
 			}
@@ -80,7 +80,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 				lm = z;
 			}
 			break;
-		case 10:
+		case (z+y):
 			if (fm*um < 0) {
 				lm = x;
 			}
@@ -88,7 +88,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 				lm = -x;
 			}
 			break;
-		case 4:
+		case (z+x):
 			if (fm*um < 0) {
 				lm = y;
 			}
@@ -162,34 +162,38 @@ function yaw(lr) {
 		}
 	}
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
-	cubeShipPositioning(direction,"UP", 23, viewOrient);
+	cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 }
 
 function generateWorld() {
 	for (i=0;i<(x*x*x);i++) {
-		if (worldArray.length%6==0) {
-			worldArray.push(1);	
-		}
-		else {
-			worldArray.push(0);	
-		}
+		worldArray.push(0);		
 	}
 }
 
 function switchOrientation() {
 	if (viewOrient == "BACK") {
 		viewOrient = "TOP";
-		cubeShipPositioning(direction,"UP", 23, viewOrient);
+		cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 	}
 	else {
 		viewOrient = "BACK";
-		cubeShipPositioning(direction,"UP", 23, viewOrient);
+		cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 	}
 }
 
 function tableView(id,isWhat) {
-	document.querySelector("#" + id).innerHTML = isWhat;
+	if (isWhat > worldArray.length) {
+		document.querySelector("#" + id).innerHTML = isWhat - worldArray.length;
+	}
+	else if (isWhat < 1) {
+		document.querySelector("#" + id).innerHTML = isWhat + worldArray.length;
+	}
+	else {
+		document.querySelector("#" + id).innerHTML = isWhat;	
+	}
+	
 }
 
 generateWorld();
-cubeShipPositioning(direction,"UP", 23, viewOrient);
+cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
