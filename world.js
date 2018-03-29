@@ -1,21 +1,22 @@
 var worldArray = [];
 var i = 0;
-var x = 4;
+var x = 3;
 var y = x*x;
 var z = 1;
-var currentLocation = 64;
+var currentLocation = 23;
 var viewOrient = "BACK";
-var directionArray = ["N","E","S","W","UP","DOWN"];
-var direction = directionArray[0];
-var topfacing = directionArray[4];
+var dArr = ["UP","N","DOWN","W","UP","S","DOWN","E"];
+var direction = dArr[1];
+var topfacing = dArr[0];
 
-////             y+ /z+
+
+////             y- /x-
 ////             | /
 ////             |/
-////  	x+_______*_______x-
+////  	z-_______*_______z+
 ////            /|
 ////           / |
-////       z- /  y-
+////       x+ /  y+
 
 
 
@@ -43,7 +44,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		case "UP":
 			fm = -y;
 			break;
-		case "down":
+		case "DOWN":
 			fm = y;
 			break;
 		default:
@@ -65,7 +66,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		case "UP":
 			um = -y;
 			break;
-		case "down":
+		case "DOWN":
 			um = y;
 			break;
 		default:
@@ -96,8 +97,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 				lm = -y;
 			}
 			break;
-		default:
-			console.log("error");
+		default: console.log("error");
 	}
 	if (orient == "BACK") {
 		tableView("t0-0",(pos + 2*um - lm));
@@ -124,46 +124,67 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
 
-function pitch(lr) {
-	console.log(lr);
-}
 
-function yaw(lr) {
-	if (lr == "left") {
-		switch (direction) {
-		case "N":
-			direction = "W";
-			break;
-		case "E":
-			direction = "N";
-			break;
-		case "S":
-			direction = "E";
-			break;
-		case "W":
-			direction = "S";
-			break;
-		}
+function shipRotation(rAxes, lr) {
+	var axis
+	if (direction == "N" || direction == "S") {
+		axis = x;
 	}
-	if (lr == "right") {
-		switch (direction) {
-		case "N":
-			direction = "E";
-			break;
-		case "E":
-			direction = "S";
-			break;
-		case "S":
-			direction = "W";
-			break;
-		case "W":
-			direction = "N";
-			break;
-		}
+	else if (direction == "W" || direction == "E") {
+		axis = z;
 	}
+	else if (direction == "UP" || direction == "DOWN") {
+		axis = y;
+	}
+	if (direction == "S" || direction == "E" || direction == "DOWN") {
+		axis = axis * -1;
+	}
+
+	if (topfacing == "N") {
+		axis = axis * -1;
+	}
+	if (topfacing == "UP") {
+		axis = axis * -1;
+	}
+	if (topfacing == "W") {
+		axis = axis * 3;
+	}
+
+	switch(axis * lr) {
+		case z:
+			if (rAxes=="YAW") {direction = "S"};
+			console.log("z");
+			break;
+		case -z:
+			if (rAxes=="YAW") {direction = "N"};
+			console.log("-z");
+			break;
+		case x:
+			if (rAxes=="YAW") {direction = "E"};
+			if (rAxes=="ROLL") {topfacing = "E"};
+			console.log("x");
+			break;
+		case -x:
+			if (rAxes=="YAW") {direction = "E"};
+			if (rAxes=="ROLL") {topfacing = "E"};
+			console.log("-x");
+			break
+		case y:
+			console.log("y");
+			if (rAxes=="ROLL") {topfacing = "DOWN"};
+			break;
+		case -y:
+			if (rAxes=="ROLL") {topfacing = "UP"};
+			console.log("-y");
+			break;
+		default: console.log("error");
+	}
+
+	console.log(axis + " " + rAxes + " " + lr);
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 	cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 }
+
 
 function generateWorld() {
 	for (i=0;i<(x*x*x);i++) {
@@ -194,6 +215,5 @@ function tableView(id,isWhat) {
 	}
 	
 }
-
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
