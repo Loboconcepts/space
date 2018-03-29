@@ -4,7 +4,7 @@ var x = 3;
 var y = 9;
 var z = 1;
 var currentLocation = 23;
-var orientation = "BACK";
+var viewOrient = "BACK";
 var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
 var topfacing = directionArray[4];
@@ -121,9 +121,6 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
 		tableView("t2-2",(pos + lm));
 	}
-	console.log(orientation);
-	console.log(orient);
-	console.log((pos + 2*um - lm));
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
 
@@ -165,7 +162,7 @@ function yaw(lr) {
 		}
 	}
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
-	cubeShipPositioning(direction,"UP", 23, orientation);
+	cubeShipPositioning(direction,"UP", 23, viewOrient);
 }
 
 function generateWorld() {
@@ -180,13 +177,13 @@ function generateWorld() {
 }
 
 function switchOrientation() {
-	if (orientation == "BACK") {
-		orientation = "TOP";
-		cubeShipPositioning(direction,"UP", 23, orientation);
+	if (viewOrient == "BACK") {
+		viewOrient = "TOP";
+		cubeShipPositioning(direction,"UP", 23, viewOrient);
 	}
 	else {
-		orientation = "BACK";
-		cubeShipPositioning(direction,"UP", 23, orientation);
+		viewOrient = "BACK";
+		cubeShipPositioning(direction,"UP", 23, viewOrient);
 	}
 }
 
@@ -195,5 +192,5 @@ function tableView(id,isWhat) {
 }
 
 generateWorld();
-cubeShipPositioning(direction,"UP", 23, orientation);
+cubeShipPositioning(direction,"UP", 23, viewOrient);
 document.querySelector("#t0-0").innerHTML = "HI";
