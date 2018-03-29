@@ -100,7 +100,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 			console.log("error");
 	}
 	if (orient == "BACK") {
-		// tableView("t0-0",(pos + 2*um - lm));
+		tableView("t0-0",(pos + 2*um - lm));
 		tableView("t0-1",(pos + 2*um));
 		tableView("t0-2",(pos + 2*um + lm));
 		tableView("t1-0",(pos + um - lm));
@@ -193,4 +193,3 @@ function tableView(id,isWhat) {
 
 generateWorld();
 cubeShipPositioning(direction,"UP", 23, viewOrient);
-document.querySelector("#t0-0").innerHTML = "HI";
