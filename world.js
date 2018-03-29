@@ -4,7 +4,7 @@ var x = 3;
 var y = 9;
 var z = 1;
 var currentLocation = 23;
-var orientation = "BACK"
+var orientation = "BACK";
 var directionArray = ["N","E","S","W","UP","DOWN"];
 var direction = directionArray[0];
 var topfacing = directionArray[4];
@@ -111,20 +111,19 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-2",(pos + lm)); 
 	}
 	if (orient == "TOP") {
-		tableView("t0-0",(pos + 2*fm - lm)); //19
-		tableView("t0-1",(pos + 2*fm)); //20
-		tableView("t0-2",(pos + 2*fm + lm)); //21
-		tableView("t1-0",(pos + fm - lm)); //22
-		tableView("t1-1",(pos + fm)); //23
-		tableView("t1-2",(pos + fm + lm)); //24
-		tableView("t2-0",(pos - lm)); //25
-		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;"); //26
-		tableView("t2-2",(pos + lm)); //27
+		tableView("t0-0",(pos + 2*fm - lm));
+		tableView("t0-1",(pos + 2*fm));
+		tableView("t0-2",(pos + 2*fm + lm));
+		tableView("t1-0",(pos + fm - lm));
+		tableView("t1-1",(pos + fm));
+		tableView("t1-2",(pos + fm + lm));
+		tableView("t2-0",(pos - lm));
+		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
+		tableView("t2-2",(pos + lm));
 	}
+	console.log("working?")
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
-
-cubeShipPositioning(direction,"UP", 23, orientation);
 
 function pitch(lr) {
 	console.log(lr);
@@ -194,3 +193,4 @@ function tableView(id,isWhat) {
 }
 
 generateWorld();
+cubeShipPositioning(direction,"UP", 23, orientation);
