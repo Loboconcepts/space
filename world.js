@@ -100,26 +100,26 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 			console.log("error");
 	}
 	if (orient == "BACK") {
-		tableView(0,0,(pos + 2*um - lm));
-		tableView(0,1,(pos + 2*um));
-		tableView(0,2,(pos + 2*um + lm));
-		tableView(1,0,(pos + um - lm));
-		tableView(1,1,(pos + um)); 
-		tableView(1,2,(pos + um + lm));
-		tableView(2,0,(pos - lm));
-		tableView(2,1,"&#8743;<br>&#9669;&#9677;&#9677;&#9677;&#9659;"); 
-		tableView(2,2,(pos + lm)); 
+		tableView("t0-0",(pos + 2*um - lm));
+		tableView("t0-1",(pos + 2*um));
+		tableView("t0-2",(pos + 2*um + lm));
+		tableView("t1-0",(pos + um - lm));
+		tableView("t1-1",(pos + um)); 
+		tableView("t1-2",(pos + um + lm));
+		tableView("t2-0",(pos - lm));
+		tableView("t2-1","&#8743;<br>&#9669;&#9677;&#9677;&#9677;&#9659;"); 
+		tableView("t2-2",(pos + lm)); 
 	}
 	if (orient == "TOP") {
-		tableView(0,0,(pos + 2*fm - lm)); //19
-		tableView(0,1,(pos + 2*fm)); //20
-		tableView(0,2,(pos + 2*fm + lm)); //21
-		tableView(1,0,(pos + fm - lm)); //22
-		tableView(1,1,(pos + fm)); //23
-		tableView(1,2,(pos + fm + lm)); //24
-		tableView(2,0,(pos - lm)); //25
-		tableView(2,1,"&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;"); //26
-		tableView(2,2,(pos + lm)); //27
+		tableView("t0-0",(pos + 2*fm - lm)); //19
+		tableView("t0-1",(pos + 2*fm)); //20
+		tableView("t0-2",(pos + 2*fm + lm)); //21
+		tableView("t1-0",(pos + fm - lm)); //22
+		tableView("t1-1",(pos + fm)); //23
+		tableView("t1-2",(pos + fm + lm)); //24
+		tableView("t2-0",(pos - lm)); //25
+		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;"); //26
+		tableView("t2-2",(pos + lm)); //27
 	}
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
@@ -185,8 +185,8 @@ function switchOrientation() {
 	}
 }
 
-function tableView(tr,td,isWhat) {
-	document.querySelector("#fieldOfView").childNodes[0].childNodes[tr].childNodes[td].innerHTML = isWhat;
+function tableView(id,isWhat) {
+	document.querySelector("#" + id).innerHTML = isWhat;
 }
 
 generateWorld();
