@@ -106,7 +106,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t1-0",(pos + um - lm));
 		tableView("t1-1",(pos + um)); 
 		tableView("t1-2",(pos + um + lm));
-		tableView("t2-0","(pos-lm)");
+		tableView("t2-0",(pos - lm));
 		tableView("t2-1","&#8743;<br>&#9669;&#9677;&#9677;&#9677;&#9659;"); 
 		tableView("t2-2",(pos + lm)); 
 	}
@@ -122,6 +122,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-2",(pos + lm));
 	}
 	console.log("working?")
+	console.log((pos + 2*um - lm));
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
 
