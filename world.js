@@ -126,6 +126,10 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 
 cubeShipPositioning(direction,"UP", 23, orientation);
 
+function pitch(lr) {
+	console.log(lr);
+}
+
 function yaw(lr) {
 	if (lr == "left") {
 		switch (direction) {
