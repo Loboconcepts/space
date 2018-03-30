@@ -160,8 +160,8 @@ function shipRotation(rAxes, lr) {
 			console.log("-z");
 			break;
 		case x:
-			if (rAxes=="YAW") {direction = "E"};
-			if (rAxes=="ROLL") {topfacing = "E"};
+			if (rAxes=="YAW") {direction = "W"};
+			if (rAxes=="ROLL") {topfacing = "W"};
 			console.log("x");
 			break;
 		case -x:
