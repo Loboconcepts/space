@@ -159,7 +159,7 @@ function shipRotation(rAxes, lr) {
 		return newDirection;
 	}
 	if (rAxes == "YAW") {
-		if (topfacing == "S" || topfacing == "DOWN" || topfacing == "E") {lr = lr * -1};
+		if (topfacing == "N" || topfacing == "DOWN" || topfacing == "E") {lr = lr * -1};
 		switch(yawAxis) {
 		case z:
 			direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
@@ -174,7 +174,7 @@ function shipRotation(rAxes, lr) {
 		}
 	}
 	if (rAxes == "ROLL") {
-		if (direction == "S" || direction == "DOWN" || direction == "E") {lr = lr * -1};
+		if (direction == "S" || direction == "UP" || direction == "W") {lr = lr * -1};
 		switch(rollAxis) {
 		case z:
 			topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
