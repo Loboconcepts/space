@@ -7,9 +7,10 @@ var currentLocation = 23;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
-var xAxis = ["UP","N","DOWN","S"];
+var xAxis = ["UP","S","DOWN","N"];
 var direction = "N";
 var topfacing = "UP";
+
 
 
 ////             y- /x-
@@ -103,6 +104,8 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	}
 	// Here needs work!!!
 	// if ((direction == "DOWN") || (direction == "UP" && (topfacing == "W" || topfacing == "S"))) {lm = lm*-1};
+	if (topfacing == "E" || topfacing == "W") {if (direction == "UP" || direction == "DOWN") {lm = lm * -1};};
+	// if (direction == "S" || direction == "DOWN" || direction == "E") {lm = lm * -1};
 	if (orient == "BACK") {
 		tableView("t0-0",(pos + 2*um - lm));
 		tableView("t0-1",(pos + 2*um));
@@ -130,101 +133,65 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 
 
 function shipRotation(rAxes, lr) {
-	var axis
-	if (direction == "N" || direction == "S") {
-		if (topfacing == "UP" || topfacing == "DOWN") {
-			axis = y;	
-		}
-		else {
-			axis = x;
-		}
-		// if (topfacing == "DOWN" || topfacing == "E") {
-		// 	axis = axis * -1;
-		// }
-		
-	}
-	else if (direction == "W" || direction == "E") {
-		if (topfacing == "UP" || topfacing == "DOWN") {
-			axis = y;	
-		}
-		else {
-			axis = z;
-		}
-		// if (topfacing == "DOWN" || topfacing == "E") {
-		// 	axis = axis * -1;
-		// }
-	}
-	else if (direction == "UP" || direction == "DOWN") {
-		if (topfacing == "N" || topfacing == "S") {
-			axis = z;	
-		}
-		else {
-			axis = x;
-		}
-		// if (topfacing == "DOWN" || topfacing == "E") {
-		// 	axis = axis * -1;
-		// }
+	var yawAxis;
+	var rollAxis;
+	var pitchAxis;
+	var xyz = [0,0,0];
+	if (topfacing == "UP" || topfacing == "DOWN") {yawAxis = y;xyz[1]=1;};
+	if (topfacing == "E" || topfacing == "W") {yawAxis = x;xyz[0]=1;};
+	if (topfacing == "N" || topfacing == "S") {yawAxis = z;xyz[2]=1;};
+	if (direction == "UP" || direction == "DOWN") {rollAxis = y;xyz[1]=1;};
+	if (direction == "E" || direction == "W") {rollAxis = x;xyz[0]=1;};
+	if (direction == "N" || direction == "S") {rollAxis = z;xyz[2]=1;};
+	if (xyz = [1,1,0]) {pitchAxis = z;};
+	if (xyz = [1,0,1]) {pitchAxis = y;};
+	if (xyz = [0,1,1]) {pitchAxis = x;};
 
-	}
-
-	function loopThroughArray(rAxis, array, topOrDir, number, lr) {
-		console.log(number + "\n" + lr);
-		// number = number * lr;
-		// if ((rAxis == "ROLL") && (direction == "S" || direction == "W" || direction == "DOWN")) {
-		// 	number = number * -1;
-		// }
-		if ((rAxis == "YAW") && ((topfacing == "DOWN") || (topfacing == "W"))) {
-			number = number * -1;
-		}
-		// if (direction == "DOWN") {
-		// 	if (topfacing == "S" || topfacing == "N") {
-		// 		number = number * -1;
-		// 	}
-		// }
-		console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "number: " + number + "\n" + "left right: " + lr);
-		var newDirection = array.indexOf(topOrDir) + number;
+	function loopThroughArray(rAxis, array, topOrDir, lr) {
+		console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "left right: " + lr);
+		var newDirection = array.indexOf(topOrDir) + lr;
 		if (newDirection > array.length - 1) {
 			newDirection = 0;
 		}
 		if (newDirection < 0) {
 			newDirection = array.length - 1;
 		}
-		console.log(newDirection);
 		return newDirection;
 	}
-
-	console.log("axis: " + axis)
-
-	switch(axis * lr) {
+	if (rAxes == "YAW") {
+		if (topfacing == "S" || topfacing == "DOWN" || topfacing == "E") {lr = lr * -1};
+		switch(yawAxis) {
 		case z:
-			if (rAxes=="YAW") {direction = zAxis[loopThroughArray(rAxes, zAxis, direction, 1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "UP" || direction == "DOWN"){topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, 1, lr)]} else{topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, 1, lr)]}};
-			break;
-		case -z:
-			if (rAxes=="YAW") {direction = zAxis[loopThroughArray(rAxes, zAxis, direction, -1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "UP" || direction == "DOWN"){topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, 1, lr)]} else{topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, 1, lr)]}};
+			direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
 			break;
 		case x:
-			if (rAxes=="YAW") {direction = xAxis[loopThroughArray(rAxes, xAxis, direction, 1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "N" || direction == "S"){topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, 1, lr)]} else{topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, -1, lr)]}};
+			direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];
 			break;
-		case -x:
-			if (rAxes=="YAW") {direction = xAxis[loopThroughArray(rAxes, xAxis, direction, -1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "N" || direction == "S"){topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, 1, lr)]} else{topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, -1, lr)]}};
-			break
 		case y:
-			if (rAxes=="YAW") {direction = yAxis[loopThroughArray(rAxes, yAxis, direction, 1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "N" || direction == "S"){topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, 1, lr)]} else{topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, -1, lr)]}};
-			break;
-		case -y:
-			if (rAxes=="YAW") {direction = yAxis[loopThroughArray(rAxes, yAxis, direction, -1, lr)]};
-			if (rAxes=="ROLL") {if (direction == "N" || direction == "S"){topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, 1, lr)]} else{topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, -1, lr)]}};
+			direction = yAxis[loopThroughArray(rAxes, yAxis, direction, lr)];
 			break;
 		default: console.log("error");
+		}
 	}
+	if (rAxes == "ROLL") {
+		if (direction == "S" || direction == "DOWN" || direction == "E") {lr = lr * -1};
+		switch(rollAxis) {
+		case z:
+			topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
+			break;
+		case x:
+			topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];
+			break;
+		case y:
+			topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];
+			break;
+		default: console.log("error");
+		}
+	}
+	
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
-	cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
 
