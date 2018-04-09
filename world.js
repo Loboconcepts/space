@@ -103,9 +103,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		default: console.log("error");
 	}
 	// Here needs work!!!
-	// if ((direction == "DOWN") || (direction == "UP" && (topfacing == "W" || topfacing == "S"))) {lm = lm*-1};
-	// if (topfacing == "E" || topfacing == "W") {if (direction == "UP" || direction == "DOWN") {lm = lm * -1};};
-	// if (direction == "S" || direction == "DOWN" || direction == "E") {lm = lm * -1};
+	if (direction == "DOWN") {lm = lm * -1};
 	if (orient == "BACK") {
 		tableView("t0-0",(pos + 2*um - lm));
 		tableView("t0-1",(pos + 2*um));
