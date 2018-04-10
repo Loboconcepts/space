@@ -103,7 +103,10 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		default: console.log("error");
 	}
 	// Here needs work!!!
-	if (direction == "DOWN") {lm = lm * -1};
+	if (direction == "E" && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
+	// if (direction == "N" && topfacing == "E") {lm = lm * -1};
+	// if ((direction == "E" || direction == "W") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
+	// if ((direction == "UP" || direction == "DOWN") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
 	if (orient == "BACK") {
 		tableView("t0-0",(pos + 2*um - lm));
 		tableView("t0-1",(pos + 2*um));
@@ -213,15 +216,18 @@ function switchOrientation() {
 }
 
 function tableView(id,isWhat) {
-	if (isWhat > worldArray.length) {
-		document.querySelector("#" + id).innerHTML = isWhat - worldArray.length;
-	}
-	else if (isWhat < 1) {
-		document.querySelector("#" + id).innerHTML = isWhat + worldArray.length;
-	}
-	else {
-		document.querySelector("#" + id).innerHTML = isWhat;	
-	}
+	// if (isWhat > worldArray.length) {
+	// 	document.querySelector("#" + id).innerHTML = isWhat - worldArray.length;
+	// }
+	// else if (isWhat < 1) {
+	// 	document.querySelector("#" + id).innerHTML = isWhat + worldArray.length;
+	// }
+	// else {
+	// 	document.querySelector("#" + id).innerHTML = isWhat;	
+	// }
+
+	// TEST DELETE and uncomment above
+	document.querySelector("#" + id).innerHTML = isWhat;
 	
 }
 generateWorld();
