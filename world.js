@@ -207,46 +207,57 @@ function shipRotation(rAxes, lr) {
 		default: console.log("error");
 		}
 	}
-	
-
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
-
-
-
 function generateWorld() {
 	for (i=0;i<(x*x*x);i++) {
-		worldArray.push(0);		
+		if ((i+1 == 1) || ((i+1)%(x*x*x)==0)) {
+			worldArray.push("WH");
+		}
+		else {
+			worldArray.push(i+1);	
+		}	
 	}
 }
 
 function switchOrientation() {
 	if (viewOrient == "BACK") {
 		viewOrient = "TOP";
-		cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 	}
 	else {
 		viewOrient = "BACK";
-		cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 	}
 }
 
 function tableView(id,isWhat) {
-	// if (isWhat > worldArray.length) {
-	// 	document.querySelector("#" + id).innerHTML = isWhat - worldArray.length;
-	// }
-	// else if (isWhat < 1) {
-	// 	document.querySelector("#" + id).innerHTML = isWhat + worldArray.length;
-	// }
-	// else {
-	// 	document.querySelector("#" + id).innerHTML = isWhat;	
-	// }
-
-	// TEST DELETE and uncomment above
-	document.querySelector("#" + id).innerHTML = isWhat;
-	
+	if (id == "t2-1") {
+		switch (viewOrient) {
+			case "BACK":
+				document.querySelector("#" + id).innerHTML = isWhat;
+				break;
+			case "TOP":
+				document.querySelector("#" + id).innerHTML = isWhat;
+				break;
+			default: console.log("error ship");
+		}
+	}
+	else {
+		if (isWhat > worldArray.length) {
+		document.querySelector("#" + id).innerHTML = worldArray[(isWhat - worldArray.length)-1];
+		}
+		else if (isWhat < 1) {
+			document.querySelector("#" + id).innerHTML = worldArray[(isWhat + worldArray.length)-1];
+		}
+		else {
+			document.querySelector("#" + id).innerHTML = worldArray[(isWhat-1)];	
+		}
+	}	
 }
+
+
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
