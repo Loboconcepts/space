@@ -103,10 +103,8 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		default: console.log("error");
 	}
 	// Here needs work!!!
-	if (direction == "E" && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
-	// if (direction == "N" && topfacing == "E") {lm = lm * -1};
-	// if ((direction == "E" || direction == "W") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
-	// if ((direction == "UP" || direction == "DOWN") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
+	if ((direction == "E" || direction == "W") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
+	if (direction == "DOWN" || direction == "UP") {lm = lm * -1};
 	if (orient == "BACK") {
 		tableView("t0-0",(pos + 2*um - lm));
 		tableView("t0-1",(pos + 2*um));
@@ -144,9 +142,9 @@ function shipRotation(rAxes, lr) {
 	if (direction == "UP" || direction == "DOWN") {rollAxis = y;xyz[1]=1;};
 	if (direction == "E" || direction == "W") {rollAxis = x;xyz[0]=1;};
 	if (direction == "N" || direction == "S") {rollAxis = z;xyz[2]=1;};
-	if (xyz = [1,1,0]) {pitchAxis = z;};
-	if (xyz = [1,0,1]) {pitchAxis = y;};
-	if (xyz = [0,1,1]) {pitchAxis = x;};
+	if (xyz[0] == 1 && xyz[1] == 1) {pitchAxis = z;};
+	if (xyz[0] == 1 && xyz[2] == 1) {pitchAxis = y;};
+	if (xyz[1] == 1 && xyz[2] == 1) {pitchAxis = x;};
 
 	function loopThroughArray(rAxis, array, topOrDir, lr) {
 		console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "left right: " + lr);
@@ -185,6 +183,36 @@ function shipRotation(rAxes, lr) {
 			break;
 		case y:
 			topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];
+			break;
+		default: console.log("error");
+		}
+	}
+	if (rAxes == "PITCH") {
+		switch(pitchAxis) {
+		case z:
+			if ((zAxis.indexOf(direction) - zAxis.indexOf(topfacing) != 1) || (zAxis.indexOf(direction) - zAxis.indexOf(topfacing) != -3)) {lr = lr * -1};
+			if (lr == -1) {
+				topfacing = direction;
+				direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
+			}
+			else {
+				direction = topfacing;
+				topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
+			}
+			break;
+		case x:
+			if (lr == -1) {
+				topfacing = direction;
+				direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];
+			}
+			else {
+				direction = topfacing;
+				topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];
+			}
+			break;
+		case y:
+			topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];
+			direction = yAxis[loopThroughArray(rAxes, yAxis, direction, lr)];
 			break;
 		default: console.log("error");
 		}
