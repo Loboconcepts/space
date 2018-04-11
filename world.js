@@ -190,27 +190,17 @@ function shipRotation(rAxes, lr) {
 	if (rAxes == "PITCH") {
 		switch(pitchAxis) {
 		case z:
-			if ((zAxis.indexOf(direction) - zAxis.indexOf(topfacing) != 1) || (zAxis.indexOf(direction) - zAxis.indexOf(topfacing) != -3)) {lr = lr * -1};
-			if (lr == -1) {
-				topfacing = direction;
-				direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
-			}
-			else {
-				direction = topfacing;
-				topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
-			}
+			if ((zAxis.indexOf(direction) - zAxis.indexOf(topfacing) == 1) || (zAxis.indexOf(direction) - zAxis.indexOf(topfacing) == -3)) {lr = lr * -1;};
+			topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
+			direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
 			break;
 		case x:
-			if (lr == -1) {
-				topfacing = direction;
-				direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];
-			}
-			else {
-				direction = topfacing;
-				topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];
-			}
+			if ((xAxis.indexOf(direction) - xAxis.indexOf(topfacing) == 1) || (xAxis.indexOf(direction) - xAxis.indexOf(topfacing) == -3)) {lr = lr * -1;};
+			topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];
+			direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];
 			break;
 		case y:
+			if ((yAxis.indexOf(direction) - yAxis.indexOf(topfacing) == 1) || (yAxis.indexOf(direction) - yAxis.indexOf(topfacing) == -3)) {lr = lr * -1;};
 			topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];
 			direction = yAxis[loopThroughArray(rAxes, yAxis, direction, lr)];
 			break;
