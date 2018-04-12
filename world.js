@@ -257,6 +257,16 @@ function tableView(id,isWhat) {
 		}
 	}	
 }
+// Canvas
+
+var canvas = document.getElementById("shipView");
+var ctx = canvas.getContext("2d");
+
+ctx.beginPath();
+ctx.rect(160, 10, 100, 40);
+ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+ctx.stroke();
+ctx.closePath();
 
 
 generateWorld();
