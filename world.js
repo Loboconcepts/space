@@ -1,15 +1,19 @@
-var worldArray = [];
+var worldArray;
 var i = 0;
-var x = 3;
+// Changes whole size
+var x = 6;
+// This
 var y = x*x;
 var z = 1;
-var currentLocation = 14;
+var currentLocation = 61;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
 var xAxis = ["UP","S","DOWN","N"];
 var direction = "N";
 var topfacing = "UP";
+
+
 
 // Disable scrolling.
 document.ontouchmove = function (e) {
@@ -240,14 +244,31 @@ function shipRotation(rAxes, lr) {
 }
 
 function generateWorld() {
+	// A - Nothing
+	// B - Star
+	// C - Planet
+	// D - Asteroids
+	// E - Worm Hole
+
+	worldArray = [];
+
 	for (i=0;i<(x*x*x);i++) {
-		if ((i+1 == 1) || ((i+1)%(x*x*x)==0)) {
-			worldArray.push("WH");
+		var rarityValue = 60;
+		if ((i == 0) || ((i)%((x*x*x)-1) == 0)) {
+			worldArray.push("E");
 		}
+		else if (i%rarityValue==0) {
+			worldArray.push("B");
+		}
+		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
+			worldArray.push("C");
+		}
+		
 		else {
-			worldArray.push(i+1);	
+			worldArray.push("A");	
 		}	
 	}
+	worldArray = worldArray.join("");
 }
 
 function switchOrientation() {
@@ -481,24 +502,14 @@ function drawField(pos, fm, um, lm) {
 	ctx.closePath();
 
 	// Windshield
-	ctx.beginPath();
-	ctx.moveTo(200, 0);
-	ctx.lineTo(450, 0);
-	ctx.lineTo(250, 1000);
-	ctx.lineTo(0, 1000);
-	ctx.fillStyle = "rgba(255, 255, 255, .7)";
-	ctx.fill();
-	ctx.closePath();
-
-	//SHIP CONSOLE
-	ctx.beginPath();
-	ctx.moveTo(0, 950);
-	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
-	ctx.lineTo(1000, 1000);
-	ctx.lineTo(0, 1000);
-	ctx.fillStyle = "#999999";
-	ctx.fill();
-	ctx.closePath();
+	// ctx.beginPath();
+	// ctx.moveTo(200, 0);
+	// ctx.lineTo(450, 0);
+	// ctx.lineTo(250, 1000);
+	// ctx.lineTo(0, 1000);
+	// ctx.fillStyle = "rgba(255, 255, 255, .7)";
+	// ctx.fill();
+	// ctx.closePath();
 
 	// current pos
 	ctx.font = '900px sans-serif';
