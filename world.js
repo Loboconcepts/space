@@ -244,28 +244,27 @@ function shipRotation(rAxes, lr) {
 }
 
 function generateWorld() {
-	// A - Nothing
-	// B - Star
-	// C - Planet
-	// D - Asteroids
-	// E - Worm Hole
+	// 1 - Nothing
+	// 2 - Star
+	// 3 - Planet
+	// 4 - Asteroids
+	// 5 - Worm Hole
 
 	worldArray = [];
 
 	for (i=0;i<(x*x*x);i++) {
 		var rarityValue = 60;
 		if ((i == 0) || ((i)%((x*x*x)-1) == 0)) {
-			worldArray.push("E");
+			worldArray.push("5");
 		}
 		else if (i%rarityValue==0) {
-			worldArray.push("B");
+			worldArray.push("2");
 		}
 		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-			worldArray.push("C");
+			worldArray.push("3");
 		}
-		
 		else {
-			worldArray.push("A");	
+			worldArray.push("1");	
 		}	
 	}
 	worldArray = worldArray.join("");
