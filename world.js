@@ -117,7 +117,6 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 			break;
 		default: console.log("error");
 	}
-	// Here needs work!!!
 	if ((direction == "E" || direction == "W") && (topfacing == "N" || topfacing == "S")) {lm = lm * -1};
 	if (direction == "DOWN" || direction == "UP") {lm = lm * -1};
 	if (orient == "BACK") {
@@ -142,76 +141,9 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
 		tableView("t2-2",(pos + lm));
 	}
-	drawField();
-	// current pos
-	ctx.font = '900px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .8)"
-	ctx.textAlign="center";
-	ctx.fillText((pos), 500, 800);
-	// center center
-	ctx.font = '600px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + fm), 500, 700);
-	// top left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + um + 2*fm - lm), 200, 270);
-	// top middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + um + 2*fm), 500, 270);
-	// top right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + um + 2*fm + lm), 800, 270);
-	// center left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + 2*fm - lm), 200, 570);
-	// center middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + 2*fm), 500, 570);
-	// center right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos + 2*fm + lm), 800, 570);
-	// bottom left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos - um + 2*fm - lm), 200, 870);
-	// bottom middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos - um + 2*fm), 500, 870);
-	// bottom right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText((pos - um + 2*fm + lm), 800, 870);
-
-	//SHIP CONSOLE
-	ctx.beginPath();
-	ctx.moveTo(0, 950);
-	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
-	ctx.lineTo(1000, 1000);
-	ctx.lineTo(0, 1000);
-	ctx.fillStyle = "#999999";
-	ctx.fill();
-	ctx.closePath();
+	drawField(pos, fm, um, lm);
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
-
-	
 }
 
 
@@ -344,8 +276,20 @@ function tableView(id,isWhat) {
 	}	
 }
 
+function loopView(isWhat) {
+	if (isWhat > worldArray.length) {
+		return worldArray[(isWhat - worldArray.length)-1];
+	}
+	else if (isWhat < 1) {
+		return worldArray[(isWhat + worldArray.length)-1];
+	}
+	else {
+		return worldArray[(isWhat-1)];	
+	}
+}
 
-function drawField() {
+
+function drawField(pos, fm, um, lm) {
 
 	ctx.rect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "#000000";
@@ -527,11 +471,80 @@ function drawField() {
 	ctx.closePath();
 
 	// Windshield
+	// ctx.beginPath();
+	// ctx.moveTo(200, 0);
+	// ctx.lineTo(450, 0);
+	// ctx.lineTo(250, 1000);
+	// ctx.lineTo(0, 1000);
+	// ctx.fillStyle = "rgba(255, 255, 255, .7)";
+	// ctx.fill();
+	// ctx.closePath();
+
+	//SHIP CONSOLE
 	ctx.beginPath();
-	ctx.rect(0, 0, 1000, 1000);
-	ctx.fillStyle = "rgba(255, 255, 255, .2)";
+	ctx.moveTo(0, 950);
+	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
+	ctx.lineTo(1000, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "#999999";
 	ctx.fill();
 	ctx.closePath();
+
+	// current pos
+	ctx.font = '900px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .8)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos), 500, 800);
+	// center center
+	ctx.font = '600px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + fm), 500, 700);
+	// top left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + um + 2*fm - lm), 200, 270);
+	// top middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + um + 2*fm), 500, 270);
+	// top right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + um + 2*fm + lm), 800, 270);
+	// center left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + 2*fm - lm), 200, 570);
+	// center middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + 2*fm), 500, 570);
+	// center right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + 2*fm + lm), 800, 570);
+	// bottom left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos - um + 2*fm - lm), 200, 870);
+	// bottom middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos - um + 2*fm), 500, 870);
+	// bottom right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos - um + 2*fm + lm), 800, 870);
 
 	//SHIP CONSOLE
 	ctx.beginPath();
@@ -544,7 +557,5 @@ function drawField() {
 	ctx.closePath();
 }
 
-
-drawField();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
