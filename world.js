@@ -10,6 +10,12 @@ var yAxis = ["N","E","S","W"];
 var xAxis = ["UP","S","DOWN","N"];
 var direction = "N";
 var topfacing = "UP";
+
+// Disable scrolling.
+document.ontouchmove = function (e) {
+  e.preventDefault();
+}
+
 // Canvas
 
 var W = H = 1000;
