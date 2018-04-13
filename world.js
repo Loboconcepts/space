@@ -16,6 +16,10 @@ document.ontouchmove = function (e) {
   e.preventDefault();
 }
 
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+
 // Canvas
 
 var W = H = 1000;
