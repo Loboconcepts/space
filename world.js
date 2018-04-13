@@ -471,14 +471,14 @@ function drawField(pos, fm, um, lm) {
 	ctx.closePath();
 
 	// Windshield
-	// ctx.beginPath();
-	// ctx.moveTo(200, 0);
-	// ctx.lineTo(450, 0);
-	// ctx.lineTo(250, 1000);
-	// ctx.lineTo(0, 1000);
-	// ctx.fillStyle = "rgba(255, 255, 255, .7)";
-	// ctx.fill();
-	// ctx.closePath();
+	ctx.beginPath();
+	ctx.moveTo(200, 0);
+	ctx.lineTo(450, 0);
+	ctx.lineTo(250, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "rgba(255, 255, 255, .7)";
+	ctx.fill();
+	ctx.closePath();
 
 	//SHIP CONSOLE
 	ctx.beginPath();
