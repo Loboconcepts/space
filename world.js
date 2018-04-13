@@ -3,13 +3,28 @@ var i = 0;
 var x = 3;
 var y = x*x;
 var z = 1;
-var currentLocation = 23;
+var currentLocation = 14;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
 var xAxis = ["UP","S","DOWN","N"];
 var direction = "N";
 var topfacing = "UP";
+// Canvas
+
+var W = H = 1000;
+var scale = Math.min(window.innerHeight/H, window.innerWidth/W);
+
+var canvas = document.getElementById("shipView");
+canvas.width = W;
+canvas.height = H;
+canvas.style.position = "relative";
+canvas.style.width = (W * Math.min(window.innerWidth/W)) + "px";
+canvas.style.height = ((H * Math.min(window.innerHeight/H))/2) + "px";
+// canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
+// canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
+
+var ctx = canvas.getContext("2d");
 
 
 
@@ -127,11 +142,82 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
 		tableView("t2-2",(pos + lm));
 	}
+	drawField();
+	// current pos
+	ctx.font = '900px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .8)"
+	ctx.textAlign="center";
+	ctx.fillText((pos), 500, 800);
+	// center center
+	ctx.font = '600px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + fm), 500, 700);
+	// top left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + um + 2*fm - lm), 200, 270);
+	// top middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + um + 2*fm), 500, 270);
+	// top right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + um + 2*fm + lm), 800, 270);
+	// center left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + 2*fm - lm), 200, 570);
+	// center middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + 2*fm), 500, 570);
+	// center right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos + 2*fm + lm), 800, 570);
+	// bottom left
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos - um + 2*fm - lm), 200, 870);
+	// bottom middle
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos - um + 2*fm), 500, 870);
+	// bottom right
+	ctx.font = '200px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	ctx.textAlign="center";
+	ctx.fillText((pos - um + 2*fm + lm), 800, 870);
+
+	//SHIP CONSOLE
+	ctx.beginPath();
+	ctx.moveTo(0, 950);
+	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
+	ctx.lineTo(1000, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "#999999";
+	ctx.fill();
+	ctx.closePath();
+
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
+
+	
 }
 
 
 function shipRotation(rAxes, lr) {
+	ctx.clearRect(0, 0, 1000, 1000);
+	
 	var yawAxis;
 	var rollAxis;
 	var pitchAxis;
@@ -257,17 +343,208 @@ function tableView(id,isWhat) {
 		}
 	}	
 }
-// Canvas
-
-var canvas = document.getElementById("shipView");
-var ctx = canvas.getContext("2d");
-
-ctx.beginPath();
-ctx.rect(160, 10, 100, 40);
-ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-ctx.stroke();
-ctx.closePath();
 
 
+function drawField() {
+
+	ctx.rect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#000000";
+	ctx.fill();
+
+	// Red Angle Lines
+	// ctx.beginPath();
+	// ctx.moveTo(0, 0);
+	// ctx.lineTo(1000, 500);
+	// ctx.strokeStyle = "rgba(255, 0, 0, 1)";
+	// ctx.stroke();
+	// ctx.closePath();
+
+	// ctx.beginPath();
+	// ctx.moveTo(1000, 0);
+	// ctx.lineTo(0, 500);
+	// ctx.strokeStyle = "rgba(255, 0, 0, 1)";
+	// ctx.stroke();
+	// ctx.closePath();
+
+	// END
+
+	// Center top back
+	ctx.beginPath();
+	ctx.rect(350, 50, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Left top Back
+	ctx.beginPath();
+	ctx.rect(50, 50, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Right top back
+	ctx.beginPath();
+	ctx.rect(650, 50, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Center middle back
+	ctx.beginPath();
+	ctx.rect(350, 350, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Left middle Back
+	ctx.beginPath();
+	ctx.rect(50, 350, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Right middle back
+	ctx.beginPath();
+	ctx.rect(650, 350, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Center bottom back
+	ctx.beginPath();
+	ctx.rect(350, 650, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Left bottom Back
+	ctx.beginPath();
+	ctx.rect(50, 650, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Right bottom back
+	ctx.beginPath();
+	ctx.rect(650, 650, 300, 300);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+
+	// Middle center
+	ctx.beginPath();
+	ctx.rect(150, 150, 700, 700);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.fillStyle = "rgba(255, 255, 255, .1)";
+	ctx.fill();
+	ctx.closePath();
+
+	// angle lines
+	ctx.beginPath();
+	ctx.moveTo(0, 0);
+	ctx.lineTo(350, 350);
+	ctx.strokeStyle = "rgba(255, 255, 255)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(1000, 0);
+	ctx.lineTo(650, 350);
+	ctx.strokeStyle = "rgba(255, 255, 255)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(0, 1000);
+	ctx.lineTo(350, 650);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(1000, 1000);
+	ctx.lineTo(650, 650);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(0, 335);
+	ctx.lineTo(50, 350);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(1000, 335);
+	ctx.lineTo(950, 350);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(665, 0);
+	ctx.lineTo(650, 50);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(335, 0);
+	ctx.lineTo(350, 50);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(0, 665);
+	ctx.lineTo(50, 650);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(1000, 665);
+	ctx.lineTo(950, 650);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(665, 1000);
+	ctx.lineTo(650, 950);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(335, 1000);
+	ctx.lineTo(350, 950);
+	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	ctx.stroke();
+	ctx.closePath();
+
+	// Windshield
+	ctx.beginPath();
+	ctx.rect(0, 0, 1000, 1000);
+	ctx.fillStyle = "rgba(255, 255, 255, .2)";
+	ctx.fill();
+	ctx.closePath();
+
+	//SHIP CONSOLE
+	ctx.beginPath();
+	ctx.moveTo(0, 950);
+	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
+	ctx.lineTo(1000, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "#999999";
+	ctx.fill();
+	ctx.closePath();
+}
+
+
+drawField();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
