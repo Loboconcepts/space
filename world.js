@@ -539,7 +539,7 @@ function drawField(pos, fm, um, lm) {
 	//back middle left
 	whichArt(loopView(pos + 2*fm - lm),200,500,100);
 	//back middle center
-	whichArt(loopView(pos + 2*fm),500,500,100);
+	whichArt(loopView(pos + 2*fm),500,500,150);
 	//back middle right
 	whichArt(loopView(pos + 2*fm + lm),800,500,100);
 	//back bottom left
@@ -548,12 +548,24 @@ function drawField(pos, fm, um, lm) {
 	whichArt(loopView(pos - um + 2*fm),500,800,100);
 	//back bottom right
 	whichArt(loopView(pos - um + 2*fm + lm),800,800,100);
+	//top center
+	whichArt(loopView(pos + um + fm),500,100,200);
+	//top left
+	whichArt(loopView(pos + um + fm - lm),100,100,200);
+	//top right
+	whichArt(loopView(pos + um + fm + lm),800,100,200);
+	//bottom center
+	whichArt(loopView(pos - um + fm),500,800,200);
+	//bottom left
+	whichArt(loopView(pos - um + fm - lm),100,800,200);
+	//bottom right
+	whichArt(loopView(pos - um + fm + lm),800,800,200);
 	//middle left
-	whichArt(loopView(pos + fm - lm),100, 500, 250);
+	whichArt(loopView(pos + fm - lm),100, 500, 200);
 	//middle center
-	whichArt(loopView(pos + fm),500,500,250);
+	whichArt(loopView(pos + fm),500,500,350);
 	//middle right
-	whichArt(loopView(pos + fm + lm),900, 500, 250);
+	whichArt(loopView(pos + fm + lm),900, 500, 200);
 	//current pos
 	switch (direction) {
 		case ("DOWN"):
