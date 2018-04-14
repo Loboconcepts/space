@@ -1,6 +1,6 @@
 var worldArray;
 var i = 0;
-var x = 3;
+var x = 7;
 var y = x*x;
 var z = 1;
 var currentLocation = 14;
@@ -135,7 +135,17 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
 		tableView("t2-2",(pos + lm));
 	}
+	staticArt();
 	drawField(pos, fm, um, lm);
+	//SHIP CONSOLE
+	ctx.beginPath();
+	ctx.moveTo(0, 950);
+	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
+	ctx.lineTo(1000, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "#999999";
+	ctx.fill();
+	ctx.closePath();
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
@@ -216,28 +226,31 @@ function accelerate() {
 function generateWorld() {
 	// 1 - Nothing
 	// 2 - Star
-	// 3 - Planet
-	// 4 - Asteroids
-	// 5 - Worm Hole
+	// 3 - Livable Planet
+	// 4 - Gaseous Planet
+	// 5 - Liquid Planet
+	// 6 - Asteroids
+	// 7 - Space Dust
+	// 8 - Worm Hole
 
 	worldArray = [];
 
 	for (i=0;i<(x*x*x);i++) {
-		var rarityValue = 60;
+		var rarityValue = 90;
 		if ((i == 0) || ((i)%((x*x*x)-1) == 0)) {
-			worldArray.push("5");
+			worldArray.push("8");
 		}
-		// else if (i%rarityValue==0) {
-		// 	worldArray.push("2");
-		// }
-		// else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-		// 	worldArray.push("3");
-		// }
+		else if (i%rarityValue==0) {
+			worldArray.push("2");
+		}
+		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
+			worldArray.push("3");
+		}
 		else {
-			worldArray.push(i+1);	
+			worldArray.push(1);	
 		}
 	}
-	// worldArray = worldArray.join("");
+	worldArray = worldArray.join("");
 }
 
 function switchOrientation() {
@@ -270,7 +283,6 @@ function tableView(id,isWhat) {
 			document.querySelector("#" + id).innerHTML = worldArray[(isWhat-1)];	
 		}
 	}
-	console.log(isWhat);
 }
 
 function loopView(isWhat) {
@@ -279,14 +291,12 @@ function loopView(isWhat) {
 	else {return worldArray[(isWhat-1)];	}
 }
 
-// Only shapes here down
-function drawField(pos, fm, um, lm) {
-
+function staticArt() {
 	ctx.rect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "#000000";
 	ctx.fill();
 
-// Back items
+	// Back items
 	for (var i = 0; i < 3; i++) {
     	for (var j = 0; j < 3; j++) {
 		ctx.save();
@@ -300,9 +310,10 @@ function drawField(pos, fm, um, lm) {
 
 		}
 	}
-// For animation table
+
+	// For animation table
 	// for (var i = 0; i < 3; i++) {
- //    	for (var j = 0; j < 3; j++) {
+ 	// 	for (var j = 0; j < 3; j++) {
 	// 	ctx.save();
 	// 	ctx.beginPath();
 	// 	ctx.translate(j * 150, i * 150);
@@ -314,32 +325,6 @@ function drawField(pos, fm, um, lm) {
 
 	// 	}
 	// }
-// Stars
-	for (var j = 1; j < 100; j++) {
-	    ctx.save();
-	    ctx.fillStyle = '#fff';
-	    ctx.translate(1000 - Math.floor(Math.random() * 1000),
-	                  1000 - Math.floor(Math.random() * 1000));
-	    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
-	    ctx.restore();
-	}
-
-	function drawStar(ctx, r) {
-		ctx.save();
-		ctx.beginPath();
-		ctx.moveTo(r, 0);
-		for (var i = 0; i < 9; i++) {
-			ctx.rotate(Math.PI / 5);
-			if (i % 2 === 0) {
-			  ctx.lineTo((r / 0.525731) * 0.200811, 0);
-			} else {
-			  ctx.lineTo(r, 0);
-			}
-		}
-		ctx.closePath();
-		ctx.fill();
-		ctx.restore();
-	}
 
 	// Middle center
 	ctx.beginPath();
@@ -435,6 +420,33 @@ function drawField(pos, fm, um, lm) {
 	ctx.stroke();
 	ctx.closePath();
 
+	// Stars
+	for (var j = 1; j < 100; j++) {
+	    ctx.save();
+	    ctx.fillStyle = '#fff';
+	    ctx.translate(1000 - Math.floor(Math.random() * 1000),
+	                  1000 - Math.floor(Math.random() * 1000));
+	    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
+	    ctx.restore();
+	}
+
+	function drawStar(ctx, r) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.moveTo(r, 0);
+		for (var i = 0; i < 9; i++) {
+			ctx.rotate(Math.PI / 5);
+			if (i % 2 === 0) {
+			  ctx.lineTo((r / 0.525731) * 0.200811, 0);
+			} else {
+			  ctx.lineTo(r, 0);
+			}
+		}
+		ctx.closePath();
+		ctx.fill();
+		ctx.restore();
+	}
+
 	// Windshield
 	// ctx.beginPath();
 	// ctx.moveTo(200, 0);
@@ -445,83 +457,219 @@ function drawField(pos, fm, um, lm) {
 	// ctx.fill();
 	// ctx.closePath();
 
-	// current pos
-	ctx.font = '900px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .8)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos), 500, 800);
-	// center left
-	ctx.font = '600px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + fm - lm), 100, 700);
-	// center center
-	ctx.font = '600px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + fm), 500, 700);
-	// center right
-	ctx.font = '600px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + fm + lm), 900, 700);
-	// top left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + um + 2*fm - lm), 200, 270);
-	// top middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + um + 2*fm), 500, 270);
-	// top right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + um + 2*fm + lm), 800, 270);
-	// center left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + 2*fm - lm), 200, 570);
-	// center middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + 2*fm), 500, 570);
-	// center right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos + 2*fm + lm), 800, 570);
-	// bottom left
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos - um + 2*fm - lm), 200, 870);
-	// bottom middle
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos - um + 2*fm), 500, 870);
-	// bottom right
-	ctx.font = '200px sans-serif';
-	ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	ctx.textAlign="center";
-	ctx.fillText(loopView(pos - um + 2*fm + lm), 800, 870);
+	
 
-	//SHIP CONSOLE
-	ctx.beginPath();
-	ctx.moveTo(0, 950);
-	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
-	ctx.lineTo(1000, 1000);
-	ctx.lineTo(0, 1000);
-	ctx.fillStyle = "#999999";
-	ctx.fill();
-	ctx.closePath();
+	}
+
+// Only shapes here down
+function drawField(pos, fm, um, lm) {
+	// // current pos
+	// ctx.font = '900px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .8)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos), 500, 800);
+	// // center left
+	// ctx.font = '600px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + fm - lm), 100, 700);
+	// // center center
+	// ctx.font = '600px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + fm), 500, 700);
+	// // center right
+	// ctx.font = '600px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + fm + lm), 900, 700);
+	// // top left
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + um + 2*fm - lm), 200, 270);
+	// // top middle
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + um + 2*fm), 500, 270);
+	// // top right
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + um + 2*fm + lm), 800, 270);
+	// // center left
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + 2*fm - lm), 200, 570);
+	// // center middle
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + 2*fm), 500, 570);
+	// // center right
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos + 2*fm + lm), 800, 570);
+	// // bottom left
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos - um + 2*fm - lm), 200, 870);
+	// // bottom middle
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos - um + 2*fm), 500, 870);
+	// // bottom right
+	// ctx.font = '200px sans-serif';
+	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
+	// ctx.textAlign="center";
+	// ctx.fillText(loopView(pos - um + 2*fm + lm), 800, 870);
+
+	
+	//back top left
+	whichArt(loopView(pos + um + 2*fm - lm),200,200,100);
+	//back top center
+	whichArt(loopView(pos + um + 2*fm),500,200,100);
+	//back top right
+	whichArt(loopView(pos + um + 2*fm + lm),800,200,100);
+	//back middle left
+	whichArt(loopView(pos + 2*fm - lm),200,500,100);
+	//back middle center
+	whichArt(loopView(pos + 2*fm),500,500,100);
+	//back middle right
+	whichArt(loopView(pos + 2*fm + lm),800,500,100);
+	//back bottom left
+	whichArt(loopView(pos - um + 2*fm - lm),200,800,100);
+	//back bottom center
+	whichArt(loopView(pos - um + 2*fm),500,800,100);
+	//back bottom right
+	whichArt(loopView(pos - um + 2*fm + lm),800,800,100);
+	//middle left
+	whichArt(loopView(pos + fm - lm),100, 500, 250);
+	//middle center
+	whichArt(loopView(pos + fm),500,500,250);
+	//middle right
+	whichArt(loopView(pos + fm + lm),900, 500, 250);
+	//current pos
+	switch (direction) {
+		case ("DOWN"):
+		whichArt(loopView(pos),500,500,1000);
+		break;
+		case ("UP"):
+		console.log("facing up");
+		break;
+		case ("N"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(pos),500,1100,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(pos),500,-100,1000);
+				break;
+				case ("W"):
+				whichArt(loopView(pos),-200,500,1000);
+				break;
+				case ("E"):
+				whichArt(loopView(pos),1200,500,1000);
+				break;
+
+			}
+		break;
+		case ("S"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(pos),500,1100,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(pos),500,-100,1000);
+				break;
+				case ("E"):
+				whichArt(loopView(pos),-200,500,1000);
+				break;
+				case ("W"):
+				whichArt(loopView(pos),1200,500,1000);
+				break;
+			}
+		break;
+		case ("E"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(pos),500,1100,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(pos),500,-100,1000);
+				break;
+				case ("N"):
+				whichArt(loopView(pos),-200,500,1000);
+				break;
+				case ("S"):
+				whichArt(loopView(pos),1200,500,1000);
+				break;
+			}
+		break;
+		case ("W"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(pos),500,1100,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(pos),500,-100,1000);
+				break;
+				case ("S"):
+				whichArt(loopView(pos),-200,500,1000);
+				break;
+				case ("N"):
+				whichArt(loopView(pos),1200,500,1000);
+				break;
+			}
+		break;
+		default:console.log("Not set up yet");
+	}
+	// whichArt(loopView(pos),500,1100,1000);
 }
+
+	
+	function whichArt(posNum,xPos,yPos,size) {
+		// 1 - Nothing
+		// 2 - Star
+		// 3 - Livable Planet
+		// 4 - Gaseous Planet
+		// 5 - Liquid Planet
+		// 6 - Asteroids
+		// 7 - Space Dust
+		// 8 - Worm Hole
+		switch (posNum) {
+			case ("2"):
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size, size, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(255, 255, 0, 1)";
+		    ctx.fill();
+			ctx.closePath();
+			break;
+			case ("3"):
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(0, 255, 0, 1)";
+		    ctx.fill();
+			ctx.closePath();
+			break;
+			case ("4"):
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+		    ctx.fill();
+			ctx.closePath();
+			break;
+			default: console.log(posNum);
+		};
+	}
+
 
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+
