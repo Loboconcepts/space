@@ -1,26 +1,23 @@
 var worldArray;
 var i = 0;
-// Changes whole size
-var x = 6;
-// This
+var x = 3;
 var y = x*x;
 var z = 1;
-var currentLocation = 61;
+var currentLocation = 14;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
 var xAxis = ["UP","S","DOWN","N"];
 var direction = "N";
 var topfacing = "UP";
+var yawAxis;
+var rollAxis;
+var pitchAxis;
 
 // Disable scrolling.
 document.ontouchmove = function (e) {
   e.preventDefault();
 }
-
-document.addEventListener('gesturestart', function (e) {
-    e.preventDefault();
-});
 
 function preventZoom(e) {
   var t2 = e.timeStamp;
@@ -50,8 +47,6 @@ canvas.style.height = ((H * Math.min(window.innerHeight/H))/2) + "px";
 
 var ctx = canvas.getContext("2d");
 
-
-
 ////             y- /x-
 ////             | /
 ////             |/
@@ -61,83 +56,58 @@ var ctx = canvas.getContext("2d");
 ////       x+ /  y+
 
 
+// Determine axis
 
-
+function axisFinder() {
+	var xyz = [0,0,0];
+	if (topfacing == "UP" || topfacing == "DOWN") {yawAxis = y;xyz[1]=1;};
+	if (topfacing == "E" || topfacing == "W") {yawAxis = x;xyz[0]=1;};
+	if (topfacing == "N" || topfacing == "S") {yawAxis = z;xyz[2]=1;};
+	if (direction == "UP" || direction == "DOWN") {rollAxis = y;xyz[1]=1;};
+	if (direction == "E" || direction == "W") {rollAxis = x;xyz[0]=1;};
+	if (direction == "N" || direction == "S") {rollAxis = z;xyz[2]=1;};
+	if (xyz[0] == 1 && xyz[1] == 1) {pitchAxis = z;};
+	if (xyz[0] == 1 && xyz[2] == 1) {pitchAxis = y;};
+	if (xyz[1] == 1 && xyz[2] == 1) {pitchAxis = x;};
+}
 
 function cubeShipPositioning(direction, topfacing, pos, orient) {
+	ctx.clearRect(0, 0, 1000, 1000);
 	// upward movement UM || forward movement FM || lateral movement LM
 	var um;
 	var fm;
 	var lm;
 
 	switch (direction) {
-		case "N":
-			fm = -x;
-			break;
-		case "S":
-			fm = x;
-			break;
-		case "E":
-			fm = z;
-			break;
-		case "W":
-			fm = -z;
-			break;
-		case "UP":
-			fm = -y;
-			break;
-		case "DOWN":
-			fm = y;
-			break;
-		default:
-			console.log("error");
+		case "N":fm = -x;break;
+		case "S":fm = x;break;
+		case "E":fm = z;break;
+		case "W":fm = -z;break;
+		case "UP":fm = -y;break;
+		case "DOWN":fm = y;break;
+		default:console.log("error");
 	};
 	switch (topfacing) {
-		case "N":
-			um = -x;
-			break;
-		case "S":
-			um = x;
-			break;
-		case "E":
-			um = z;
-			break;
-		case "W":
-			um = -z;
-			break;
-		case "UP":
-			um = -y;
-			break;
-		case "DOWN":
-			um = y;
-			break;
-		default:
-			console.log("error");
+		case "N":um = -x;break;
+		case "S":um = x;break;
+		case "E":um = z;break;
+		case "W":um = -z;break;
+		case "UP":um = -y;break;
+		case "DOWN":um = y;break;
+		default:console.log("error");
 	};
 	switch (Math.abs(fm) + Math.abs(um)) {
 		case (x+y):
-			if (fm*um < 0) {
-				lm = -z;
-			}
-			else {
-				lm = z;
-			}
+			if (fm*um < 0) {lm = -z;}
+			else {lm = z;}
 			break;
 		case (z+y):
-			if (fm*um < 0) {
-				lm = x;
-			}
-			else {
-				lm = -x;
-			}
+			if (fm*um < 0) {lm = x;}
+			else {lm = -x;}
 			break;
 		case (z+x):
-			if (fm*um < 0) {
-				lm = y;
-			}
-			else {
-				lm = -y;
-			}
+			if (fm*um < 0) {lm = y;}
+			else {lm = -y;}
 			break;
 		default: console.log("error");
 	}
@@ -170,23 +140,9 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
 
-
 function shipRotation(rAxes, lr) {
-	ctx.clearRect(0, 0, 1000, 1000);
 	
-	var yawAxis;
-	var rollAxis;
-	var pitchAxis;
-	var xyz = [0,0,0];
-	if (topfacing == "UP" || topfacing == "DOWN") {yawAxis = y;xyz[1]=1;};
-	if (topfacing == "E" || topfacing == "W") {yawAxis = x;xyz[0]=1;};
-	if (topfacing == "N" || topfacing == "S") {yawAxis = z;xyz[2]=1;};
-	if (direction == "UP" || direction == "DOWN") {rollAxis = y;xyz[1]=1;};
-	if (direction == "E" || direction == "W") {rollAxis = x;xyz[0]=1;};
-	if (direction == "N" || direction == "S") {rollAxis = z;xyz[2]=1;};
-	if (xyz[0] == 1 && xyz[1] == 1) {pitchAxis = z;};
-	if (xyz[0] == 1 && xyz[2] == 1) {pitchAxis = y;};
-	if (xyz[1] == 1 && xyz[2] == 1) {pitchAxis = x;};
+	axisFinder();
 
 	function loopThroughArray(rAxis, array, topOrDir, lr) {
 		console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "left right: " + lr);
@@ -202,30 +158,18 @@ function shipRotation(rAxes, lr) {
 	if (rAxes == "YAW") {
 		if (topfacing == "N" || topfacing == "DOWN" || topfacing == "E") {lr = lr * -1};
 		switch(yawAxis) {
-		case z:
-			direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];
-			break;
-		case x:
-			direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];
-			break;
-		case y:
-			direction = yAxis[loopThroughArray(rAxes, yAxis, direction, lr)];
-			break;
+		case z:direction = zAxis[loopThroughArray(rAxes, zAxis, direction, lr)];break;
+		case x:direction = xAxis[loopThroughArray(rAxes, xAxis, direction, lr)];break;
+		case y:direction = yAxis[loopThroughArray(rAxes, yAxis, direction, lr)];break;
 		default: console.log("error");
 		}
 	}
 	if (rAxes == "ROLL") {
 		if (direction == "S" || direction == "UP" || direction == "W") {lr = lr * -1};
 		switch(rollAxis) {
-		case z:
-			topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];
-			break;
-		case x:
-			topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];
-			break;
-		case y:
-			topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];
-			break;
+		case z:topfacing = zAxis[loopThroughArray(rAxes, zAxis, topfacing, lr)];break;
+		case x:topfacing = xAxis[loopThroughArray(rAxes, xAxis, topfacing, lr)];break;
+		case y:topfacing = yAxis[loopThroughArray(rAxes, yAxis, topfacing, lr)];break;
 		default: console.log("error");
 		}
 	}
@@ -253,6 +197,22 @@ function shipRotation(rAxes, lr) {
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
+function accelerate() {
+	switch (direction) {
+		case "N":currentLocation = currentLocation - x;break;
+		case "S":currentLocation = currentLocation + x;break;
+		case "E":currentLocation = currentLocation + z;break;
+		case "W":currentLocation = currentLocation - z;break;
+		case "UP":currentLocation = currentLocation - y;break;
+		case "DOWN":currentLocation = currentLocation + y;break;
+		default: console.log("OK");
+	}
+	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
+	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
+	else {currentLocation = (currentLocation);	}
+	cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+}
+
 function generateWorld() {
 	// 1 - Nothing
 	// 2 - Star
@@ -267,17 +227,17 @@ function generateWorld() {
 		if ((i == 0) || ((i)%((x*x*x)-1) == 0)) {
 			worldArray.push("5");
 		}
-		else if (i%rarityValue==0) {
-			worldArray.push("2");
-		}
-		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-			worldArray.push("3");
-		}
+		// else if (i%rarityValue==0) {
+		// 	worldArray.push("2");
+		// }
+		// else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
+		// 	worldArray.push("3");
+		// }
 		else {
-			worldArray.push("1");	
-		}	
+			worldArray.push(i+1);	
+		}
 	}
-	worldArray = worldArray.join("");
+	// worldArray = worldArray.join("");
 }
 
 function switchOrientation() {
@@ -294,12 +254,8 @@ function switchOrientation() {
 function tableView(id,isWhat) {
 	if (id == "t2-1") {
 		switch (viewOrient) {
-			case "BACK":
-				document.querySelector("#" + id).innerHTML = isWhat;
-				break;
-			case "TOP":
-				document.querySelector("#" + id).innerHTML = isWhat;
-				break;
+			case "BACK":document.querySelector("#" + id).innerHTML = isWhat;break;
+			case "TOP":document.querySelector("#" + id).innerHTML = isWhat;break;
 			default: console.log("error ship");
 		}
 	}
@@ -313,108 +269,77 @@ function tableView(id,isWhat) {
 		else {
 			document.querySelector("#" + id).innerHTML = worldArray[(isWhat-1)];	
 		}
-	}	
+	}
+	console.log(isWhat);
 }
 
 function loopView(isWhat) {
-	if (isWhat > worldArray.length) {
-		return worldArray[(isWhat - worldArray.length)-1];
-	}
-	else if (isWhat < 1) {
-		return worldArray[(isWhat + worldArray.length)-1];
-	}
-	else {
-		return worldArray[(isWhat-1)];	
-	}
+	if (isWhat > worldArray.length) {return worldArray[(isWhat - worldArray.length)-1];}
+	else if (isWhat < 1) {return worldArray[(isWhat + worldArray.length)-1];}
+	else {return worldArray[(isWhat-1)];	}
 }
 
-
+// Only shapes here down
 function drawField(pos, fm, um, lm) {
 
 	ctx.rect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "#000000";
 	ctx.fill();
 
-	// Red Angle Lines
-	// ctx.beginPath();
-	// ctx.moveTo(0, 0);
-	// ctx.lineTo(1000, 500);
-	// ctx.strokeStyle = "rgba(255, 0, 0, 1)";
-	// ctx.stroke();
-	// ctx.closePath();
+// Back items
+	for (var i = 0; i < 3; i++) {
+    	for (var j = 0; j < 3; j++) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.translate(j * 300, i * 300);
+		ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+		ctx.rect(50, 50, 300, 300);
+		ctx.stroke();
+		ctx.closePath();
+		ctx.restore();
 
-	// ctx.beginPath();
-	// ctx.moveTo(1000, 0);
-	// ctx.lineTo(0, 500);
-	// ctx.strokeStyle = "rgba(255, 0, 0, 1)";
-	// ctx.stroke();
-	// ctx.closePath();
+		}
+	}
+// For animation table
+	// for (var i = 0; i < 3; i++) {
+ //    	for (var j = 0; j < 3; j++) {
+	// 	ctx.save();
+	// 	ctx.beginPath();
+	// 	ctx.translate(j * 150, i * 150);
+	// 	ctx.strokeStyle = "rgba(255, 0, 255, 1)";
+	// 	ctx.rect(300, 300, 150, 150);
+	// 	ctx.stroke();
+	// 	ctx.closePath();
+	// 	ctx.restore();
 
-	// END
+	// 	}
+	// }
+// Stars
+	for (var j = 1; j < 100; j++) {
+	    ctx.save();
+	    ctx.fillStyle = '#fff';
+	    ctx.translate(1000 - Math.floor(Math.random() * 1000),
+	                  1000 - Math.floor(Math.random() * 1000));
+	    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
+	    ctx.restore();
+	}
 
-	// Center top back
-	ctx.beginPath();
-	ctx.rect(350, 50, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Left top Back
-	ctx.beginPath();
-	ctx.rect(50, 50, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Right top back
-	ctx.beginPath();
-	ctx.rect(650, 50, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Center middle back
-	ctx.beginPath();
-	ctx.rect(350, 350, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Left middle Back
-	ctx.beginPath();
-	ctx.rect(50, 350, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Right middle back
-	ctx.beginPath();
-	ctx.rect(650, 350, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Center bottom back
-	ctx.beginPath();
-	ctx.rect(350, 650, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Left bottom Back
-	ctx.beginPath();
-	ctx.rect(50, 650, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	// Right bottom back
-	ctx.beginPath();
-	ctx.rect(650, 650, 300, 300);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
+	function drawStar(ctx, r) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.moveTo(r, 0);
+		for (var i = 0; i < 9; i++) {
+			ctx.rotate(Math.PI / 5);
+			if (i % 2 === 0) {
+			  ctx.lineTo((r / 0.525731) * 0.200811, 0);
+			} else {
+			  ctx.lineTo(r, 0);
+			}
+		}
+		ctx.closePath();
+		ctx.fill();
+		ctx.restore();
+	}
 
 	// Middle center
 	ctx.beginPath();
@@ -525,11 +450,21 @@ function drawField(pos, fm, um, lm) {
 	ctx.fillStyle = "rgba(255, 255, 255, .8)"
 	ctx.textAlign="center";
 	ctx.fillText(loopView(pos), 500, 800);
+	// center left
+	ctx.font = '600px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + fm - lm), 100, 700);
 	// center center
 	ctx.font = '600px sans-serif';
 	ctx.fillStyle = "rgba(255, 255, 255, .4)"
 	ctx.textAlign="center";
 	ctx.fillText(loopView(pos + fm), 500, 700);
+	// center right
+	ctx.font = '600px sans-serif';
+	ctx.fillStyle = "rgba(255, 255, 255, .4)"
+	ctx.textAlign="center";
+	ctx.fillText(loopView(pos + fm + lm), 900, 700);
 	// top left
 	ctx.font = '200px sans-serif';
 	ctx.fillStyle = "rgba(255, 255, 255, .2)"
@@ -587,5 +522,6 @@ function drawField(pos, fm, um, lm) {
 	ctx.closePath();
 }
 
+axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
