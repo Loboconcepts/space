@@ -311,6 +311,22 @@ function staticArt() {
 		}
 	}
 
+	// Middle items
+	for (var i = 0; i < 3; i++) {
+    	for (var j = 0; j < 3; j++) {
+		ctx.save();
+		ctx.beginPath();
+		ctx.translate(j * 700, i * 700);
+		ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+		ctx.rect(-550, -550, 700, 700);
+		ctx.stroke();
+		ctx.closePath();
+		ctx.restore();
+		}
+	}
+
+
+
 	// For animation table
 	// for (var i = 0; i < 3; i++) {
  	// 	for (var j = 0; j < 3; j++) {
@@ -326,97 +342,64 @@ function staticArt() {
 	// 	}
 	// }
 
-	// Middle center
-	ctx.beginPath();
-	ctx.rect(150, 150, 700, 700);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.fillStyle = "rgba(255, 255, 255, .1)";
-	ctx.fill();
-	ctx.closePath();
+	// // Middle center
+	// ctx.beginPath();
+	// ctx.rect(150, 150, 700, 700);
+	// ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+	// ctx.stroke();
+	// ctx.fillStyle = "rgba(255, 255, 255, .1)";
+	// ctx.fill();
+	// ctx.closePath();
 
 	// angle lines
 	ctx.beginPath();
 	ctx.moveTo(0, 0);
+	// top left
+	ctx.lineTo(50, 50);
+	ctx.moveTo(150, 150);
 	ctx.lineTo(350, 350);
-	ctx.strokeStyle = "rgba(255, 255, 255)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// top right
 	ctx.moveTo(1000, 0);
+	ctx.lineTo(950, 50);
+	ctx.moveTo(850, 150);
 	ctx.lineTo(650, 350);
-	ctx.strokeStyle = "rgba(255, 255, 255)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// bottom left
 	ctx.moveTo(0, 1000);
+	ctx.lineTo(150, 950);
+	ctx.moveTo(150, 850);
 	ctx.lineTo(350, 650);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// bottom right
 	ctx.moveTo(1000, 1000);
+	ctx.lineTo(950, 950);
+	ctx.moveTo(850, 850);
 	ctx.lineTo(650, 650);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	//middle angles
+	//left top
 	ctx.moveTo(0, 335);
 	ctx.lineTo(50, 350);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	//bottom maybe
 	ctx.moveTo(1000, 335);
 	ctx.lineTo(950, 350);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// top right
 	ctx.moveTo(665, 0);
 	ctx.lineTo(650, 50);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// top left
 	ctx.moveTo(335, 0);
 	ctx.lineTo(350, 50);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// left bottom
 	ctx.moveTo(0, 665);
 	ctx.lineTo(50, 650);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// right bottom
 	ctx.moveTo(1000, 665);
 	ctx.lineTo(950, 650);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// bottom maybe
 	ctx.moveTo(665, 1000);
 	ctx.lineTo(650, 950);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	ctx.stroke();
-	ctx.closePath();
-
-	ctx.beginPath();
+	// no idea
 	ctx.moveTo(335, 1000);
 	ctx.lineTo(350, 950);
-	ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+
+	ctx.strokeStyle = "rgba(255, 255, 255)";
 	ctx.stroke();
 	ctx.closePath();
 
