@@ -137,7 +137,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	}
 	staticArt();
 	drawField(pos, fm, um, lm);
-	drawShipConsole();
+	// drawShipConsole();
 	
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
@@ -301,7 +301,7 @@ function drawStar(ctx, r) {
 	ctx.restore();
 }
 
-function move(a,b,c,d,e,f,g,h){
+function move(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x){
 
 	// WORKING HERE. UNCOMMENT TO CONTINUE
 
@@ -313,6 +313,22 @@ function move(a,b,c,d,e,f,g,h){
 	var num6 = 0;
 	var num7 = 0;
 	var num8 = 0;
+	var num9 = 0;
+	var num10 = 0;
+	var num11 = 0;
+	var num12 = 0;
+	var num13 = 0;
+	var num14 = 0;
+	var num15 = 0;
+	var num16 = 0;
+	var num17 = 0;
+	var num18 = 0;
+	var num19 = 0;
+	var num20 = 0;
+	var num21 = 0;
+	var num22 = 0;
+	var num23 = 0;
+	var num24 = 0;
 	var movement = setInterval(function() {
 	  num1=num1+a;
 	  num2=num2+b;
@@ -322,22 +338,38 @@ function move(a,b,c,d,e,f,g,h){
 	  num6=num6+f;
 	  num7=num7+g;
 	  num8=num8+h;
+	  num9=num9+i;
+	  num10=num10+j;
+	  num11=num11+k;
+	  num12=num12+l;
+	  num13=num13+m;
+	  num14=num14+n;
+	  num15=num15+o;
+	  num16=num16+p;
+	  num17=num17+q;
+	  num18=num18+r;
+	  num19=num19+s;
+	  num20=num20+t;
+	  num21=num21+u;
+	  num22=num22+v;
+	  num23=num23+w;
+	  num24=num24+x;
 	  ctx.clearRect(0,0,1000,1000);
-	  // staticArt();
+	  staticArt();
 		ctx.beginPath();
 		ctx.moveTo(50 + num1, 50 + num3);
 		ctx.lineTo(950 + num2, 50 + num5);
 		ctx.lineTo(950 + num7, 950 + num6);
 		ctx.lineTo(50 + num8, 950 + num4);
 		ctx.lineTo(50 + num1, 50 + num3);
-		ctx.moveTo(50 + num1, 350 + num3/2);
-		ctx.lineTo(950 + num7, 350 + num5/2);
-		ctx.moveTo(50, 650);
-		ctx.lineTo(950, 650);
-		ctx.moveTo(350, 50);
-		ctx.lineTo(350, 950);
-		ctx.moveTo(650, 50);
-		ctx.lineTo(650, 950);
+		ctx.moveTo(50 + num9, 350 + num11);
+		ctx.lineTo(950 + num10, 350 + num12);
+		ctx.moveTo(50 + num13, 650 + num15);
+		ctx.lineTo(950 + num14, 650 + num16);
+		ctx.moveTo(350 + num17, 50 + num19);
+		ctx.lineTo(350 + num18, 950 + num20);
+		ctx.moveTo(650 + num21, 50 + num23);
+		ctx.lineTo(650 + num22, 950 + num24);
 		ctx.strokeStyle = "rgba(0, 255, 255)";
 		ctx.stroke();
 		ctx.closePath();
@@ -361,7 +393,6 @@ function staticArt() {
 		ctx.stroke();
 		ctx.closePath();
 		ctx.restore();
-
 		}
 	}
 
@@ -438,7 +469,7 @@ function staticArt() {
 	ctx.lineTo(650, 350);
 	// bottom left
 	ctx.moveTo(0, 1000);
-	ctx.lineTo(150, 950);
+	ctx.lineTo(50, 950);
 	ctx.moveTo(150, 850);
 	ctx.lineTo(350, 650);
 	// bottom right
