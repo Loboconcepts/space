@@ -301,40 +301,48 @@ function drawStar(ctx, r) {
 	ctx.restore();
 }
 
-function move(a,b,c,d){
+function move(a,b,c,d,e,f,g,h){
 
 	// WORKING HERE. UNCOMMENT TO CONTINUE
 
-	// var num1 = 0;
-	// var num2 = 0;
-	// var num3 = 0;
-	// var num4 = 0;
-	// var movement = setInterval(function() {
-	//   num1=num1+a;
-	//   num2=num2+b;
-	//   num3=num3+c;
-	//   num4=num4+d;
-	//   ctx.clearRect(0,0,1000,1000);
-	//   // staticArt();
-	// 	ctx.beginPath();
-	// 	ctx.moveTo(50 + num1, 50 + num3);
-	// 	ctx.lineTo(950 + num2, 50 + num3);
-	// 	ctx.lineTo(950 + num2, 950 + num4);
-	// 	ctx.lineTo(50 + num1, 950 + num4);
-	// 	ctx.lineTo(50 + num1, 50 + num3);
-	// 	ctx.moveTo(50 + num1, 350);
-	// 	ctx.lineTo(950 + num2, 350);
-	// 	ctx.moveTo(50 + num1, 650);
-	// 	ctx.lineTo(950 + num2, 650);
-	// 	ctx.moveTo(350, 50 + num3);
-	// 	ctx.lineTo(350, 950 + num4);
-	// 	ctx.moveTo(650, 50 + num3);
-	// 	ctx.lineTo(650, 950 + num4);
-	// 	ctx.strokeStyle = "rgba(0, 255, 255)";
-	// 	ctx.stroke();
-	// 	ctx.closePath();
-	//   if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
-	// }, 5);
+	var num1 = 0;
+	var num2 = 0;
+	var num3 = 0;
+	var num4 = 0;
+	var num5 = 0;
+	var num6 = 0;
+	var num7 = 0;
+	var num8 = 0;
+	var movement = setInterval(function() {
+	  num1=num1+a;
+	  num2=num2+b;
+	  num3=num3+c;
+	  num4=num4+d;
+	  num5=num5+e;
+	  num6=num6+f;
+	  num7=num7+g;
+	  num8=num8+h;
+	  ctx.clearRect(0,0,1000,1000);
+	  // staticArt();
+		ctx.beginPath();
+		ctx.moveTo(50 + num1, 50 + num3);
+		ctx.lineTo(950 + num2, 50 + num5);
+		ctx.lineTo(950 + num7, 950 + num6);
+		ctx.lineTo(50 + num8, 950 + num4);
+		ctx.lineTo(50 + num1, 50 + num3);
+		ctx.moveTo(50, 350);
+		ctx.lineTo(950, 350);
+		ctx.moveTo(50, 650);
+		ctx.lineTo(950, 650);
+		ctx.moveTo(350, 50);
+		ctx.lineTo(350, 950);
+		ctx.moveTo(650, 50);
+		ctx.lineTo(650, 950);
+		ctx.strokeStyle = "rgba(0, 255, 255)";
+		ctx.stroke();
+		ctx.closePath();
+	  if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
+	}, 5);
 };
 
 function staticArt() {
