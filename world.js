@@ -330,8 +330,8 @@ function move(a,b,c,d,e,f,g,h){
 		ctx.lineTo(950 + num7, 950 + num6);
 		ctx.lineTo(50 + num8, 950 + num4);
 		ctx.lineTo(50 + num1, 50 + num3);
-		ctx.moveTo(50, 350);
-		ctx.lineTo(950, 350);
+		ctx.moveTo(50 + num1, 350 + num3/2);
+		ctx.lineTo(950 + num7, 350 + num5/2);
 		ctx.moveTo(50, 650);
 		ctx.lineTo(950, 650);
 		ctx.moveTo(350, 50);
@@ -342,7 +342,7 @@ function move(a,b,c,d,e,f,g,h){
 		ctx.stroke();
 		ctx.closePath();
 	  if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
-	}, 5);
+	}, 15);
 };
 
 function staticArt() {
