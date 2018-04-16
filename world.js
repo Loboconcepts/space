@@ -137,15 +137,8 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	}
 	staticArt();
 	drawField(pos, fm, um, lm);
-	//SHIP CONSOLE
-	ctx.beginPath();
-	ctx.moveTo(0, 950);
-	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
-	ctx.lineTo(1000, 1000);
-	ctx.lineTo(0, 1000);
-	ctx.fillStyle = "#999999";
-	ctx.fill();
-	ctx.closePath();
+	drawShipConsole();
+	
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
@@ -289,7 +282,60 @@ function loopView(isWhat) {
 	if (isWhat > worldArray.length) {return worldArray[(isWhat - worldArray.length)-1];}
 	else if (isWhat < 1) {return worldArray[(isWhat + worldArray.length)-1];}
 	else {return worldArray[(isWhat-1)];	}
+};
+
+function drawStar(ctx, r) {
+	ctx.save();
+	ctx.beginPath();
+	ctx.moveTo(r, 0);
+	for (var i = 0; i < 9; i++) {
+		ctx.rotate(Math.PI / 5);
+		if (i % 2 === 0) {
+		  ctx.lineTo((r / 0.525731) * 0.200811, 0);
+		} else {
+		  ctx.lineTo(r, 0);
+		}
+	}
+	ctx.closePath();
+	ctx.fill();
+	ctx.restore();
 }
+
+function move(a,b,c,d){
+
+	// WORKING HERE. UNCOMMENT TO CONTINUE
+
+	// var num1 = 0;
+	// var num2 = 0;
+	// var num3 = 0;
+	// var num4 = 0;
+	// var movement = setInterval(function() {
+	//   num1=num1+a;
+	//   num2=num2+b;
+	//   num3=num3+c;
+	//   num4=num4+d;
+	//   ctx.clearRect(0,0,1000,1000);
+	//   // staticArt();
+	// 	ctx.beginPath();
+	// 	ctx.moveTo(50 + num1, 50 + num3);
+	// 	ctx.lineTo(950 + num2, 50 + num3);
+	// 	ctx.lineTo(950 + num2, 950 + num4);
+	// 	ctx.lineTo(50 + num1, 950 + num4);
+	// 	ctx.lineTo(50 + num1, 50 + num3);
+	// 	ctx.moveTo(50 + num1, 350);
+	// 	ctx.lineTo(950 + num2, 350);
+	// 	ctx.moveTo(50 + num1, 650);
+	// 	ctx.lineTo(950 + num2, 650);
+	// 	ctx.moveTo(350, 50 + num3);
+	// 	ctx.lineTo(350, 950 + num4);
+	// 	ctx.moveTo(650, 50 + num3);
+	// 	ctx.lineTo(650, 950 + num4);
+	// 	ctx.strokeStyle = "rgba(0, 255, 255)";
+	// 	ctx.stroke();
+	// 	ctx.closePath();
+	//   if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
+	// }, 5);
+};
 
 function staticArt() {
 	ctx.rect(0, 0, canvas.width, canvas.height);
@@ -310,6 +356,25 @@ function staticArt() {
 
 		}
 	}
+
+	//front
+	ctx.beginPath();
+	ctx.moveTo(50, 50);
+	ctx.lineTo(950, 50);
+	ctx.lineTo(950, 950);
+	ctx.lineTo(50, 950);
+	ctx.lineTo(50, 50);
+	ctx.moveTo(50, 350);
+	ctx.lineTo(950, 350);
+	ctx.moveTo(50, 650);
+	ctx.lineTo(950, 650);
+	ctx.moveTo(350, 50);
+	ctx.lineTo(350, 950);
+	ctx.moveTo(650, 50);
+	ctx.lineTo(650, 950);
+	ctx.strokeStyle = "rgba(0, 255, 255)";
+	ctx.stroke();
+	ctx.closePath();
 
 	// Middle items
 	for (var i = 0; i < 3; i++) {
@@ -413,22 +478,7 @@ function staticArt() {
 	    ctx.restore();
 	}
 
-	function drawStar(ctx, r) {
-		ctx.save();
-		ctx.beginPath();
-		ctx.moveTo(r, 0);
-		for (var i = 0; i < 9; i++) {
-			ctx.rotate(Math.PI / 5);
-			if (i % 2 === 0) {
-			  ctx.lineTo((r / 0.525731) * 0.200811, 0);
-			} else {
-			  ctx.lineTo(r, 0);
-			}
-		}
-		ctx.closePath();
-		ctx.fill();
-		ctx.restore();
-	}
+	
 
 	// Windshield
 	// ctx.beginPath();
@@ -663,6 +713,17 @@ function drawField(pos, fm, um, lm) {
 		};
 	}
 
+function drawShipConsole() {
+	//SHIP CONSOLE
+	ctx.beginPath();
+	ctx.moveTo(0, 950);
+	ctx.bezierCurveTo(500, 800, 500, 800, 1000, 950);
+	ctx.lineTo(1000, 1000);
+	ctx.lineTo(0, 1000);
+	ctx.fillStyle = "#999999";
+	ctx.fill();
+	ctx.closePath();
+}
 
 axisFinder();
 generateWorld();
