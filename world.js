@@ -370,7 +370,7 @@ function move(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x){
 		ctx.lineTo(350 + num18, 950 + num20);
 		ctx.moveTo(650 + num21, 50 + num23);
 		ctx.lineTo(650 + num22, 950 + num24);
-		ctx.strokeStyle = "rgba(0, 255, 255)";
+		ctx.strokeStyle = "rgba(255, 255, 255)";
 		ctx.stroke();
 		ctx.closePath();
 	  if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
@@ -411,7 +411,7 @@ function staticArt() {
 	ctx.lineTo(350, 950);
 	ctx.moveTo(650, 50);
 	ctx.lineTo(650, 950);
-	ctx.strokeStyle = "rgba(0, 255, 255)";
+	ctx.strokeStyle = "rgba(255, 255, 255)";
 	ctx.stroke();
 	ctx.closePath();
 
