@@ -303,8 +303,6 @@ function drawStar(ctx, r) {
 
 function move(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x){
 
-	// WORKING HERE. UNCOMMENT TO CONTINUE
-
 	var num1 = 0;
 	var num2 = 0;
 	var num3 = 0;
@@ -371,6 +369,7 @@ function move(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x){
 		ctx.moveTo(650 + num21, 50 + num23);
 		ctx.lineTo(650 + num22, 950 + num24);
 		ctx.strokeStyle = "rgba(255, 255, 255)";
+		ctx.lineWidth=2;
 		ctx.stroke();
 		ctx.closePath();
 	  if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
@@ -428,32 +427,6 @@ function staticArt() {
 		ctx.restore();
 		}
 	}
-
-
-
-	// For animation table
-	// for (var i = 0; i < 3; i++) {
- 	// 	for (var j = 0; j < 3; j++) {
-	// 	ctx.save();
-	// 	ctx.beginPath();
-	// 	ctx.translate(j * 150, i * 150);
-	// 	ctx.strokeStyle = "rgba(255, 0, 255, 1)";
-	// 	ctx.rect(300, 300, 150, 150);
-	// 	ctx.stroke();
-	// 	ctx.closePath();
-	// 	ctx.restore();
-
-	// 	}
-	// }
-
-	// // Middle center
-	// ctx.beginPath();
-	// ctx.rect(150, 150, 700, 700);
-	// ctx.strokeStyle = "rgba(255, 255, 255, 1)";
-	// ctx.stroke();
-	// ctx.fillStyle = "rgba(255, 255, 255, .1)";
-	// ctx.fill();
-	// ctx.closePath();
 
 	// angle lines
 	ctx.beginPath();
@@ -534,74 +507,7 @@ function staticArt() {
 	}
 
 // Only shapes here down
-function drawField(pos, fm, um, lm) {
-	// // current pos
-	// ctx.font = '900px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .8)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos), 500, 800);
-	// // center left
-	// ctx.font = '600px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + fm - lm), 100, 700);
-	// // center center
-	// ctx.font = '600px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + fm), 500, 700);
-	// // center right
-	// ctx.font = '600px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .4)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + fm + lm), 900, 700);
-	// // top left
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + um + 2*fm - lm), 200, 270);
-	// // top middle
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + um + 2*fm), 500, 270);
-	// // top right
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + um + 2*fm + lm), 800, 270);
-	// // center left
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + 2*fm - lm), 200, 570);
-	// // center middle
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + 2*fm), 500, 570);
-	// // center right
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos + 2*fm + lm), 800, 570);
-	// // bottom left
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos - um + 2*fm - lm), 200, 870);
-	// // bottom middle
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos - um + 2*fm), 500, 870);
-	// // bottom right
-	// ctx.font = '200px sans-serif';
-	// ctx.fillStyle = "rgba(255, 255, 255, .2)"
-	// ctx.textAlign="center";
-	// ctx.fillText(loopView(pos - um + 2*fm + lm), 800, 870);
-
-	
+function drawField(pos, fm, um, lm) {	
 	//back top left
 	whichArt(loopView(pos + um + 2*fm - lm),200,200,100);
 	//back top center
@@ -713,44 +619,43 @@ function drawField(pos, fm, um, lm) {
 		break;
 		default:console.log("Not set up yet");
 	}
-	// whichArt(loopView(pos),500,1100,1000);
 }
 
 	
-	function whichArt(posNum,xPos,yPos,size) {
-		// 1 - Nothing
-		// 2 - Star
-		// 3 - Livable Planet
-		// 4 - Gaseous Planet
-		// 5 - Liquid Planet
-		// 6 - Asteroids
-		// 7 - Space Dust
-		// 8 - Worm Hole
-		switch (posNum) {
-			case ("2"):
-			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size, size, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(255, 255, 0, 1)";
-		    ctx.fill();
-			ctx.closePath();
-			break;
-			case ("3"):
-			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(0, 255, 0, 1)";
-		    ctx.fill();
-			ctx.closePath();
-			break;
-			case ("4"):
-			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(0, 0, 255, 1)";
-		    ctx.fill();
-			ctx.closePath();
-			break;
-			default: console.log(posNum);
-		};
-	}
+function whichArt(posNum,xPos,yPos,size) {
+	// 1 - Nothing
+	// 2 - Star
+	// 3 - Livable Planet
+	// 4 - Gaseous Planet
+	// 5 - Liquid Planet
+	// 6 - Asteroids
+	// 7 - Space Dust
+	// 8 - Worm Hole
+	switch (posNum) {
+		case ("2"):
+		ctx.beginPath();
+	    ctx.arc(xPos, yPos, size, size, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(255, 255, 0, 1)";
+	    ctx.fill();
+		ctx.closePath();
+		break;
+		case ("3"):
+		ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(0, 255, 0, 1)";
+	    ctx.fill();
+		ctx.closePath();
+		break;
+		case ("4"):
+		ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+	    ctx.fill();
+		ctx.closePath();
+		break;
+		default: console.log(posNum);
+	};
+}
 
 function drawShipConsole() {
 	//SHIP CONSOLE
