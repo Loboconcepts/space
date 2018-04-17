@@ -337,6 +337,48 @@ function move(a){
 		ctx.lineTo(350 + (a[41]*75) - num[41], 950 + (a[43]*75) - num[43]);
 		ctx.moveTo(650 + (a[44]*75) - num[44], 50 + (a[46]*75) - num[46]);
 		ctx.lineTo(650 + (a[45]*75) - num[45], 950 + (a[47]*75) - num[47]);
+
+		// angle lines
+	
+		// top left
+		// ctx.moveTo(0, 0);
+		// ctx.lineTo(50, 50);
+		// // top right
+		// ctx.moveTo(1000, 0);
+		// ctx.lineTo(950, 50);
+		// // bottom left
+		// ctx.moveTo(0, 1000);
+		// ctx.lineTo(50, 950);
+		// // bottom right
+		// ctx.moveTo(1000, 1000);
+		// ctx.lineTo(950, 950);
+		// //middle angles
+		// //left top
+		// ctx.moveTo(0, 335);
+		// ctx.lineTo(50, 350);
+		// //bottom maybe
+		// ctx.moveTo(1000, 335);
+		// ctx.lineTo(950, 350);
+		// // top right
+		// ctx.moveTo(665, 0);
+		// ctx.lineTo(650, 50);
+		// // top left
+		// ctx.moveTo(335 + num[1], 0 + num[2]);
+		// ctx.lineTo(350 + num[1], 50 + num[2]);
+		// // left bottom
+		// ctx.moveTo(0, 665);
+		// ctx.lineTo(50, 650);
+		// // right bottom
+		// ctx.moveTo(1000, 665);
+		// ctx.lineTo(950, 650);
+		// // bottom maybe
+		// ctx.moveTo(665, 1000);
+		// ctx.lineTo(650, 950);
+		// // no idea
+		// ctx.moveTo(335, 1000);
+		// ctx.lineTo(350, 950);
+
+
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
@@ -400,8 +442,8 @@ function staticArt() {
 
 	// angle lines
 	// ctx.beginPath();
-	// ctx.moveTo(0, 0);
 	// // top left
+	// ctx.moveTo(0, 0);
 	// ctx.lineTo(50, 50);
 	// ctx.moveTo(150, 150);
 	// ctx.lineTo(350, 350);
@@ -445,7 +487,6 @@ function staticArt() {
 	// // no idea
 	// ctx.moveTo(335, 1000);
 	// ctx.lineTo(350, 950);
-
 	// ctx.strokeStyle = "#ffffff";
 	// ctx.stroke();
 	// ctx.closePath();
