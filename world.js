@@ -324,7 +324,7 @@ function move(a){
 		ctx.lineTo(350 + num[17], 950 + num[19]);
 		ctx.moveTo(650 + num[20], 50 + num[22]);
 		ctx.lineTo(650 + num[21], 950 + num[23]);
-		ctx.strokeStyle = "rgba(255, 255, 255)";
+		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth=2;
 		ctx.stroke();
 		ctx.closePath();
@@ -343,7 +343,7 @@ function staticArt() {
 		ctx.save();
 		ctx.beginPath();
 		ctx.translate(j * 300, i * 300);
-		ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+		ctx.strokeStyle = "#ffffff";
 		ctx.rect(50, 50, 300, 300);
 		ctx.stroke();
 		ctx.closePath();
@@ -366,7 +366,7 @@ function staticArt() {
 	ctx.lineTo(350, 950);
 	ctx.moveTo(650, 50);
 	ctx.lineTo(650, 950);
-	ctx.strokeStyle = "rgba(255, 255, 255)";
+	ctx.strokeStyle = "#ffffff";
 	ctx.stroke();
 	ctx.closePath();
 
@@ -376,7 +376,7 @@ function staticArt() {
 		ctx.save();
 		ctx.beginPath();
 		ctx.translate(j * 700, i * 700);
-		ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+		ctx.strokeStyle = "#ffffff";
 		ctx.rect(-550, -550, 700, 700);
 		ctx.stroke();
 		ctx.closePath();
@@ -432,14 +432,14 @@ function staticArt() {
 	ctx.moveTo(335, 1000);
 	ctx.lineTo(350, 950);
 
-	ctx.strokeStyle = "rgba(255, 255, 255)";
+	ctx.strokeStyle = "#ffffff";
 	ctx.stroke();
 	ctx.closePath();
 
 	// Stars
 	for (var j = 1; j < 100; j++) {
 	    ctx.save();
-	    ctx.fillStyle = '#fff';
+	    ctx.fillStyle = '#ffffff';
 	    ctx.translate(1000 - Math.floor(Math.random() * 1000),
 	                  1000 - Math.floor(Math.random() * 1000));
 	    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
