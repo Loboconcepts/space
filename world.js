@@ -301,78 +301,34 @@ function drawStar(ctx, r) {
 	ctx.restore();
 }
 
-function move(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x){
-
-	var num1 = 0;
-	var num2 = 0;
-	var num3 = 0;
-	var num4 = 0;
-	var num5 = 0;
-	var num6 = 0;
-	var num7 = 0;
-	var num8 = 0;
-	var num9 = 0;
-	var num10 = 0;
-	var num11 = 0;
-	var num12 = 0;
-	var num13 = 0;
-	var num14 = 0;
-	var num15 = 0;
-	var num16 = 0;
-	var num17 = 0;
-	var num18 = 0;
-	var num19 = 0;
-	var num20 = 0;
-	var num21 = 0;
-	var num22 = 0;
-	var num23 = 0;
-	var num24 = 0;
+function move(a){
+	console.log(a);
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var movement = setInterval(function() {
-	  num1=num1+a;
-	  num2=num2+b;
-	  num3=num3+c;
-	  num4=num4+d;
-	  num5=num5+e;
-	  num6=num6+f;
-	  num7=num7+g;
-	  num8=num8+h;
-	  num9=num9+i;
-	  num10=num10+j;
-	  num11=num11+k;
-	  num12=num12+l;
-	  num13=num13+m;
-	  num14=num14+n;
-	  num15=num15+o;
-	  num16=num16+p;
-	  num17=num17+q;
-	  num18=num18+r;
-	  num19=num19+s;
-	  num20=num20+t;
-	  num21=num21+u;
-	  num22=num22+v;
-	  num23=num23+w;
-	  num24=num24+x;
+		for (i=0;i<24;i++) {
+			num[i]=num[i]+a[i];
+		}
 	  ctx.clearRect(0,0,1000,1000);
 	  staticArt();
 		ctx.beginPath();
-		ctx.moveTo(50 + num1, 50 + num3);
-		ctx.lineTo(950 + num2, 50 + num5);
-		ctx.lineTo(950 + num7, 950 + num6);
-		ctx.lineTo(50 + num8, 950 + num4);
-		ctx.lineTo(50 + num1, 50 + num3);
-		ctx.moveTo(50 + num9, 350 + num11);
-		ctx.lineTo(950 + num10, 350 + num12);
-		ctx.moveTo(50 + num13, 650 + num15);
-		ctx.lineTo(950 + num14, 650 + num16);
-		ctx.moveTo(350 + num17, 50 + num19);
-		ctx.lineTo(350 + num18, 950 + num20);
-		ctx.moveTo(650 + num21, 50 + num23);
-		ctx.lineTo(650 + num22, 950 + num24);
+		ctx.moveTo(50 + num[0], 50 + num[2]);
+		ctx.lineTo(950 + num[1], 50 + num[4]);
+		ctx.lineTo(950 + num[6], 950 + num[5]);
+		ctx.lineTo(50 + num[7], 950 + num[3]);
+		ctx.lineTo(50 + num[0], 50 + num[2]);
+		ctx.moveTo(50 + num[8], 350 + num[10]);
+		ctx.lineTo(950 + num[9], 350 + num[11]);
+		ctx.moveTo(50 + num[12], 650 + num[14]);
+		ctx.lineTo(950 + num[13], 650 + num[15]);
+		ctx.moveTo(350 + num[16], 50 + num[18]);
+		ctx.lineTo(350 + num[17], 950 + num[19]);
+		ctx.moveTo(650 + num[20], 50 + num[22]);
+		ctx.lineTo(650 + num[21], 950 + num[23]);
 		ctx.strokeStyle = "rgba(255, 255, 255)";
 		ctx.lineWidth=2;
 		ctx.stroke();
 		ctx.closePath();
-	  if (num1 > 890 || num3 > 890 || num1 < -890 || num3 < -890) clearInterval(movement);
+	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement);
 	}, 15);
 };
 
