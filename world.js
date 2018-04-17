@@ -302,10 +302,10 @@ function drawStar(ctx, r) {
 }
 
 function move(a){
-	console.log(a);
-	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var testnum = 0;
 	var movement = setInterval(function() {
-		for (i=0;i<24;i++) {
+		for (i=0;i<48;i++) {
 			num[i]=num[i]+a[i];
 		}
 	  ctx.clearRect(0,0,1000,1000);
@@ -324,10 +324,24 @@ function move(a){
 		ctx.lineTo(350 + num[17], 950 + num[19]);
 		ctx.moveTo(650 + num[20], 50 + num[22]);
 		ctx.lineTo(650 + num[21], 950 + num[23]);
+		ctx.moveTo(50 + (a[24]*75) - num[24], 50 + (a[26]*75) - num[26]);
+		ctx.lineTo(950 + (a[25]*75) - num[25], 50 + (a[28]*75) - num[28]);
+		ctx.lineTo(950 + (a[30]*75) - num[30], 950 + (a[29]*75) - num[29]);
+		ctx.lineTo(50 + (a[31]*75) - num[31], 950 + (a[27]*75) - num[27]);
+		ctx.lineTo(50 + (a[24]*75) - num[24], 50 + (a[26]*75) - num[26]);
+		ctx.moveTo(50 + (a[32]*75) - num[32], 350 + (a[34]*75) - num[34]);
+		ctx.lineTo(950 + (a[33]*75) - num[33], 350 + (a[35]*75) - num[35]);
+		ctx.moveTo(50 + (a[36]*75) - num[36], 650 + (a[38]*75) - num[38]);
+		ctx.lineTo(950 + (a[37]*75) - num[37], 650 + (a[39]*75) - num[39]);
+		ctx.moveTo(350 + (a[40]*75) - num[40], 50 + (a[42]*75) - num[42]);
+		ctx.lineTo(350 + (a[41]*75) - num[41], 950 + (a[43]*75) - num[43]);
+		ctx.moveTo(650 + (a[44]*75) - num[44], 50 + (a[46]*75) - num[46]);
+		ctx.lineTo(650 + (a[45]*75) - num[45], 950 + (a[47]*75) - num[47]);
 		ctx.strokeStyle = "#ffffff";
-		ctx.lineWidth=2;
+		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.closePath();
+		testnum = testnum+1;
 	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement);
 	}, 15);
 };
@@ -338,103 +352,103 @@ function staticArt() {
 	ctx.fill();
 
 	// Back items
-	for (var i = 0; i < 3; i++) {
-    	for (var j = 0; j < 3; j++) {
-		ctx.save();
-		ctx.beginPath();
-		ctx.translate(j * 300, i * 300);
-		ctx.strokeStyle = "#ffffff";
-		ctx.rect(50, 50, 300, 300);
-		ctx.stroke();
-		ctx.closePath();
-		ctx.restore();
-		}
-	}
+	// for (var i = 0; i < 3; i++) {
+ //    	for (var j = 0; j < 3; j++) {
+	// 	ctx.save();
+	// 	ctx.beginPath();
+	// 	ctx.translate(j * 300, i * 300);
+	// 	ctx.strokeStyle = "#ffffff";
+	// 	ctx.rect(50, 50, 300, 300);
+	// 	ctx.stroke();
+	// 	ctx.closePath();
+	// 	ctx.restore();
+	// 	}
+	// }
 
 	//front
-	ctx.beginPath();
-	ctx.moveTo(50, 50);
-	ctx.lineTo(950, 50);
-	ctx.lineTo(950, 950);
-	ctx.lineTo(50, 950);
-	ctx.lineTo(50, 50);
-	ctx.moveTo(50, 350);
-	ctx.lineTo(950, 350);
-	ctx.moveTo(50, 650);
-	ctx.lineTo(950, 650);
-	ctx.moveTo(350, 50);
-	ctx.lineTo(350, 950);
-	ctx.moveTo(650, 50);
-	ctx.lineTo(650, 950);
-	ctx.strokeStyle = "#ffffff";
-	ctx.stroke();
-	ctx.closePath();
+	// ctx.beginPath();
+	// ctx.moveTo(50, 50);
+	// ctx.lineTo(950, 50);
+	// ctx.lineTo(950, 950);
+	// ctx.lineTo(50, 950);
+	// ctx.lineTo(50, 50);
+	// ctx.moveTo(50, 350);
+	// ctx.lineTo(950, 350);
+	// ctx.moveTo(50, 650);
+	// ctx.lineTo(950, 650);
+	// ctx.moveTo(350, 50);
+	// ctx.lineTo(350, 950);
+	// ctx.moveTo(650, 50);
+	// ctx.lineTo(650, 950);
+	// ctx.strokeStyle = "#ffffff";
+	// ctx.stroke();
+	// ctx.closePath();
 
 	// Middle items
-	for (var i = 0; i < 3; i++) {
-    	for (var j = 0; j < 3; j++) {
-		ctx.save();
-		ctx.beginPath();
-		ctx.translate(j * 700, i * 700);
-		ctx.strokeStyle = "#ffffff";
-		ctx.rect(-550, -550, 700, 700);
-		ctx.stroke();
-		ctx.closePath();
-		ctx.restore();
-		}
-	}
+	// for (var i = 0; i < 3; i++) {
+ //    	for (var j = 0; j < 3; j++) {
+	// 	ctx.save();
+	// 	ctx.beginPath();
+	// 	ctx.translate(j * 700, i * 700);
+	// 	ctx.strokeStyle = "#ffffff";
+	// 	ctx.rect(-550, -550, 700, 700);
+	// 	ctx.stroke();
+	// 	ctx.closePath();
+	// 	ctx.restore();
+	// 	}
+	// }
 
 	// angle lines
-	ctx.beginPath();
-	ctx.moveTo(0, 0);
-	// top left
-	ctx.lineTo(50, 50);
-	ctx.moveTo(150, 150);
-	ctx.lineTo(350, 350);
-	// top right
-	ctx.moveTo(1000, 0);
-	ctx.lineTo(950, 50);
-	ctx.moveTo(850, 150);
-	ctx.lineTo(650, 350);
-	// bottom left
-	ctx.moveTo(0, 1000);
-	ctx.lineTo(50, 950);
-	ctx.moveTo(150, 850);
-	ctx.lineTo(350, 650);
-	// bottom right
-	ctx.moveTo(1000, 1000);
-	ctx.lineTo(950, 950);
-	ctx.moveTo(850, 850);
-	ctx.lineTo(650, 650);
-	//middle angles
-	//left top
-	ctx.moveTo(0, 335);
-	ctx.lineTo(50, 350);
-	//bottom maybe
-	ctx.moveTo(1000, 335);
-	ctx.lineTo(950, 350);
-	// top right
-	ctx.moveTo(665, 0);
-	ctx.lineTo(650, 50);
-	// top left
-	ctx.moveTo(335, 0);
-	ctx.lineTo(350, 50);
-	// left bottom
-	ctx.moveTo(0, 665);
-	ctx.lineTo(50, 650);
-	// right bottom
-	ctx.moveTo(1000, 665);
-	ctx.lineTo(950, 650);
-	// bottom maybe
-	ctx.moveTo(665, 1000);
-	ctx.lineTo(650, 950);
-	// no idea
-	ctx.moveTo(335, 1000);
-	ctx.lineTo(350, 950);
+	// ctx.beginPath();
+	// ctx.moveTo(0, 0);
+	// // top left
+	// ctx.lineTo(50, 50);
+	// ctx.moveTo(150, 150);
+	// ctx.lineTo(350, 350);
+	// // top right
+	// ctx.moveTo(1000, 0);
+	// ctx.lineTo(950, 50);
+	// ctx.moveTo(850, 150);
+	// ctx.lineTo(650, 350);
+	// // bottom left
+	// ctx.moveTo(0, 1000);
+	// ctx.lineTo(50, 950);
+	// ctx.moveTo(150, 850);
+	// ctx.lineTo(350, 650);
+	// // bottom right
+	// ctx.moveTo(1000, 1000);
+	// ctx.lineTo(950, 950);
+	// ctx.moveTo(850, 850);
+	// ctx.lineTo(650, 650);
+	// //middle angles
+	// //left top
+	// ctx.moveTo(0, 335);
+	// ctx.lineTo(50, 350);
+	// //bottom maybe
+	// ctx.moveTo(1000, 335);
+	// ctx.lineTo(950, 350);
+	// // top right
+	// ctx.moveTo(665, 0);
+	// ctx.lineTo(650, 50);
+	// // top left
+	// ctx.moveTo(335, 0);
+	// ctx.lineTo(350, 50);
+	// // left bottom
+	// ctx.moveTo(0, 665);
+	// ctx.lineTo(50, 650);
+	// // right bottom
+	// ctx.moveTo(1000, 665);
+	// ctx.lineTo(950, 650);
+	// // bottom maybe
+	// ctx.moveTo(665, 1000);
+	// ctx.lineTo(650, 950);
+	// // no idea
+	// ctx.moveTo(335, 1000);
+	// ctx.lineTo(350, 950);
 
-	ctx.strokeStyle = "#ffffff";
-	ctx.stroke();
-	ctx.closePath();
+	// ctx.strokeStyle = "#ffffff";
+	// ctx.stroke();
+	// ctx.closePath();
 
 	// Stars
 	for (var j = 1; j < 100; j++) {
