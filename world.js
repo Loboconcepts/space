@@ -139,6 +139,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	staticArt();
 	// drawField(pos, fm, um, lm);
 	// drawShipConsole();
+	console.log(currentLocation);
 	
 
 	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
@@ -517,40 +518,41 @@ function staticArt() {
 function drawField(pos, fm, um, lm) {	
 	//back top left
 	whichArt(loopView(pos + um + 2*fm - lm),200,200,100);
-	//back top center
-	whichArt(loopView(pos + um + 2*fm),500,200,100);
 	//back top right
 	whichArt(loopView(pos + um + 2*fm + lm),800,200,100);
+	//back top center
+	whichArt(loopView(pos + um + 2*fm),500,200,100);
 	//back middle left
 	whichArt(loopView(pos + 2*fm - lm),200,500,100);
-	//back middle center
-	whichArt(loopView(pos + 2*fm),500,500,150);
 	//back middle right
 	whichArt(loopView(pos + 2*fm + lm),800,500,100);
+	//back middle center
+	whichArt(loopView(pos + 2*fm),500,500,150);
 	//back bottom left
 	whichArt(loopView(pos - um + 2*fm - lm),200,800,100);
-	//back bottom center
-	whichArt(loopView(pos - um + 2*fm),500,800,100);
 	//back bottom right
 	whichArt(loopView(pos - um + 2*fm + lm),800,800,100);
-	//top center
-	whichArt(loopView(pos + um + fm),500,100,200);
+	//back bottom center
+	whichArt(loopView(pos - um + 2*fm),500,800,100);
 	//top left
-	whichArt(loopView(pos + um + fm - lm),100,100,200);
+	whichArt(loopView(pos + um + fm - lm),200,200,200);
 	//top right
-	whichArt(loopView(pos + um + fm + lm),800,100,200);
-	//bottom center
-	whichArt(loopView(pos - um + fm),500,800,200);
+	whichArt(loopView(pos + um + fm + lm),800,200,200);
+	//top center
+	whichArt(loopView(pos + um + fm),500,200,200);
 	//bottom left
-	whichArt(loopView(pos - um + fm - lm),100,800,200);
+	whichArt(loopView(pos - um + fm - lm),200,800,200);
 	//bottom right
 	whichArt(loopView(pos - um + fm + lm),800,800,200);
+	//bottom center
+	whichArt(loopView(pos - um + fm),500,800,200);
 	//middle left
-	whichArt(loopView(pos + fm - lm),100, 500, 200);
+	whichArt(loopView(pos + fm - lm),200, 500, 200);
+	//middle right
+	whichArt(loopView(pos + fm + lm),800, 500, 200);
 	//middle center
 	whichArt(loopView(pos + fm),500,500,350);
-	//middle right
-	whichArt(loopView(pos + fm + lm),900, 500, 200);
+	
 	//current pos
 	switch (direction) {
 		case ("DOWN"):
@@ -561,10 +563,10 @@ function drawField(pos, fm, um, lm) {
 		case ("N"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(pos),500,1100,1000);
+				whichArt(loopView(pos),500,1200,1000);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(pos),500,-100,1000);
+				whichArt(loopView(pos),500,-200,1000);
 				break;
 				case ("W"):
 				whichArt(loopView(pos),-200,500,1000);
@@ -578,10 +580,10 @@ function drawField(pos, fm, um, lm) {
 		case ("S"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(pos),500,1100,1000);
+				whichArt(loopView(pos),500,1200,1000);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(pos),500,-100,1000);
+				whichArt(loopView(pos),500,-200,1000);
 				break;
 				case ("E"):
 				whichArt(loopView(pos),-200,500,1000);
@@ -594,10 +596,10 @@ function drawField(pos, fm, um, lm) {
 		case ("E"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(pos),500,1100,1000);
+				whichArt(loopView(pos),500,1200,1000);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(pos),500,-100,1000);
+				whichArt(loopView(pos),500,-200,1000);
 				break;
 				case ("N"):
 				whichArt(loopView(pos),-200,500,1000);
@@ -610,10 +612,10 @@ function drawField(pos, fm, um, lm) {
 		case ("W"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(pos),500,1100,1000);
+				whichArt(loopView(pos),500,1200,1000);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(pos),500,-100,1000);
+				whichArt(loopView(pos),500,-200,1000);
 				break;
 				case ("S"):
 				whichArt(loopView(pos),-200,500,1000);
@@ -681,4 +683,3 @@ axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 drawField(currentLocation, fm, um, lm);
-
