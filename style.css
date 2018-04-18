@@ -19,3 +19,7 @@ td {
 	text-align: center;
 	line-height: .8;
 }
+
+canvas {
+	background-color:#000000;
+}

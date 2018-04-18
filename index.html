@@ -12,14 +12,14 @@
 	
 	<br>
 	<button onclick="switchOrientation()">Switch Orientation</button><br>
-	<button onclick="shipRotation('ROLL', -1), rotateShape(1)">&larr;</button>Roll<button onclick="shipRotation('ROLL', 1), rotateShape(-1)">&rarr;</button><br>
-	<button onclick="shipRotation('YAW', -1), move(movArrArr[0])">&larr;</button>
+	<button onclick="rotateShape(1,'ROLL', -1)">&larr;</button>Roll<button onclick="rotateShape(-1,'ROLL', 1)">&rarr;</button><br>
+	<button onclick="move(movArrArr[0]), shipRotation('YAW', -1)">&larr;</button>
 	Yaw
-	<button onclick="shipRotation('YAW', 1), move(movArrArr[1])">&rarr;</button>
+	<button onclick="move(movArrArr[1]), shipRotation('YAW', 1)">&rarr;</button>
 	<br>
-	<button onclick="shipRotation('PITCH', 1), move(movArrArr[2])">&uarr;</button>
+	<button onclick="move(movArrArr[2]), shipRotation('PITCH', 1)">&uarr;</button>
 	Pitch
-	<button onclick="shipRotation('PITCH', -1), move(movArrArr[3])">&darr;</button><br>
+	<button onclick="move(movArrArr[3]), shipRotation('PITCH', -1)">&darr;</button><br>
 	<button onclick="accelerate()">Accelerate</button>
 	<div><table id="fieldOfView"><tbody><tr><td id="t0-0"></td><td id="t0-1"></td><td id="t0-2"></td></tr><tr><td id="t1-0"></td><td id="t1-1"></td><td id="t1-2"></td></tr><tr><td id="t2-0"></td><td id="t2-1"></td><td id="t2-2"></td></tr></tbody></table></div>
 	<!-- <br>Top Facing N or S :::::::::::::::::::: zAxis = UP, E, DOWN, W<br>

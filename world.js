@@ -13,6 +13,9 @@ var topfacing = "UP";
 var yawAxis;
 var rollAxis;
 var pitchAxis;
+var um;
+var fm;
+var lm;
 
 // Disable scrolling.
 document.ontouchmove = function (e) {
@@ -74,9 +77,7 @@ function axisFinder() {
 function cubeShipPositioning(direction, topfacing, pos, orient) {
 	ctx.clearRect(0, 0, 1000, 1000);
 	// upward movement UM || forward movement FM || lateral movement LM
-	var um;
-	var fm;
-	var lm;
+	
 
 	switch (direction) {
 		case "N":fm = -x;break;
@@ -136,7 +137,7 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 		tableView("t2-2",(pos + lm));
 	}
 	staticArt();
-	drawField(pos, fm, um, lm);
+	// drawField(pos, fm, um, lm);
 	// drawShipConsole();
 	
 
@@ -213,7 +214,8 @@ function accelerate() {
 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	}
-	cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+	drawField(currentLocation, fm, um, lm);
 }
 
 function generateWorld() {
@@ -305,9 +307,7 @@ var movArrArr = [
 	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6],
 	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3],
 	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12],
-	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12],
-	[12,0,0,-12,12,0,-12,0,4,-8,-4,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-	[0,-12,12,0,0,-12,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12]
 ];
 
 function move(a){
@@ -318,7 +318,6 @@ function move(a){
 			num[i]=num[i]+a[i];
 		}
 	  ctx.clearRect(0,0,1000,1000);
-	  staticArt();
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[2]);
 		ctx.lineTo(950 + num[1], 50 + num[4]);
@@ -346,31 +345,21 @@ function move(a){
 		ctx.lineTo(350 + (a[41]*75) - num[41], 950 + (a[43]*75) - num[43]);
 		ctx.moveTo(650 + (a[44]*75) - num[44], 50 + (a[46]*75) - num[46]);
 		ctx.lineTo(650 + (a[45]*75) - num[45], 950 + (a[47]*75) - num[47]);
-
-
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.closePath();
-	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement),angleLines("#000000");
+	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement),angleLines("#000000"),staticArt(),drawField(currentLocation, fm, um, lm);
 	}, 15);
-	
 };
 
-function rotateShape(direction) {
+function rotateShape(direction, rAxes, lr) {
 	var a=0;
 	var center = [500,500];
 	ctx.save();
-	var movement = setInterval(function() {
-			
+	var movement = setInterval(function() {		
 		a=a+1
-
-		
-		
 		ctx.clearRect(-200,-200,1200,1200);
-	  	staticArt();
-
-
 		ctx.beginPath();		
 		ctx.moveTo(50, 50);
 		ctx.lineTo(950, 50);
@@ -388,22 +377,16 @@ function rotateShape(direction) {
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
-
 		ctx.closePath();
+		drawField(currentLocation, fm, um, lm);
 		ctx.translate(500,500);
 	 	ctx.rotate(direction * Math.PI / 180);
 		ctx.translate(-500,-500);
-		
-		console.log(a);
-		
-	  if (a > 90 || a < -90) clearInterval(movement),angleLines("#000000"),ctx.restore();;
-	}, 15);
-	
-	
+	  if (a > 90 || a < -90) clearInterval(movement),angleLines("#000000"),ctx.restore(),staticArt(),shipRotation(rAxes, lr),drawField(currentLocation, fm, um, lm);
+	}, 10);
 }
 
 function angleLines(color) {
-	console.log(color);
 	// angle lines
 	ctx.beginPath();
 	// top left
@@ -469,23 +452,24 @@ function staticArt() {
 	// }
 
 	//front
-	// ctx.beginPath();
-	// ctx.moveTo(50, 50);
-	// ctx.lineTo(950, 50);
-	// ctx.lineTo(950, 950);
-	// ctx.lineTo(50, 950);
-	// ctx.lineTo(50, 50);
-	// ctx.moveTo(50, 350);
-	// ctx.lineTo(950, 350);
-	// ctx.moveTo(50, 650);
-	// ctx.lineTo(950, 650);
-	// ctx.moveTo(350, 50);
-	// ctx.lineTo(350, 950);
-	// ctx.moveTo(650, 50);
-	// ctx.lineTo(650, 950);
-	// ctx.strokeStyle = "#ffffff";
-	// ctx.stroke();
-	// ctx.closePath();
+	ctx.beginPath();
+	ctx.moveTo(50, 50);
+	ctx.lineTo(950, 50);
+	ctx.lineTo(950, 950);
+	ctx.lineTo(50, 950);
+	ctx.lineTo(50, 50);
+	ctx.moveTo(50, 350);
+	ctx.lineTo(950, 350);
+	ctx.moveTo(50, 650);
+	ctx.lineTo(950, 650);
+	ctx.moveTo(350, 50);
+	ctx.lineTo(350, 950);
+	ctx.moveTo(650, 50);
+	ctx.lineTo(650, 950);
+	ctx.strokeStyle = "#ffffff";
+	ctx.lineWidth = 2;
+	ctx.stroke();
+	ctx.closePath();
 
 	// Middle items
 	// for (var i = 0; i < 3; i++) {
@@ -573,7 +557,6 @@ function drawField(pos, fm, um, lm) {
 		whichArt(loopView(pos),500,500,1000);
 		break;
 		case ("UP"):
-		console.log("facing up");
 		break;
 		case ("N"):
 			switch(topfacing) {
@@ -655,6 +638,8 @@ function whichArt(posNum,xPos,yPos,size) {
 	// 7 - Space Dust
 	// 8 - Worm Hole
 	switch (posNum) {
+		case ("1"):
+		break;
 		case ("2"):
 		ctx.beginPath();
 	    ctx.arc(xPos, yPos, size, size, Math.PI * 2, true);
@@ -695,4 +680,5 @@ function drawShipConsole() {
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+drawField(currentLocation, fm, um, lm);
 
