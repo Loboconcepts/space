@@ -349,6 +349,47 @@ function move(a){
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
+		//
+		console.log(oldArtArr[0]);
+
+		//
+		//back top left
+		whichArt(loopView(currentLocation + um + 2*fm - lm),200 + (a[24]*75) - num[24],200 + (a[26]*75) - num[26],100);
+		//back top right
+		whichArt(loopView(currentLocation + um + 2*fm + lm),800 + (a[24]*75) - num[24],200 + (a[26]*75) - num[26],100);
+		//back top center
+		whichArt(loopView(currentLocation + um + 2*fm),500,200,100);
+		//back middle left
+		whichArt(loopView(currentLocation + 2*fm - lm),200,500,100);
+		//back middle right
+		whichArt(loopView(currentLocation + 2*fm + lm),800,500,100);
+		//back middle center
+		whichArt(loopView(currentLocation + 2*fm),500,500,150);
+		//back bottom left
+		whichArt(loopView(currentLocation - um + 2*fm - lm),200,800,100);
+		//back bottom right
+		whichArt(loopView(currentLocation - um + 2*fm + lm),800,800,100);
+		//back bottom center
+		whichArt(loopView(currentLocation - um + 2*fm),500,800,100);
+		//top left
+		whichArt(loopView(currentLocation + um + fm - lm),200,200,200);
+		//top right
+		whichArt(loopView(currentLocation + um + fm + lm),800,200,200);
+		//top center
+		whichArt(loopView(currentLocation + um + fm),500,200,200);
+		//bottom left
+		whichArt(loopView(currentLocation - um + fm - lm),200,800,200);
+		//bottom right
+		whichArt(loopView(currentLocation - um + fm + lm),800,800,200);
+		//bottom center
+		whichArt(loopView(currentLocation - um + fm),500,800,200);
+		//middle left
+		whichArt(loopView(currentLocation + fm - lm),200, 500, 200);
+		//middle right
+		whichArt(loopView(currentLocation + fm + lm),800, 500, 200);
+		//middle center
+		whichArt(loopView(currentLocation + fm),500,500,350);
+
 		ctx.closePath();
 	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement),angleLines("#000000"),staticArt(),drawField(currentLocation, fm, um, lm);
 	}, 15);
@@ -514,6 +555,8 @@ function staticArt() {
 
 	}
 
+var oldArtArr = [];
+
 // Only shapes here down
 function drawField(pos, fm, um, lm) {	
 	//back top left
@@ -552,6 +595,14 @@ function drawField(pos, fm, um, lm) {
 	whichArt(loopView(pos + fm + lm),800, 500, 200);
 	//middle center
 	whichArt(loopView(pos + fm),500,500,350);
+
+	oldArtArr = [//back top left
+		"whichArt(loopView(pos + um + 2*fm - lm),200,200,100)",
+		//back top right
+		"whichArt(loopView(pos + um + 2*fm + lm),800,200,100)",
+		//back top center
+		"whichArt(loopView(pos + um + 2*fm),500,200,100)",
+	];
 	
 	//current pos
 	switch (direction) {
