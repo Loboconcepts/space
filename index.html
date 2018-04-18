@@ -12,14 +12,14 @@
 	
 	<br>
 	<button onclick="switchOrientation()">Switch Orientation</button><br>
-	<button onclick="shipRotation('ROLL', -1)">&larr;</button>Roll<button onclick="shipRotation('ROLL', 1)">&rarr;</button><br>
-	<button onclick="shipRotation('YAW', -1), move([12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6])">&larr;</button>
+	<button onclick="shipRotation('ROLL', -1), rotateShape(1)">&larr;</button>Roll<button onclick="shipRotation('ROLL', 1), rotateShape(-1)">&rarr;</button><br>
+	<button onclick="shipRotation('YAW', -1), move(movArrArr[0])">&larr;</button>
 	Yaw
-	<button onclick="shipRotation('YAW', 1), move([-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3])">&rarr;</button>
+	<button onclick="shipRotation('YAW', 1), move(movArrArr[1])">&rarr;</button>
 	<br>
-	<button onclick="shipRotation('PITCH', 1), move([0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12])">&uarr;</button>
+	<button onclick="shipRotation('PITCH', 1), move(movArrArr[2])">&uarr;</button>
 	Pitch
-	<button onclick="shipRotation('PITCH', -1), move([-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12])">&darr;</button><br>
+	<button onclick="shipRotation('PITCH', -1), move(movArrArr[3])">&darr;</button><br>
 	<button onclick="accelerate()">Accelerate</button>
 	<div><table id="fieldOfView"><tbody><tr><td id="t0-0"></td><td id="t0-1"></td><td id="t0-2"></td></tr><tr><td id="t1-0"></td><td id="t1-1"></td><td id="t1-2"></td></tr><tr><td id="t2-0"></td><td id="t2-1"></td><td id="t2-2"></td></tr></tbody></table></div>
 	<!-- <br>Top Facing N or S :::::::::::::::::::: zAxis = UP, E, DOWN, W<br>

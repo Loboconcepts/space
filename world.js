@@ -301,9 +301,18 @@ function drawStar(ctx, r) {
 	ctx.restore();
 }
 
+var movArrArr = [
+	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6],
+	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3],
+	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12],
+	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12],
+	[12,0,0,-12,12,0,-12,0,4,-8,-4,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	[0,-12,12,0,0,-12,0,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+];
+
 function move(a){
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var testnum = 0;
+	angleLines("#000000");
 	var movement = setInterval(function() {
 		for (i=0;i<48;i++) {
 			num[i]=num[i]+a[i];
@@ -338,55 +347,107 @@ function move(a){
 		ctx.moveTo(650 + (a[44]*75) - num[44], 50 + (a[46]*75) - num[46]);
 		ctx.lineTo(650 + (a[45]*75) - num[45], 950 + (a[47]*75) - num[47]);
 
-		// angle lines
-	
-		// top left
-		// ctx.moveTo(0, 0);
-		// ctx.lineTo(50, 50);
-		// // top right
-		// ctx.moveTo(1000, 0);
-		// ctx.lineTo(950, 50);
-		// // bottom left
-		// ctx.moveTo(0, 1000);
-		// ctx.lineTo(50, 950);
-		// // bottom right
-		// ctx.moveTo(1000, 1000);
-		// ctx.lineTo(950, 950);
-		// //middle angles
-		// //left top
-		// ctx.moveTo(0, 335);
-		// ctx.lineTo(50, 350);
-		// //bottom maybe
-		// ctx.moveTo(1000, 335);
-		// ctx.lineTo(950, 350);
-		// // top right
-		// ctx.moveTo(665, 0);
-		// ctx.lineTo(650, 50);
-		// // top left
-		// ctx.moveTo(335 + num[1], 0 + num[2]);
-		// ctx.lineTo(350 + num[1], 50 + num[2]);
-		// // left bottom
-		// ctx.moveTo(0, 665);
-		// ctx.lineTo(50, 650);
-		// // right bottom
-		// ctx.moveTo(1000, 665);
-		// ctx.lineTo(950, 650);
-		// // bottom maybe
-		// ctx.moveTo(665, 1000);
-		// ctx.lineTo(650, 950);
-		// // no idea
-		// ctx.moveTo(335, 1000);
-		// ctx.lineTo(350, 950);
-
 
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.closePath();
-		testnum = testnum+1;
-	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement);
+	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement),angleLines("#000000");
 	}, 15);
+	
 };
+
+function rotateShape(direction) {
+	var a=0;
+	var center = [500,500];
+	ctx.save();
+	var movement = setInterval(function() {
+			
+		a=a+1
+
+		
+		
+		ctx.clearRect(-200,-200,1200,1200);
+	  	staticArt();
+
+
+		ctx.beginPath();		
+		ctx.moveTo(50, 50);
+		ctx.lineTo(950, 50);
+		ctx.lineTo(950, 950);
+		ctx.lineTo(50, 950);
+		ctx.lineTo(50, 50);
+		ctx.moveTo(50, 350);
+		ctx.lineTo(950, 350);
+		ctx.moveTo(50, 650);
+		ctx.lineTo(950, 650);z
+		ctx.moveTo(350, 50);
+		ctx.lineTo(350, 950);
+		ctx.moveTo(650, 50);
+		ctx.lineTo(650, 950);
+		ctx.strokeStyle = "#ffffff";
+		ctx.lineWidth = 2;
+		ctx.stroke();
+
+		ctx.closePath();
+		ctx.translate(500,500);
+	 	ctx.rotate(direction * Math.PI / 180);
+		ctx.translate(-500,-500);
+		
+		console.log(a);
+		
+	  if (a > 90 || a < -90) clearInterval(movement),angleLines("#000000"),ctx.restore();;
+	}, 15);
+	
+	
+}
+
+function angleLines(color) {
+	console.log(color);
+	// angle lines
+	ctx.beginPath();
+	// top left
+	ctx.moveTo(0, 0);
+	ctx.lineTo(50, 50);
+	// top right
+	ctx.moveTo(1000, 0);
+	ctx.lineTo(950, 50);
+	// bottom left
+	ctx.moveTo(0, 1000);
+	ctx.lineTo(50, 950);
+	// bottom right
+	ctx.moveTo(1000, 1000);
+	ctx.lineTo(950, 950);
+	//middle angles
+	//left top
+	ctx.moveTo(0, 335);
+	ctx.lineTo(50, 350);
+	//bottom maybe
+	ctx.moveTo(1000, 335);
+	ctx.lineTo(950, 350);
+	// top right
+	ctx.moveTo(665, 0);
+	ctx.lineTo(650, 50);
+	// top left
+	ctx.moveTo(335, 0);
+	ctx.lineTo(350, 50);
+	// left bottom
+	ctx.moveTo(0, 665);
+	ctx.lineTo(50, 650);
+	// right bottom
+	ctx.moveTo(1000, 665);
+	ctx.lineTo(950, 650);
+	// bottom maybe
+	ctx.moveTo(665, 1000);
+	ctx.lineTo(650, 950);
+	// no idea
+	ctx.moveTo(335, 1000);
+	ctx.lineTo(350, 950);
+	ctx.strokeStyle = color;
+	ctx.lineWidth = 6;
+	ctx.stroke();
+	ctx.closePath();
+}
 
 function staticArt() {
 	ctx.rect(0, 0, canvas.width, canvas.height);
@@ -439,57 +500,8 @@ function staticArt() {
 	// 	ctx.restore();
 	// 	}
 	// }
-
-	// angle lines
-	// ctx.beginPath();
-	// // top left
-	// ctx.moveTo(0, 0);
-	// ctx.lineTo(50, 50);
-	// ctx.moveTo(150, 150);
-	// ctx.lineTo(350, 350);
-	// // top right
-	// ctx.moveTo(1000, 0);
-	// ctx.lineTo(950, 50);
-	// ctx.moveTo(850, 150);
-	// ctx.lineTo(650, 350);
-	// // bottom left
-	// ctx.moveTo(0, 1000);
-	// ctx.lineTo(50, 950);
-	// ctx.moveTo(150, 850);
-	// ctx.lineTo(350, 650);
-	// // bottom right
-	// ctx.moveTo(1000, 1000);
-	// ctx.lineTo(950, 950);
-	// ctx.moveTo(850, 850);
-	// ctx.lineTo(650, 650);
-	// //middle angles
-	// //left top
-	// ctx.moveTo(0, 335);
-	// ctx.lineTo(50, 350);
-	// //bottom maybe
-	// ctx.moveTo(1000, 335);
-	// ctx.lineTo(950, 350);
-	// // top right
-	// ctx.moveTo(665, 0);
-	// ctx.lineTo(650, 50);
-	// // top left
-	// ctx.moveTo(335, 0);
-	// ctx.lineTo(350, 50);
-	// // left bottom
-	// ctx.moveTo(0, 665);
-	// ctx.lineTo(50, 650);
-	// // right bottom
-	// ctx.moveTo(1000, 665);
-	// ctx.lineTo(950, 650);
-	// // bottom maybe
-	// ctx.moveTo(665, 1000);
-	// ctx.lineTo(650, 950);
-	// // no idea
-	// ctx.moveTo(335, 1000);
-	// ctx.lineTo(350, 950);
-	// ctx.strokeStyle = "#ffffff";
-	// ctx.stroke();
-	// ctx.closePath();
+	
+	
 
 	// Stars
 	for (var j = 1; j < 100; j++) {
