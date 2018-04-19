@@ -3,7 +3,7 @@ var i = 0;
 var x = 7;
 var y = x*x;
 var z = 1;
-var currentLocation = 14;
+var currentLocation = 155;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
@@ -304,21 +304,45 @@ function drawStar(ctx, r) {
 	ctx.restore();
 }
 
+//for oganization
+var n = 0;
+
 var movArrArr = [
-	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6],
-	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3],
-	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12],
-	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12]
+	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,-1,12,-3,12,1,12,3,12,-2,12,0,12,0,12,0,12,2,12,-1,n,n,n,n,n,n],
+	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-3,-12,-1,-12,3,-12,1,-12,-2,-12,0,-12,0,-12,0,-12,2,-12,-3,n,n,n,n,n,n],
+	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,-1,12,1,12,-3,12,3,12,0,12,-2,12,2,12,0,12,0,12,-1,12,n,n,n,n,n,n],
+	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-3,-12,3,-12,-1,-12,1,-12,0,-12,-2,-12,2,-12,0,-12,0,-12,-3,-12,n,n,n,n,n,n]
 ];
 
 function move(a){
-	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	angleLines("#000000");
 	var movement = setInterval(function() {
-		for (i=0;i<48;i++) {
+		for (i=0;i<80;i++) {
 			num[i]=num[i]+a[i];
 		}
 	  ctx.clearRect(0,0,1000,1000);
+	  	// old space obj
+		whichArt(oldPlanets[0].posNum,oldPlanets[0].xPos + num[48],oldPlanets[0].yPos + num[49],oldPlanets[0].size);
+		whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + num[50],oldPlanets[1].yPos + num[51],oldPlanets[1].size);
+		whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos + num[56],oldPlanets[2].yPos + num[57],oldPlanets[2].size);
+		whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + num[58],oldPlanets[3].yPos + num[59],oldPlanets[3].size);
+		whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + num[60],oldPlanets[4].yPos + num[61],oldPlanets[4].size);
+		whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos + num[62],oldPlanets[5].yPos + num[63],oldPlanets[5].size);
+		whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + num[52],oldPlanets[6].yPos + num[53],oldPlanets[6].size);
+		whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + num[54],oldPlanets[7].yPos + num[55],oldPlanets[7].size);
+		whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos + num[64],oldPlanets[8].yPos + num[65],oldPlanets[8].size);
+		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[66],oldPlanets[9].yPos + num[67],oldPlanets[9].size);
+		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos,oldPlanets[10].yPos,oldPlanets[10].size);
+		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos,oldPlanets[11].yPos,oldPlanets[11].size);
+		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos,oldPlanets[12].yPos,oldPlanets[12].size);
+		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos,oldPlanets[13].yPos,oldPlanets[13].size);
+		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos,oldPlanets[14].yPos,oldPlanets[14].size);
+		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos,oldPlanets[15].yPos,oldPlanets[15].size);
+		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos,oldPlanets[16].yPos,oldPlanets[16].size);
+		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size);
+		whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size);
+
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[2]);
 		ctx.lineTo(950 + num[1], 50 + num[4]);
@@ -350,7 +374,8 @@ function move(a){
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		//
-		console.log(oldArtArr[0]);
+		
+
 
 		//
 		//back top left
@@ -555,10 +580,10 @@ function staticArt() {
 
 	}
 
-var oldArtArr = [];
 
 // Only shapes here down
-function drawField(pos, fm, um, lm) {	
+function drawField(pos, fm, um, lm) {
+	oldPlanets.length = 0;
 	//back top left
 	whichArt(loopView(pos + um + 2*fm - lm),200,200,100);
 	//back top right
@@ -596,13 +621,6 @@ function drawField(pos, fm, um, lm) {
 	//middle center
 	whichArt(loopView(pos + fm),500,500,350);
 
-	oldArtArr = [//back top left
-		"whichArt(loopView(pos + um + 2*fm - lm),200,200,100)",
-		//back top right
-		"whichArt(loopView(pos + um + 2*fm + lm),800,200,100)",
-		//back top center
-		"whichArt(loopView(pos + um + 2*fm),500,200,100)",
-	];
 	
 	//current pos
 	switch (direction) {
@@ -680,6 +698,15 @@ function drawField(pos, fm, um, lm) {
 	}
 }
 
+function SpaceObject(posNum,xPos,yPos,size) {
+	this.posNum = posNum;
+	this.xPos = xPos;
+	this.yPos = yPos;
+	this.size = size;
+}
+
+var oldPlanets = [];
+
 	
 function whichArt(posNum,xPos,yPos,size) {
 	// 1 - Nothing
@@ -716,6 +743,7 @@ function whichArt(posNum,xPos,yPos,size) {
 		break;
 		default: console.log(posNum);
 	};
+	oldPlanets.push(new SpaceObject(posNum,xPos,yPos,size));	
 }
 
 function drawShipConsole() {
