@@ -617,15 +617,15 @@ function move(a){
 };
 
 function accel(){
-	var num = [0,0,0,0,0,0,0,0];
-	var a = [-3,3,1,-1,6,-6,1.34,]
+	var num = [0,0,0,0,0,0,0,0,0,0];
+	var a = [-3,3,1,-1,6,-6,1.34,1,-1]
 	var newYPos;
 	var newXPos;
 	var c = 1;
 
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);
-		for (i=0;i<7;i++) {
+		for (i=0;i<10;i++) {
 			num[i]=num[i]+a[i];
 		}
 		c = c+1;
@@ -653,23 +653,23 @@ function accel(){
 
 		// COMING IN
 		//back top left
-		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[2]*75) - (num[2]),300 + (a[2]*75) - (num[2]),100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[3]*75) - (num[3]));
 		//back top right
-		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[3]*75) - (num[3]),300 + (a[2]*75) - (num[2]),100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[8]*75) - (num[8]),300 + (a[7]*75) - (num[7]),100 + (a[3]*75) - (num[3]));
 		//back top center
-		whichArt(loopView(currentLocation + um + 2*fm),500,300 + (a[2]*75) - (num[2]),100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + um + 2*fm),500,300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
 		//back middle left
-		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[2]*75) - (num[2]),500,100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[7]*75) - (num[7]),500,100 + (a[8]*75) - (num[8]));
 		//back middle right
-		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[3]*75) - (num[3]),500,100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[8]*75) - (num[8]),500,100 + (a[8]*75) - (num[8]));
 		//back middle center
-		whichArt(loopView(currentLocation + 2*fm),500,500,150 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + 2*fm),500,500,150 + (a[8]*75) - (num[8]));
 		//back bottom left
-		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[2]*75) - (num[2]),700 + (a[3]*75) - (num[3]),oldPlanets[6],100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[7]*75) - (num[7]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
 		//back bottom right
-		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[3]*75) - (num[3]),700 + (a[3]*75) - (num[3]),oldPlanets[6],100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[8]*75) - (num[8]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
 		//back bottom center
-		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[3]*75) - (num[3]),oldPlanets[6],100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
 		
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[0]);
