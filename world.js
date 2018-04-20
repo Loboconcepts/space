@@ -3,7 +3,7 @@ var i = 0;
 var x = 7;
 var y = x*x;
 var z = 1;
-var currentLocation = 154;
+var currentLocation = 196;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
@@ -309,10 +309,10 @@ var n = 0;
 
 //get rid of mini angled movement for back items [O]!!
 var movArrArr = [
-	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,-1,12,-3,12,1,12,3,12,-2,12,0,12,0,12,0,12,2,8,0,8,-3,8,0,n,n],
-	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-3,-12,-1,-12,3,-12,1,-12,-2,-12,0,-12,0,-12,0,-8,2,-12,-3,-8,0,-8,0,n,n],
-	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,-1,12,1,12,-3,12,3,12,0,12,-2,12,2,12,0,12,0,8,0,8,0,8,n,n,n,n],
-	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-3,-12,3,-12,-1,-12,1,-12,0,-12,-2,-12,2,-12,0,-12,0,-8,-3,-8,3,-8,n,n,n,n]
+	[12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,0,8,0,n,n],
+	[-12,-12,-12,12,0,0,-12,-12,-12,-12,-3,0,-12,-12,3,0,-6,-6,-3,3,-9,-9,-6,6,12,12,0,0,-12,12,12,12,12,12,0,-3,12,12,0,3,9,9,-6,6,6,6,-3,3,-12,0,-8,0,n,n],
+	[0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,12,0,8,n,n],
+	[-12,12,-12,-12,-12,-12,0,0,-6,6,-6,-6,-6,6,-9,-9,-3,0,-12,-12,3,0,-12,-12,0,0,12,12,12,12,12,-12,-6,6,9,9,-6,6,6,6,0,-3,12,12,0,3,12,12,0,-12,0,-8,n,n]
 ];
 
 function move(a){
@@ -324,26 +324,43 @@ function move(a){
 		}
 	  ctx.clearRect(0,0,1000,1000);
 	  	// old space obj
+//back top left
 		whichArt(oldPlanets[0].posNum,oldPlanets[0].xPos + num[48],oldPlanets[0].yPos + num[49],oldPlanets[0].size);
-		whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + num[50],oldPlanets[1].yPos + num[51],oldPlanets[1].size);
-		whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos + num[56],oldPlanets[2].yPos + num[57],oldPlanets[2].size);
-		whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + num[58],oldPlanets[3].yPos + num[59],oldPlanets[3].size);
-		whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + num[60],oldPlanets[4].yPos + num[61],oldPlanets[4].size);
-		whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos + num[62],oldPlanets[5].yPos + num[63],oldPlanets[5].size);
-		whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + num[52],oldPlanets[6].yPos + num[53],oldPlanets[6].size);
-		whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + num[54],oldPlanets[7].yPos + num[55],oldPlanets[7].size);
-		whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos + num[64],oldPlanets[8].yPos + num[65],oldPlanets[8].size);
-		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[66],oldPlanets[9].yPos + num[67],oldPlanets[9].size);
-		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[68],oldPlanets[10].yPos + num[69],oldPlanets[10].size);
-		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos + num[70],oldPlanets[11].yPos + num[71],oldPlanets[11].size);
-		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos,oldPlanets[12].yPos,oldPlanets[12].size);
-		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos,oldPlanets[13].yPos,oldPlanets[13].size);
-		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos,oldPlanets[14].yPos,oldPlanets[14].size);
-		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos,oldPlanets[15].yPos,oldPlanets[15].size);
-		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos,oldPlanets[16].yPos,oldPlanets[16].size);
-		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size);
-		whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size);
-
+//back top right
+		whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + num[48],oldPlanets[1].yPos + num[49],oldPlanets[1].size);
+//back top center
+		whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos + num[48],oldPlanets[2].yPos + num[49],oldPlanets[2].size);
+//back middle left
+		whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + num[48],oldPlanets[3].yPos + num[49],oldPlanets[3].size);
+//back middle right
+		whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + num[48],oldPlanets[4].yPos + num[49],oldPlanets[4].size);
+//back middle center
+		whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos + num[48],oldPlanets[5].yPos + num[49],oldPlanets[5].size);
+//back bottom left
+		whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + num[48],oldPlanets[6].yPos + num[49],oldPlanets[6].size);
+//back bottom right
+		whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + num[48],oldPlanets[7].yPos + num[49],oldPlanets[7].size);
+//back bottom center
+		whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos + num[48],oldPlanets[8].yPos + num[49],oldPlanets[8].size);
+//top left
+		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[50],oldPlanets[9].yPos + num[51],oldPlanets[9].size);
+//top right
+		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[50],oldPlanets[10].yPos + num[51],oldPlanets[10].size);
+//top center
+		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos + num[50],oldPlanets[11].yPos + num[51],oldPlanets[11].size);
+//bottom left
+		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos + num[50],oldPlanets[12].yPos + num[51],oldPlanets[12].size);
+//bottom right
+		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos + num[50],oldPlanets[13].yPos + num[51],oldPlanets[13].size);
+//bottom center
+		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos + num[50],oldPlanets[14].yPos + num[51],oldPlanets[14].size);
+//middle left
+		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[50],oldPlanets[15].yPos + num[51],oldPlanets[15].size);
+//middle right
+		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[50],oldPlanets[16].yPos + num[51],oldPlanets[16].size);
+//middle center
+		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + num[50],oldPlanets[17].yPos + num[51],oldPlanets[17].size);
+		
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[2]);
 		ctx.lineTo(950 + num[1], 50 + num[4]);
@@ -374,47 +391,43 @@ function move(a){
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
-		//
-		
 
-
-		//
 		//back top left
-		whichArt(loopView(currentLocation + um + 2*fm - lm),200 + (a[24]*75) - num[24],200 + (a[26]*75) - num[26],100);
+		whichArt(loopView(currentLocation + um + 2*fm - lm),200 + (a[48]*75*-1) - (num[48]*-1),200 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back top right
-		whichArt(loopView(currentLocation + um + 2*fm + lm),800 + (a[24]*75) - num[24],200 + (a[26]*75) - num[26],100);
+		whichArt(loopView(currentLocation + um + 2*fm + lm),800 + (a[48]*75*-1) - (num[48]*-1),200 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back top center
-		whichArt(loopView(currentLocation + um + 2*fm),500,200,100);
+		whichArt(loopView(currentLocation + um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),200 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back middle left
-		whichArt(loopView(currentLocation + 2*fm - lm),200,500,100);
+		whichArt(loopView(currentLocation + 2*fm - lm),200 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back middle right
-		whichArt(loopView(currentLocation + 2*fm + lm),800,500,100);
+		whichArt(loopView(currentLocation + 2*fm + lm),800 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back middle center
-		whichArt(loopView(currentLocation + 2*fm),500,500,150);
+		whichArt(loopView(currentLocation + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),150);
 		//back bottom left
-		whichArt(loopView(currentLocation - um + 2*fm - lm),200,800,100);
+		whichArt(loopView(currentLocation - um + 2*fm - lm),200 + (a[48]*75*-1) - (num[48]*-1),800 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back bottom right
-		whichArt(loopView(currentLocation - um + 2*fm + lm),800,800,100);
+		whichArt(loopView(currentLocation - um + 2*fm + lm),800 + (a[48]*75*-1) - (num[48]*-1),800 + (a[49]*75*-1) - (num[49]*-1),100);
 		//back bottom center
-		whichArt(loopView(currentLocation - um + 2*fm),500,800,100);
+		whichArt(loopView(currentLocation - um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),800 + (a[49]*75*-1) - (num[49]*-1),100);
 		//top left
-		whichArt(loopView(currentLocation + um + fm - lm),200,200,200);
+		whichArt(loopView(currentLocation + um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
 		//top right
-		whichArt(loopView(currentLocation + um + fm + lm),800,200,200);
+		whichArt(loopView(currentLocation + um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
 		//top center
-		whichArt(loopView(currentLocation + um + fm),500,200,200);
+		whichArt(loopView(currentLocation + um + fm),500 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
 		//bottom left
-		whichArt(loopView(currentLocation - um + fm - lm),200,800,200);
+		whichArt(loopView(currentLocation - um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
 		//bottom right
-		whichArt(loopView(currentLocation - um + fm + lm),800,800,200);
+		whichArt(loopView(currentLocation - um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
 		//bottom center
-		whichArt(loopView(currentLocation - um + fm),500,800,200);
+		whichArt(loopView(currentLocation - um + fm),500 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
 		//middle left
-		whichArt(loopView(currentLocation + fm - lm),200, 500, 200);
+		whichArt(loopView(currentLocation + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1), 200);
 		//middle right
-		whichArt(loopView(currentLocation + fm + lm),800, 500, 200);
+		whichArt(loopView(currentLocation + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1), 200);
 		//middle center
-		whichArt(loopView(currentLocation + fm),500,500,350);
+		whichArt(loopView(currentLocation + fm),500 + (a[50]*75*-1) - (num[50]*-1),500 + (a[51]*75*-1) - (num[51]*-1),250);
 
 		ctx.closePath();
 	  if (num[0] > 890 || num[2] > 890 || num[0] < -890 || num[2] < -890) clearInterval(movement),angleLines("#000000"),staticArt(),drawField(currentLocation, fm, um, lm);
@@ -620,7 +633,7 @@ function drawField(pos, fm, um, lm) {
 	//middle right
 	whichArt(loopView(pos + fm + lm),800, 500, 200);
 	//middle center
-	whichArt(loopView(pos + fm),500,500,350);
+	whichArt(loopView(pos + fm),500,500,250);
 
 	
 	//current pos
