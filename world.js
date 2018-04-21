@@ -703,7 +703,6 @@ function accel(){
 		ctx.stroke();
 		//   0 1 2  3 4  5
 		// [-3,3,1,-1,2,-2]
-		console.log(Math.floor(num[6]));
 		
 
 		// COMING IN
