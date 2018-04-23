@@ -623,7 +623,7 @@ function move(a){
 
 function accel(){
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
-	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
+	var a = [-3,3,2,-2,6,-6,1.34,1,-1,10,15]
 	var newYPos;
 	var newXPos;
 	var c = 1;
@@ -658,9 +658,9 @@ function accel(){
 
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
-		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
 		//back top right
-		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[8]*75) - (num[8]),300 + (a[7]*75) - (num[7]),100 + (a[3]*75) - (num[3]));
+		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[8]*75) - (num[8]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
 		//back top center
 		whichArt(loopView(currentLocation + um + 2*fm),500,300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
 		//back middle left
@@ -690,19 +690,19 @@ function accel(){
 		ctx.lineTo(350 + num[0], 950 + num[1]);
 		ctx.moveTo(650 + num[1], 50 + num[0]);
 		ctx.lineTo(650 + num[1], 950 + num[1]);
-		ctx.moveTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
-		ctx.lineTo(950 + (a[0]*75) - num[0], 50 + (a[1]*75) - num[1]);
-		ctx.lineTo(950 + (a[0]*75) - num[0], 950 + (a[0]*75) - num[0]);
-		ctx.lineTo(50 + (a[1]*75) - num[1], 950 + (a[0]*75) - num[0]);
-		ctx.lineTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
-		ctx.moveTo(50 + (a[1]*75) - num[1], 350 + (a[2]*75) - num[2]);
-		ctx.lineTo(950 + (a[0]*75) - num[0], 350 + (a[2]*75) - num[2]);
-		ctx.moveTo(50 + (a[1]*75) - num[1], 650 + (a[3]*75) - num[3]);
-		ctx.lineTo(950 + (a[0]*75) - num[0], 650 + (a[3]*75) - num[3]);
-		ctx.moveTo(350 + (a[2]*75) - num[2], 50 + (a[1]*75) - num[1]);
-		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[0]*75) - num[0]);
-		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
-		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
+		ctx.moveTo(50 + (a[4]*75) - num[4], 50 + (a[4]*75) - num[4]);
+		ctx.lineTo(950 + (a[5]*75) - num[5], 50 + (a[4]*75) - num[4]);
+		ctx.lineTo(950 + (a[5]*75) - num[5], 950 + (a[5]*75) - num[5]);
+		ctx.lineTo(50 + (a[4]*75) - num[4], 950 + (a[5]*75) - num[5]);
+		ctx.lineTo(50 + (a[4]*75) - num[4], 50 + (a[4]*75) - num[4]);
+		ctx.moveTo(50 + (a[4]*75) - num[4], 350 + (a[2]*75) - num[2]);
+		ctx.lineTo(950 + (a[5]*75) - num[5], 350 + (a[2]*75) - num[2]);
+		ctx.moveTo(50 + (a[4]*75) - num[4], 650 + (a[3]*75) - num[3]);
+		ctx.lineTo(950 + (a[5]*75) - num[5], 650 + (a[3]*75) - num[3]);
+		ctx.moveTo(350 + (a[2]*75) - num[2], 50 + (a[4]*75) - num[4]);
+		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[5]*75) - num[5]);
+		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[4]*75) - num[4]);
+		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[5]*75) - num[5]);
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
