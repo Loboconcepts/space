@@ -1268,19 +1268,21 @@ function drawShipConsole() {
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	
+	ctx.fillStyle = "rgb(79, 190, 255)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
 	ctx.shadowOffsetY = 0;
 	ctx.shadowBlur = 100;
-    
-    // ctx.fill();
+    ctx.fill();
 	ctx.closePath();
 	ctx.clip();
-	ctx.fillStyle = "rgba(0, 255, 0, 1)";
-	ctx.fillRect(xPos-size/2, yPos-size/2, size, size);
-	
+	ctx.beginPath();
+	ctx.fillStyle = "rgba(100, 200, 100, 1)";
+	ctx.fillRect(xPos-size/2, yPos-size/9, size, size/4);
+
+	ctx.closePath();
+
 	ctx.restore();
 }
 
