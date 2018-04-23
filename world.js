@@ -1237,17 +1237,7 @@ function whichArt(posNum,xPos,yPos,size) {
 		ctx.restore();
 		break;
 		case ("3"):
-		ctx.save();
-		ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(0, 255, 0, 1)";
-	    ctx.shadowColor = "#0000FF" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 100; 
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
+		drawPlanet(posNum,xPos,yPos,size);
 		break;
 		case ("4"):
 		ctx.save();
@@ -1273,6 +1263,25 @@ function drawShipConsole() {
 	ctx.fillStyle = "#999999";
 	ctx.fill();
 	ctx.closePath();
+}
+
+function drawPlanet(posNum,xPos,yPos,size) {
+	ctx.save();
+	ctx.beginPath();
+	
+    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+    ctx.shadowColor = "#0000FF" 
+    ctx.shadowOffsetX = 0;
+	ctx.shadowOffsetY = 0;
+	ctx.shadowBlur = 100;
+    
+    // ctx.fill();
+	ctx.closePath();
+	ctx.clip();
+	ctx.fillStyle = "rgba(0, 255, 0, 1)";
+	ctx.fillRect(xPos-size/2, yPos-size/2, size, size);
+	
+	ctx.restore();
 }
 
 axisFinder();
