@@ -21,6 +21,8 @@ var um;
 var fm;
 var lm;
 
+
+
 // Disable scrolling.
 document.ontouchmove = function (e) {
   e.preventDefault();
@@ -1356,6 +1358,8 @@ function whichArt(posNum,xPos,yPos,size) {
 	oldPlanets.push(new SpaceObject(posNum,xPos,yPos,size));	
 }
 
+
+
 function drawShipConsole() {
 	//SHIP CONSOLE
 	ctx.beginPath();
@@ -1371,7 +1375,7 @@ function drawShipConsole() {
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	ctx.fillStyle = "rgb(79, 190, 255)";
+	ctx.fillStyle = "rgb(0, 0, 255)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
@@ -1411,18 +1415,27 @@ var planetFace = new Image(500,500);
 planetFace = document.getElementById("planetFace");
 
 function randomContinent(xPos,yPos,size) {
-	ctx.drawImage(planetFace,xPos-size, yPos-size, size*4, size*4);
-	// if (direction == "N" || direction == "DOWN") {
-	// 	ctx.drawImage(planetFace,xPos-size*.5, yPos-size*.5, size*2, size*1.1);
-	// }
-	// else {
-	// 	ctx.drawImage(planetFace,xPos-size*2, yPos-size*.5, size*2, size*1.1);
-	// 	ctx.drawImage(planetFace,xPos, yPos-size*.5, size*2, size*1.1);
-	// }
+	
+	if (direction == "N") {
+		ctx.drawImage(planetFace,xPos-size*2, yPos-size*1.5, size*6, size*2);
+	}
+	else if (direction == "E") {
+		ctx.drawImage(planetFace,xPos-size*1.5, yPos-size*1.5, size*6, size*2);
+	}
+	else if (direction == "S") {
+		ctx.drawImage(planetFace,xPos-size*1, yPos-size*1.5, size*6, size*2);
+	}
+	else if (direction == "W") {
+		ctx.drawImage(planetFace,xPos-size*.5, yPos-size*1.5, size*6, size*2);
+	}
+	else {
+		ctx.drawImage(planetFace,xPos-size*2, yPos-size*1.5, size*6, size*2);
+	}
 }
 
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+staticArt();
 drawField(currentLocation, fm, um, lm);
 
