@@ -3,7 +3,7 @@ var i = 0;
 var x = 7;
 var y = x*x;
 var z = 1;
-var currentLocation = 246;
+var currentLocation = 90;
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
@@ -617,15 +617,15 @@ function move(a){
 };
 
 function accel(){
-	var num = [0,0,0,0,0,0,0,0,0,0];
-	var a = [-3,3,1,-1,6,-6,1.34,1,-1]
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
+	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
 	var newYPos;
 	var newXPos;
 	var c = 1;
 
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);
-		for (i=0;i<10;i++) {
+		for (i=0;i<11;i++) {
 			num[i]=num[i]+a[i];
 		}
 		c = c+1;
@@ -651,7 +651,7 @@ function accel(){
 		// //back bottom center
 		// whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos,oldPlanets[8].yPos + (a[3]*75) - (num[3]),oldPlanets[8].size + (a[3]*75) - (num[3]));
 
-		// COMING IN
+		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
 		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[3]*75) - (num[3]));
 		//back top right
@@ -705,7 +705,7 @@ function accel(){
 		// [-3,3,1,-1,2,-2]
 		
 
-		// COMING IN
+		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//top left
 		whichArt(loopView(currentLocation + um + fm - lm),300-Math.floor(num[6]),300-Math.floor(num[6]),100 + Math.floor(num[6]));
 		//top right
@@ -725,7 +725,7 @@ function accel(){
 		//middle center
 		whichArt(loopView(currentLocation + fm),500,500,150 + Math.floor(num[6]));
 
-		// GOING AWAY
+		// OLD ART MOVING TO NEW P0SITION
 		// top left
 		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[5],oldPlanets[9].yPos + num[0],oldPlanets[9].size + num[1]);
 		//top right
@@ -743,7 +743,7 @@ function accel(){
 		//middle right
 		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[4],oldPlanets[16].yPos,oldPlanets[16].size + num[1]);
 		//middle center
-		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[4]);
+		// whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
 
 		
 		// switch (direction) {
@@ -838,84 +838,181 @@ function accel(){
 		// 	default:console.log("Not set up yet");
 		// }
 
-		// if (oldPlanets[18].xPos == newXPos && oldPlanets[18].yPos == newYPos) {
-		// 	whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size);
-		// }
-		// else {
-		// 	switch (direction) {
-		// 		case ("DOWN"):
-		// 		whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 		break;
-		// 		case ("UP"):
-		// 		whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[52],oldPlanets[18].yPos + num[53],oldPlanets[18].size);
-		// 		break;
-		// 		case ("N"):
-		// 			switch(topfacing) {
-		// 				case ("UP"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("DOWN"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("W"):
-		// 				whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("E"):
-		// 				whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 			}
-		// 		break;
-		// 		case ("S"):
-		// 			switch(topfacing) {
-		// 				case ("UP"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("DOWN"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("E"):
-		// 				whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("W"):
-		// 				whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 			}
-		// 		break;
-		// 		case ("E"):
-		// 			switch(topfacing) {
-		// 				case ("UP"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("DOWN"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("N"):
-		// 				whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("S"):
-		// 				whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 			}
-		// 		break;
-		// 		case ("W"):
-		// 			switch(topfacing) {
-		// 				case ("UP"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("DOWN"):
-		// 				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("S"):
-		// 				whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 				case ("N"):
-		// 				whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
-		// 				break;
-		// 			}
-		// 		break;
-		// 		default:console.log("Not set up yet");
-		// 	}
-		// }
+			switch (direction) {
+				case ("DOWN"):
+				whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
+				whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+				break;
+				case ("UP"):
+					if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10]*1.3,oldPlanets[17].size + num[9]);	
+						}
+				break;
+				case ("N"):
+					switch(topfacing) {
+						case ("UP"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("DOWN"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("W"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+						case ("E"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+					}
+				break;
+				case ("S"):
+					switch(topfacing) {
+						case ("UP"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("DOWN"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("E"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+						case ("W"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+					}
+				break;
+				case ("E"):
+					switch(topfacing) {
+						case ("UP"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("DOWN"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("N"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+						case ("S"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+					}
+				break;
+				case ("W"):
+					switch(topfacing) {
+						case ("UP"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("DOWN"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						break;
+						case ("S"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+						case ("N"):
+						if (c < 30) {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						else {
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+						}
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						break;
+					}
+				break;
+				default:console.log("Not set up yet");
+			}
 		
 
 		
@@ -1277,16 +1374,34 @@ function drawPlanet(posNum,xPos,yPos,size) {
     ctx.fill();
 	ctx.closePath();
 	ctx.clip();
-	ctx.beginPath();
-	ctx.fillStyle = "rgba(100, 200, 100, 1)";
-	ctx.fillRect(xPos-size/2, yPos-size/9, size, size/4);
-
-	ctx.closePath();
-
+	randomContinent(xPos,yPos,size);
 	ctx.restore();
+}
+
+function randomContinent(xPos,yPos,size) {
+	// ctx.beginPath();
+	// ctx.fillStyle = "rgba(100, 200, 100, 1)";
+	var image = new Image(1000,400);
+	image.src = "https://i.imgur.com/fsbQTUk.jpg";
+	ctx.drawImage(image,xPos-size*1.2, yPos-size*1.2, size*2, size*2)
+	// ctx.fillRect(xPos-size/2, yPos-size/3, size, size/1.5);
+	// ctx.rect(xPos-size/2, yPos-size/3, size, size/1.5);
+	// ctx.moveTo(xPos-size/2, yPos-size/3);
+	// ctx.quadraticCurveTo(randNom/8, yPos-size/4, randNom/4, yPos-size/3);
+	// ctx.quadraticCurveTo(randNom/4, yPos-size/4, randNom/2, yPos-size/3);
+	// ctx.quadraticCurveTo(randNom/2, yPos-size/4, size, yPos-size/3);
+ //    ctx.lineTo(size,yPos-size/3);
+
+    
+ //    ctx.lineTo(xPos-size/2,size/1.5);
+ //    ctx.lineTo(xPos-size/2,yPos-size/3);
+
+    // ctx.stroke();
+    // ctx.closePath();
 }
 
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 drawField(currentLocation, fm, um, lm);
+
