@@ -1,10 +1,10 @@
 var worldArray;
 // Size of the universe
-var x = 10;
+var x = 51;
 // Density of the universe
-var rarityValue = 280;
+var rarityValue = 481;
 //
-var currentLocation = 101;
+var currentLocation = 64988;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -245,14 +245,17 @@ function generateWorld() {
 			worldArray.push("2");
 		}
 		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-			if (i%6==0) {
+			if (i%7==0) {
 				worldArray.push("3")
 			}
-			else if (i%5==0) {
+			else if (i%8==0) {
 				worldArray.push("4")
 			}
+			else if (i%9==0) {
+				worldArray.push("5")
+			}
 			else {
-			worldArray.push(1);	
+				worldArray.push(1);	
 			};
 		}
 		else {
@@ -1267,8 +1270,41 @@ function whichArt(posNum,xPos,yPos,size) {
 		case ("4"):
 		ctx.save();
 		ctx.beginPath();
+		ctx.fillStyle = "rgba(80, 80, 50, .7)";
 	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+	    ctx.shadowColor = "#cc9922" 
+	    ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 100;
+	    ctx.fill();
+		ctx.closePath();
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(170, 170, 130, 1)";
+        ctx.ellipse(xPos, yPos,size, size/4, 0, 0, Math.PI*2);
+        ctx.fill();
+        ctx.closePath();
+        ctx.clip();
+        ctx.beginPath();
+		ctx.fillStyle = "rgba(80, 80, 50, .7)";
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.shadowColor = "#7777FF" 
+	    ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 100;
+	    ctx.fill();
+		ctx.closePath();
+
+		ctx.restore();
+		break;
+		case ("5"):
+		ctx.save();
+		ctx.beginPath();
+		ctx.fillStyle = "rgba(0, 0, 255, 1)";
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.shadowColor = "#7777FF" 
+	    ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 100;
 	    ctx.fill();
 		ctx.closePath();
 		ctx.restore();
