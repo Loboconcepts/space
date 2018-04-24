@@ -4,7 +4,7 @@ var x = 10;
 // Density of the universe
 var rarityValue = 280;
 //
-var currentLocation = 52;
+var currentLocation = 101;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -265,6 +265,19 @@ function switchOrientation() {
 	}
 }
 
+function disableButtons(bool) {
+	if (bool) {
+		for (i=0;i<document.querySelectorAll("button").length;i++) {
+			document.querySelectorAll("button")[i].disabled = true;
+		}
+	};
+	if (!bool) {
+		for (i=0;i<document.querySelectorAll("button").length;i++) {
+			document.querySelectorAll("button")[i].disabled = false;
+		}
+	};
+}
+
 // function tableView(id,isWhat) {
 // 	if (id == "t2-1") {
 // 		switch (viewOrient) {
@@ -324,6 +337,7 @@ function move(a){
 	var newYPos;
 	var newXPos;
 	var c = 1;
+	disableButtons(true);
 	var movement = setInterval(function() {
 		for (i=0;i<80;i++) {
 			num[i]=num[i]+a[i];
@@ -617,16 +631,18 @@ function move(a){
 		
 
 		ctx.closePath();
-	  if (c > 75) clearInterval(movement),staticArt(),drawField(currentLocation, fm, um, lm);
+	  if (c > 75) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm);
 	}, 15);
 };
 
 function accel(){
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
-	var a = [-3,3,2,-2,6,-6,1.34,1,-1,10,15]
+	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
 	var newYPos;
 	var newXPos;
 	var c = 1;
+	disableButtons(true);
+	document.querySelector("#accelLock").disabled = false;
 
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);
@@ -636,26 +652,6 @@ function accel(){
 		c = c+1;
 		
 	  ctx.clearRect(0,0,1000,1000);
-	 //  	// GOING AWAY
-		// //back top left
-		// whichArt(oldPlanets[0].posNum,oldPlanets[0].xPos + (a[2]*75) - (num[2]),oldPlanets[0].yPos + (a[2]*75) - (num[2]),oldPlanets[0].size + (a[3]*75) - (num[3]));
-		// //back top right
-		// whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + (a[3]*75) - (num[3]),oldPlanets[1].yPos + (a[2]*75) - (num[2]),oldPlanets[1].size + (a[3]*75) - (num[3]));
-		// //back top center
-		// whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos,oldPlanets[2].yPos + (a[2]*75) - (num[2]),oldPlanets[2].size + (a[3]*75) - (num[3]));
-		// //back middle left
-		// whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + (a[2]*75) - (num[2]),oldPlanets[3].yPos,oldPlanets[3].size + (a[3]*75) - (num[3]));
-		// //back middle right
-		// whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + (a[3]*75) - (num[3]),oldPlanets[4].yPos,oldPlanets[4].size + (a[3]*75) - (num[3]));
-		// //back middle center
-		// whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos,oldPlanets[5].yPos + num[4],oldPlanets[5].size + (a[3]*75) - (num[3]));
-		// //back bottom left
-		// whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + (a[2]*75) - (num[2]),oldPlanets[6].yPos + (a[3]*75) - (num[3]),oldPlanets[6].size + (a[3]*75) - (num[3]));
-		// //back bottom right
-		// whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + (a[3]*75) - (num[3]),oldPlanets[7].yPos + (a[3]*75) - (num[3]),oldPlanets[7].size + (a[3]*75) - (num[3]));
-		// //back bottom center
-		// whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos,oldPlanets[8].yPos + (a[3]*75) - (num[3]),oldPlanets[8].size + (a[3]*75) - (num[3]));
-
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
 		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
@@ -690,19 +686,19 @@ function accel(){
 		ctx.lineTo(350 + num[0], 950 + num[1]);
 		ctx.moveTo(650 + num[1], 50 + num[0]);
 		ctx.lineTo(650 + num[1], 950 + num[1]);
-		ctx.moveTo(50 + (a[4]*75) - num[4], 50 + (a[4]*75) - num[4]);
-		ctx.lineTo(950 + (a[5]*75) - num[5], 50 + (a[4]*75) - num[4]);
-		ctx.lineTo(950 + (a[5]*75) - num[5], 950 + (a[5]*75) - num[5]);
-		ctx.lineTo(50 + (a[4]*75) - num[4], 950 + (a[5]*75) - num[5]);
-		ctx.lineTo(50 + (a[4]*75) - num[4], 50 + (a[4]*75) - num[4]);
-		ctx.moveTo(50 + (a[4]*75) - num[4], 350 + (a[2]*75) - num[2]);
-		ctx.lineTo(950 + (a[5]*75) - num[5], 350 + (a[2]*75) - num[2]);
-		ctx.moveTo(50 + (a[4]*75) - num[4], 650 + (a[3]*75) - num[3]);
-		ctx.lineTo(950 + (a[5]*75) - num[5], 650 + (a[3]*75) - num[3]);
-		ctx.moveTo(350 + (a[2]*75) - num[2], 50 + (a[4]*75) - num[4]);
-		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[5]*75) - num[5]);
-		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[4]*75) - num[4]);
-		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[5]*75) - num[5]);
+		ctx.moveTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 950 + (a[0]*75) - num[0]);
+		ctx.lineTo(50 + (a[1]*75) - num[1], 950 + (a[0]*75) - num[0]);
+		ctx.lineTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
+		ctx.moveTo(50 + (a[1]*75) - num[1], 350 + (a[2]*75) - num[2]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 350 + (a[2]*75) - num[2]);
+		ctx.moveTo(50 + (a[1]*75) - num[1], 650 + (a[3]*75) - num[3]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 650 + (a[3]*75) - num[3]);
+		ctx.moveTo(350 + (a[2]*75) - num[2], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[0]*75) - num[0]);
+		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
 		ctx.strokeStyle = "#ffffff";
 		ctx.lineWidth = 2;
 		ctx.stroke();
@@ -748,100 +744,6 @@ function accel(){
 		//middle right
 		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[4],oldPlanets[16].yPos,oldPlanets[16].size + num[1]);
 		//middle center
-		// whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
-
-		
-		// switch (direction) {
-		// 	case ("DOWN"):
-		// 		newXPos = 500;
-		// 		newYPos = 500;
-		// 	break;
-		// 	case ("UP"):
-		// 		newXPos = -2000;
-		// 		newYPos = -2000;
-		// 	break;
-		// 	case ("N"):
-		// 		switch(topfacing) {
-		// 			case ("UP"):
-		// 			newXPos = 500;
-		// 			newYPos = 1200;
-		// 			break;
-		// 			case ("DOWN"):
-		// 			newXPos = 500;
-		// 			newYPos = -200;
-		// 			break;
-		// 			case ("W"):
-		// 			newXPos = -200;
-		// 			newYPos = 500;
-		// 			break;
-		// 			case ("E"):
-		// 			newXPos = 1200;
-		// 			newYPos = 500;
-		// 			break;
-		// 		}
-		// 	break;
-		// 	case ("S"):
-		// 		switch(topfacing) {
-		// 			case ("UP"):
-		// 			newXPos = 500;
-		// 			newYPos = 1200;
-		// 			break;
-		// 			case ("DOWN"):
-		// 			newXPos = 500;
-		// 			newYPos = -200;
-		// 			break;
-		// 			case ("E"):
-		// 			newXPos = -200;
-		// 			newYPos = 500;
-		// 			break;
-		// 			case ("W"):
-		// 			newXPos = 1200;
-		// 			newYPos = 500;
-		// 			break;
-		// 		}
-		// 	break;
-		// 	case ("E"):
-		// 		switch(topfacing) {
-		// 			case ("UP"):
-		// 			newXPos = 500;
-		// 			newYPos = 1200;
-		// 			break;
-		// 			case ("DOWN"):
-		// 			newXPos = 500;
-		// 			newYPos = -200;
-		// 			break;
-		// 			case ("N"):
-		// 			newXPos = -200;
-		// 			newYPos = 500;
-		// 			break;
-		// 			case ("S"):
-		// 			newXPos = 1200;
-		// 			newYPos = 500;
-		// 			break;
-		// 		}
-		// 	break;
-		// 	case ("W"):
-		// 		switch(topfacing) {
-		// 			case ("UP"):
-		// 			newXPos = 500;
-		// 			newYPos = 1200;
-		// 			break;
-		// 			case ("DOWN"):
-		// 			newXPos = 500;
-		// 			newYPos = -200;
-		// 			break;
-		// 			case ("S"):
-		// 			newXPos = -200;
-		// 			newYPos = 500;
-		// 			break;
-		// 			case ("N"):
-		// 			newXPos = 1200;
-		// 			newYPos = 500;
-		// 			break;
-		// 		}
-		// 	break;
-		// 	default:console.log("Not set up yet");
-		// }
 
 			switch (direction) {
 				case ("DOWN"):
@@ -1018,19 +920,32 @@ function accel(){
 				break;
 				default:console.log("Not set up yet");
 			}
-		
-
-		
 
 		ctx.closePath();
 
-	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),staticArt(),drawField(currentLocation, fm, um, lm);
+	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),autoAccel(movement);
 	}, 15);
 };
+
+function autoAccel(intFunc) {
+	if (document.querySelector("#accelLock").checked) {
+		clearInterval(intFunc);
+		// ctx.clearRect(0,0,1000,1000);
+		// staticArt();
+		// drawField(currentLocation, fm, um, lm);
+		accel();
+		accelerate();
+		return;
+	}
+	else {
+		document.querySelector("#accelLock").disabled=true
+	}
+}
 
 function rotateShape(direction, rAxes, lr) {
 	var a=0;
 	var center = [500,500];
+	disableButtons(true);
 	ctx.save();
 	var movement = setInterval(function() {		
 		a=a+1
@@ -1057,7 +972,7 @@ function rotateShape(direction, rAxes, lr) {
 		ctx.translate(500,500);
 	 	ctx.rotate(direction * Math.PI / 180);
 		ctx.translate(-500,-500);
-	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),staticArt(),shipRotation(rAxes, lr),drawField(currentLocation, fm, um, lm);
+	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),staticArt(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm);
 	}, 10);
 }
 
@@ -1375,7 +1290,7 @@ function drawShipConsole() {
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	ctx.fillStyle = "rgb(0, 0, 255)";
+	ctx.fillStyle = "rgb(0, 100, 255)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
@@ -1384,7 +1299,7 @@ function drawPlanet(posNum,xPos,yPos,size) {
     ctx.fill();
 	ctx.closePath();
 	ctx.clip();
-	randomContinent(xPos,yPos,size);
+	//planet image here
 	ctx.restore();
 }
 
@@ -1409,28 +1324,6 @@ blhole = document.getElementById("shipView");
 
 function blackHole(xPos,yPos,size) {
 	ctx.drawImage(blhole,xPos-size, yPos-size, size*2, size*2)
-}
-
-var planetFace = new Image(500,500);
-planetFace = document.getElementById("planetFace");
-
-function randomContinent(xPos,yPos,size) {
-	
-	if (direction == "N") {
-		ctx.drawImage(planetFace,xPos-size*2, yPos-size*1.5, size*6, size*2);
-	}
-	else if (direction == "E") {
-		ctx.drawImage(planetFace,xPos-size*1.5, yPos-size*1.5, size*6, size*2);
-	}
-	else if (direction == "S") {
-		ctx.drawImage(planetFace,xPos-size*1, yPos-size*1.5, size*6, size*2);
-	}
-	else if (direction == "W") {
-		ctx.drawImage(planetFace,xPos-size*.5, yPos-size*1.5, size*6, size*2);
-	}
-	else {
-		ctx.drawImage(planetFace,xPos-size*2, yPos-size*1.5, size*6, size*2);
-	}
 }
 
 axisFinder();
