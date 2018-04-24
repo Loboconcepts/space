@@ -245,7 +245,15 @@ function generateWorld() {
 			worldArray.push("2");
 		}
 		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-			worldArray.push("3");
+			if (i%6==0) {
+				worldArray.push("3")
+			}
+			else if (i%5==0) {
+				worldArray.push("4")
+			}
+			else {
+			worldArray.push(1);	
+			};
 		}
 		else {
 			worldArray.push(1);	
@@ -1290,7 +1298,7 @@ function drawShipConsole() {
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	ctx.fillStyle = "rgb(0, 100, 255)";
+	ctx.fillStyle = "rgb(150, 255, 150)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
