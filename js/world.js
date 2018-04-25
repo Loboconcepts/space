@@ -1,10 +1,10 @@
 var worldArray;
 // Size of the universe
-var x = 51;
+var x = 10;
 // Density of the universe
-var rarityValue = 481;
+var rarityValue = 101;
 //
-var currentLocation = 64988;
+var currentLocation = 1;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -316,21 +316,25 @@ function loopView(isWhat) {
 	else {return worldArray[(isWhat-1)];	}
 };
 
-function drawStar(ctx, r) {
-	ctx.save();
-	ctx.beginPath();
-	ctx.moveTo(r, 0);
-	for (var i = 0; i < 9; i++) {
-		ctx.rotate(Math.PI / 5);
-		if (i % 2 === 0) {
-		  ctx.lineTo((r / 0.525731) * 0.200811, 0);
-		} else {
-		  ctx.lineTo(r, 0);
-		}
-	}
-	ctx.closePath();
-	ctx.fill();
-	ctx.restore();
+// function drawStar(ctx, r) {
+// 	ctx.save();
+// 	ctx.beginPath();
+// 	ctx.moveTo(r, 0);
+// 	for (var i = 0; i < 9; i++) {
+// 		ctx.rotate(Math.PI / 5);
+// 		if (i % 2 === 0) {
+// 		  ctx.lineTo((r / 0.525731) * 0.200811, 0);
+// 		} else {
+// 		  ctx.lineTo(r, 0);
+// 		}
+// 	}
+// 	ctx.closePath();
+// 	ctx.fill();
+// 	ctx.restore();
+// }
+
+function generalState() {
+
 }
 
 //for oganization
@@ -344,6 +348,7 @@ var movArrArr = [
 ];
 
 function move(a){
+	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var newYPos;
 	var newXPos;
@@ -637,16 +642,13 @@ function move(a){
 				default:console.log("Not set up yet");
 			}
 		}
-		
-
-		
-
 		ctx.closePath();
-	  if (c > 75) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm);
+	  if (c > 75) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
 function accel(){
+	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
 	var newYPos;
@@ -934,7 +936,7 @@ function accel(){
 
 		ctx.closePath();
 
-	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),autoAccel(movement);
+	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),autoAccel(movement),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -1090,14 +1092,14 @@ function staticArt() {
 	
 
 	// Stars
-	for (var j = 1; j < 100; j++) {
-	    ctx.save();
-	    ctx.fillStyle = '#ffffff';
-	    ctx.translate(1000 - Math.floor(Math.random() * 1000),
-	                  1000 - Math.floor(Math.random() * 1000));
-	    drawStar(ctx, Math.floor(Math.random() * 4) + 2);
-	    ctx.restore();
-	}
+	// for (var j = 1; j < 100; j++) {
+	//     ctx.save();
+	//     ctx.fillStyle = '#ffffff';
+	//     ctx.translate(1000 - Math.floor(Math.random() * 1000),
+	//                   1000 - Math.floor(Math.random() * 1000));
+	//     drawStar(ctx, Math.floor(Math.random() * 4) + 2);
+	//     ctx.restore();
+	// }
 
 	
 
@@ -1317,8 +1319,6 @@ function whichArt(posNum,xPos,yPos,size) {
 	oldPlanets.push(new SpaceObject(posNum,xPos,yPos,size));	
 }
 
-
-
 function drawShipConsole() {
 	//SHIP CONSOLE
 	ctx.beginPath();
@@ -1331,10 +1331,17 @@ function drawShipConsole() {
 	ctx.closePath();
 }
 
+// var earth = new Image(800,200);
+earth = document.getElementById("earthFace");
+
+function planetFace(whatFace,xPos,yPos,size) {
+	ctx.drawImage(whatFace,xPos-size, yPos-size/2, size*4, size*1.1);
+};
+
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	ctx.fillStyle = "rgb(150, 255, 150)";
+	// ctx.fillStyle = "rgb(0, 255, 150)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
@@ -1343,7 +1350,7 @@ function drawPlanet(posNum,xPos,yPos,size) {
     ctx.fill();
 	ctx.closePath();
 	ctx.clip();
-	//planet image here
+	planetFace(earth,xPos,yPos,size);
 	ctx.restore();
 }
 
@@ -1366,13 +1373,153 @@ function drawBlackHole(posNum,xPos,yPos,size) {
 var blhole = new Image(500,500);
 blhole = document.getElementById("shipView");
 
+
+
 function blackHole(xPos,yPos,size) {
 	ctx.drawImage(blhole,xPos-size, yPos-size, size*2, size*2)
 }
+
+
 
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 staticArt();
-drawField(currentLocation, fm, um, lm);
 
+function generalState() {
+	ctx.clearRect(0,0,1000,1000);
+
+  	ctx.beginPath();
+	ctx.moveTo(50, 50);
+	ctx.lineTo(950, 50);
+	ctx.lineTo(950, 950);
+	ctx.lineTo(50, 950);
+	ctx.lineTo(50, 50);
+	ctx.moveTo(50, 350);
+	ctx.lineTo(950, 350);
+	ctx.moveTo(50, 650);
+	ctx.lineTo(950, 650);
+	ctx.moveTo(350, 50);
+	ctx.lineTo(350, 950);
+	ctx.moveTo(650, 50);
+	ctx.lineTo(650, 950);
+	ctx.strokeStyle = "#ffffff";
+	ctx.lineWidth = 2;
+	ctx.stroke();
+	ctx.closePath();
+
+  	// GOING AWAY
+	//back top left
+	whichArt(loopView(currentLocation + um + 2*fm - lm),300,300,100);
+	//back top right
+	whichArt(loopView(currentLocation + um + 2*fm + lm),700,300,100);
+	//back top center
+	whichArt(loopView(currentLocation + um + 2*fm),500,300,100);
+	//back middle left
+	whichArt(loopView(currentLocation + 2*fm - lm),300,500,100);
+	//back middle right
+	whichArt(loopView(currentLocation + 2*fm + lm),700,500,100);
+	//back middle center
+	whichArt(loopView(currentLocation + 2*fm),500,500,150);
+	//back bottom left
+	whichArt(loopView(currentLocation - um + 2*fm - lm),300,700,100);
+	//back bottom right
+	whichArt(loopView(currentLocation - um + 2*fm + lm),700,700,100);
+	//back bottom center
+	whichArt(loopView(currentLocation - um + 2*fm),500,700,100);
+	//top left
+	whichArt(loopView(currentLocation + um + fm - lm),200,200,200);
+	//top right
+	whichArt(loopView(currentLocation + um + fm + lm),800,200,200);
+	//top center
+	whichArt(loopView(currentLocation + um + fm),500,200,200);
+	//bottom left
+	whichArt(loopView(currentLocation - um + fm - lm),200,800,200);
+	//bottom right
+	whichArt(loopView(currentLocation - um + fm + lm),800,800,200);
+	//bottom center
+	whichArt(loopView(currentLocation - um + fm),500,800,200);
+	//middle left
+	whichArt(loopView(currentLocation + fm - lm),200, 500, 200);
+	//middle right
+	whichArt(loopView(currentLocation + fm + lm),800, 500, 200);
+	//middle center
+	whichArt(loopView(currentLocation + fm),500,500,250);
+	
+	switch (direction) {
+		case ("DOWN"):
+		whichArt(loopView(currentLocation),500,500,1000);
+		break;
+		case ("UP"):
+		break;
+		case ("N"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(currentLocation),500,1200,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(currentLocation),500,-200,1000);
+				break;
+				case ("W"):
+				whichArt(loopView(currentLocation),-200,500,1000);
+				break;
+				case ("E"):
+				whichArt(loopView(currentLocation),1200,500,1000);
+				break;
+			}
+		break;
+		case ("S"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(currentLocation),500,1200,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(currentLocation),500,-200,1000);
+				break;
+				case ("E"):
+				whichArt(loopView(currentLocation),-200,500,1000);
+				break;
+				case ("W"):
+				whichArt(loopView(currentLocation),1200,500,1000);
+				break;
+			}
+		break;
+		case ("E"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(currentLocation),500,1200,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(currentLocation),500,-200,1000);
+				break;
+				case ("N"):
+				whichArt(loopView(currentLocation),-200,500,1000);
+				break;
+				case ("S"):
+				whichArt(loopView(currentLocation),1200,500,1000);
+				break;
+			}
+		break;
+		case ("W"):
+			switch(topfacing) {
+				case ("UP"):
+				whichArt(loopView(currentLocation),500,1200,1000);
+				break;
+				case ("DOWN"):
+				whichArt(loopView(currentLocation),500,-200,1000);
+				break;
+				case ("S"):
+				whichArt(loopView(currentLocation),-200,500,1000);
+				break;
+				case ("N"):
+				whichArt(loopView(currentLocation),1200,500,1000);
+				break;
+			}
+		break;
+		default:console.log("Not set up yet");
+	}
+	ctx.closePath();
+}
+
+
+var stalled = setInterval(generalState, 30);
