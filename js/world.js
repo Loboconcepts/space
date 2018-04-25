@@ -208,22 +208,22 @@ function shipRotation(rAxes, lr) {
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
-function accelerate() {
-	switch (direction) {
-		case "N":currentLocation = currentLocation - x;break;
-		case "S":currentLocation = currentLocation + x;break;
-		case "E":currentLocation = currentLocation + z;break;
-		case "W":currentLocation = currentLocation - z;break;
-		case "UP":currentLocation = currentLocation - y;break;
-		case "DOWN":currentLocation = currentLocation + y;break;
-		default: console.log("OK");
-	}
-	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
-	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
-	else {currentLocation = (currentLocation);	}
-	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
-	// drawField(currentLocation, fm, um, lm);
-}
+// function accelerate() {
+// 	switch (direction) {
+// 		case "N":currentLocation = currentLocation - x;break;
+// 		case "S":currentLocation = currentLocation + x;break;
+// 		case "E":currentLocation = currentLocation + z;break;
+// 		case "W":currentLocation = currentLocation - z;break;
+// 		case "UP":currentLocation = currentLocation - y;break;
+// 		case "DOWN":currentLocation = currentLocation + y;break;
+// 		default: console.log("OK");
+// 	}
+// 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
+// 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
+// 	else {currentLocation = (currentLocation);	}
+// 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+// 	// drawField(currentLocation, fm, um, lm);
+// }
 
 function generateWorld() {
 	// 1 - Nothing
@@ -647,8 +647,22 @@ function move(a){
 	}, 15);
 };
 
-function accel(){
+function accelerate(){
 	clearInterval(stalled);
+	switch (direction) {
+		case "N":currentLocation = currentLocation - x;break;
+		case "S":currentLocation = currentLocation + x;break;
+		case "E":currentLocation = currentLocation + z;break;
+		case "W":currentLocation = currentLocation - z;break;
+		case "UP":currentLocation = currentLocation - y;break;
+		case "DOWN":currentLocation = currentLocation + y;break;
+		default: console.log("OK");
+	}
+	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
+	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
+	else {currentLocation = (currentLocation);	}
+	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+	// drawField(currentLocation, fm, um, lm);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
 	var newYPos;
@@ -936,22 +950,23 @@ function accel(){
 
 		ctx.closePath();
 
-	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),autoAccel(movement),stalled = setInterval(generalState, 30);
+	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),disableButtons(false),autoAccel(movement);
 	}, 15);
 };
 
 function autoAccel(intFunc) {
 	if (document.querySelector("#accelLock").checked) {
 		clearInterval(intFunc);
-		// ctx.clearRect(0,0,1000,1000);
-		// staticArt();
-		// drawField(currentLocation, fm, um, lm);
-		accel();
+		staticArt();
+		drawField(currentLocation, fm, um, lm);
 		accelerate();
 		return;
 	}
 	else {
-		document.querySelector("#accelLock").disabled=true
+		document.querySelector("#accelLock").disabled=true;
+		staticArt();
+		drawField(currentLocation, fm, um, lm);
+		stalled = setInterval(generalState, 30);
 	}
 }
 
