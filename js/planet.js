@@ -43,10 +43,6 @@ img.onload = function() {
     
     // get canvas context
     efctx = document.getElementById('earthFace').getContext('2d');
-
-    console.log(imgW);
-    console.log(imgH);
-
     // set refresh rate
     return setInterval(draw, speed);
 

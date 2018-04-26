@@ -2,9 +2,9 @@ var worldArray;
 // Size of the universe
 var x = 10;
 // Density of the universe
-var rarityValue = 101;
+var rarityValue = 170;
 //
-var currentLocation = 1;
+var currentLocation = 691;
 var i = 0;
 var y = x*x;
 var z = 1;
