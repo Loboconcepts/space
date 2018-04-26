@@ -36,8 +36,8 @@ var img = new Image();
 // direction, and the speed.
 
 img.src = 'img/earth.jpg';
-var CanvasXSize = 800;
-var CanvasYSize = 200;
+var CanvasXSize = 1000;
+var CanvasYSize = 500;
 var speed = 60; // lower is faster
 var scale = 1.05;
 var y2 = 1.5; // vertical offset
