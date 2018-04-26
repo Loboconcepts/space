@@ -1,35 +1,3 @@
-// var W = H = 1000;
-
-// var earthFace = document.getElementById("earthFace");
-// earthFace.width = W;
-// earthFace.height = H;
-// earthFace.style.width = "1000px";
-// earthFace.style.height = "100px";
-// var efctx = earthFace.getContext("2d");
-
-// function drawPlanetFace() {
-	
-// 	efctx.fillStyle = "#0000FF";
-// 	efctx.rect(0, 0, earthFace.width, earthFace.height);
-// 	efctx.fill();
-// 	efctx.closePath();
-// 	efctx.fillStyle = "#00FF00";
-// 	efctx.beginPath();
-// 	efctx.moveTo(0,150);
-// 	efctx.lineTo(400,150);
-// 	efctx.lineTo(400,350);
-// 	efctx.lineTo(200,1000);
-// 	efctx.lineTo(0,350);
-// 	efctx.fill();
-
-
-
-// 	efctx.closePath();
-// }
-
-// drawPlanetFace();
-
-
 var img = new Image();
 
 // User Variables - customize these to change the image being scrolled, its
@@ -39,8 +7,8 @@ img.src = 'img/earth.jpg';
 var CanvasXSize = 1000;
 var CanvasYSize = 500;
 var speed = 60; // lower is faster
-var scale = 1;
-var y2 = -5; // vertical offset
+var scale2 = 1;
+var y2 = 0; // vertical offset
 
 // Main program
 
@@ -53,8 +21,8 @@ var clearY;
 var efctx;
 
 img.onload = function() {
-    imgW = img.width * scale;
-    imgH = img.height * scale;
+    imgW = img.width * scale2;
+    imgH = img.height * scale2;
     
     if (imgW > CanvasXSize) {
         // image larger than canvas
@@ -75,7 +43,10 @@ img.onload = function() {
     
     // get canvas context
     efctx = document.getElementById('earthFace').getContext('2d');
- 	console.log("Changes");
+
+    console.log(imgW);
+    console.log(imgH);
+
     // set refresh rate
     return setInterval(draw, speed);
 

@@ -1350,7 +1350,7 @@ function drawShipConsole() {
 earth = document.getElementById("earthFace");
 
 function planetFace(whatFace,xPos,yPos,size) {
-	ctx.drawImage(whatFace,xPos-size, yPos-size/2, size*3, size*2);
+	ctx.drawImage(whatFace,xPos-size/2, yPos-size/2, size*2, size*1);
 };
 
 function drawPlanet(posNum,xPos,yPos,size) {
