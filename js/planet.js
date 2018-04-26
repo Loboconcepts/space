@@ -39,8 +39,8 @@ img.src = 'img/earth.jpg';
 var CanvasXSize = 1000;
 var CanvasYSize = 500;
 var speed = 60; // lower is faster
-var scale = 1.05;
-var y2 = 1.5; // vertical offset
+var scale = 1;
+var y2 = -5; // vertical offset
 
 // Main program
 
