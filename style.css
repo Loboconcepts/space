@@ -23,3 +23,14 @@ td {
 canvas {
 	background-color:#000000;
 }
+
+.earth {
+  width: 500px;
+  height: 500px;
+  background: url('img/earth-texture-atlas.jpg') left center;
+  animation: play 1.5s steps(12) infinite;
+}
+
+@keyframes play {
+   100% { background-position: -6000px; }
+}

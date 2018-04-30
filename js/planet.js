@@ -6,7 +6,7 @@ var img = new Image();
 img.src = 'img/earth.jpg';
 var CanvasXSize = 1000;
 var CanvasYSize = 500;
-var speed = 60; // lower is faster
+var speed = 10; // lower is faster
 var scale2 = 1;
 var y2 = 0; // vertical offset
 
