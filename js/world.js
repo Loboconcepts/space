@@ -21,8 +21,6 @@ var um;
 var fm;
 var lm;
 
-
-
 // Disable scrolling.
 document.ontouchmove = function (e) {
   e.preventDefault();
@@ -49,8 +47,10 @@ var canvas = document.getElementById("shipView");
 canvas.width = W;
 canvas.height = H;
 canvas.style.position = "relative";
-canvas.style.width = (W * Math.min(window.innerWidth/W)) + "px";
-canvas.style.height = ((H * Math.min(window.innerHeight/H))/2) + "px";
+// canvas.style.width = (W * Math.min(window.innerWidth/W)) + "px";
+// canvas.style.height = ((H * Math.min(window.innerHeight/H))/2) + "px";
+canvas.style.width = "500px";
+canvas.style.height = "500px";
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
@@ -278,11 +278,14 @@ function switchOrientation() {
 
 function disableButtons(bool) {
 	if (bool) {
+		document.getElementById("user").disabled = true;
 		for (i=0;i<document.querySelectorAll("button").length;i++) {
 			document.querySelectorAll("button")[i].disabled = true;
 		}
 	};
 	if (!bool) {
+		document.getElementById("user").disabled = false;
+		document.getElementById("user").focus();
 		for (i=0;i<document.querySelectorAll("button").length;i++) {
 			document.querySelectorAll("button")[i].disabled = false;
 		}
@@ -1346,17 +1349,10 @@ function drawShipConsole() {
 	ctx.closePath();
 }
 
-// var earth = new Image(800,200);
-earth = document.getElementById("earthFace");
-
-function planetFace(whatFace,xPos,yPos,size) {
-	ctx.drawImage(whatFace,xPos-size/2, yPos-size/2, size*2, size*1);
-};
-
 function drawPlanet(posNum,xPos,yPos,size) {
 	ctx.save();
 	ctx.beginPath();
-	// ctx.fillStyle = "rgb(0, 255, 150)";
+	ctx.fillStyle = "rgb(0, 255, 150)";
     ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
     ctx.shadowColor = "#0000FF" 
     ctx.shadowOffsetX = 0;
@@ -1365,7 +1361,6 @@ function drawPlanet(posNum,xPos,yPos,size) {
     ctx.fill();
 	ctx.closePath();
 	ctx.clip();
-	planetFace(earth,xPos,yPos,size);
 	ctx.restore();
 }
 
