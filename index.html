@@ -134,6 +134,7 @@
 				}
 				break;
 			case "cruise control on":
+			case "cc on":
 				cruiseControl=true;
 				computerReply("Cruise control is enabled");
 				break;
@@ -150,6 +151,12 @@
 				break;
 			case "help":
 				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
+				break;
+			case "hello":
+			case "hi":
+			case "yo":
+			case "howdy":
+				computerReply("Hello");
 				break;
 			default:
 				computerReply("Does Not Compute");
