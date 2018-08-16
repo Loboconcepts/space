@@ -158,8 +158,14 @@
 			case "howdy":
 				computerReply("Hello");
 				break;
+			case "what is this":
+			case "who are you":
+				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
+				break;
+			case "direction":
+			
 			default:
-				computerReply("Does Not Compute");
+				computerReply("Does not compute");
 		}
 	}
 	function computerReply(reply) {
