@@ -5,20 +5,20 @@
 	<title>Space</title>
 	   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 </head>
-<body>
+<body style="text-align:center;">
 
 	<div style="display:none;position: absolute;z-index:10000;"><canvas id="earthFace"></canvas></div>
 	
 
 	<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
-	<div id="compass"></div>
+	<!-- <div id="compass"></div> -->
 	
-	<br>
-	<div id="shipConsole" style="overflow:scroll;overflow-y: hidden;overflow-x: hidden; background:#000000;color:#00ff00;width:200px;height:160px;padding:5px;font-family: monospace;"></div>
-	<input style="font-family: monospace;background-color:#000000; color:#00ff00;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
+	
+	<div id="shipConsole" style="margin:0 auto;overflow:scroll;overflow-y: hidden;overflow-x: hidden; background:#000000;color:#00ff00;width:200px;height:160px;padding:5px;font-family: monospace;text-align:left;"></div>
+	<input style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
 
 	<!-- <button onclick="switchOrientation()">Switch Orientation</button><br> -->
-	<button onclick="rotateShape(1,'ROLL', -1)">&larr;</button>Roll<button onclick="rotateShape(-1,'ROLL', 1)">&rarr;</button><br>
+	<!-- <button onclick="rotateShape(1,'ROLL', -1)">&larr;</button>Roll<button onclick="rotateShape(-1,'ROLL', 1)">&rarr;</button><br>
 	<button onclick="move(movArrArr[0]), shipRotation('YAW', -1)">&larr;</button>
 	Yaw
 	<button onclick="move(movArrArr[1]), shipRotation('YAW', 1)">&rarr;</button>
@@ -26,7 +26,7 @@
 	<button onclick="move(movArrArr[2]), shipRotation('PITCH', 1)">&uarr;</button>
 	Pitch
 	<button onclick="move(movArrArr[3]), shipRotation('PITCH', -1)">&darr;</button><br>
-	<button onclick="accelerate()">Accelerate</button><input disabled onchange="" id="accelLock" type="checkbox">
+	<button onclick="accelerate()">Accelerate</button><input disabled onchange="" id="accelLock" type="checkbox"> -->
 	<!-- <div><table id="fieldOfView"><tbody><tr><td id="t0-0"></td><td id="t0-1"></td><td id="t0-2"></td></tr><tr><td id="t1-0"></td><td id="t1-1"></td><td id="t1-2"></td></tr><tr><td id="t2-0"></td><td id="t2-1"></td><td id="t2-2"></td></tr></tbody></table></div> -->
 	<!-- <br>Top Facing N or S :::::::::::::::::::: zAxis = UP, E, DOWN, W<br>
 	<br>Top Facing UP or DOWN ::::::::: yAxis = N, E, S, W<br>
@@ -38,76 +38,126 @@
 <script src="js/world.js"></script>
 
 <script>
-	var lastCommand = "";
+	var lastCommand = [];
+	var commandChoice = -1;
 	var user = document.getElementById("user");
-	user.addEventListener("keyup", function(event) {event.preventDefault();if (event.keyCode === 13) {submitUserInput(document.getElementById('user').value);}if (event.keyCode === 38) {document.getElementById('user').value = lastCommand;}});
+	var cruiseControl = false;
+	user.addEventListener("keyup", function(event) {event.preventDefault();
+		if (event.keyCode === 13) {
+			lastCommand.unshift(document.getElementById('user').value);
+			if (lastCommand.length>6) {
+				lastCommand.splice(-1,1);
+			}
+			submitUserInput(document.getElementById('user').value);
+			commandChoice = -1;
+		}
+		if (event.keyCode === 38) {
+			if (commandChoice<lastCommand.length-1) {
+				commandChoice = commandChoice+1;	
+			}
+			document.getElementById('user').value = lastCommand[commandChoice];
+		}
+		if (event.keyCode === 40) {
+			if (commandChoice>0) {
+				commandChoice = commandChoice-1;	
+			}
+			document.getElementById('user').value = lastCommand[commandChoice];
+		}
+	});
 
 	function submitUserInput(x) {
 		understandUserInput(x);
 		document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;
-		lastCommand = x;
 		document.getElementById("user").value = "";
 	}
 
 	function understandUserInput(ui) {
 		document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
-		var rows = speeches.filter(ifTermExists);
-		function ifTermExists(row) {
-		  	return row.term == ui.toLowerCase();
+		
+		switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
+			case "yl":
+			case "yaw left":
+				if (!weCruisin) {
+					computerReply("Yawing Left");
+					move(movArrArr[0]);
+					shipRotation('YAW',-1);
+				}
+				break;
+			case "yr":
+			case "yaw right":
+				if (!weCruisin) {
+					computerReply("Yawing Right");
+					move(movArrArr[1]);
+					shipRotation('YAW',1);
+				}
+				break;
+			case "pu":
+			case "pitch up":
+				if (!weCruisin) {
+					computerReply("Pitching Up");
+					move(movArrArr[2]);
+					shipRotation('PITCH',1);
+				}
+				break;
+			case "pd":
+			case "pitch down":
+				if (!weCruisin) {
+					computerReply("Pitching Down");
+					move(movArrArr[3]);
+					shipRotation('PITCH',-1);	
+				}
+				break;
+			case "rl":
+			case "roll left":
+				if (!weCruisin) {
+					computerReply("Rolling Left");
+					rotateShape(1,'ROLL', -1);	
+				}
+				break;
+			case "rr":
+			case "roll right":
+				if (!weCruisin) {
+					computerReply("Rolling Right");
+					rotateShape(-1,'ROLL', 1);	
+				}
+				break;
+			case "accelerate":
+			case "accel":
+				if (!weCruisin) {
+					if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+						computerReply("Error. Collision course detected.");
+					}
+					else {
+						computerReply("Accelerating");
+						accelerate();
+					}
+				}
+				break;
+			case "cruise control on":
+				cruiseControl=true;
+				computerReply("Cruise control is enabled");
+				break;
+			case "cruise control off":
+			case "stop":
+				cruiseControl=false;
+				computerReply("Cruise control is disabled");
+				break;
+			case "where am i":
+			case "current location":
+			case "location":
+			case "where are we":
+				computerReply("We are currently at galacube " + currentLocation);
+				break;
+			case "help":
+				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
+				break;
+			default:
+				computerReply("Does Not Compute");
 		}
-		if (rows[0]) {
-			if (rows[0].functions) {
-				if (rows[0].functions[0]) {
-				console.log("cb1 true")
-				if (rows[0].functions[0].param3) {
-					rows[0].functions[0].cb(rows[0].functions[0].param1,rows[0].functions[0].param2,rows[0].functions[0].param3);
-				}
-				else if (rows[0].functions[0].param2) {
-					rows[0].functions[0].cb(rows[0].functions[0].param1,rows[0].functions[0].param2);
-				}
-				else if (rows[0].functions[0].param1) {
-					rows[0].functions[0].cb(rows[0].functions[0].param1);
-				}
-				else {
-					rows[0].functions[0].cb();	
-				}
-			}
-			if (rows[0].functions[1]) {
-				console.log("cb2 true")
-				if (rows[0].functions[1].param2) {
-					rows[0].functions[1].cb(rows[0].functions[1].param1,rows[0].functions[1].param2);
-				}
-				else if (rows[0].functions[1].param1) {
-					rows[0].functions[1].cb(rows[0].functions[1].param1);
-				}
-				else {
-					rows[0].functions[1].cb();	
-				}
-			}
-		}
-		return document.getElementById("shipConsole").innerHTML += rows[0].response + "<br>";
-		}
-
-		else if (ui == "") {return}
-		else {return document.getElementById("shipConsole").innerHTML += "Does not compute<br>";};
 	}
-
-	var speeches = [
-		{term:"yl",functions:[{cb:move,param1:movArrArr[0]},{cb:shipRotation,param1:'YAW',param2:-1}],response:"Yawing Left"},
-		{term:"yaw left",functions:[{cb:move,param1:movArrArr[0]},{cb:shipRotation,param1:'YAW',param2:-1}],response:"Yawing Left"},
-		{term:"yr",functions:[{cb:move,param1:movArrArr[1]},{cb:shipRotation,param1:'YAW',param2:1}],response:"Yawing Right"},
-		{term:"yaw right",functions:[{cb:move,param1:movArrArr[1]},{cb:shipRotation,param1:'YAW',param2:1}],response:"Yawing Right"},
-		{term:"pitch up",functions:[{cb:move,param1:movArrArr[2]},{cb:shipRotation,param1:'PITCH',param2:1}],response:"Pitching Up"},
-		{term:"pu",functions:[{cb:move,param1:movArrArr[2]},{cb:shipRotation,param1:'PITCH',param2:1}],response:"Pitching Up"},
-		{term:"pitch down",functions:[{cb:move,param1:movArrArr[3]},{cb:shipRotation,param1:'PITCH',param2:-1}],response:"Pitching Down"},
-		{term:"pd",functions:[{cb:move,param1:movArrArr[3]},{cb:shipRotation,param1:'PITCH',param2:-1}],response:"Pitching Down"},
-		{term:"roll left",functions:[{cb:rotateShape,param1:1,param2:'ROLL',param3:-1}],response:"Rolling Left"},
-		{term:"rl",functions:[{cb:rotateShape,param1:1,param2:'ROLL',param3:-1}],response:"Rolling Left"},
-		{term:"roll right",functions:[{cb:rotateShape,param1:-1,param2:'ROLL',param3:1}],response:"Rolling Right"},
-		{term:"rr",functions:[{cb:rotateShape,param1:-1,param2:'ROLL',param3:1}],response:"Rolling Right"},
-		{term:"accelerate",functions:[{cb:accelerate}],response:"Accelerating"},
-		{term:"hi",response:"Hello"}
-	]
+	function computerReply(reply) {
+		return setTimeout(function(){ document.getElementById("shipConsole").innerHTML += reply + "<br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, 700);
+	}
 
 	
 </script>

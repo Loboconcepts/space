@@ -1,10 +1,10 @@
 var worldArray;
 // Size of the universe
-var x = 10;
+var x = 100;
 // Density of the universe
-var rarityValue = 170;
+var rarityValue = 570;
 //
-var currentLocation = 691;
+var currentLocation = 970091;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -49,8 +49,10 @@ canvas.height = H;
 canvas.style.position = "relative";
 // canvas.style.width = (W * Math.min(window.innerWidth/W)) + "px";
 // canvas.style.height = ((H * Math.min(window.innerHeight/H))/2) + "px";
-canvas.style.width = "500px";
-canvas.style.height = "500px";
+canvas.style.width = "100%";
+canvas.style.maxWidth = "500px";
+canvas.style.height = "auto";
+canvas.style.maxHeight = "500px";
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
@@ -145,10 +147,10 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	staticArt();
 	// drawField(pos, fm, um, lm);
 	// drawShipConsole();
-	console.log(currentLocation);
+	// console.log(currentLocation);
 	
 
-	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
+	// document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 }
 
 function shipRotation(rAxes, lr) {
@@ -156,7 +158,7 @@ function shipRotation(rAxes, lr) {
 	axisFinder();
 
 	function loopThroughArray(rAxis, array, topOrDir, lr) {
-		console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "left right: " + lr);
+		// console.log("rAxis: " + rAxis + "\n" + "array: " + array + "\n" + "topOrDir: " + topOrDir + "\n" + "left right: " + lr);
 		var newDirection = array.indexOf(topOrDir) + lr;
 		if (newDirection > array.length - 1) {
 			newDirection = 0;
@@ -204,7 +206,7 @@ function shipRotation(rAxes, lr) {
 		default: console.log("error");
 		}
 	}
-	document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
+	// document.querySelector("#compass").innerHTML = "Direction: " + direction + "<br>Top Facing: " + topfacing;
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
@@ -278,17 +280,19 @@ function switchOrientation() {
 
 function disableButtons(bool) {
 	if (bool) {
-		document.getElementById("user").disabled = true;
-		for (i=0;i<document.querySelectorAll("button").length;i++) {
-			document.querySelectorAll("button")[i].disabled = true;
+		if (!cruiseControl || !weCruisin) {
+			document.getElementById("user").disabled = true;	
 		}
+		// for (i=0;i<document.querySelectorAll("button").length;i++) {
+		// 	document.querySelectorAll("button")[i].disabled = true;
+		// }
 	};
 	if (!bool) {
 		document.getElementById("user").disabled = false;
 		document.getElementById("user").focus();
-		for (i=0;i<document.querySelectorAll("button").length;i++) {
-			document.querySelectorAll("button")[i].disabled = false;
-		}
+		// for (i=0;i<document.querySelectorAll("button").length;i++) {
+		// 	document.querySelectorAll("button")[i].disabled = false;
+		// }
 	};
 }
 
@@ -672,7 +676,7 @@ function accelerate(){
 	var newXPos;
 	var c = 1;
 	disableButtons(true);
-	document.querySelector("#accelLock").disabled = false;
+	// document.querySelector("#accelLock").disabled = false;
 
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);
@@ -707,7 +711,7 @@ function accelerate(){
 		ctx.lineTo(950 + num[1], 50 + num[0]);
 		ctx.lineTo(950 + num[1], 950 + num[1]);
 		ctx.lineTo(50 + num[0], 950 + num[1]);
-		ctx.lineTo(50 + num[0], 50 + num[1]);
+		ctx.lineTo(50 + num[0], 50 + num[0]);
 		ctx.moveTo(50 + num[0], 350 + num[0]);
 		ctx.lineTo(950 + num[1], 350 + num[0]);
 		ctx.moveTo(50 + num[0], 650 + num[1]);
@@ -956,17 +960,28 @@ function accelerate(){
 	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),disableButtons(false),autoAccel(movement);
 	}, 15);
 };
-
+var weCruisin = false;
 function autoAccel(intFunc) {
-	if (document.querySelector("#accelLock").checked) {
-		clearInterval(intFunc);
-		staticArt();
-		drawField(currentLocation, fm, um, lm);
-		accelerate();
-		return;
+	if (cruiseControl) {
+		if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+			weCruisin = false;
+			staticArt();
+			drawField(currentLocation, fm, um, lm);
+			stalled = setInterval(generalState, 30);
+			computerReply("Error. Collision course detected.");
+			return cruiseControl = false;
+		}
+		else {
+			weCruisin = true;
+			clearInterval(intFunc);
+			staticArt();
+			drawField(currentLocation, fm, um, lm);
+			accelerate();
+			return;
+		}
 	}
 	else {
-		document.querySelector("#accelLock").disabled=true;
+		weCruisin = false;
 		staticArt();
 		drawField(currentLocation, fm, um, lm);
 		stalled = setInterval(generalState, 30);
@@ -1298,22 +1313,6 @@ function whichArt(posNum,xPos,yPos,size) {
 		ctx.shadowBlur = 100;
 	    ctx.fill();
 		ctx.closePath();
-        ctx.beginPath();
-        ctx.fillStyle = "rgba(170, 170, 130, 1)";
-        ctx.ellipse(xPos, yPos,size, size/4, 0, 0, Math.PI*2);
-        ctx.fill();
-        ctx.closePath();
-        ctx.clip();
-        ctx.beginPath();
-		ctx.fillStyle = "rgba(80, 80, 50, .7)";
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.shadowColor = "#7777FF" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 100;
-	    ctx.fill();
-		ctx.closePath();
-
 		ctx.restore();
 		break;
 		case ("5"):
