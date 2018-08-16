@@ -139,6 +139,7 @@
 				computerReply("Cruise control is enabled");
 				break;
 			case "cruise control off":
+			case "cc off":
 			case "stop":
 				cruiseControl=false;
 				computerReply("Cruise control is disabled");
@@ -150,6 +151,7 @@
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
 			case "help":
+			case "controls":
 				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
 				break;
 			case "hello":
@@ -163,13 +165,47 @@
 				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
 				break;
 			case "direction":
-			
+				computerReply("We are facing " + direction);
+				break;
+			case "scan":
+				scan();
+				break;
 			default:
 				computerReply("Does not compute");
 		}
 	}
 	function computerReply(reply) {
 		return setTimeout(function(){ document.getElementById("shipConsole").innerHTML += reply + "<br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, 700);
+	}
+	function scan() {
+		// var objectFound = false;
+		var xi = 1;
+		document.getElementById("shipConsole").innerHTML += "scanning...<br>";
+		while (xi<10) {
+			if (loopView(currentLocation-(xi*x))!="1") {
+				return computerReply("The nearest object is NORTH");
+			}
+			else if (loopView(currentLocation+(xi*x))!="1") {
+				return computerReply("The nearest object is SOUTH");
+			}
+			else if (loopView(currentLocation-(xi*z))!="1") {
+				return computerReply("The nearest object is EAST");
+			}
+			else if (loopView(currentLocation+(xi*z))!="1") {
+				return computerReply("The nearest object is WEST");
+			}
+			else if (loopView(currentLocation-(xi*y))!="1") {
+				return computerReply("The nearest object is UP");
+			}
+			else if (loopView(currentLocation+(xi*y))!="1") {
+				return computerReply("The nearest object is DOWN");
+			}
+			else {
+				xi = xi + 1;
+			}
+		}
+		return computerReply("Scan unable to locate nearby objects");
+		
 	}
 
 	
