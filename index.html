@@ -42,6 +42,7 @@
 	var commandChoice = -1;
 	var user = document.getElementById("user");
 	var cruiseControl = false;
+	var isLanded = false;
 	user.addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
 			lastCommand.unshift(document.getElementById('user').value);
@@ -75,54 +76,47 @@
 		document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
 		
 		switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
-			case "yl":
-			case "yaw left":
+			case "yl":case "yaw left":
 				if (!weCruisin) {
 					computerReply("Yawing Left");
 					move(movArrArr[0]);
 					shipRotation('YAW',-1);
 				}
 				break;
-			case "yr":
-			case "yaw right":
+			case "yr":case "yaw right":
 				if (!weCruisin) {
 					computerReply("Yawing Right");
 					move(movArrArr[1]);
 					shipRotation('YAW',1);
 				}
 				break;
-			case "pu":
-			case "pitch up":
+			case "pu":case "pitch up":
 				if (!weCruisin) {
 					computerReply("Pitching Up");
 					move(movArrArr[2]);
 					shipRotation('PITCH',1);
 				}
 				break;
-			case "pd":
-			case "pitch down":
+			case "pd":case "pitch down":
 				if (!weCruisin) {
 					computerReply("Pitching Down");
 					move(movArrArr[3]);
 					shipRotation('PITCH',-1);	
 				}
 				break;
-			case "rl":
-			case "roll left":
+			case "rl":case "roll left":
 				if (!weCruisin) {
 					computerReply("Rolling Left");
 					rotateShape(1,'ROLL', -1);	
 				}
 				break;
-			case "rr":
-			case "roll right":
+			case "rr":case "roll right":
 				if (!weCruisin) {
 					computerReply("Rolling Right");
 					rotateShape(-1,'ROLL', 1);	
 				}
 				break;
-			case "accelerate":
-			case "accel":
+			case "accelerate":case "accel":
 				if (!weCruisin) {
 					if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
 						computerReply("Error. Collision course detected.");
@@ -133,35 +127,52 @@
 					}
 				}
 				break;
-			case "cruise control on":
-			case "cc on":
+			case "land":
+				if (!weCruisin) {
+					if ((worldArray[currentLocation-1] == "3" || worldArray[currentLocation-1] == "5") && direction == "DOWN") {
+						computerReply("Landing sequence initiated.");
+						land(movArrArr[2]);
+						isLanded = true;
+					}
+					else {
+						computerReply("Error. No landing surface detected.");
+					}
+				}
+				break;
+			case "cruise control on":case "cc on":
 				cruiseControl=true;
 				computerReply("Cruise control is enabled");
 				break;
-			case "cruise control off":
-			case "cc off":
-			case "stop":
+			case "cruise control off":case "cc off":case "stop":
 				cruiseControl=false;
 				computerReply("Cruise control is disabled");
 				break;
-			case "where am i":
-			case "current location":
-			case "location":
-			case "where are we":
+			case "where am i":case "current location":case "location":case "where are we":
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
-			case "help":
-			case "controls":
+			case "help":case "controls":case "what":
 				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
 				break;
-			case "hello":
-			case "hi":
-			case "yo":
-			case "howdy":
-				computerReply("Hello");
+			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
+				switch (true) {
+					case new Date().getHours() >= 5 && new Date().getHours() < 11:
+						computerReply("Good morning");
+						break;
+					case new Date().getHours() >= 11 && new Date().getHours() < 14:
+						computerReply("Good midday");
+						break;
+					case new Date().getHours() >= 14 && new Date().getHours() < 18:
+						computerReply("Good afternoon");
+						break;
+					case new Date().getHours() >= 18 || new Date().getHours() < 5:
+						computerReply("Good evening");
+						break;
+					default:
+						computerReply("Hello");
+						break;
+				}
 				break;
-			case "what is this":
-			case "who are you":
+			case "what is this":case "who are you":
 				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
 				break;
 			case "direction":
@@ -169,6 +180,12 @@
 				break;
 			case "scan":
 				scan();
+				break;
+			case "thanks":case "thanks you":case "okay thanks":
+				computerReply("You're welcome");
+				break;
+			case "time":case "what time is it":case "whats the time":
+				computerReply(new Date());
 				break;
 			default:
 				computerReply("Does not compute");
