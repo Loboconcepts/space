@@ -340,10 +340,6 @@ function loopView(isWhat) {
 // 	ctx.restore();
 // }
 
-function generalState() {
-
-}
-
 //for oganization
 var n = 0;
 
@@ -667,15 +663,38 @@ function land(a){
 		}
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
-	  	// GOING AWAY
 	  	ctx.rect(0, 0, canvas.width, canvas.height);
 	  	ctx.fillStyle = "rgb(0, 0, " + c + ")";
 		ctx.fill();
 	  	whichArt(loopView(currentLocation),500,1200 + (a[53]*75*-1) - (num[53]*-1),1000+num[2]);
-
 		
 		ctx.closePath();
 	  if (c > 255) clearInterval(movement),disableButtons(false);
+	}, 15);
+};
+
+function launch(a){
+	clearInterval(stalled);
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var newYPos;
+	var newXPos;
+	var c = 1;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		for (i=0;i<80;i++) {
+			num[i]=num[i]+a[i];
+		}
+		c = c+1;
+	  ctx.clearRect(0,0,1000,1000);
+	  	ctx.rect(0, 0, canvas.width, canvas.height);
+	  	ctx.fillStyle = "rgb(0, 0, " + (255 - c) + ")";
+		ctx.fill();
+		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12));
+	  	// whichArt(loopView(currentLocation),500,2820 - (a[53]*75*-1) - (num[53]*-1),4060-num[1]);
+
+		
+		ctx.closePath();
+	  if (c > 255) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 

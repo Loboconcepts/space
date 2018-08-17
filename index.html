@@ -77,47 +77,65 @@
 		
 		switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 			case "yl":case "yaw left":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Yawing Left");
 					move(movArrArr[0]);
 					shipRotation('YAW',-1);
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "yr":case "yaw right":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Yawing Right");
 					move(movArrArr[1]);
 					shipRotation('YAW',1);
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "pu":case "pitch up":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Pitching Up");
 					move(movArrArr[2]);
 					shipRotation('PITCH',1);
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "pd":case "pitch down":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Pitching Down");
 					move(movArrArr[3]);
 					shipRotation('PITCH',-1);	
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "rl":case "roll left":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Rolling Left");
 					rotateShape(1,'ROLL', -1);	
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "rr":case "roll right":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					computerReply("Rolling Right");
 					rotateShape(-1,'ROLL', 1);	
 				}
+				else {
+					computerReply("Ignored");
+				}
 				break;
 			case "accelerate":case "accel":
-				if (!weCruisin) {
+				if (!weCruisin && !isLanded) {
 					if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
 						computerReply("Error. Collision course detected.");
 					}
@@ -125,6 +143,9 @@
 						computerReply("Accelerating");
 						accelerate();
 					}
+				}
+				else {
+					computerReply("Ignored");
 				}
 				break;
 			case "land":
@@ -139,6 +160,16 @@
 					}
 				}
 				break;
+			case "launch":
+				if (isLanded) {
+					computerReply("Launching sequence initiated.");
+					launch(movArrArr[3]);
+					isLanded = false;
+				}
+				else {
+					computerReply("Error. Already launched.");
+				}
+				break;
 			case "cruise control on":case "cc on":
 				cruiseControl=true;
 				computerReply("Cruise control is enabled");
@@ -150,7 +181,7 @@
 			case "where am i":case "current location":case "location":case "where are we":
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
-			case "help":case "controls":case "what":
+			case "help":case "controls":case "what":case "instructions":case "manual":
 				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
 				break;
 			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
@@ -175,7 +206,7 @@
 			case "what is this":case "who are you":
 				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
 				break;
-			case "direction":
+			case "direction":case "compass":
 				computerReply("We are facing " + direction);
 				break;
 			case "scan":
