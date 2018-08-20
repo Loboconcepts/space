@@ -1,10 +1,10 @@
 var worldArray;
 // Size of the universe
-var x = 100;
+var x = 101;
 // Density of the universe
 var rarityValue = 570;
-//
-var currentLocation = 938792;
+//938792
+var currentLocation = 148873;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -58,6 +58,9 @@ canvas.style.maxHeight = "500px";
 
 var ctx = canvas.getContext("2d");
 
+dataUrl = canvas.toDataURL();
+// your_div.style.background='url('+dataUrl+')'
+
 ////             y- /x-
 ////             | /
 ////             |/
@@ -68,6 +71,46 @@ var ctx = canvas.getContext("2d");
 
 
 // Determine axis
+
+function generateWorld() {
+	// 1 - Nothing
+	// 2 - Star
+	// 3 - Livable Planet
+	// 4 - Gaseous Planet
+	// 5 - Liquid Planet
+	// 6 - Asteroids
+	// 7 - Space Dust
+	// 8 - Worm Hole
+
+	worldArray = [];
+
+	for (i=0;i<(x*x*x);i++) {
+		if (i == (x*x*x-1)) {
+			worldArray.push("8");
+		}
+		else if (i%rarityValue==0 && i!=0) {
+			worldArray.push("2");
+		}
+		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
+			if (i%7==0) {
+				worldArray.push("3")
+			}
+			else if (i%8==0) {
+				worldArray.push("4")
+			}
+			else if (i%9==0) {
+				worldArray.push("5")
+			}
+			else {
+				worldArray.push(1);
+			};
+		}
+		else {
+			worldArray.push(1);	
+		}
+	}
+	worldArray = worldArray.join("");
+}
 
 function axisFinder() {
 	var xyz = [0,0,0];
@@ -86,7 +129,6 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	ctx.clearRect(0, 0, 1000, 1000);
 	// upward movement UM || forward movement FM || lateral movement LM
 	
-
 	switch (direction) {
 		case "N":fm = -x;break;
 		case "S":fm = x;break;
@@ -227,45 +269,7 @@ function shipRotation(rAxes, lr) {
 // 	// drawField(currentLocation, fm, um, lm);
 // }
 
-function generateWorld() {
-	// 1 - Nothing
-	// 2 - Star
-	// 3 - Livable Planet
-	// 4 - Gaseous Planet
-	// 5 - Liquid Planet
-	// 6 - Asteroids
-	// 7 - Space Dust
-	// 8 - Worm Hole
 
-	worldArray = [];
-
-	for (i=0;i<(x*x*x);i++) {
-		if (i == (x*x*x-1)) {
-			worldArray.push("8");
-		}
-		else if (i%rarityValue==0 && i!=0) {
-			worldArray.push("2");
-		}
-		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
-			if (i%7==0) {
-				worldArray.push("3")
-			}
-			else if (i%8==0) {
-				worldArray.push("4")
-			}
-			else if (i%9==0) {
-				worldArray.push("5")
-			}
-			else {
-				worldArray.push(1);	
-			};
-		}
-		else {
-			worldArray.push(1);	
-		}
-	}
-	worldArray = worldArray.join("");
-}
 
 function switchOrientation() {
 	if (viewOrient == "BACK") {
@@ -825,8 +829,8 @@ function accelerate(){
 
 			switch (direction) {
 				case ("DOWN"):
-				whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
-				whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+					whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
+					whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
 				break;
 				case ("UP"):
 					if (c < 30) {
@@ -1344,7 +1348,17 @@ function whichArt(posNum,xPos,yPos,size) {
 		ctx.restore();
 		break;
 		case ("3"):
-		drawPlanet(posNum,xPos,yPos,size);
+		ctx.save();
+		ctx.beginPath();
+		ctx.fillStyle = "rgb(100, 235, 100, 1)";
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.shadowColor = "#0000FF" 
+	    ctx.shadowOffsetX = 0;
+		ctx.shadowOffsetY = 0;
+		ctx.shadowBlur = 100;
+	    ctx.fill();
+		ctx.closePath();
+		ctx.restore();
 		break;
 		case ("4"):
 		ctx.save();
@@ -1393,18 +1407,7 @@ function drawShipConsole() {
 }
 
 function drawPlanet(posNum,xPos,yPos,size) {
-	ctx.save();
-	ctx.beginPath();
-	ctx.fillStyle = "rgb(0, 255, 150)";
-    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-    ctx.shadowColor = "#0000FF" 
-    ctx.shadowOffsetX = 0;
-	ctx.shadowOffsetY = 0;
-	ctx.shadowBlur = 100;
-    ctx.fill();
-	ctx.closePath();
-	ctx.clip();
-	ctx.restore();
+	
 }
 
 function drawBlackHole(posNum,xPos,yPos,size) {

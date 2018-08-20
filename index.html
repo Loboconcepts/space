@@ -1,20 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="style.css">
 	<title>Space</title>
 	   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+	   <style type="text/css">
+	   	html, body {
+		  	width:  100%;
+		  	height: 100%;
+		  	margin: 0px;
+		  	background-color:#999999;
+			color:#ffffff;
+			overflow-x: hidden;
+			overflow-y: hidden;
+		}
+
+		body {
+		  position: relative;
+		}
+
+		td {
+			width:100px;
+			height:100px;
+			border:1px solid #ffffff;
+			text-align: center;
+			line-height: .8;
+		}
+		canvas {
+			background-color:#000000;
+		}
+		#shipConsole {
+	    	margin:0 auto;
+	    	overflow:scroll;
+	    	overflow-y: hidden;
+	    	overflow-x: hidden;
+	    	background:#000000;
+	    	color:#00ff00;
+	    	width:200px;
+	    	height:160px;
+	    	padding:5px;
+	    	font-family: monospace;
+	    	text-align:left;
+	    }
+		@media only screen and (max-width: 500px) {
+			.row {
+				display: flex;
+			}
+		    #shipView {
+		    	width:48% !important;
+		    	height:50% !important;
+		    	flex: 1; /* additionally, equal width */
+		    	padding: 1em;
+		    }
+		    #shipConsole {
+		    	width:48%;
+		    	height:auto;
+		    	flex: 1; /* additionally, equal width */
+		    	padding: 1em;
+		    	padding:2px;
+		    }
+		}
+	   </style>
 </head>
 <body style="text-align:center;">
 
-	<div style="display:none;position: absolute;z-index:10000;"><canvas id="earthFace"></canvas></div>
-	
-
-	<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
-	<!-- <div id="compass"></div> -->
-	
-	
-	<div id="shipConsole" style="margin:0 auto;overflow:scroll;overflow-y: hidden;overflow-x: hidden; background:#000000;color:#00ff00;width:200px;height:160px;padding:5px;font-family: monospace;text-align:left;"></div>
+	<div class="row">
+		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
+		<!-- <div id="compass"></div> -->
+		<div id="shipConsole"></div>
+	</div>
 	<input style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
 
 	<!-- <button onclick="switchOrientation()">Switch Orientation</button><br> -->
@@ -74,7 +128,6 @@
 
 	function understandUserInput(ui) {
 		document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
-		
 		switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 			case "yl":case "yaw left":
 				if (!weCruisin && !isLanded) {
@@ -150,10 +203,14 @@
 				break;
 			case "land":
 				if (!weCruisin) {
-					if ((worldArray[currentLocation-1] == "3" || worldArray[currentLocation-1] == "5") && direction == "DOWN") {
-						computerReply("Landing sequence initiated.");
+					if (!isLanded && (worldArray[currentLocation-1] == "3" || worldArray[currentLocation-1] == "5") && direction == "DOWN") {
+						computerReply("Landing sequence initiated...");
 						land(movArrArr[2]);
 						isLanded = true;
+						computerReply("Land sequence completed successfully. <br>Welcome to " + planetNamer(), 3800);
+					}
+					else if (isLanded) {
+						computerReply("Error. Currently landed.");
 					}
 					else {
 						computerReply("Error. No landing surface detected.");
@@ -162,8 +219,12 @@
 				break;
 			case "launch":
 				if (isLanded) {
-					computerReply("Launching sequence initiated.");
-					launch(movArrArr[3]);
+					computerReply("Launching sequence initiated...", 700);
+					computerReply("3...", 1700);
+					computerReply("2...", 2700);
+					computerReply("1...", 3700);
+					setTimeout(function() {launch(movArrArr[3])}, 4700);
+					computerReply("Launch sequence successful.", 8800);
 					isLanded = false;
 				}
 				else {
@@ -178,11 +239,11 @@
 				cruiseControl=false;
 				computerReply("Cruise control is disabled");
 				break;
-			case "where am i":case "current location":case "location":case "where are we":
+			case "where am i":case "current location":case "location":case "where are we":case "position":case "current position":case "pos":case "loc":
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
-			case "help":case "controls":case "what":case "instructions":case "manual":
-				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop");
+			case "help":case "controls":case "what":case "instructions":case "manual":case "commands":
+				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop, land, launch.");
 				break;
 			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
 				switch (true) {
@@ -206,7 +267,7 @@
 			case "what is this":case "who are you":
 				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
 				break;
-			case "direction":case "compass":
+			case "direction":case "compass":case "dir":
 				computerReply("We are facing " + direction);
 				break;
 			case "scan":
@@ -221,12 +282,16 @@
 			case "time":case "what time is it":case "whats the time":
 				computerReply(new Date());
 				break;
+			case "clear":
+				document.getElementById("shipConsole").innerHTML = "";
+				break;
 			default:
 				computerReply("Does not compute");
 		}
 	}
-	function computerReply(reply) {
-		return setTimeout(function(){ document.getElementById("shipConsole").innerHTML += reply + "<br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, 700);
+	function computerReply(reply, time) {
+		if (!time) {time = 700;};
+		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += reply + "<br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
 	}
 	function scan() {
 		// var objectFound = false;
@@ -240,10 +305,10 @@
 				return computerReply("The nearest object is SOUTH");
 			}
 			else if (loopView(currentLocation-(xi*z))!="1") {
-				return computerReply("The nearest object is EAST");
+				return computerReply("The nearest object is WEST");
 			}
 			else if (loopView(currentLocation+(xi*z))!="1") {
-				return computerReply("The nearest object is WEST");
+				return computerReply("The nearest object is EAST");
 			}
 			else if (loopView(currentLocation-(xi*y))!="1") {
 				return computerReply("The nearest object is UP");
@@ -256,8 +321,24 @@
 			}
 		}
 		return computerReply("Scan unable to locate nearby objects");
-		
 	}
+	function planetNamer() {
+		var sp = currentLocation.toString().split("");
+		var v1 = ['br','','cr','dr','','fr','gr','','pr','','str','','tr','bl','','cl','fl','','gl','','pl','sl','sc','sk','sm','sn','sp','st','sw','ch','','sh','th','wh','','ex','b','c','d','','f','g','h','','i','j','','k','l','m','n','','p','q','r','s','t','','v','w','x','y','z'];
+		var vv = ['a','ae','ai','ao','au','e','ea','ee','ei','eo','eu','i','ia','ie','io','iu','o','oa','oe','oi','oo','ou','u','ua','ue','ui','uo'];
+		var v2 = ['th','','he','an','','in','','er','on','re','','ed','nd','ha','','at','en','es','','of','nt','','ti','','to','le','','is','','ou','ar','','as','de','rt','','ve','the','','and','tha','','ent','ion','tio','for','nde','has','nce','tis','oft','men',''];
+		var name = v1[findLetter(0) + findLetter(1) + findLetter(3) + findLetter(4) + findLetter(5) + findLetter(6) + findLetter(7)] + "" + vv[findLetter(5) + findLetter(4) + findLetter(3)] + "" + v2[findLetter(0) + findLetter(2) + findLetter(5) + findLetter(4) - 1];
+		// console.log(name.charAt(0).toUpperCase() + name.substr(1));
+		// console.log(v1.length + " " + vv.length + " " + v2.length);
+		function findLetter(num) {
+			if (sp[num]) {
+				return Number(sp[num]);	
+			}
+			else return "";
+		}
+		return name.charAt(0).toUpperCase() + name.substr(1);
+	}
+	
 
 	
 </script>
