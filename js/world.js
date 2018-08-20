@@ -1351,7 +1351,7 @@ function whichArt(posNum,xPos,yPos,size) {
 		ctx.save();
 		ctx.beginPath();
 	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgb(100, 235, 100, 1)";
+	    ctx.fillStyle = "rgba(100, 235, 100, 1)";
 	    ctx.shadowColor = "#0000FF" 
 	    ctx.shadowOffsetX = 0;
 		ctx.shadowOffsetY = 0;
