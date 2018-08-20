@@ -2,9 +2,9 @@ var worldArray;
 // Size of the universe
 var x = 101;
 // Density of the universe
-var rarityValue = 570;
+var rarityValue = 131;
 //938792
-var currentLocation = 148873;
+var currentLocation = 152812;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -668,11 +668,13 @@ function land(a){
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
 	  	ctx.rect(0, 0, canvas.width, canvas.height);
-	  	ctx.fillStyle = "rgb(0, 0, " + c + ")";
+	  	ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
 		ctx.fill();
 	  	whichArt(loopView(currentLocation),500,1200 + (a[53]*75*-1) - (num[53]*-1),1000+num[2]);
 		
 		ctx.closePath();
+
+		console.log(Math.floor(c/2));
 	  if (c > 255) clearInterval(movement),disableButtons(false);
 	}, 15);
 };
@@ -691,7 +693,7 @@ function launch(a){
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
 	  	ctx.rect(0, 0, canvas.width, canvas.height);
-	  	ctx.fillStyle = "rgb(0, 0, " + (255 - c) + ")";
+	  	ctx.fillStyle = "rgb(" + (128 -  Math.floor(c/2)) + ", " + (128 - Math.floor(c/2)) + ", " + (255 - c) + ")";
 		ctx.fill();
 		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12));
 	  	// whichArt(loopView(currentLocation),500,2820 - (a[53]*75*-1) - (num[53]*-1),4060-num[1]);
