@@ -1350,8 +1350,8 @@ function whichArt(posNum,xPos,yPos,size) {
 		case ("3"):
 		ctx.save();
 		ctx.beginPath();
-		ctx.fillStyle = "rgb(100, 235, 100, 1)";
 	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgb(100, 235, 100, 1)";
 	    ctx.shadowColor = "#0000FF" 
 	    ctx.shadowOffsetX = 0;
 		ctx.shadowOffsetY = 0;
@@ -1363,8 +1363,8 @@ function whichArt(posNum,xPos,yPos,size) {
 		case ("4"):
 		ctx.save();
 		ctx.beginPath();
-		ctx.fillStyle = "rgba(80, 80, 50, .7)";
 	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(80, 80, 50, .7)";
 	    ctx.shadowColor = "#cc9922" 
 	    ctx.shadowOffsetX = 0;
 		ctx.shadowOffsetY = 0;
@@ -1376,8 +1376,8 @@ function whichArt(posNum,xPos,yPos,size) {
 		case ("5"):
 		ctx.save();
 		ctx.beginPath();
-		ctx.fillStyle = "rgba(0, 0, 255, 1)";
 	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(0, 0, 255, 1)";
 	    ctx.shadowColor = "#7777FF" 
 	    ctx.shadowOffsetX = 0;
 		ctx.shadowOffsetY = 0;
@@ -1404,10 +1404,6 @@ function drawShipConsole() {
 	ctx.fillStyle = "#999999";
 	ctx.fill();
 	ctx.closePath();
-}
-
-function drawPlanet(posNum,xPos,yPos,size) {
-	
 }
 
 function drawBlackHole(posNum,xPos,yPos,size) {
