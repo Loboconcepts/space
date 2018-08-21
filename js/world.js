@@ -682,6 +682,30 @@ function land(a){
 	}, 15);
 };
 
+function solarBlaster(){
+	clearInterval(stalled);
+	var c = 1;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		
+		c = c+1;
+	  
+	  	ctx.beginPath();
+	  	ctx.fillStyle = "#ffff99";
+	  	ctx.strokeStyle = "#ff9999";
+		ctx.moveTo(0, 800);
+		ctx.lineTo(490,500);
+		ctx.lineTo(0,820);
+		ctx.moveTo(1000, 800);
+		ctx.lineTo(510,500);
+		ctx.lineTo(1000, 820);
+		ctx.fill();
+		ctx.stroke();
+
+	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	}, 15);
+};
+
 function launch(a){
 	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -1339,87 +1363,89 @@ function whichArt(posNum,xPos,yPos,size) {
 	// a - Space Station
 	switch (posNum) {
 		case ("1"):
-		break;
+			break;
 		case ("2"):
-		ctx.save();
-		ctx.beginPath();
-		ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(255, 255, 245, 1)";
-	    ctx.shadowColor = "#FFFF00" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 50; 
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
-		break;
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(255, 255, 245, 1)";
+		    ctx.shadowColor = "#FFFF00" 
+		    ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 50; 
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("3"):
-		ctx.save();
-		ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(100, 235, 100, 1)";
-	    ctx.shadowColor = "#0000FF" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 100;
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
-		break;
+			ctx.save();
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(100, 235, 100, 1)";
+		    ctx.shadowColor = "#0000FF" 
+		    ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 100;
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("4"):
-		ctx.save();
-		ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(80, 80, 50, .7)";
-	    ctx.shadowColor = "#cc9922" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 100;
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
-		break;
+			ctx.save();
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(80, 80, 50, .7)";
+		    ctx.shadowColor = "#cc9922" 
+		    ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 100;
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("5"):
-		ctx.save();
-		ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(0, 0, 255, 1)";
-	    ctx.shadowColor = "#7777FF" 
-	    ctx.shadowOffsetX = 0;
-		ctx.shadowOffsetY = 0;
-		ctx.shadowBlur = 100;
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
-		break;
+			ctx.save();
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+		    ctx.shadowColor = "#7777FF" 
+		    ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 100;
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("a"):
-		ctx.save();
-		ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(100, 100, 110, 1)";
-	    ctx.fill();
-	    ctx.closePath();
-	    ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/5, size/5, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(100, 100, 0, 1)";
-	    ctx.fill();
-	    ctx.closePath();
-	    ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/7, size/7, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(80, 80, 0, 1)";
-	    ctx.fill();
-	    ctx.closePath();
-	    ctx.beginPath();
-	    ctx.arc(xPos, yPos, size/20, size/20, Math.PI * 2, true);
-	    ctx.fillStyle = "rgba(0, 0, 0, 1)";
-	    ctx.fill();
-		ctx.closePath();
-		ctx.restore();
-		break;
+			ctx.save();
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(100, 100, 110, 1)";
+		    ctx.fill();
+		    ctx.closePath();
+		    ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/5, size/5, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(100, 100, 0, 1)";
+		    ctx.fill();
+		    ctx.closePath();
+		    ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/7, size/7, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(80, 80, 0, 1)";
+		    ctx.fill();
+		    ctx.closePath();
+		    ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/20, size/20, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(0, 0, 0, 1)";
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("8"):
-		drawBlackHole(posNum,xPos,yPos,size);
-		break;
-		default: console.log(posNum);
+			drawBlackHole(posNum,xPos,yPos,size);
+			break;
+		default: 
+			console.log(posNum);
+			break;
 	};
 	oldPlanets.push(new SpaceObject(posNum,xPos,yPos,size));	
 }
