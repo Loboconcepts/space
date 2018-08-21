@@ -4,7 +4,7 @@ var x = 101;
 // Density of the universe
 var rarityValue = 131;
 //938792
-var currentLocation = 152812;
+var currentLocation = 142516;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -20,6 +20,7 @@ var pitchAxis;
 var um;
 var fm;
 var lm;
+var weCruisin = false;
 
 // Disable scrolling.
 document.ontouchmove = function (e) {
@@ -104,6 +105,9 @@ function generateWorld() {
 			else {
 				worldArray.push(1);
 			};
+		}
+		else if (i%6==0) {
+				worldArray.push("a")
 		}
 		else {
 			worldArray.push(1);	
@@ -674,7 +678,6 @@ function land(a){
 		
 		ctx.closePath();
 
-		console.log(Math.floor(c/2));
 	  if (c > 255) clearInterval(movement),disableButtons(false);
 	}, 15);
 };
@@ -1010,7 +1013,7 @@ function accelerate(){
 	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),disableButtons(false),autoAccel(movement);
 	}, 15);
 };
-var weCruisin = false;
+
 function autoAccel(intFunc) {
 	if (cruiseControl) {
 		if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
@@ -1333,6 +1336,7 @@ function whichArt(posNum,xPos,yPos,size) {
 	// 6 - Asteroids
 	// 7 - Space Dust
 	// 8 - Worm Hole
+	// a - Space Station
 	switch (posNum) {
 		case ("1"):
 		break;
@@ -1384,6 +1388,30 @@ function whichArt(posNum,xPos,yPos,size) {
 	    ctx.shadowOffsetX = 0;
 		ctx.shadowOffsetY = 0;
 		ctx.shadowBlur = 100;
+	    ctx.fill();
+		ctx.closePath();
+		ctx.restore();
+		break;
+		case ("a"):
+		ctx.save();
+		ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(100, 100, 110, 1)";
+	    ctx.fill();
+	    ctx.closePath();
+	    ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/5, size/5, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(100, 100, 0, 1)";
+	    ctx.fill();
+	    ctx.closePath();
+	    ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/7, size/7, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(80, 80, 0, 1)";
+	    ctx.fill();
+	    ctx.closePath();
+	    ctx.beginPath();
+	    ctx.arc(xPos, yPos, size/20, size/20, Math.PI * 2, true);
+	    ctx.fillStyle = "rgba(0, 0, 0, 1)";
 	    ctx.fill();
 		ctx.closePath();
 		ctx.restore();
