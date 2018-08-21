@@ -289,7 +289,7 @@
 				document.getElementById("shipConsole").innerHTML = "";
 				break;
 			case "fire":
-				if (cruiseControl=false) {
+				if (cruiseControl==false) {
 					solarBlaster();
 					destroyObject(direction)
 					computerReply("Fire power: TBD",200);
