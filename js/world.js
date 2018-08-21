@@ -1425,7 +1425,11 @@ function whichArt(posNum,xPos,yPos,size) {
 		    ctx.lineTo(xPos + size/4, yPos + size/4);
 		    ctx.lineTo(xPos - size/4, yPos + size/4);
 		    ctx.fill();
-		    // ctx.stroke();
+		    ctx.closePath();
+		    ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/6, size/6, Math.PI * 2, true);
+		    ctx.fillStyle = "#ff0000";
+		    ctx.fill();
 			ctx.closePath();
 			ctx.restore();
 			break;
