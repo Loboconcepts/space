@@ -106,8 +106,11 @@ function generateWorld() {
 				worldArray.push(1);
 			};
 		}
-		else if (i%6==0) {
+		else if (i%12==0) {
 				worldArray.push("a")
+		}
+		else if (i%6==0) {
+				worldArray.push("d")
 		}
 		else {
 			worldArray.push(1);	
@@ -1420,17 +1423,30 @@ function whichArt(posNum,xPos,yPos,size) {
 			ctx.save();
 			ctx.beginPath();
 			ctx.fillStyle = "rgba(100, 100, 100, 1)";
-		    ctx.moveTo(xPos - size/4, yPos - size/4);
-		    ctx.lineTo(xPos + size/4, yPos - size/4);
-		    ctx.lineTo(xPos + size/4, yPos + size/4);
-		    ctx.lineTo(xPos - size/4, yPos + size/4);
-		    ctx.fill();
+		    ctx.fillRect(xPos - size/4, yPos - size/4,size/2, size/2);
 		    ctx.closePath();
 		    ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/6, size/6, Math.PI * 2, true);
-		    ctx.fillStyle = "#ff0000";
+		    ctx.fillStyle = "rgba(255, 0, 0, 1)";
 		    ctx.fill();
 			ctx.closePath();
+			ctx.restore();
+			break;
+		case ("d"):
+			ctx.save();
+			ctx.beginPath();
+			ctx.fillStyle = "rgba(255, 255, 100, 1)";
+			ctx.fillRect(xPos, yPos,size/20, size/20);
+		    ctx.fillRect(xPos - size/10, yPos - size/10,size/20, size/20);
+		    ctx.fillRect(xPos - size/4, yPos + size/3,size/20, size/20);
+		    ctx.fillRect(xPos + size/3, yPos - size/9,size/20, size/20);
+		    ctx.fillRect(xPos + size/4, yPos + size/3,size/20, size/20);
+		    ctx.fillRect(xPos - size/9, yPos - size/3,size/20, size/20);
+		    ctx.fillRect(xPos - size/3, yPos + size/4,size/20, size/20);
+		    ctx.fillRect(xPos + size/2, yPos - size/3,size/20, size/20);
+		    ctx.fillRect(xPos + size/3, yPos + size/3,size/20, size/20);
+		    ctx.fill();
+		    ctx.closePath();
 			ctx.restore();
 			break;
 		case ("8"):
