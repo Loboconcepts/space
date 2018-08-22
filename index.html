@@ -211,10 +211,10 @@
 						computerReply("Land sequence completed successfully. <br>Welcome to " + planetNamer(), 3800);
 					}
 					else if (isLanded) {
-						computerReply("Error. Currently landed.");
+						computerReply("Error. We are currently landed.");
 					}
 					else {
-						computerReply("Error. No landing surface detected.");
+						computerReply("Error. I am unable to detect a suitable landing surface.");
 					}
 				}
 				break;
@@ -247,26 +247,10 @@
 				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop, land, launch, fire.");
 				break;
 			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
-				switch (true) {
-					case new Date().getHours() >= 5 && new Date().getHours() < 11:
-						computerReply("Good morning");
-						break;
-					case new Date().getHours() >= 11 && new Date().getHours() < 14:
-						computerReply("Good midday");
-						break;
-					case new Date().getHours() >= 14 && new Date().getHours() < 18:
-						computerReply("Good afternoon");
-						break;
-					case new Date().getHours() >= 18 || new Date().getHours() < 5:
-						computerReply("Good evening");
-						break;
-					default:
-						computerReply("Hello");
-						break;
-				}
+				computerReply(timeOfDay() + " Captain.");
 				break;
 			case "what is this":case "who are you":
-				computerReply("I am a computer and my purpose is to help you navigate the universe. Input 'help' for navigation commands.");
+				computerReply("ACCESS DENIED. Input 'help' for navigation commands.");
 				break;
 			case "direction":case "compass":case "dir":
 				computerReply("We are facing " + direction);
@@ -274,13 +258,12 @@
 			case "scan":
 				if (isLanded) {scanPlanet();}
 				else {scanUniverse();};
-				
 				break;
 			case "thanks":case "thanks you":case "okay thanks":
-				computerReply("You're welcome");
+				computerReply("You're welcome.");
 				break;
 			case "open the pod bay doors":case "open the pod bay doors hal":
-				computerReply("I'm afraid I can't do that.");
+				computerReply("I'm afraid I can't do that, Captain.");
 				break;
 			case "time":case "what time is it":case "whats the time":
 				computerReply(new Date());
@@ -339,47 +322,67 @@
 		return computerReply("Scan unable to locate nearby objects");
 	};
 
+	function timeOfDay() {
+		switch (true) {
+			case new Date().getHours() >= 5 && new Date().getHours() < 11:
+				return "Good morning";
+				break;
+			case new Date().getHours() >= 11 && new Date().getHours() < 14:
+				return "Good day";
+				break;
+			case new Date().getHours() >= 14 && new Date().getHours() < 18:
+				return "Good afternoon";
+				break;
+			case new Date().getHours() >= 18 || new Date().getHours() < 5:
+				return "Good evening";
+				break;
+			default:
+				return "Hello";
+				break;
+		}
+	}
+
 	function destroyObject(dx) {
 		switch (dx) {
 			case "N":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*x))=="a") {return spliceWorldArray(currentLocation-(xi*x)-1,"1")}
+					if (loopView(currentLocation-(xi*x))=="a") {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "S":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*x))=="a") {return spliceWorldArray(currentLocation+(xi*x)-1,"1")}
+					if (loopView(currentLocation+(xi*x))=="a") {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "W":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*z))=="a") {return spliceWorldArray(currentLocation-(xi*z)-1,"1")}
+					if (loopView(currentLocation-(xi*z))=="a") {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "E":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*z))=="a") {return spliceWorldArray(currentLocation+(xi*z)-1,"1")}
+					if (loopView(currentLocation+(xi*z))=="a") {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "UP":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*y))=="a") {return spliceWorldArray(currentLocation-(xi*y)-1,"1")}
+					if (loopView(currentLocation-(xi*y))=="a") {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "DOWN":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*y))=="a") {return spliceWorldArray(currentLocation+(xi*y)-1,"1")}
+					if (loopView(currentLocation+(xi*y))=="a") {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
@@ -428,8 +431,8 @@ for (var i = 0; i < worldArray.length; i++) {
 }
 
 console.log(counts[1], counts[2], counts[3], counts[4], counts[5], counts['a'], worldArray.length, counts[1] + counts[2] + counts[3] + counts[4] + counts[5]);
-computerReply("Booting...");
-computerReply("All systems go. Type 'help' for nav commands.", 1700);
+computerReply("Brainwave scan activity.<br>System booting...");
+computerReply(timeOfDay() + " Captain. All systems go. Type 'help' for nav commands.", 2200);
 	
 </script>
 

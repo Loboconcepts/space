@@ -109,9 +109,6 @@ function generateWorld() {
 		else if (i%12==0) {
 				worldArray.push("a")
 		}
-		else if (i%6==0) {
-				worldArray.push("d")
-		}
 		else {
 			worldArray.push(1);	
 		}
