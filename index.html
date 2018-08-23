@@ -190,7 +190,10 @@
 				break;
 			case "accelerate":case "accel":
 				if (!weCruisin && !isLanded) {
-					if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+					if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
+						computerReply("Error. Flying through shrapnel with damage craft.");
+					}
+					else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
 						computerReply("Error. Collision course detected.");
 					}
 					else {
@@ -200,6 +203,15 @@
 				}
 				else {
 					computerReply("Ignored");
+				}
+				break;
+			case "charge":
+				if (worldArray[currentLocation-1] == "2") {
+					computerReply("Charging...");
+					computerReply("Solar blaster fully charged.", 1700);
+				}
+				else {
+					computerReply("No energy source detected.");
 				}
 				break;
 			case "land":
@@ -380,7 +392,7 @@
 				}
 				break;
 			case "DOWN":
-				var xi = 1;
+				var xi = 0;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*y))=="a") {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
 					else {xi = xi + 1;}
@@ -420,6 +432,21 @@
 		}
 		return name.toUpperCase();
 	};
+
+	function takeDamage(){
+		clearInterval(stalled);
+		var c = 1;
+		disableButtons(true);
+		var movement = setInterval(function() {
+			c = c+1;
+		  	// ctx.clearRect(0,0,1000,1000);
+		  	ctx.beginPath();
+		  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
+			ctx.fillRect(0,0,1000,1000);
+			ctx.closePath();
+		  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30),computerReply("Shields at percent",100);
+		}, 15);
+	};
 	
 
 
@@ -431,7 +458,7 @@ for (var i = 0; i < worldArray.length; i++) {
 }
 
 console.log(counts[1], counts[2], counts[3], counts[4], counts[5], counts['a'], worldArray.length, counts[1] + counts[2] + counts[3] + counts[4] + counts[5]);
-computerReply("Brainwave scan activity.<br>System booting...");
+computerReply("You're finally awake.<br>System booting...");
 computerReply(timeOfDay() + " Captain. All systems go. Type 'help' for nav commands.", 2200);
 	
 </script>

@@ -701,6 +701,7 @@ function solarBlaster(){
 		ctx.lineTo(1000, 820);
 		ctx.fill();
 		ctx.stroke();
+		ctx.closePath();
 
 	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
@@ -1048,6 +1049,14 @@ function autoAccel(intFunc) {
 			computerReply("Error. Collision course detected.");
 			return cruiseControl = false;
 		}
+		else if (worldArray[currentLocation-1] == "a") {
+			weCruisin = false;
+			staticArt();
+			drawField(currentLocation, fm, um, lm);
+			stalled = setInterval(generalState, 30);
+			takeDamage();
+			return cruiseControl = false;
+		}
 		else {
 			weCruisin = true;
 			clearInterval(intFunc);
@@ -1056,6 +1065,13 @@ function autoAccel(intFunc) {
 			accelerate();
 			return;
 		}
+	}
+	else if (worldArray[currentLocation-1] == "a") {
+		weCruisin = false;
+		staticArt();
+		drawField(currentLocation, fm, um, lm);
+		stalled = setInterval(generalState, 30);
+		takeDamage();
 	}
 	else {
 		weCruisin = false;
@@ -1633,7 +1649,7 @@ function generalState() {
 		default:console.log("Not set up yet");
 	}
 	ctx.closePath();
-}
+};
 
 
 var stalled = setInterval(generalState, 30);
