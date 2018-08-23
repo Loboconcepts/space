@@ -1079,7 +1079,7 @@ function autoAccel(intFunc) {
 		drawField(currentLocation, fm, um, lm);
 		stalled = setInterval(generalState, 30);
 	}
-}
+};
 
 function rotateShape(direction, rAxes, lr) {
 	var a=0;
@@ -1113,7 +1113,7 @@ function rotateShape(direction, rAxes, lr) {
 		ctx.translate(-500,-500);
 	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),staticArt(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm);
 	}, 10);
-}
+};
 
 //Check if needed
 // function angleLines(color) {

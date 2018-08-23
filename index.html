@@ -98,6 +98,7 @@
 	var user = document.getElementById("user");
 	var cruiseControl = false;
 	var isLanded = false;
+	var solarEnergy = 100;
 	user.addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
 			lastCommand.unshift(document.getElementById('user').value);
@@ -209,6 +210,7 @@
 				if (worldArray[currentLocation-1] == "2") {
 					computerReply("Charging...");
 					computerReply("Solar blaster fully charged.", 1700);
+					solarEnergy = 100;
 				}
 				else {
 					computerReply("No energy source detected.");
@@ -246,20 +248,20 @@
 				break;
 			case "cruise control on":case "cc on":
 				cruiseControl=true;
-				computerReply("Cruise control is enabled");
+				computerReply("Cruise control is enabled.");
 				break;
-			case "cruise control off":case "cc off":case "stop":
+			case "cruise control off":case "cc off":case "stop":case "s":
 				cruiseControl=false;
-				computerReply("Cruise control is disabled");
+				computerReply("Cruise control is disabled.");
 				break;
 			case "where am i":case "current location":case "location":case "where are we":case "position":case "current position":case "pos":case "loc":
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
-			case "help":case "controls":case "what":case "instructions":case "manual":case "commands":
-				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop, land, launch, fire.");
+			case "help":case "controls":case "what":case "instructions":case "manual":case "commands":case "nav commands":
+				computerReply("nav commands: accelerate, yaw left, yaw right, pitch up, pitch down, roll left, roll right, cruise control on, cruise control off, stop or 's', land, launch, fire.");
 				break;
 			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
-				computerReply(timeOfDay() + " Captain.");
+				computerReply(timeOfDay() + " Commander.");
 				break;
 			case "what is this":case "who are you":
 				computerReply("ACCESS DENIED. Input 'help' for navigation commands.");
@@ -275,7 +277,7 @@
 				computerReply("You're welcome.");
 				break;
 			case "open the pod bay doors":case "open the pod bay doors hal":
-				computerReply("I'm afraid I can't do that, Captain.");
+				computerReply("I'm afraid I can't do that, Commander.");
 				break;
 			case "time":case "what time is it":case "whats the time":
 				computerReply(new Date());
@@ -283,11 +285,15 @@
 			case "clear":
 				document.getElementById("shipConsole").innerHTML = "";
 				break;
+			case "solar energy": case "energy":
+				computerReply("Solar energy: " + solarEnergy + "%");
+				break;
 			case "fire":
 				if (!weCruisin) {
 					solarBlaster();
-					destroyObject(direction)
-					computerReply("Fire power: TBD",200);
+					destroyObject(direction);
+					solarEnergy = solarEnergy - 5;
+					computerReply("Solar energy: " + solarEnergy + "%",200);
 				}
 				else {
 					computerReply("Error. Disable cruise control first.");
@@ -352,63 +358,69 @@
 				return "Hello";
 				break;
 		}
-	}
+	};
 
 	function destroyObject(dx) {
 		switch (dx) {
 			case "N":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*x))=="a") {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
+					if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4" || loopView(currentLocation-(xi*x))=="5") {return;}
+					else if (loopView(currentLocation-(xi*x))=="a") {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "S":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*x))=="a") {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
+					if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4" || loopView(currentLocation+(xi*x))=="5") {return;}
+					else if (loopView(currentLocation+(xi*x))=="a") {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "W":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*z))=="a") {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
+					if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4" || loopView(currentLocation-(xi*z))=="5") {return;}
+					else if (loopView(currentLocation-(xi*z))=="a") {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "E":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*z))=="a") {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
+					if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4" || loopView(currentLocation+(xi*z))=="5") {return;}
+					else if (loopView(currentLocation+(xi*z))=="a") {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "UP":
 				var xi = 1;
 				while (xi<3) {
-					if (loopView(currentLocation-(xi*y))=="a") {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
+					if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4" || loopView(currentLocation-(xi*y))=="5") {return;}
+					else if (loopView(currentLocation-(xi*y))=="a") {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			case "DOWN":
 				var xi = 0;
 				while (xi<3) {
-					if (loopView(currentLocation+(xi*y))=="a") {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
+					if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4" || loopView(currentLocation+(xi*y))=="5") {return;}
+					else if (loopView(currentLocation+(xi*y))=="a") {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
 					else {xi = xi + 1;}
 				}
 				break;
 			default:
 				break;
 		}
-	}
+	};
 
 	function spliceWorldArray(where, withWhat) {
 		var tempArray;
 		tempArray = [worldArray.substring(0, where),worldArray.substring(where, where+1),worldArray.substring(where+1)];
 		tempArray.splice(1,1,withWhat);
 		return worldArray = tempArray.join("");
-	}
+	};
 
 	function scanPlanet() {
 		computerReply("Scanning");
@@ -436,6 +448,7 @@
 	function takeDamage(){
 		clearInterval(stalled);
 		var c = 1;
+		solarEnergy = solarEnergy - 20;
 		disableButtons(true);
 		var movement = setInterval(function() {
 			c = c+1;
@@ -444,7 +457,7 @@
 		  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
 			ctx.fillRect(0,0,1000,1000);
 			ctx.closePath();
-		  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30),computerReply("Shields at percent",100);
+		  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30),computerReply("Solar energy: " + solarEnergy + "%",100);
 		}, 15);
 	};
 	
@@ -455,11 +468,11 @@ var counts = {};
 for (var i = 0; i < worldArray.length; i++) {
   var num = worldArray[i];
   counts[num] = counts[num] ? counts[num] + 1 : 1;
-}
+};
 
 console.log(counts[1], counts[2], counts[3], counts[4], counts[5], counts['a'], worldArray.length, counts[1] + counts[2] + counts[3] + counts[4] + counts[5]);
 computerReply("You're finally awake.<br>System booting...");
-computerReply(timeOfDay() + " Captain. All systems go. Type 'help' for nav commands.", 2200);
+computerReply(timeOfDay() + " Commander. All systems go. Type 'help' for nav commands.", 2200);
 	
 </script>
 
