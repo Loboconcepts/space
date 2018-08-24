@@ -92,7 +92,8 @@ function generateWorld() {
 		else if (i%rarityValue==0 && i!=0) {
 			worldArray.push("2");
 		}
-		else if ((i>rarityValue/2) && (i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
+		// (currentLocation-1)%rarityValue = 17 & 114. All values = 131. Y axis not working because y > rarityValue.
+		else if ((i%rarityValue==z || i%rarityValue==rarityValue-z || i%rarityValue==x || i%rarityValue==rarityValue-x || i%rarityValue==y || i%rarityValue==rarityValue-y)) {
 			if (i%7==0) {
 				worldArray.push("3")
 			}
@@ -101,6 +102,9 @@ function generateWorld() {
 			}
 			else if (i%9==0) {
 				worldArray.push("5")
+			}
+			else if (i%1==0) {
+				worldArray.push("6")
 			}
 			else {
 				worldArray.push(1);
@@ -256,25 +260,6 @@ function shipRotation(rAxes, lr) {
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
-// function accelerate() {
-// 	switch (direction) {
-// 		case "N":currentLocation = currentLocation - x;break;
-// 		case "S":currentLocation = currentLocation + x;break;
-// 		case "E":currentLocation = currentLocation + z;break;
-// 		case "W":currentLocation = currentLocation - z;break;
-// 		case "UP":currentLocation = currentLocation - y;break;
-// 		case "DOWN":currentLocation = currentLocation + y;break;
-// 		default: console.log("OK");
-// 	}
-// 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
-// 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
-// 	else {currentLocation = (currentLocation);	}
-// 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
-// 	// drawField(currentLocation, fm, um, lm);
-// }
-
-
-
 function switchOrientation() {
 	if (viewOrient == "BACK") {
 		viewOrient = "TOP";
@@ -304,49 +289,11 @@ function disableButtons(bool) {
 	};
 }
 
-// function tableView(id,isWhat) {
-// 	if (id == "t2-1") {
-// 		switch (viewOrient) {
-// 			case "BACK":document.querySelector("#" + id).innerHTML = isWhat;break;
-// 			case "TOP":document.querySelector("#" + id).innerHTML = isWhat;break;
-// 			default: console.log("error ship");
-// 		}
-// 	}
-// 	else {
-// 		if (isWhat > worldArray.length) {
-// 		document.querySelector("#" + id).innerHTML = worldArray[(isWhat - worldArray.length)-1];
-// 		}
-// 		else if (isWhat < 1) {
-// 			document.querySelector("#" + id).innerHTML = worldArray[(isWhat + worldArray.length)-1];
-// 		}
-// 		else {
-// 			document.querySelector("#" + id).innerHTML = worldArray[(isWhat-1)];	
-// 		}
-// 	}
-// }
-
 function loopView(isWhat) {
 	if (isWhat > worldArray.length) {return worldArray[(isWhat - worldArray.length)-1];}
 	else if (isWhat < 1) {return worldArray[(isWhat + worldArray.length)-1];}
 	else {return worldArray[(isWhat-1)];	}
 };
-
-// function drawStar(ctx, r) {
-// 	ctx.save();
-// 	ctx.beginPath();
-// 	ctx.moveTo(r, 0);
-// 	for (var i = 0; i < 9; i++) {
-// 		ctx.rotate(Math.PI / 5);
-// 		if (i % 2 === 0) {
-// 		  ctx.lineTo((r / 0.525731) * 0.200811, 0);
-// 		} else {
-// 		  ctx.lineTo(r, 0);
-// 		}
-// 	}
-// 	ctx.closePath();
-// 	ctx.fill();
-// 	ctx.restore();
-// }
 
 //for oganization
 var n = 0;
@@ -1169,7 +1116,7 @@ function staticArt() {
 
 	// Back items
 	// for (var i = 0; i < 3; i++) {
- //    	for (var j = 0; j < 3; j++) {
+ 	//	for (var j = 0; j < 3; j++) {
 	// 	ctx.save();
 	// 	ctx.beginPath();
 	// 	ctx.translate(j * 300, i * 300);
@@ -1242,7 +1189,6 @@ function staticArt() {
 	
 
 	}
-
 
 // Only shapes here down
 function drawField(pos, fm, um, lm) {
@@ -1424,6 +1370,19 @@ function whichArt(posNum,xPos,yPos,size) {
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
 		    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+		    ctx.shadowColor = "#7777FF" 
+		    ctx.shadowOffsetX = 0;
+			ctx.shadowOffsetY = 0;
+			ctx.shadowBlur = 100;
+		    ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
+		case ("6"):
+			ctx.save();
+			ctx.beginPath();
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
+		    ctx.fillStyle = "rgba(200, 0, 200, 1)";
 		    ctx.shadowColor = "#7777FF" 
 		    ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
