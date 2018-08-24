@@ -94,27 +94,21 @@ function generateWorld() {
 		}
 		// (currentLocation-1)%rarityValue = 17 & 114. All values = 131. Y axis not working because y > rarityValue.
 		else if ((i%rarityValue==rarityValue-(z%rarityValue) || i%rarityValue==z%rarityValue || i%rarityValue==rarityValue-(x%rarityValue) || i%rarityValue==x%rarityValue || i%rarityValue==rarityValue-(y%rarityValue) || i%rarityValue==y%rarityValue)) {
-			if (i%9==0) {
+			if (i%9==0 || i%6==0 || i%4==0) {
 				worldArray.push("3")
 			}
 			else if (i%7==0) {
 				worldArray.push("4")
 			}
-			else if (i%6==0) {
-				worldArray.push("5")
-			}
-			else if (i%4==0) {
-				worldArray.push("6")
-			}
 			else {
-				worldArray.push(1);
+				worldArray.push("1");
 			};
 		}
-		else if (i%12==0) {
+		else if (i%256==0) {
 				worldArray.push("a")
 		}
 		else {
-			worldArray.push(1);	
+			worldArray.push("1");	
 		}
 	}
 	worldArray = worldArray.join("");
@@ -1314,7 +1308,7 @@ var oldPlanets = [];
 
 function rgbGenerateFromCurPos(curPos) {
 	var temp = curPos.toString();
-	return [((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1))%256,((temp[temp.length-1]+temp[temp.length-2]+temp[temp.length-3])*22)%256,((temp[temp.length-1]+temp[temp.length-2]+temp[temp.length-3])*6)%256]
+	return [(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*12)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*21)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*16)%206)+50]
 }
 
 function whichArt(posNum,xPos,yPos,size,actPos) {
@@ -1359,9 +1353,9 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 		case ("4"):
 			ctx.save();
 			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(80, 80, 50, .7)";
-		    ctx.shadowColor = "#cc9922" 
+		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true)
+		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", .5)";
+		    ctx.shadowColor = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
 		    ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
 			ctx.shadowBlur = 100;
