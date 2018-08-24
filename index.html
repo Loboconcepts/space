@@ -424,8 +424,21 @@
 
 	function scanPlanet() {
 		computerReply("Scanning");
-		if (worldArray[currentLocation-1] == "3") {computerReply("Planet is 95% land.",1700);}
-		else if (worldArray[currentLocation-1] == "5"){computerReply("Planet is 95% liquid.",1700);}
+		if (worldArray[currentLocation-1] == "3") {
+			if (rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[1] && rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[2]) {
+				computerReply("Planet is primarily IRON OXIDE.")
+			}
+			else if (rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[2]) {
+				computerReply("Planet is primarily HYDROCARBON.")
+			}
+			else if (rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[1]) {
+				computerReply("Planet is primarily HYDROXIDE.")
+			}
+			else {
+				computerReply("Unable to accurately scan.")	
+			}
+		}
+		
 	};
 
 	function planetNamer() {
