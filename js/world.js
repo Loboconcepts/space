@@ -320,43 +320,43 @@ function move(a){
 	  ctx.clearRect(0,0,1000,1000);
 	  	// GOING AWAY
 		//back top left
-		whichArt(oldPlanets[0].posNum,oldPlanets[0].xPos + num[48],oldPlanets[0].yPos + num[49],oldPlanets[0].size);
+		whichArt(oldPlanets[0].posNum,oldPlanets[0].xPos + num[48],oldPlanets[0].yPos + num[49],oldPlanets[0].size,oldPlanets[0].actPos);
 		//back top right
-		whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + num[48],oldPlanets[1].yPos + num[49],oldPlanets[1].size);
+		whichArt(oldPlanets[1].posNum,oldPlanets[1].xPos + num[48],oldPlanets[1].yPos + num[49],oldPlanets[1].size,oldPlanets[1].actPos);
 		//back top center
-		whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos + num[48],oldPlanets[2].yPos + num[49],oldPlanets[2].size);
+		whichArt(oldPlanets[2].posNum,oldPlanets[2].xPos + num[48],oldPlanets[2].yPos + num[49],oldPlanets[2].size,oldPlanets[2].actPos);
 		//back middle left
-		whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + num[48],oldPlanets[3].yPos + num[49],oldPlanets[3].size);
+		whichArt(oldPlanets[3].posNum,oldPlanets[3].xPos + num[48],oldPlanets[3].yPos + num[49],oldPlanets[3].size,oldPlanets[3].actPos);
 		//back middle right
-		whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + num[48],oldPlanets[4].yPos + num[49],oldPlanets[4].size);
+		whichArt(oldPlanets[4].posNum,oldPlanets[4].xPos + num[48],oldPlanets[4].yPos + num[49],oldPlanets[4].size,oldPlanets[4].actPos);
 		//back middle center
-		whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos + num[48],oldPlanets[5].yPos + num[49],oldPlanets[5].size);
+		whichArt(oldPlanets[5].posNum,oldPlanets[5].xPos + num[48],oldPlanets[5].yPos + num[49],oldPlanets[5].size,oldPlanets[5].actPos);
 		//back bottom left
-		whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + num[48],oldPlanets[6].yPos + num[49],oldPlanets[6].size);
+		whichArt(oldPlanets[6].posNum,oldPlanets[6].xPos + num[48],oldPlanets[6].yPos + num[49],oldPlanets[6].size,oldPlanets[6].actPos);
 		//back bottom right
-		whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + num[48],oldPlanets[7].yPos + num[49],oldPlanets[7].size);
+		whichArt(oldPlanets[7].posNum,oldPlanets[7].xPos + num[48],oldPlanets[7].yPos + num[49],oldPlanets[7].size,oldPlanets[7].actPos);
 		//back bottom center
-		whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos + num[48],oldPlanets[8].yPos + num[49],oldPlanets[8].size);
+		whichArt(oldPlanets[8].posNum,oldPlanets[8].xPos + num[48],oldPlanets[8].yPos + num[49],oldPlanets[8].size,oldPlanets[8].actPos);
 
 		// COMING IN
 		//back top left
-		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation + um + 2*fm - lm);
 		//back top right
-		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation + um + 2*fm + lm);
 		//back top center
-		whichArt(loopView(currentLocation + um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation + um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),300 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation + um + 2*fm);
 		//back middle left
-		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation + 2*fm - lm);
 		//back middle right
-		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation + 2*fm + lm);
 		//back middle center
-		whichArt(loopView(currentLocation + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),150);
+		whichArt(loopView(currentLocation + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),500 + (a[49]*75*-1) - (num[49]*-1),150,currentLocation + 2*fm);
 		//back bottom left
-		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation - um + 2*fm - lm);
 		//back bottom right
-		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation - um + 2*fm + lm);
 		//back bottom center
-		whichArt(loopView(currentLocation - um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100);
+		whichArt(loopView(currentLocation - um + 2*fm),500 + (a[48]*75*-1) - (num[48]*-1),700 + (a[49]*75*-1) - (num[49]*-1),100,currentLocation - um + 2*fm);
 		
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[2]);
@@ -391,43 +391,43 @@ function move(a){
 
 		// GOING AWAY
 		//top left
-		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[50],oldPlanets[9].yPos + num[51],oldPlanets[9].size);
+		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[50],oldPlanets[9].yPos + num[51],oldPlanets[9].size,oldPlanets[9].actPos);
 		//top right
-		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[50],oldPlanets[10].yPos + num[51],oldPlanets[10].size);
+		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[50],oldPlanets[10].yPos + num[51],oldPlanets[10].size,oldPlanets[10].actPos);
 		//top center
-		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos + num[50],oldPlanets[11].yPos + num[51],oldPlanets[11].size);
+		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos + num[50],oldPlanets[11].yPos + num[51],oldPlanets[11].size,oldPlanets[11].actPos);
 		//bottom left
-		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos + num[50],oldPlanets[12].yPos + num[51],oldPlanets[12].size);
+		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos + num[50],oldPlanets[12].yPos + num[51],oldPlanets[12].size,oldPlanets[12].actPos);
 		//bottom right
-		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos + num[50],oldPlanets[13].yPos + num[51],oldPlanets[13].size);
+		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos + num[50],oldPlanets[13].yPos + num[51],oldPlanets[13].size,oldPlanets[13].actPos);
 		//bottom center
-		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos + num[50],oldPlanets[14].yPos + num[51],oldPlanets[14].size);
+		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos + num[50],oldPlanets[14].yPos + num[51],oldPlanets[14].size,oldPlanets[14].actPos);
 		//middle left
-		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[50],oldPlanets[15].yPos + num[51],oldPlanets[15].size);
+		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[50],oldPlanets[15].yPos + num[51],oldPlanets[15].size,oldPlanets[15].actPos);
 		//middle right
-		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[50],oldPlanets[16].yPos + num[51],oldPlanets[16].size);
+		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[50],oldPlanets[16].yPos + num[51],oldPlanets[16].size,oldPlanets[16].actPos);
 		//middle center
-		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + num[50],oldPlanets[17].yPos + num[51],oldPlanets[17].size);
+		whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + num[50],oldPlanets[17].yPos + num[51],oldPlanets[17].size,oldPlanets[17].actPos);
 
 		// COMING IN
 		//top left
-		whichArt(loopView(currentLocation + um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation + um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation + um + fm - lm);
 		//top right
-		whichArt(loopView(currentLocation + um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation + um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation + um + fm + lm);
 		//top center
-		whichArt(loopView(currentLocation + um + fm),500 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation + um + fm),500 + (a[50]*75*-1) - (num[50]*-1),200 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation + um + fm);
 		//bottom left
-		whichArt(loopView(currentLocation - um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation - um + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation - um + fm - lm);
 		//bottom right
-		whichArt(loopView(currentLocation - um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation - um + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation - um + fm + lm);
 		//bottom center
-		whichArt(loopView(currentLocation - um + fm),500 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200);
+		whichArt(loopView(currentLocation - um + fm),500 + (a[50]*75*-1) - (num[50]*-1),800 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation - um + fm);
 		//middle left
-		whichArt(loopView(currentLocation + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1), 200);
+		whichArt(loopView(currentLocation + fm - lm),200 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation + fm - lm);
 		//middle right
-		whichArt(loopView(currentLocation + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1), 200);
+		whichArt(loopView(currentLocation + fm + lm),800 + (a[50]*75*-1) - (num[50]*-1), 500 + (a[51]*75*-1) - (num[51]*-1),200,currentLocation + fm + lm);
 		//middle center
-		whichArt(loopView(currentLocation + fm),500 + (a[50]*75*-1) - (num[50]*-1),500 + (a[51]*75*-1) - (num[51]*-1),250);
+		whichArt(loopView(currentLocation + fm),500 + (a[50]*75*-1) - (num[50]*-1),500 + (a[51]*75*-1) - (num[51]*-1),250,currentLocation + fm);
 
 		
 		switch (direction) {
@@ -523,77 +523,77 @@ function move(a){
 		}
 
 		if (oldPlanets[18].xPos == newXPos && oldPlanets[18].yPos == newYPos) {
-			whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size);
+			whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size,oldPlanets[18].actPos);
 		}
 		else {
 			switch (direction) {
 				case ("DOWN"):
-				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+				whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 				break;
 				case ("UP"):
-				whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[52],oldPlanets[18].yPos + num[53],oldPlanets[18].size);
+				whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[52],oldPlanets[18].yPos + num[53],oldPlanets[18].size,oldPlanets[18].actPos);
 				break;
 				case ("N"):
 					switch(topfacing) {
 						case ("UP"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("DOWN"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("W"):
-						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("E"):
-						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 					}
 				break;
 				case ("S"):
 					switch(topfacing) {
 						case ("UP"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("DOWN"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("E"):
-						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("W"):
-						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 					}
 				break;
 				case ("E"):
 					switch(topfacing) {
 						case ("UP"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("DOWN"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("N"):
-						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("S"):
-						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 					}
 				break;
 				case ("W"):
 					switch(topfacing) {
 						case ("UP"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),1200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("DOWN"):
-						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),500 + (a[52]*75*-1) - (num[52]*-1),-200 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("S"):
-						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),-200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 						case ("N"):
-						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000);
+						whichArt(loopView(currentLocation),1200 + (a[52]*75*-1) - (num[52]*-1),500 + (a[53]*75*-1) - (num[53]*-1),1000,currentLocation);
 						break;
 					}
 				break;
@@ -621,7 +621,7 @@ function land(a){
 	  	ctx.rect(0, 0, canvas.width, canvas.height);
 	  	ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
 		ctx.fill();
-	  	whichArt(loopView(currentLocation),500,1200 + (a[53]*75*-1) - (num[53]*-1),1000+num[2]);
+	  	whichArt(loopView(currentLocation),500,1200 + (a[53]*75*-1) - (num[53]*-1),1000+num[2],currentLocation);
 		
 		ctx.closePath();
 
@@ -670,7 +670,7 @@ function launch(a){
 	  	ctx.rect(0, 0, canvas.width, canvas.height);
 	  	ctx.fillStyle = "rgb(" + (128 -  Math.floor(c/2)) + ", " + (128 - Math.floor(c/2)) + ", " + (255 - c) + ")";
 		ctx.fill();
-		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12));
+		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12),currentLocation);
 		ctx.closePath();
 
 	  if (c > 255) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
@@ -711,23 +711,23 @@ function accelerate(){
 	  ctx.clearRect(0,0,1000,1000);
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
-		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]),currentLocation + um + 2*fm - lm);
 		//back top right
-		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[8]*75) - (num[8]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + um + 2*fm + lm),700 + (a[8]*75) - (num[8]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]),currentLocation + um + 2*fm + lm);
 		//back top center
-		whichArt(loopView(currentLocation + um + 2*fm),500,300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + um + 2*fm),500,300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]),currentLocation + um + 2*fm);
 		//back middle left
-		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[7]*75) - (num[7]),500,100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + 2*fm - lm),300 + (a[7]*75) - (num[7]),500,100 + (a[8]*75) - (num[8]),currentLocation + 2*fm - lm);
 		//back middle right
-		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[8]*75) - (num[8]),500,100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + 2*fm + lm),700 + (a[8]*75) - (num[8]),500,100 + (a[8]*75) - (num[8]),currentLocation + 2*fm + lm);
 		//back middle center
-		whichArt(loopView(currentLocation + 2*fm),500,500,150 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation + 2*fm),500,500,150 + (a[8]*75) - (num[8]),currentLocation + 2*fm);
 		//back bottom left
-		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[7]*75) - (num[7]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation - um + 2*fm - lm),300 + (a[7]*75) - (num[7]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm - lm);
 		//back bottom right
-		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[8]*75) - (num[8]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[8]*75) - (num[8]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm + lm);
 		//back bottom center
-		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]));
+		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm);
 		
 		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[0]);
@@ -765,93 +765,93 @@ function accelerate(){
 
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//top left
-		whichArt(loopView(currentLocation + um + fm - lm),300-Math.floor(num[6]),300-Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + um + fm - lm),300-Math.floor(num[6]),300-Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation + um + fm - lm);
 		//top right
-		whichArt(loopView(currentLocation + um + fm + lm),700+Math.floor(num[6]),300-Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + um + fm + lm),700+Math.floor(num[6]),300-Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation + um + fm + lm);
 		//top center
-		whichArt(loopView(currentLocation + um + fm),500,300-Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + um + fm),500,300-Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation + um + fm);
 		//bottom left
-		whichArt(loopView(currentLocation - um + fm - lm),300-Math.floor(num[6]),700+Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation - um + fm - lm),300-Math.floor(num[6]),700+Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation - um + fm - lm);
 		//bottom right
-		whichArt(loopView(currentLocation - um + fm + lm),700+Math.floor(num[6]),700+Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation - um + fm + lm),700+Math.floor(num[6]),700+Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation - um + fm + lm);
 		//bottom center
-		whichArt(loopView(currentLocation - um + fm),500,700+Math.floor(num[6]),100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation - um + fm),500,700+Math.floor(num[6]),100 + Math.floor(num[6]),currentLocation - um + fm);
 		//middle left
-		whichArt(loopView(currentLocation + fm - lm),300-Math.floor(num[6]), 500, 100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + fm - lm),300-Math.floor(num[6]), 500, 100 + Math.floor(num[6]),currentLocation + fm - lm);
 		//middle right
-		whichArt(loopView(currentLocation + fm + lm),700+Math.floor(num[6]), 500, 100 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + fm + lm),700+Math.floor(num[6]), 500, 100 + Math.floor(num[6]),currentLocation + fm + lm);
 		//middle center
-		whichArt(loopView(currentLocation + fm),500,500,150 + Math.floor(num[6]));
+		whichArt(loopView(currentLocation + fm),500,500,150 + Math.floor(num[6]),currentLocation + fm);
 
 		// OLD ART MOVING TO NEW P0SITION
 		// top left
-		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[5],oldPlanets[9].yPos + num[0],oldPlanets[9].size + num[1]);
+		whichArt(oldPlanets[9].posNum,oldPlanets[9].xPos + num[5],oldPlanets[9].yPos + num[0],oldPlanets[9].size + num[1],oldPlanets[9].actPos);
 		//top right
-		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[4],oldPlanets[10].yPos + num[0],oldPlanets[10].size + num[1]);
+		whichArt(oldPlanets[10].posNum,oldPlanets[10].xPos + num[4],oldPlanets[10].yPos + num[0],oldPlanets[10].size + num[1],oldPlanets[10].actPos);
 		//top center
-		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos,oldPlanets[11].yPos + num[5],oldPlanets[11].size + num[1]);
+		whichArt(oldPlanets[11].posNum,oldPlanets[11].xPos,oldPlanets[11].yPos + num[5],oldPlanets[11].size + num[1],oldPlanets[11].actPos);
 		//bottom left
-		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos + num[5],oldPlanets[12].yPos + num[1],oldPlanets[12].size + num[1]);
+		whichArt(oldPlanets[12].posNum,oldPlanets[12].xPos + num[5],oldPlanets[12].yPos + num[1],oldPlanets[12].size + num[1],oldPlanets[12].actPos);
 		//bottom right
-		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos + num[4],oldPlanets[13].yPos + num[1],oldPlanets[13].size + num[1]);
+		whichArt(oldPlanets[13].posNum,oldPlanets[13].xPos + num[4],oldPlanets[13].yPos + num[1],oldPlanets[13].size + num[1],oldPlanets[13].actPos);
 		//bottom center
-		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos,oldPlanets[14].yPos + num[4],oldPlanets[14].size + num[1]);
+		whichArt(oldPlanets[14].posNum,oldPlanets[14].xPos,oldPlanets[14].yPos + num[4],oldPlanets[14].size + num[1],oldPlanets[14].actPos);
 		//middle left
-		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[5],oldPlanets[15].yPos,oldPlanets[15].size + num[1]);
+		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[5],oldPlanets[15].yPos,oldPlanets[15].size + num[1],oldPlanets[15].actPos);
 		//middle right
-		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[4],oldPlanets[16].yPos,oldPlanets[16].size + num[1]);
+		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[4],oldPlanets[16].yPos,oldPlanets[16].size + num[1],oldPlanets[16].actPos);
 		//middle center
 
 			switch (direction) {
 				case ("DOWN"):
-					whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);
-					whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+					whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);
+					whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 				break;
 				case ("UP"):
 					if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10]*1.3,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10]*1.3,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 				break;
 				case ("N"):
 					switch(topfacing) {
 						case ("UP"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("DOWN"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("W"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("E"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 					}
 				break;
@@ -859,39 +859,39 @@ function accelerate(){
 					switch(topfacing) {
 						case ("UP"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos - 450 + num[10],oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10],oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("DOWN"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos + 450 - num[10],oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos - num[10],oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("E"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos + 450 - num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos - num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 						case ("W"):
 						if (c < 30) {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
 						else {
-							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9]);	
+							whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos - 450 + num[10],oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);	
 						}
-						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9]);
+						whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos + num[10],oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
 						break;
 					}
 				break;
@@ -1312,6 +1312,11 @@ function SpaceObject(posNum,xPos,yPos,size,actPos) {
 }
 var oldPlanets = [];
 
+function rgbGenerateFromCurPos(curPos) {
+	var temp = curPos.toString();
+	return [((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1))%256,((temp[temp.length-1]+temp[temp.length-2]+temp[temp.length-3])*22)%256,((temp[temp.length-1]+temp[temp.length-2]+temp[temp.length-3])*6)%256]
+}
+
 function whichArt(posNum,xPos,yPos,size,actPos) {
 	// 1 - Nothing
 	// 2 - Star
@@ -1342,7 +1347,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.save();
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(100, 235, 100, 1)";
+		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
 		    ctx.shadowColor = "#0000FF" 
 		    ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
@@ -1368,7 +1373,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.save();
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(0, 0, 255, 1)";
+		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
 		    ctx.shadowColor = "#7777FF" 
 		    ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
@@ -1381,7 +1386,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.save();
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(200, 0, 200, 1)";
+		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
 		    ctx.shadowColor = "#7777FF" 
 		    ctx.shadowOffsetX = 0;
 			ctx.shadowOffsetY = 0;
@@ -1498,109 +1503,109 @@ function generalState() {
 
   	// GOING AWAY
 	//back top left
-	whichArt(loopView(currentLocation + um + 2*fm - lm),300,300,100);
+	whichArt(loopView(currentLocation + um + 2*fm - lm),300,300,100,currentLocation + um + 2*fm - lm);
 	//back top right
-	whichArt(loopView(currentLocation + um + 2*fm + lm),700,300,100);
+	whichArt(loopView(currentLocation + um + 2*fm + lm),700,300,100,currentLocation + um + 2*fm + lm);
 	//back top center
-	whichArt(loopView(currentLocation + um + 2*fm),500,300,100);
+	whichArt(loopView(currentLocation + um + 2*fm),500,300,100,currentLocation + um + 2*fm);
 	//back middle left
-	whichArt(loopView(currentLocation + 2*fm - lm),300,500,100);
+	whichArt(loopView(currentLocation + 2*fm - lm),300,500,100,currentLocation + 2*fm - lm);
 	//back middle right
-	whichArt(loopView(currentLocation + 2*fm + lm),700,500,100);
+	whichArt(loopView(currentLocation + 2*fm + lm),700,500,100,currentLocation + 2*fm + lm);
 	//back middle center
-	whichArt(loopView(currentLocation + 2*fm),500,500,150);
+	whichArt(loopView(currentLocation + 2*fm),500,500,150,currentLocation + 2*fm);
 	//back bottom left
-	whichArt(loopView(currentLocation - um + 2*fm - lm),300,700,100);
+	whichArt(loopView(currentLocation - um + 2*fm - lm),300,700,100,currentLocation - um + 2*fm - lm);
 	//back bottom right
-	whichArt(loopView(currentLocation - um + 2*fm + lm),700,700,100);
+	whichArt(loopView(currentLocation - um + 2*fm + lm),700,700,100,currentLocation - um + 2*fm + lm);
 	//back bottom center
-	whichArt(loopView(currentLocation - um + 2*fm),500,700,100);
+	whichArt(loopView(currentLocation - um + 2*fm),500,700,100,currentLocation - um + 2*fm);
 	//top left
-	whichArt(loopView(currentLocation + um + fm - lm),200,200,200);
+	whichArt(loopView(currentLocation + um + fm - lm),200,200,200,currentLocation + um + fm - lm);
 	//top right
-	whichArt(loopView(currentLocation + um + fm + lm),800,200,200);
+	whichArt(loopView(currentLocation + um + fm + lm),800,200,200,currentLocation + um + fm + lm);
 	//top center
-	whichArt(loopView(currentLocation + um + fm),500,200,200);
+	whichArt(loopView(currentLocation + um + fm),500,200,200,currentLocation + um + fm);
 	//bottom left
-	whichArt(loopView(currentLocation - um + fm - lm),200,800,200);
+	whichArt(loopView(currentLocation - um + fm - lm),200,800,200,currentLocation - um + fm - lm);
 	//bottom right
-	whichArt(loopView(currentLocation - um + fm + lm),800,800,200);
+	whichArt(loopView(currentLocation - um + fm + lm),800,800,200,currentLocation - um + fm + lm);
 	//bottom center
-	whichArt(loopView(currentLocation - um + fm),500,800,200);
+	whichArt(loopView(currentLocation - um + fm),500,800,200,currentLocation - um + fm);
 	//middle left
-	whichArt(loopView(currentLocation + fm - lm),200, 500, 200);
+	whichArt(loopView(currentLocation + fm - lm),200, 500, 200,currentLocation + fm - lm);
 	//middle right
-	whichArt(loopView(currentLocation + fm + lm),800, 500, 200);
+	whichArt(loopView(currentLocation + fm + lm),800, 500, 200,currentLocation + fm + lm);
 	//middle center
-	whichArt(loopView(currentLocation + fm),500,500,250);
+	whichArt(loopView(currentLocation + fm),500,500,250,currentLocation + fm);
 	
 	switch (direction) {
 		case ("DOWN"):
-		whichArt(loopView(currentLocation),500,500,1000);
+		whichArt(loopView(currentLocation),500,500,1000,currentLocation);
 		break;
 		case ("UP"):
 		break;
 		case ("N"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(currentLocation),500,1200,1000);
+				whichArt(loopView(currentLocation),500,1200,1000,currentLocation);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(currentLocation),500,-200,1000);
+				whichArt(loopView(currentLocation),500,-200,1000,currentLocation);
 				break;
 				case ("W"):
-				whichArt(loopView(currentLocation),-200,500,1000);
+				whichArt(loopView(currentLocation),-200,500,1000,currentLocation);
 				break;
 				case ("E"):
-				whichArt(loopView(currentLocation),1200,500,1000);
+				whichArt(loopView(currentLocation),1200,500,1000,currentLocation);
 				break;
 			}
 		break;
 		case ("S"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(currentLocation),500,1200,1000);
+				whichArt(loopView(currentLocation),500,1200,1000,currentLocation);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(currentLocation),500,-200,1000);
+				whichArt(loopView(currentLocation),500,-200,1000,currentLocation);
 				break;
 				case ("E"):
-				whichArt(loopView(currentLocation),-200,500,1000);
+				whichArt(loopView(currentLocation),-200,500,1000,currentLocation);
 				break;
 				case ("W"):
-				whichArt(loopView(currentLocation),1200,500,1000);
+				whichArt(loopView(currentLocation),1200,500,1000,currentLocation);
 				break;
 			}
 		break;
 		case ("E"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(currentLocation),500,1200,1000);
+				whichArt(loopView(currentLocation),500,1200,1000,currentLocation);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(currentLocation),500,-200,1000);
+				whichArt(loopView(currentLocation),500,-200,1000,currentLocation);
 				break;
 				case ("N"):
-				whichArt(loopView(currentLocation),-200,500,1000);
+				whichArt(loopView(currentLocation),-200,500,1000,currentLocation);
 				break;
 				case ("S"):
-				whichArt(loopView(currentLocation),1200,500,1000);
+				whichArt(loopView(currentLocation),1200,500,1000,currentLocation);
 				break;
 			}
 		break;
 		case ("W"):
 			switch(topfacing) {
 				case ("UP"):
-				whichArt(loopView(currentLocation),500,1200,1000);
+				whichArt(loopView(currentLocation),500,1200,1000,currentLocation);
 				break;
 				case ("DOWN"):
-				whichArt(loopView(currentLocation),500,-200,1000);
+				whichArt(loopView(currentLocation),500,-200,1000,currentLocation);
 				break;
 				case ("S"):
-				whichArt(loopView(currentLocation),-200,500,1000);
+				whichArt(loopView(currentLocation),-200,500,1000,currentLocation);
 				break;
 				case ("N"):
-				whichArt(loopView(currentLocation),1200,500,1000);
+				whichArt(loopView(currentLocation),1200,500,1000,currentLocation);
 				break;
 			}
 		break;
