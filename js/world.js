@@ -74,17 +74,7 @@ dataUrl = canvas.toDataURL();
 // Determine axis
 
 function generateWorld() {
-	// 1 - Nothing
-	// 2 - Star
-	// 3 - Livable Planet
-	// 4 - Gaseous Planet
-	// 5 - Liquid Planet
-	// 6 - Asteroids
-	// 7 - Space Dust
-	// 8 - Worm Hole
-
 	worldArray = [];
-
 	for (i=0;i<(x*x*x);i++) {
 		if (i == (x*x*x-1)) {
 			worldArray.push("8");
@@ -105,9 +95,9 @@ function generateWorld() {
 			};
 		}
 		else if (i%256==0) {
-				worldArray.push("a")
+				worldArray.push("x")
 		}
-		else if (i%28483==0) {
+		else if (i%244==0) {
 				worldArray.push("z")
 		}
 		else {
@@ -1386,6 +1376,25 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.closePath();
 			ctx.restore();
 			break;
+		case ("x"):
+			ctx.save();
+			ctx.beginPath();
+			ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+		    ctx.moveTo(xPos - size/2, yPos - size/4);
+		    ctx.lineTo(xPos, yPos - size/10);
+		    ctx.lineTo(xPos + size/2, yPos + size/4);
+		    ctx.moveTo(xPos + size/2, yPos - size/4);
+		    ctx.lineTo(xPos, yPos - size/10);
+		    ctx.lineTo(xPos - size/2, yPos + size/4);
+		    ctx.fill();
+			ctx.closePath();
+			ctx.beginPath();
+			ctx.arc(xPos, yPos - size/15, size/12, 2 * Math.PI, false);
+			ctx.fillStyle = "rgba(200, 200, 255, 1)";
+			ctx.fill();
+			ctx.closePath();
+			ctx.restore();
+			break;
 		case ("a"):
 			ctx.save();
 			ctx.beginPath();
@@ -1472,7 +1481,6 @@ staticArt();
 
 function generalState() {
 	ctx.clearRect(0,0,1000,1000);
-
   	ctx.beginPath();
 	ctx.moveTo(50, 50);
 	ctx.lineTo(950, 50);
