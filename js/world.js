@@ -1411,7 +1411,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 		case ("d"):
 			ctx.save();
 			ctx.beginPath();
-			ctx.fillStyle = "rgba(255, 255, 100, 1)";
+			ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
 			ctx.fillRect(xPos, yPos,size/20, size/20);
 		    ctx.fillRect(xPos - size/10, yPos - size/10,size/20, size/20);
 		    ctx.fillRect(xPos - size/4, yPos + size/3,size/20, size/20);
