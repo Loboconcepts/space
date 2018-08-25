@@ -107,6 +107,9 @@ function generateWorld() {
 		else if (i%256==0) {
 				worldArray.push("a")
 		}
+		else if (i%28483==0) {
+				worldArray.push("z")
+		}
 		else {
 			worldArray.push("1");	
 		}
@@ -1311,13 +1314,12 @@ function rgbGenerateFromCurPos(curPos) {
 	return [(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*12)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*21)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*16)%206)+50]
 }
 
+// ART DRAWN HERE
 function whichArt(posNum,xPos,yPos,size,actPos) {
 	// 1 - Nothing
 	// 2 - Star
-	// 3 - Livable Planet
+	// 3 - Solid Planet
 	// 4 - Gaseous Planet
-	// 5 - Liquid Planet
-	// 6 - Asteroids
 	// 7 - Space Dust
 	// 8 - Worm Hole
 	// a - Space Station
@@ -1363,29 +1365,24 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.closePath();
 			ctx.restore();
 			break;
-		case ("5"):
+		case ("z"):
 			ctx.save();
 			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.shadowColor = "#7777FF" 
-		    ctx.shadowOffsetX = 0;
-			ctx.shadowOffsetY = 0;
-			ctx.shadowBlur = 100;
-		    ctx.fill();
+			ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+		    ctx.fillRect(xPos - size/4, yPos,size/2, size/4);
+		    ctx.closePath();
+		    ctx.beginPath();
+			ctx.arc((xPos - size/4)+1, yPos+size/8, size/8,.5*Math.PI,1.5*Math.PI);
+			ctx.fill();
 			ctx.closePath();
-			ctx.restore();
-			break;
-		case ("6"):
-			ctx.save();
 			ctx.beginPath();
-		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.shadowColor = "#7777FF" 
-		    ctx.shadowOffsetX = 0;
-			ctx.shadowOffsetY = 0;
-			ctx.shadowBlur = 100;
-		    ctx.fill();
+			ctx.arc((xPos + size/4)-1, yPos+size/8, size/8,1.5*Math.PI,.5*Math.PI);
+			ctx.fill();
+			ctx.closePath();
+		    ctx.beginPath();
+			ctx.arc(xPos, yPos, size/6, Math.PI, false);
+			ctx.fillStyle = "rgba(200, 200, 255, 1)";
+			ctx.fill();
 			ctx.closePath();
 			ctx.restore();
 			break;
