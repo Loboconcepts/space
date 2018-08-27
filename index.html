@@ -99,6 +99,7 @@
 	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 	var inventory = [100,0,0,0,0];
 	var alienConversation = false;
+	var currentlyTrading = false;
 	user.addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
 			lastCommand.unshift(document.getElementById('user').value);
@@ -130,7 +131,8 @@
 
 	function understandUserInput(ui) {
 		document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
-		if (alienConversation) {return conversation(ui)};
+		if (alienConversation && currentlyTrading) {return trading(ui)}
+		else if (alienConversation) {return conversation(ui)};
 		switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 			case "yl":case "yaw left":
 				if (!weCruisin && !isLanded) {
@@ -507,7 +509,7 @@ for (var i = 0; i < worldArray.length; i++) {
   counts[num] = counts[num] ? counts[num] + 1 : 1;
 };
 
-console.log("empty stars land gas badguys totalsize\n",counts[1], counts[2], counts[3], counts[4], counts['z']+counts['x'], worldArray.length);
+console.log("empty stars land gas aliens totalsize\n",counts[1], counts[2], counts[3], counts[4], counts['z']+counts['x'], worldArray.length);
 computerReply("You're finally awake.<br>System booting...");
 computerReply(timeOfDay() + " Commander. All systems go. Type 'help' for nav commands.", 2200);
 	
