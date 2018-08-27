@@ -986,7 +986,7 @@ function autoAccel(intFunc) {
 			staticArt();
 			drawField(currentLocation, fm, um, lm);
 			stalled = setInterval(generalState, 30);
-			takeDamage();
+			takeDamage(20);
 			return cruiseControl = false;
 		}
 		else {
@@ -1003,7 +1003,7 @@ function autoAccel(intFunc) {
 		staticArt();
 		drawField(currentLocation, fm, um, lm);
 		stalled = setInterval(generalState, 30);
-		takeDamage();
+		takeDamage(20);
 	}
 	else {
 		weCruisin = false;

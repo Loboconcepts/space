@@ -482,10 +482,10 @@
 		return name.toUpperCase();
 	};
 
-	function takeDamage(){
+	function takeDamage(howMuch){
 		clearInterval(stalled);
 		var c = 1;
-		inventory[0] = inventory[0] - 20;
+		inventory[0] = inventory[0] - howMuch;
 		disableButtons(true);
 		var movement = setInterval(function() {
 			c = c+1;
