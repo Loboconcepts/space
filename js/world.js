@@ -1,7 +1,7 @@
 var worldArray;
 // Size of the universe
 // x=101
-var x = 101;
+var x = (Math.floor(Math.random()*85)+20)
 // Density of the universe
 var rarityValue = 131;
 //142516
