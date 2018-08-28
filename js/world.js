@@ -1,10 +1,11 @@
 var worldArray;
 // Size of the universe
+// x=101
 var x = 101;
 // Density of the universe
 var rarityValue = 131;
-//938792
-var currentLocation = 142516;
+//142516
+var currentLocation = x*x;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -1475,7 +1476,6 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			drawBlackHole(posNum,xPos,yPos,size);
 			break;
 		default: 
-			console.log(posNum);
 			break;
 	};
 	if (oldPlanets.length < 19) {oldPlanets.push(new SpaceObject(posNum,xPos,yPos,size,actPos));};

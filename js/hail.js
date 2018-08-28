@@ -151,6 +151,13 @@ function conversation(ui) {
 			}
 			else {alienReply("We have already completed our trade.")}
 			break;
+		case "check inventory": case "inventory":
+			computerReply("SOLAR ENERGY: " + inventory[0] + "%");
+			computerReply("IRON OXIDE: " + inventory[1], 1700);
+			computerReply("HYDROCARBON: " + inventory[2], 2700);
+			computerReply("HYDROXIDE: " + inventory[3], 3700);
+			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
+			break;
 		case "fire":
 			if (!weCruisin) {
 				alienReply("NO!", 200);
@@ -185,7 +192,7 @@ function offer() {
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
 		case (1):case (6):
-			dealOrNoDeal.push("HYDORCARBON");
+			dealOrNoDeal.push("HYDROCARBON");
 			break;
 		case (2):case (7):
 			dealOrNoDeal.push("HYDROXIDE");
@@ -203,7 +210,7 @@ function offer() {
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
 		case (1):case (6):
-			dealOrNoDeal.push("HYDORCARBON");
+			dealOrNoDeal.push("HYDROCARBON");
 			break;
 		case (2):case (7):
 			dealOrNoDeal.push("HYDROXIDE");
@@ -235,10 +242,10 @@ function trading(ui) {
 						inventory[1] = inventory[1] - dealOrNoDeal[0];
 					};
 				break;
-				case "HYDORCARBON":
+				case "HYDROCARBON":
 					if (inventory[2] < dealOrNoDeal[0]) {
 						currentlyTrading = false;
-						return alienReply("You do not have enough HYDORCARBON.");
+						return alienReply("You do not have enough HYDROCARBON.");
 					}
 					else {
 						inventory[2] = inventory[2] - dealOrNoDeal[0];
@@ -272,7 +279,7 @@ function trading(ui) {
 				case "IRON OXIDE":
 					inventory[1] = inventory[1] + dealOrNoDeal[2];
 				break;
-				case "HYDORCARBON":
+				case "HYDROCARBON":
 					inventory[2] = inventory[2] + dealOrNoDeal[2];
 				break;
 				case "HYDROXIDE":
@@ -300,6 +307,13 @@ function trading(ui) {
 			else {
 				computerReply("Ignored");
 			}
+			break;
+		case "check inventory": case "inventory":
+			computerReply("SOLAR ENERGY: " + inventory[0] + "%");
+			computerReply("IRON OXIDE: " + inventory[1], 1700);
+			computerReply("HYDROCARBON: " + inventory[2], 2700);
+			computerReply("HYDROXIDE: " + inventory[3], 3700);
+			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 			break;
 		case "yr":case "yaw right":
 			if (!weCruisin && !isLanded) {
