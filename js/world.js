@@ -21,7 +21,7 @@ var um;
 var fm;
 var lm;
 var weCruisin = false;
-var collideableObjects = ["a","z","x","d"];
+var collideableObjects = ["a","z","x"];
 
 // Disable scrolling.
 document.ontouchmove = function (e) {

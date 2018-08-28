@@ -291,6 +291,13 @@
 			case "solar energy": case "energy":
 				computerReply("SOLAR ENERGY: " + inventory[0] + "%");
 				break;
+			case "check inventory": case "inventory":
+				computerReply("SOLAR ENERGY: " + inventory[0] + "%");
+				computerReply("IRON OXIDE: " + inventory[1], 1700);
+				computerReply("HYDROCARBON: " + inventory[2], 2700);
+				computerReply("HYDROXIDE: " + inventory[3], 3700);
+				computerReply("ETERNITY ORBS: " + inventory[4], 4700);
+				break;
 			case "fire":
 				if (!weCruisin) {
 					solarBlaster();
@@ -370,27 +377,29 @@
 		}
 	};
 	function harvestResources() {
-	if (harvestedLocations.indexOf(currentLocation.toString(36)) == -1){
-		if (rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[1] && rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[2]) {
-				harvestedLocations.push(currentLocation.toString(36));
-				if (rgbGenerateFromCurPos(currentLocation)[0] > 200) {inventory[1] = inventory[1] + (Math.floor(Math.random() * 9) + 15);return computerReply("IRON OXIDE: " + inventory[1]);}
-				else if (rgbGenerateFromCurPos(currentLocation)[0] > 110) {inventory[1] = inventory[1] + (Math.floor(Math.random() * 9) +9);return computerReply("IRON OXIDE: " + inventory[1]);}
-				else {inventory[1] = inventory[1] + (Math.floor(Math.random() * 9) + 3);return computerReply("IRON OXIDE: " + inventory[1]);};
-			}
-			else if (rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[2]) {
-				harvestedLocations.push(currentLocation.toString(36));
-				if (rgbGenerateFromCurPos(currentLocation)[1] > 200) {inventory[2] = inventory[2] + (Math.floor(Math.random() * 9) + 15); return computerReply("HYDROCARBON: " + inventory[2]);}
-				else if (rgbGenerateFromCurPos(currentLocation)[1] > 110) {inventory[2] = inventory[2] + (Math.floor(Math.random() * 9) + 9); return computerReply("HYDROCARBON: " + inventory[2]);}
-				else {inventory[2] = inventory[2] + (Math.floor(Math.random() * 9) + 3); return computerReply("HYDROCARBON: " + inventory[2]);};
-			}
-			else if (rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[1]) {
-				harvestedLocations.push(currentLocation.toString(36));
-				if (rgbGenerateFromCurPos(currentLocation)[2] > 200) {inventory[3] = inventory[3] + (Math.floor(Math.random() * 9) + 15); return computerReply("HYDROXIDE: " + inventory[3]);}
-				else if (rgbGenerateFromCurPos(currentLocation)[2] > 110) {inventory[3] = inventory[3] + (Math.floor(Math.random() * 9) + 9); return computerReply("HYDROXIDE: " + inventory[3]);}
-				else {inventory[3] = inventory[3] + (Math.floor(Math.random() * 9) + 3); return computerReply("HYDROXIDE: " + inventory[3]);};
-			}
-			else {harvestedLocations.push(currentLocation.toString(36));inventory[4] = inventory[4] + 1;return computerReply("ETERNITY ORB: " + inventory[4]);};}
-		else {computerReply("Planet fully harvested.");};
+		var increase = "";
+		if (harvestedLocations.indexOf(currentLocation.toString(36)) == -1){
+			if (rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[1] && rgbGenerateFromCurPos(currentLocation)[0] > rgbGenerateFromCurPos(currentLocation)[2]) {
+					harvestedLocations.push(currentLocation.toString(36));
+					if (rgbGenerateFromCurPos(currentLocation)[0] > 200) {increase = Math.floor(Math.random() * 9) + 30; inventory[1] = inventory[1] + increase;return computerReply("IRON OXIDE: " + increase + " (" + inventory[1] + ").");}
+					else if (rgbGenerateFromCurPos(currentLocation)[0] > 110) {increase = Math.floor(Math.random() * 9) + 18;inventory[1] = inventory[1] + increase;return computerReply("IRON OXIDE: " + increase + " (" + inventory[1] + ").");}
+					else {increase = Math.floor(Math.random() * 9) + 6;inventory[1] = inventory[1] + increase;return computerReply("IRON OXIDE: " + increase + " (" + inventory[1] + ").");};
+				}
+				else if (rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[1] > rgbGenerateFromCurPos(currentLocation)[2]) {
+					harvestedLocations.push(currentLocation.toString(36));
+					if (rgbGenerateFromCurPos(currentLocation)[1] > 200) {increase = Math.floor(Math.random() * 9) + 30;inventory[2] = inventory[2] + increase; return computerReply("HYDROCARBON: " + increase + " (" + inventory[2] + ").");}
+					else if (rgbGenerateFromCurPos(currentLocation)[1] > 110) {increase = Math.floor(Math.random() * 9) + 18;inventory[2] = inventory[2] + increase; return computerReply("HYDROCARBON: " + increase + " (" + inventory[2] + ").");}
+					else {increase = Math.floor(Math.random() * 9) + 6;inventory[2] = inventory[2] + increase; return computerReply("HYDROCARBON: " + increase + " (" + inventory[2] + ").");};
+				}
+				else if (rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[0] && rgbGenerateFromCurPos(currentLocation)[2] > rgbGenerateFromCurPos(currentLocation)[1]) {
+					harvestedLocations.push(currentLocation.toString(36));
+					if (rgbGenerateFromCurPos(currentLocation)[2] > 200) {increase = Math.floor(Math.random() * 9) + 30;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[3] + ").");}
+					else if (rgbGenerateFromCurPos(currentLocation)[2] > 110) {increase = Math.floor(Math.random() * 9) + 18;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[2] + ").");}
+					else {increase = Math.floor(Math.random() * 9) + 6;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[3] + ").");};
+				}
+				else {harvestedLocations.push(currentLocation.toString(36));inventory[4] = inventory[4] + 1;return computerReply("ETERNITY ORB: " + inventory[4]);};}
+			else {computerReply("Planet fully harvested.");
+		};
 	};
 
 	function destroyObject(dx) {
@@ -468,7 +477,7 @@
 				return "Planet is primarily HYDROXIDE.";
 			}
 			else {
-				return "Unable to accurately scan.";
+				return "Sensors blocked by strange radiation.";
 			}
 		}
 		

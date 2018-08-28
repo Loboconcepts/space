@@ -179,7 +179,7 @@ var dealOrNoDeal = [];
 
 function offer() {
 	dealOrNoDeal = [];
-	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2])+1))*12)
+	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2])+1))*8)
 	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1]) {
 		case (0):case (5):
 			dealOrNoDeal.push("IRON OXIDE");
@@ -197,7 +197,7 @@ function offer() {
 			dealOrNoDeal.push("ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE");
 			break;
 	};
-	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-3])+1))*13)
+	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-3])+1))*9)
 	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2]) {
 		case (0):case (5):
 			dealOrNoDeal.push("IRON OXIDE");
