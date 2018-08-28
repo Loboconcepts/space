@@ -987,6 +987,7 @@ function autoAccel(intFunc) {
 			drawField(currentLocation, fm, um, lm);
 			stalled = setInterval(generalState, 30);
 			takeDamage(20);
+			computerReply("Solar energy: " + inventory[0] + "%",100);
 			return cruiseControl = false;
 		}
 		else {
@@ -1004,6 +1005,7 @@ function autoAccel(intFunc) {
 		drawField(currentLocation, fm, um, lm);
 		stalled = setInterval(generalState, 30);
 		takeDamage(20);
+		computerReply("Solar energy: " + inventory[0] + "%",100);
 	}
 	else {
 		weCruisin = false;

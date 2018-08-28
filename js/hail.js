@@ -115,6 +115,9 @@ function conversation(ui) {
 		case "where am i":case "where are we":
 			alienReply("In the galaxy.");
 			break;
+		case "thank you":case "thanks":
+			alienReply("You're welcome.");
+			break;
 		case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
 			alienReply(timeOfDay() + ".");
 			break;
@@ -141,18 +144,23 @@ function conversation(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case (ui.toLowerCase().replace(/\?|\!|\./g,'').match(/\btrade\b/) || {}).input:
-			offer();
-			alienReply("Yes. I desire " + dealOrNoDeal[0] + " " + dealOrNoDeal[1] + " for " + dealOrNoDeal[2] + " " + dealOrNoDeal[3]);
-			currentlyTrading = true;
+			if (harvestedLocations.indexOf(alienLocation.toString(36)) == -1) {
+				offer();
+				alienReply("I require " + dealOrNoDeal[0] + " " + dealOrNoDeal[1] + " for " + dealOrNoDeal[2] + " " + dealOrNoDeal[3]);
+				currentlyTrading = true;	
+			}
+			else {alienReply("We have already completed our trade.")}
 			break;
 		case "fire":
 			if (!weCruisin) {
+				alienReply("NO!", 200);
+				takeDamage(20);
 				alienConversation = false;
 				alienReply("Damn you.");
 				solarBlaster();
 				destroyObject(direction);
 				inventory[0] = inventory[0] - 5;
-				computerReply("Solar energy: " + inventory[0] + "%",200);
+				computerReply("Solar energy: " + inventory[0] + "%",2700);
 			}
 			else {
 				computerReply("Error. Disable cruise control first.");
@@ -211,11 +219,76 @@ function offer() {
 	if (dealOrNoDeal[1] == dealOrNoDeal[3]) {dealOrNoDeal.splice(1 , 1, "SOLAR ENERGY");};
 	if (dealOrNoDeal[3] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal[0]*2;dealOrNoDeal.splice(2 , 1, 1);};
 	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(2 , 1, "");};
+	if (dealOrNoDeal[1] == "ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE") {dealOrNoDeal.splice(0 , 1, "");};
 	if (dealOrNoDeal[1] == "SOLAR ENERGY") {dealOrNoDeal.splice(0 , 1, 95);};
 };
 
 function trading(ui) {
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
+		case "yes":case "okay":case "deal":case "agreed":case "sure":case "fine":
+			switch (dealOrNoDeal[1]) {
+				case "IRON OXIDE":
+					if (inventory[1] < dealOrNoDeal[0]) {
+						currentlyTrading = false;
+						return alienReply("You do not have enough IRON OXIDE.");
+					}
+					else {
+						inventory[1] = inventory[1] - dealOrNoDeal[0];
+					};
+				break;
+				case "HYDORCARBON":
+					if (inventory[2] < dealOrNoDeal[0]) {
+						currentlyTrading = false;
+						return alienReply("You do not have enough HYDORCARBON.");
+					}
+					else {
+						inventory[2] = inventory[2] - dealOrNoDeal[0];
+					};
+				break;
+				case "HYDROXIDE":
+					if (inventory[3] < dealOrNoDeal[0]) {
+						currentlyTrading = false;
+						return alienReply("You do not have enough HYDROXIDE.");
+					}
+					else {
+						inventory[3] = inventory[3] - dealOrNoDeal[0];
+					};
+				break;
+				case "SOLAR ENERGY":
+					if (inventory[0] < dealOrNoDeal[0]) {
+						currentlyTrading = false;
+						return alienReply("You do not have enough SOLAR ENERGY.");
+					}
+					else {
+						inventory[0] = inventory[0] - dealOrNoDeal[0];
+					};
+				break;
+				case "ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE":
+					inventory[1] = 0;
+					inventory[2] = 0;
+					inventory[3] = 0;
+				break;
+			}
+			switch (dealOrNoDeal[3]) {
+				case "IRON OXIDE":
+					inventory[1] = inventory[1] + dealOrNoDeal[2];
+				break;
+				case "HYDORCARBON":
+					inventory[2] = inventory[2] + dealOrNoDeal[2];
+				break;
+				case "HYDROXIDE":
+					inventory[3] = inventory[3] + dealOrNoDeal[2];
+				break;
+				case "ETERNITY ORB":
+					inventory[4] = inventory[4] + dealOrNoDeal[2];
+				break;
+				case "FOR FREE OR ELSE":
+				break;
+			}
+			harvestedLocations.push(alienLocation.toString(36));
+			currentlyTrading = false;
+			alienReply("Thank you.");
+			break;
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {
 				alienReply("Farewell");
@@ -272,22 +345,41 @@ function trading(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case "goodbye":case "bye":case "so long":case "fare well":case "farewell":case "signing off":case "end":case "stop":
-			alienReply("Farewell.");
-			alienConversation = false;
-			currentlyTrading = false;
+			if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {
+				alienReply("Then die.");
+				takeDamage(20);
+				alienConversation = false;
+				currentlyTrading = false;
+			}
+			else {
+				alienReply("Farewell.");
+				alienConversation = false;
+				currentlyTrading = false;
+			};
 			break;
-		case "nevermind":
-			alienReply("Okay.");
+		case "nevermind":case "no":case "not right now":
+			if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {
+				alienReply("Then die.");
+				takeDamage(20);
+				computerReply("Solar energy: " + inventory[0] + "%",200);
+				alienConversation = false;
+				currentlyTrading = false;
+			}
+			else {
+				alienReply("Okay.");	
+			};
 			currentlyTrading = false;
 			break;
 		case "fire":
+			alienReply("NO!", 200);
+			takeDamage(20);
 			alienConversation = false;
 			currentlyTrading = false;
 			alienReply("Damn you.");
 			solarBlaster();
 			destroyObject(direction);
 			inventory[0] = inventory[0] - 5;
-			computerReply("Solar energy: " + inventory[0] + "%",200);
+			computerReply("Solar energy: " + inventory[0] + "%",2700);
 			break;
 		case "":
 			break;
