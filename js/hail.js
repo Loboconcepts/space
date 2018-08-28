@@ -3,7 +3,7 @@ var alienLocation;
 function alienReply(reply, time) {
 		if (!time) {time = 1000;};
 		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += "<span style='color:#ff0000;'>" + reply + "</span><br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
-	}
+	};
 
 function hail() {
 	switch (direction) {
@@ -11,7 +11,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -19,7 +19,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -27,7 +27,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -35,7 +35,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -43,7 +43,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -51,16 +51,16 @@ function hail() {
 			var xi = 0;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); console.log(alienLocation); alienConversation = true;return alienReply("Greetings.");}
+				else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); alienConversation = true;return alienReply("Greetings.");}
 				else {xi = xi + 1;}
 			}
 			break;
 		default:
 			return computerReply("Error. Nothing within hailing range.");
 			break;
-	}
+	};
 	return computerReply("Error. Nothing within hailing range.");
-}
+};
 
 function conversation(ui) {
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
@@ -115,17 +115,14 @@ function conversation(ui) {
 		case "where am i":case "where are we":
 			alienReply("In the galaxy.");
 			break;
-		case "help":case "controls":case "what":case "instructions":case "manual":case "commands":case "nav commands":
-			alienReply("How can I be of assistance?");
-			break;
 		case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
-			alienReply(timeOfDay());
+			alienReply(timeOfDay() + ".");
 			break;
 		case "what is this":case "who are you":
 			alienReply("I am an alien.");
 			break;
 		case "what is this":case "who are you":
-			alienReply("I am an alien.");
+			alienReply("I am an ally.");
 			break;
 		case "thanks":case "thanks you":case "okay thanks":
 			alienReply("You're welcome.");
@@ -144,7 +141,8 @@ function conversation(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case (ui.toLowerCase().replace(/\?|\!|\./g,'').match(/\btrade\b/) || {}).input:
-			alienReply("Yes.");
+			offer();
+			alienReply("Yes. I desire " + dealOrNoDeal[0] + " " + dealOrNoDeal[1] + " for " + dealOrNoDeal[2] + " " + dealOrNoDeal[3]);
 			currentlyTrading = true;
 			break;
 		case "fire":
@@ -167,8 +165,54 @@ function conversation(ui) {
 			break;
 		default:
 			alienReply("I don't understand.");
-	}
-}
+	};
+};
+
+var dealOrNoDeal = [];
+
+function offer() {
+	dealOrNoDeal = [];
+	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2])+1))*12)
+	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1]) {
+		case (0):case (5):
+			dealOrNoDeal.push("IRON OXIDE");
+			break;
+		case (1):case (6):
+			dealOrNoDeal.push("HYDORCARBON");
+			break;
+		case (2):case (7):
+			dealOrNoDeal.push("HYDROXIDE");
+			break;
+		case (3):case (8):
+			dealOrNoDeal.push("SOLAR ENERGY");
+			break;
+		case (4):case (9):
+			dealOrNoDeal.push("ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE");
+			break;
+	};
+	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-3])+1))*13)
+	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2]) {
+		case (0):case (5):
+			dealOrNoDeal.push("IRON OXIDE");
+			break;
+		case (1):case (6):
+			dealOrNoDeal.push("HYDORCARBON");
+			break;
+		case (2):case (7):
+			dealOrNoDeal.push("HYDROXIDE");
+			break;
+		case (3):case (8):
+			dealOrNoDeal.push("ETERNITY ORB");
+			break;
+		case (4):case (9):
+			dealOrNoDeal.push("FOR FREE OR ELSE");
+			break;
+	};
+	if (dealOrNoDeal[1] == dealOrNoDeal[3]) {dealOrNoDeal.splice(1 , 1, "SOLAR ENERGY");};
+	if (dealOrNoDeal[3] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal[0]*2;dealOrNoDeal.splice(2 , 1, 1);};
+	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(2 , 1, "");};
+	if (dealOrNoDeal[1] == "SOLAR ENERGY") {dealOrNoDeal.splice(0 , 1, 95);};
+};
 
 function trading(ui) {
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
@@ -249,5 +293,5 @@ function trading(ui) {
 			break;
 		default:
 			alienReply("I do not understand.");
-	}
-}
+	};
+};
