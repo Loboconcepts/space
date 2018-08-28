@@ -21,6 +21,7 @@ var um;
 var fm;
 var lm;
 var weCruisin = false;
+var collideableObjects = ["a","z","x","d"];
 
 // Disable scrolling.
 document.ontouchmove = function (e) {
@@ -1024,7 +1025,7 @@ function autoAccel(intFunc) {
 			computerReply("Error. Collision course detected.");
 			return cruiseControl = false;
 		}
-		else if (worldArray[currentLocation-1] == "a") {
+		else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 			weCruisin = false;
 			staticArt();
 			drawField(currentLocation, fm, um, lm);
@@ -1042,7 +1043,7 @@ function autoAccel(intFunc) {
 			return;
 		}
 	}
-	else if (worldArray[currentLocation-1] == "a") {
+	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 		weCruisin = false;
 		staticArt();
 		drawField(currentLocation, fm, um, lm);

@@ -399,49 +399,49 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return;}
-					else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*x))) > -1) {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "S":
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return;}
-					else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*x))) > -1) {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "W":
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return;}
-					else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*z))) > -1) {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "E":
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return;}
-					else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*z))) > -1) {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "UP":
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return;}
-					else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*y))) > -1) {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "DOWN":
 				var xi = 0;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return;}
-					else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
-					else {xi = xi + 1;}
-				}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*y))) > -1) {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
+					else {xi = xi + 1;};
+				};
 				break;
 			default:
 				break;
@@ -491,21 +491,7 @@
 		return name.toUpperCase();
 	};
 
-	function takeDamage(howMuch){
-		clearInterval(stalled);
-		var c = 1;
-		inventory[0] = inventory[0] - howMuch;
-		disableButtons(true);
-		var movement = setInterval(function() {
-			c = c+1;
-		  	// ctx.clearRect(0,0,1000,1000);
-		  	ctx.beginPath();
-		  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
-			ctx.fillRect(0,0,1000,1000);
-			ctx.closePath();
-		  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
-		}, 15);
-	};
+
 	
 
 
