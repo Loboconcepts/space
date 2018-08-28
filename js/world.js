@@ -641,6 +641,49 @@ function solarBlaster(){
 	}, 15);
 };
 
+function takeDamage(howMuch){
+	clearInterval(stalled);
+	var c = 1;
+	inventory[0] = inventory[0] - howMuch;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		c = c+1;
+	  	// ctx.clearRect(0,0,1000,1000);
+	  	ctx.beginPath();
+	  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
+		ctx.fillRect(0,0,1000,1000);
+		ctx.closePath();
+	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	}, 15);
+};
+
+function dishAndTakeDamageDogfight(howMuch) {
+	clearInterval(stalled);
+	var c = 1;
+	inventory[0] = inventory[0] - howMuch;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		c = c+1;
+		ctx.beginPath();
+		ctx.fillStyle = "rgba(150, 150, 255, .1)";
+		ctx.fillRect(0,0,1000,1000);
+		ctx.closePath();
+		ctx.beginPath();
+		ctx.fillStyle = "#ffff99";
+		ctx.strokeStyle = "#ff9999";
+		ctx.moveTo(0, 800);
+		ctx.lineTo(490,500);
+		ctx.lineTo(0,820);
+		ctx.moveTo(1000, 800);
+		ctx.lineTo(510,500);
+		ctx.lineTo(1000, 820);
+		ctx.fill();
+		ctx.stroke();
+		ctx.closePath();
+		if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	}, 15);
+};
+
 function launch(a){
 	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];

@@ -154,10 +154,9 @@ function conversation(ui) {
 		case "fire":
 			if (!weCruisin) {
 				alienReply("NO!", 200);
-				takeDamage(20);
+				dishAndTakeDamageDogfight(20);
 				alienConversation = false;
 				alienReply("Damn you.");
-				solarBlaster();
 				destroyObject(direction);
 				inventory[0] = inventory[0] - 5;
 				computerReply("Solar energy: " + inventory[0] + "%",2700);
@@ -371,12 +370,11 @@ function trading(ui) {
 			currentlyTrading = false;
 			break;
 		case "fire":
+			dishAndTakeDamageDogfight(20);
 			alienReply("NO!", 200);
-			takeDamage(20);
 			alienConversation = false;
 			currentlyTrading = false;
 			alienReply("Damn you.");
-			solarBlaster();
 			destroyObject(direction);
 			inventory[0] = inventory[0] - 5;
 			computerReply("Solar energy: " + inventory[0] + "%",2700);
