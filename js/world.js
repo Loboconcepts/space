@@ -1,11 +1,11 @@
 var worldArray;
 // Size of the universe
-// x=101
-var x = (Math.floor(Math.random()*85)+20)
+// x=(Math.floor(Math.random()*85)+20)
+var x = 101;
 // Density of the universe
 var rarityValue = 131;
-//142516
-var currentLocation = x*x;
+//x*x
+var currentLocation = 142516;
 var i = 0;
 var y = x*x;
 var z = 1;
