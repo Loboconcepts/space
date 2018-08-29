@@ -161,7 +161,7 @@ function conversation(ui) {
 		case "fire":
 			if (!weCruisin) {
 				alienReply("NO!", 200);
-				dishAndTakeDamageDogfight(20);
+				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 				alienConversation = false;
 				alienReply("Damn you.");
 				destroyObject(direction);
@@ -227,6 +227,7 @@ function offer() {
 	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(2 , 1, "");};
 	if (dealOrNoDeal[1] == "ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE") {dealOrNoDeal.splice(0 , 1, "");};
 	if (dealOrNoDeal[1] == "SOLAR ENERGY") {dealOrNoDeal.splice(0 , 1, 95);};
+	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(0 , 1, 50);};
 };
 
 function trading(ui) {
@@ -384,7 +385,7 @@ function trading(ui) {
 			currentlyTrading = false;
 			break;
 		case "fire":
-			dishAndTakeDamageDogfight(20);
+			dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 			alienReply("NO!", 200);
 			alienConversation = false;
 			currentlyTrading = false;

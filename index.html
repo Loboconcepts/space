@@ -105,9 +105,11 @@
 	var shipWare = [true,true,true,true];
 	user.addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
-			lastCommand.unshift(document.getElementById('user').value);
-			if (lastCommand.length>6) {
-				lastCommand.splice(-1,1);
+			if (lastCommand[0] != document.getElementById('user').value) {
+				lastCommand.unshift(document.getElementById('user').value);
+				if (lastCommand.length>6) {
+					lastCommand.splice(-1,1);
+				}
 			}
 			submitUserInput(document.getElementById('user').value);
 			commandChoice = -1;
@@ -383,7 +385,7 @@
 
 	function harvestRemains() {
 		var temp = Math.floor(Math.random() * 3) + 1;
-		var temp2 = Math.floor(Math.random() * 55) + 0;
+		var temp2 = Math.floor(Math.random() * 54) + 1;
 		var temp3;
 		inventory[temp] = inventory[temp] + temp2;
 		switch (temp) {
@@ -486,6 +488,7 @@
 		var tempArray;
 		tempArray = [worldArray.substring(0, where),worldArray.substring(where, where+1),worldArray.substring(where+1)];
 		tempArray.splice(1,1,withWhat);
+		oldPlanets = [];
 		return worldArray = tempArray.join("");
 	};
 
