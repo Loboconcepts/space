@@ -312,7 +312,9 @@
 				}
 				break;
 			case "mine":case "harvest":case "dig":
-				if (isLanded) {harvestResources();}else {computerReply("Error. Must be landed to harvest.");}
+				if (isLanded) {harvestResources();}
+				else if (worldArray[currentLocation-1] == "d") {harvestRemains();}
+				else {computerReply("Error. Must be landed to harvest.");};
 				break;
 			case "hail":
 				if (!weCruisin && !isLanded) {hail();}
@@ -378,6 +380,27 @@
 				break;
 		}
 	};
+
+	function harvestRemains() {
+		var temp = Math.floor(Math.random() * 3) + 1;
+		var temp2 = Math.floor(Math.random() * 55) + 0;
+		var temp3;
+		inventory[temp] = inventory[temp] + temp2;
+		switch (temp) {
+			case 1:
+				temp3 = "IRON OXIDE";
+				break;
+			case 2:
+				temp3 = "HYDROCARBON";
+				break;
+			case 3:
+				temp3 = "HYDROXIDE";
+				break;
+		}
+		computerReply(temp3 + ": " + temp2 + " (" + inventory[temp] + ").")
+		return spliceWorldArray(currentLocation-1,"1");
+	}
+
 	function harvestResources() {
 		var increase = "";
 		if (harvestedLocations.indexOf(currentLocation.toString(36)) == -1){
