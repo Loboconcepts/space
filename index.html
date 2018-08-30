@@ -93,17 +93,18 @@
 <script>
 	var lastCommand = [];
 	var commandChoice = -1;
-	var user = document.getElementById("user");
 	var cruiseControl = false;
 	var isLanded = false;
-	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
-	var inventory = [100,0,0,0,0];
 	var alienConversation = false;
 	var currentlyTrading = false;
 	var harvestedLocations = [];
+	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
+	var inventory = [100,0,0,0,0];
 	// [BLASTER, COMM, CRUISE CONTROL, SCANNER]
 	var shipWare = [true,true,true,true];
-	user.addEventListener("keyup", function(event) {event.preventDefault();
+	var goodOrEvil = -120;
+	var goodEvil = [false,false];
+	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
 			if (lastCommand[0] != document.getElementById('user').value) {
 				lastCommand.unshift(document.getElementById('user').value);
@@ -306,6 +307,7 @@
 				if (!weCruisin) {
 					solarBlaster();
 					destroyObject(direction);
+					didGoodOrEvil(0,50);
 					inventory[0] = inventory[0] - 5;
 					computerReply("SOLAR ENERGY: " + inventory[0] + "%",200);
 				}
@@ -326,7 +328,32 @@
 				break;
 			default:
 				computerReply("Does not compute.");
-		}
+		};
+	};
+
+	function didGoodOrEvil(good,evil) {
+		if (goodEvil[0] || goodEvil[1]) {
+			goodOrEvil = goodOrEvil + good - evil;
+			goodEvil = [false,false];	
+		};
+		switch (true) {
+			case goodOrEvil < -100:
+				return computerReply("Legends of your evil span galaxies...", 2700);
+				break;
+			case goodOrEvil < -50:
+				return computerReply("You've done terrible things...", 2700)
+				break;
+			case goodOrEvil > 50:
+				return computerReply("Your good deeds are known...", 2700)
+				break;
+			case goodOrEvil > 100:
+				return computerReply("Legends of your good span galaxies...", 2700)
+				break;
+			default:
+				return;
+				break;
+		};
+
 	};
 
 	function computerReply(reply, time) {
@@ -435,7 +462,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*x))) > -1) {return spliceWorldArray(currentLocation-(xi*x)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*x))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*x)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -443,7 +470,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*x))) > -1) {return spliceWorldArray(currentLocation+(xi*x)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*x))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*x)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -451,7 +478,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*z))) > -1) {return spliceWorldArray(currentLocation-(xi*z)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*z))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*z)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -459,7 +486,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*z))) > -1) {return spliceWorldArray(currentLocation+(xi*z)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*z))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*z)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -467,7 +494,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*y))) > -1) {return spliceWorldArray(currentLocation-(xi*y)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*y))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*y)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -475,7 +502,7 @@
 				var xi = 0;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*y))) > -1) {return spliceWorldArray(currentLocation+(xi*y)-1,"d")}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*y))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*y)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;

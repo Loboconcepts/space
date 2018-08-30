@@ -646,7 +646,7 @@ function solarBlaster(){
 function takeDamage(howMuch){
 	clearInterval(stalled);
 	var c = 1;
-	inventory[0] = inventory[0] - howMuch;
+	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -662,7 +662,7 @@ function takeDamage(howMuch){
 function dishAndTakeDamageDogfight(howMuch) {
 	clearInterval(stalled);
 	var c = 1;
-	inventory[0] = inventory[0] - howMuch;
+	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -726,7 +726,7 @@ function accelerate(){
 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	// drawField(currentLocation, fm, um, lm);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
-	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15]
+	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
 	var newYPos;
 	var newXPos;
 	var c = 1;
