@@ -101,8 +101,8 @@
 	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 	var inventory = [100,0,0,0,0];
 	// [BLASTER, COMM, CRUISE CONTROL, SCANNER]
-	var shipWare = [true,true,true,true];
-	var goodOrEvil = -120;
+	var shipWare = [false,true,true,true];
+	var goodOrEvil = 0;
 	var goodEvil = [false,false];
 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
 		if (event.keyCode === 13) {
@@ -266,7 +266,7 @@
 				computerReply("We are currently at galacube " + currentLocation);
 				break;
 			case "help":case "controls":case "what":case "instructions":case "manual":case "commands":case "nav commands":
-				computerReply("nav commands: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH, FIRE, HAIL. Most commands have obvious shortcuts.");
+				computerReply("nav commands: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH, SCAN, FIRE, HAIL, HARVEST. Most commands have obvious shortcuts.");
 				break;
 			case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
 				computerReply(timeOfDay() + " Commander.");
@@ -283,6 +283,19 @@
 				break;
 			case "thanks":case "thanks you":case "okay thanks":
 				computerReply("You're welcome.");
+				break;
+			case "repair gun":case "repair guns":case "repair blaster":case "repair blasters":case "repair weapon":case "repair weapons":
+				if (shipWare[0]) {
+					computerReply("ERROR. Ship BLASTER has no need for repair.");	
+				}
+				else if (inventory[4] < 2) {
+					computerReply("ERROR. BLASTER repair requires 2 ETERNITY ORBS.");
+				}
+				else {
+					computerReply("BLASTER repaired.");
+					shipWare[0] = true;
+					inventory[4] = inventory[4] - 2;
+				};
 				break;
 			case "open the pod bay doors":case "open the pod bay doors hal":
 				computerReply("I'm afraid I can't do that, Commander.");
@@ -304,25 +317,28 @@
 				computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 				break;
 			case "fire":
-				if (!weCruisin) {
-					solarBlaster();
-					destroyObject(direction);
-					didGoodOrEvil(0,50);
-					inventory[0] = inventory[0] - 5;
-					computerReply("SOLAR ENERGY: " + inventory[0] + "%",200);
+				if (weCruisin) {
+					computerReply("ERROR. Disable cruise control first.");
+				}
+				else if (!shipWare[0]) {
+					computerReply("ERROR. BLASTER requires repair.");
 				}
 				else {
-					computerReply("Error. Disable cruise control first.");
-				}
+					solarBlaster();
+					destroyObject(direction);
+					didGoodOrEvil(0,70);
+					inventory[0] = inventory[0] - 5;
+					computerReply("SOLAR ENERGY: " + inventory[0] + "%",200);
+				};
 				break;
 			case "mine":case "harvest":case "dig":
 				if (isLanded) {harvestResources();}
 				else if (worldArray[currentLocation-1] == "d") {harvestRemains();}
-				else {computerReply("Error. Must be landed to harvest.");};
+				else {computerReply("ERROR. Must be landed to harvest.");};
 				break;
 			case "hail":
 				if (!weCruisin && !isLanded) {hail();}
-				else {computerReply("Error.");};
+				else {computerReply("ERROR.");};
 				break;
 			case "":
 				break;
@@ -353,7 +369,6 @@
 				return;
 				break;
 		};
-
 	};
 
 	function computerReply(reply, time) {

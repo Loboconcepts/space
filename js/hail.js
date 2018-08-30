@@ -11,7 +11,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -19,7 +19,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -27,7 +27,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -35,7 +35,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -43,7 +43,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -51,7 +51,7 @@ function hail() {
 			var xi = 0;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); if (goodOrEvil < 100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -159,18 +159,22 @@ function conversation(ui) {
 			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 			break;
 		case "fire":
-			if (!weCruisin) {
-				alienReply("NO!", 200);
+			if (weCruisin) {
+				computerReply("ERROR. Disable cruise control first.");
+			}
+			else if (!shipWare[0]) {
+				computerReply("ERROR. BLASTER requires repair.");
+			}
+			else {
+				alienReply("Glorious combat it is then!", 200);
 				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 				alienConversation = false;
-				alienReply("Damn you.");
+				alienReply("Well fought.");
 				destroyObject(direction);
 				inventory[0] = inventory[0] - 5;
 				computerReply("Solar energy: " + inventory[0] + "%",2700);
-			}
-			else {
-				computerReply("Error. Disable cruise control first.");
-			}
+				didGoodOrEvil(0,15);
+			};
 			break;
 		case "hail":
 			alienReply("We are already talking.");
@@ -218,16 +222,21 @@ function offer() {
 		case (3):case (8):
 			dealOrNoDeal.push("ETERNITY ORB");
 			break;
-		case (4):case (9):
-			dealOrNoDeal.push("FOR FREE OR ELSE");
+		case (4):
+			dealOrNoDeal.push("LETTING YOU PASS UNHARMED");
+			break;
+		case (9):
+			dealOrNoDeal.push("MY UNDYING GRATITUDE");
 			break;
 	};
 	if (dealOrNoDeal[1] == dealOrNoDeal[3]) {dealOrNoDeal.splice(1 , 1, "SOLAR ENERGY");};
 	if (dealOrNoDeal[3] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal[0]*2;dealOrNoDeal.splice(2 , 1, 1);};
-	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(2 , 1, "");};
+	if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {dealOrNoDeal.splice(2 , 1, "");};
+	if (dealOrNoDeal[3] == "MY UNDYING GRATITUDE") {dealOrNoDeal.splice(2 , 1, "");};
 	if (dealOrNoDeal[1] == "ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE") {dealOrNoDeal.splice(0 , 1, "");};
 	if (dealOrNoDeal[1] == "SOLAR ENERGY") {dealOrNoDeal.splice(0 , 1, 95);};
-	if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {dealOrNoDeal.splice(0 , 1, 50);};
+	if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {dealOrNoDeal.splice(0 , 1, 50);};
+	if (dealOrNoDeal[3] == "MY UNDYING GRATITUDE") {dealOrNoDeal.splice(0 , 1, 50);};
 };
 
 function trading(ui) {
@@ -279,17 +288,31 @@ function trading(ui) {
 			switch (dealOrNoDeal[3]) {
 				case "IRON OXIDE":
 					inventory[1] = inventory[1] + dealOrNoDeal[2];
+					goodEvil = [true,false];
+					didGoodOrEvil(5,0);
 				break;
 				case "HYDROCARBON":
 					inventory[2] = inventory[2] + dealOrNoDeal[2];
+					goodEvil = [true,false];
+					didGoodOrEvil(5,0);
 				break;
 				case "HYDROXIDE":
 					inventory[3] = inventory[3] + dealOrNoDeal[2];
+					goodEvil = [true,false];
+					didGoodOrEvil(5,0);
 				break;
 				case "ETERNITY ORB":
 					inventory[4] = inventory[4] + dealOrNoDeal[2];
+					goodEvil = [true,false];
+					didGoodOrEvil(5,0);
 				break;
-				case "FOR FREE OR ELSE":
+				case "LETTING YOU PASS UNHARMED":
+					goodEvil = [true,false];
+					didGoodOrEvil(5,0);
+				break;
+				case "MY UNDYING GRATITUDE":
+					goodEvil = [true,false];
+					didGoodOrEvil(20,0);
 				break;
 			}
 			harvestedLocations.push(alienLocation.toString(36));
@@ -359,7 +382,7 @@ function trading(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case "goodbye":case "bye":case "so long":case "fare well":case "farewell":case "signing off":case "end":case "stop":
-			if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {
+			if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {
 				alienReply("Then die.");
 				takeDamage(20);
 				alienConversation = false;
@@ -372,7 +395,7 @@ function trading(ui) {
 			};
 			break;
 		case "nevermind":case "no":case "not right now":
-			if (dealOrNoDeal[3] == "FOR FREE OR ELSE") {
+			if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {
 				alienReply("Then die.");
 				takeDamage(20);
 				computerReply("Solar energy: " + inventory[0] + "%",200);
@@ -385,14 +408,23 @@ function trading(ui) {
 			currentlyTrading = false;
 			break;
 		case "fire":
-			dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
-			alienReply("NO!", 200);
-			alienConversation = false;
-			currentlyTrading = false;
-			alienReply("Damn you.");
-			destroyObject(direction);
-			inventory[0] = inventory[0] - 5;
-			computerReply("Solar energy: " + inventory[0] + "%",2700);
+			if (weCruisin) {
+				computerReply("ERROR. Disable cruise control first.");
+			}
+			else if (!shipWare[0]) {
+				computerReply("ERROR. BLASTER requires repair.");
+			}
+			else {
+				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
+				alienReply("NO!", 200);
+				alienConversation = false;
+				currentlyTrading = false;
+				alienReply("Damn you.");
+				destroyObject(direction);
+				inventory[0] = inventory[0] - 5;
+				computerReply("Solar energy: " + inventory[0] + "%",2700);
+				if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {didGoodOrEvil(10,0);}else {didGoodOrEvil(0,50);};
+			};
 			break;
 		case "":
 			break;
