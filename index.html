@@ -45,20 +45,22 @@
 		@media only screen and (max-width: 500px) {
 			.row {
 				display: flex;
+				max-height: 30% !important;
 			}
 		    #shipView {
-		    	width:48% !important;
-		    	height:50% !important;
+		    	width:40% !important;
+		    	/*height:50% !important;*/
 		    	flex: 1;
 		    	padding: 1em;
 		    }
 		    #shipConsole {
-		    	width:48%;
-		    	height:auto;
-		    	max-height:auto;
+		    	/*width:48%;*/
 		    	flex: 1;
-		    	padding: 1em;
+		    	height: auto;
 		    	padding:2px;
+		    	overflow:scroll;
+		    	overflow-y: hidden;
+		    	background-color: #000000;
 		    }
 		}
 	   </style>

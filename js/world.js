@@ -25,9 +25,9 @@ var weCruisin = false;
 var collideableObjects = ["a","z","x"];
 
 // Disable scrolling.
-document.ontouchmove = function (e) {
-  e.preventDefault();
-}
+// document.ontouchmove = function (e) {
+//   e.preventDefault();
+// }
 
 function preventZoom(e) {
   var t2 = e.timeStamp;
