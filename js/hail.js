@@ -166,6 +166,7 @@ function conversation(ui) {
 				computerReply("ERROR. BLASTER requires repair.");
 			}
 			else {
+				soundEffect(138.6, 'sawtooth',1.5);
 				alienReply("Glorious combat it is then!", 200);
 				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 				alienConversation = false;

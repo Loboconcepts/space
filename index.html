@@ -301,7 +301,7 @@
 				break;
 			case "scan":
 				if (isLanded) {computerReply("Scanning...");computerReply(scanPlanet());}
-				else {scannerAnimation();scanUniverse();};
+				else {soundEffect(329.6,'triangle',3);scannerAnimation();scanUniverse();};
 				break;
 			case "thanks":case "thanks you":case "okay thanks":
 				computerReply("You're welcome.");
@@ -370,6 +370,7 @@
 					computerReply("ERROR. Check STATUS.");
 				}
 				else {
+					soundEffect(138.6, 'sawtooth',1.5);
 					solarBlasterAnimation();
 					destroyObject(direction);
 					didGoodOrEvil(0,70);
@@ -633,7 +634,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*x))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*x)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*x))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation-(xi*x)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -641,7 +642,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*x))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*x)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*x))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation+(xi*x)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -649,7 +650,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*z))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*z)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*z))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation-(xi*z)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -657,7 +658,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*z))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*z)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*z))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation+(xi*z)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -665,7 +666,7 @@
 				var xi = 1;
 				while (xi<3) {
 					if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*y))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation-(xi*y)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation-(xi*y))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation-(xi*y)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -673,7 +674,7 @@
 				var xi = 0;
 				while (xi<3) {
 					if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return;}
-					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*y))) > -1) {goodEvil = [false,true];return spliceWorldArray(currentLocation+(xi*y)-1,"d");}
+					else if (collideableObjects.indexOf(loopView(currentLocation+(xi*y))) > -1) {goodEvil = [false,true];soundEffect(50.6, 'sawtooth',2,400);return spliceWorldArray(currentLocation+(xi*y)-1,"d");}
 					else {xi = xi + 1;};
 				};
 				break;
@@ -753,8 +754,24 @@
 		}
 		return name.toUpperCase();
 	};
+	var context=new AudioContext();
+	var o=null;
+	var g=null;
+	function sound(frequency,type,duration){
+		o=context.createOscillator();
+		g=context.createGain();
+		o.type=type;
+		o.connect(g);
+		o.frequency.value=frequency;
+		g.connect(context.destination);
+		o.start(0);
+		g.gain.exponentialRampToValueAtTime(0.00001,context.currentTime+duration);
+	};
 
-
+	function soundEffect(frequency,type,duration,delay) {
+		if (!delay) {delay = 0;};
+		return setTimeout(function(){sound(frequency,type,duration)}, delay);
+	};
 	
 
 
