@@ -623,9 +623,7 @@ function solarBlaster(){
 	var c = 1;
 	disableButtons(true);
 	var movement = setInterval(function() {
-		
 		c = c+1;
-	  
 	  	ctx.beginPath();
 	  	ctx.fillStyle = "#ffff99";
 	  	ctx.strokeStyle = "#ff9999";
@@ -638,8 +636,57 @@ function solarBlaster(){
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-
 	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	}, 15);
+};
+
+function radar(){
+	clearInterval(stalled);
+	var c = 1;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		c = c+1;
+		ctx.clearRect(0,0,1000,1000);
+	  	staticArt();
+	  	drawField(currentLocation, fm, um, lm);
+	  	ctx.beginPath();
+	  	ctx.lineWidth=10-Math.floor(c/5);
+	  	ctx.fillStyle = "#ffff99";
+	  	ctx.strokeStyle = "#ff9999";
+		ctx.moveTo(100+c, 800-c);
+		ctx.quadraticCurveTo(500, 600-c, 900-c, 800-c);
+		ctx.moveTo(200+c, 700-c);
+		ctx.quadraticCurveTo(500, 600-c, 800-c, 700-c);
+		ctx.moveTo(100+c, 200+c);
+		ctx.quadraticCurveTo(500, 400+c, 900-c, 200+c);
+		ctx.moveTo(200+c, 300+c);
+		ctx.quadraticCurveTo(500, 400+c, 800-c, 300+c);
+		ctx.stroke();
+		ctx.closePath();
+	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	}, 15);
+};
+
+function scanner() {
+	clearInterval(stalled);
+	var c = 1;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		c = c+1;
+		ctx.clearRect(0,0,1000,1000);
+	  	staticArt();
+	  	drawField(currentLocation, fm, um, lm);
+	  	ctx.beginPath();
+	  	ctx.lineWidth=10-Math.floor(c/5);
+	  	ctx.fillStyle = "#ffff99";
+	  	ctx.strokeStyle = "#ff9999";
+		ctx.moveTo(0, 500-c);
+		ctx.quadraticCurveTo(500, 400-c, 1000, 500-c);
+		ctx.moveTo(0, 450-c);
+		ctx.quadraticCurveTo(500, 350-c, 1000, 450-c);
+		ctx.stroke();
+		ctx.closePath();
+	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 

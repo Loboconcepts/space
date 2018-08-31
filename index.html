@@ -66,7 +66,6 @@
 	   </style>
 </head>
 <body style="text-align:center;">
-
 	<div class="row">
 		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
 		<!-- <div id="compass"></div> -->
@@ -102,8 +101,8 @@
 	var harvestedLocations = [];
 	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 	var inventory = [100,0,0,0,0];
-	// [BLASTER, COMM, CRUISE CONTROL, SCANNER]
-	var shipWare = [false,false,true,true];
+	// [BLASTER, COMM, CRUISE CONTROL, SCANNER, SONAR]
+	var shipWare = [false,false,true,false,false];
 	var goodOrEvil = 0;
 	var goodEvil = [false,false];
 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
@@ -329,7 +328,8 @@
 			case "clear":
 				document.getElementById("shipConsole").innerHTML = "";
 				break;
-			case "sonar":
+			case "radar":
+				radar();
 				computerReply("Scanning...");
 				sonar();
 				break;
