@@ -779,32 +779,33 @@
 		}
 		return name.toUpperCase();
 	};
-	var context=new AudioContext();
-	var o=null;
-	var g=null;
-	function sound(frequency,type,duration,wv){
-		var waveArray = new Float32Array(5);
-		waveArray[0] = wv[0];
-		waveArray[1] = wv[1];
-		waveArray[2] = wv[2];
-		waveArray[3] = wv[3];
-		waveArray[4] = 0;
-		o=context.createOscillator();
-		g=context.createGain();
-		o.type=type;
-		o.connect(g);
-		o.frequency.value=frequency;
-		g.connect(context.destination);
-		o.start(0);
-		g.gain.setValueCurveAtTime(waveArray, context.currentTime, duration);
-	};
+	// var context=new AudioContext();
+	// var o=null;
+	// var g=null;
+	// function sound(frequency,type,duration,wv){
+	// 	var waveArray = new Float32Array(5);
+	// 	waveArray[0] = wv[0];
+	// 	waveArray[1] = wv[1];
+	// 	waveArray[2] = wv[2];
+	// 	waveArray[3] = wv[3];
+	// 	waveArray[4] = 0;
+	// 	o=context.createOscillator();
+	// 	g=context.createGain();
+	// 	o.type=type;
+	// 	o.connect(g);
+	// 	o.frequency.value=frequency;
+	// 	g.connect(context.destination);
+	// 	o.start(0);
+	// 	g.gain.setValueCurveAtTime(waveArray, context.currentTime, duration);
+	// };
 
-	function soundEffect(frequency,type,duration,wv,delay) {
-		if (!delay) {delay = 0;};
-		return setTimeout(function(){sound(frequency,type,duration,wv)}, delay);
+	// function soundEffect(frequency,type,duration,wv,delay) {
+	// 	if (!delay) {delay = 0;};
+	// 	return setTimeout(function(){sound(frequency,type,duration,wv)}, delay);
+	// };
+	function soundEffect() {
+		console.log("disabled");
 	};
-	
-
 
 var counts = {};
 
