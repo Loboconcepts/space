@@ -151,7 +151,7 @@ function conversation(ui) {
 			}
 			else {alienReply("We have already completed our trade.")}
 			break;
-		case "check inventory": case "inventory":
+		case "check inventory":case "inventory":case "inv":
 			computerReply("SOLAR ENERGY: " + inventory[0] + "%");
 			computerReply("IRON OXIDE: " + inventory[1], 1700);
 			computerReply("HYDROCARBON: " + inventory[2], 2700);
@@ -406,6 +406,13 @@ function trading(ui) {
 				alienReply("Okay.");	
 			};
 			currentlyTrading = false;
+			break;
+		case "check inventory":case "inventory":case "inv":
+			computerReply("SOLAR ENERGY: " + inventory[0] + "%");
+			computerReply("IRON OXIDE: " + inventory[1], 1700);
+			computerReply("HYDROCARBON: " + inventory[2], 2700);
+			computerReply("HYDROXIDE: " + inventory[3], 3700);
+			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 			break;
 		case "fire":
 			if (weCruisin) {
