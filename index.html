@@ -102,7 +102,7 @@
 	// [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 	var inventory = [100,0,0,0,0];
 	// [BLASTER, COMM, CRUISE CONTROL, SCANNER, SONAR]
-	var shipWare = [false,false,true,false,false];
+	var shipWare = [true,true,true,true,true];
 	var goodOrEvil = 0;
 	var goodEvil = [false,false];
 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
@@ -301,7 +301,7 @@
 				break;
 			case "scan":
 				if (isLanded) {computerReply("Scanning...");computerReply(scanPlanet());}
-				else {scanUniverse();};
+				else {scannerAnimation();scanUniverse();};
 				break;
 			case "thanks":case "thanks you":case "okay thanks":
 				computerReply("You're welcome.");
@@ -329,9 +329,9 @@
 				document.getElementById("shipConsole").innerHTML = "";
 				break;
 			case "radar":
-				radar();
+				radarAnimation();
 				computerReply("Scanning...");
-				sonar();
+				radar();
 				break;
 			case "solar energy": case "energy":
 				computerReply("SOLAR ENERGY: " + inventory[0] + "%");
@@ -370,7 +370,7 @@
 					computerReply("ERROR. Check STATUS.");
 				}
 				else {
-					solarBlaster();
+					solarBlasterAnimation();
 					destroyObject(direction);
 					didGoodOrEvil(0,70);
 					inventory[0] = inventory[0] - 5;
@@ -392,7 +392,6 @@
 				computerReply("Does not compute.");
 		};
 	};
-
 	function didGoodOrEvil(good,evil) {
 		if (goodEvil[0] || goodEvil[1]) {
 			goodOrEvil = goodOrEvil + good - evil;
@@ -416,11 +415,10 @@
 				break;
 		};
 	};
-
 	function computerReply(reply, time) {
 		if (!time) {time = 700;};
 		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += reply + "<br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
-	}
+	};
 	function scanUniverse() {
 		var xi = 1;
 		while (xi<5) {
@@ -482,7 +480,7 @@
 		};
 	};
 
-	function sonar() {
+	function radar() {
 		var xi = 1;
 		while (xi<10) {
 			switch (direction) {

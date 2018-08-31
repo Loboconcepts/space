@@ -618,7 +618,7 @@ function land(a){
 	}, 15);
 };
 
-function solarBlaster(){
+function solarBlasterAnimation(){
 	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
@@ -640,7 +640,7 @@ function solarBlaster(){
 	}, 15);
 };
 
-function radar(){
+function radarAnimation(){
 	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
@@ -651,23 +651,20 @@ function radar(){
 	  	drawField(currentLocation, fm, um, lm);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
-	  	ctx.fillStyle = "#ffff99";
-	  	ctx.strokeStyle = "#ff9999";
-		ctx.moveTo(100+c, 800-c);
-		ctx.quadraticCurveTo(500, 600-c, 900-c, 800-c);
-		ctx.moveTo(200+c, 700-c);
-		ctx.quadraticCurveTo(500, 600-c, 800-c, 700-c);
-		ctx.moveTo(100+c, 200+c);
-		ctx.quadraticCurveTo(500, 400+c, 900-c, 200+c);
-		ctx.moveTo(200+c, 300+c);
-		ctx.quadraticCurveTo(500, 400+c, 800-c, 300+c);
+	  	ctx.strokeStyle = "#aaaaff";
+		ctx.moveTo(100+(c*2), 800-Math.floor(c*3.5));
+		ctx.quadraticCurveTo(500, 600-Math.floor(c/10), 900-(c*2), 800-Math.floor(c*3.5));
+		ctx.moveTo(200+(c*2), 700-(c*2));
+		ctx.quadraticCurveTo(500, 600-Math.floor(c/5), 800-(c*2), 700-(c*2));
+		ctx.moveTo(300+(c*2), 650-Math.floor(c*1.3));
+		ctx.quadraticCurveTo(500, 600-Math.floor(c/3), 700-(c*2), 650-Math.floor(c*1.3));
 		ctx.stroke();
 		ctx.closePath();
 	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
-function scanner() {
+function scannerAnimation() {
 	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
@@ -678,13 +675,20 @@ function scanner() {
 	  	drawField(currentLocation, fm, um, lm);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
-	  	ctx.fillStyle = "#ffff99";
-	  	ctx.strokeStyle = "#ff9999";
-		ctx.moveTo(0, 500-c);
-		ctx.quadraticCurveTo(500, 400-c, 1000, 500-c);
-		ctx.moveTo(0, 450-c);
-		ctx.quadraticCurveTo(500, 350-c, 1000, 450-c);
+	  	ctx.strokeStyle = "#aaffaa";
+	  	ctx.moveTo(0, 750-Math.floor(c*1.3));
+		ctx.quadraticCurveTo(500, 650-Math.floor(c), 1000, 750-Math.floor(c*1.3));
+		ctx.moveTo(0, 700-Math.floor(c*1.1));
+		ctx.quadraticCurveTo(500, 620-Math.floor(c/4), 1000, 700-Math.floor(c*1.1));
 		ctx.stroke();
+		ctx.closePath();
+		ctx.beginPath();
+		ctx.fillStyle = "rgba(180,255,180,.5)";
+		ctx.moveTo(500,1000);
+		ctx.lineTo(100+(c*10),680-Math.floor(c));
+		ctx.quadraticCurveTo(250+(c*10),670-Math.floor(c),400+(c*10),660-Math.floor(c/2));
+		ctx.lineTo(500,1000);
+		ctx.fill();
 		ctx.closePath();
 	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
