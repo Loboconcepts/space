@@ -11,7 +11,6 @@ var thisManyChapters = 0;
 function beginStory(howManyChapters){
 	if (!howManyChapters) {howManyChapters = 0};
 	thisManyChapters = howManyChapters;
-	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
 	storyTime = true;
