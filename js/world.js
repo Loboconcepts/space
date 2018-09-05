@@ -1,28 +1,4 @@
-var worldArray;
-// Size of the universe
-// x=(Math.floor(Math.random()*85)+20)
-var x = 101;
-// Density of the universe
-var rarityValue = 131;
-//x*x
-var currentLocation = 142516;
-var i = 0;
-var y = x*x;
-var z = 1;
-var viewOrient = "BACK";
-var zAxis = ["UP","E","DOWN","W"];
-var yAxis = ["N","E","S","W"];
-var xAxis = ["UP","S","DOWN","N"];
-var direction = "N";
-var topfacing = "UP";
-var yawAxis;
-var rollAxis;
-var pitchAxis;
-var um;
-var fm;
-var lm;
-var weCruisin = false;
-var collideableObjects = ["a","z","x"];
+
 
 // Disable scrolling.
 // document.ontouchmove = function (e) {
@@ -56,6 +32,7 @@ canvas.style.width = "100%";
 canvas.style.maxWidth = "500px";
 canvas.style.height = "auto";
 canvas.style.maxHeight = "500px";
+canvas.style.backgroundColor = "#000000";
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
@@ -183,7 +160,6 @@ function cubeShipPositioning(direction, topfacing, pos, orient) {
 	// 	tableView("t2-1","&#9651;<br>&#8834;&#8890;&#8835;<br>&#9677;&#9677;&#9677;");
 	// 	tableView("t2-2",(pos + lm));
 	// }
-	staticArt();
 	// drawField(pos, fm, um, lm);
 	// drawShipConsole();
 	// console.log(currentLocation);
@@ -590,7 +566,7 @@ function move(a){
 			}
 		}
 		ctx.closePath();
-	  if (c > 75) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 75) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -636,7 +612,7 @@ function solarBlasterAnimation(){
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -647,7 +623,6 @@ function radarAnimation(){
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	staticArt();
 	  	drawField(currentLocation, fm, um, lm);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
@@ -660,7 +635,7 @@ function radarAnimation(){
 		ctx.quadraticCurveTo(500, 600-Math.floor(c/3), 700-(c*2), 650-Math.floor(c*1.3));
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -671,7 +646,6 @@ function scannerAnimation() {
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	staticArt();
 	  	drawField(currentLocation, fm, um, lm);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
@@ -690,7 +664,7 @@ function scannerAnimation() {
 		ctx.lineTo(500,1000);
 		ctx.fill();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -706,7 +680,7 @@ function takeDamage(howMuch){
 	  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
 		ctx.fillRect(0,0,1000,1000);
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -733,7 +707,7 @@ function dishAndTakeDamageDogfight(howMuch) {
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-		if (c > 20) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -756,7 +730,7 @@ function launch(a){
 		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12),currentLocation);
 		ctx.closePath();
 
-	  if (c > 255) clearInterval(movement),staticArt(),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
 	}, 15);
 };
 
@@ -1071,17 +1045,15 @@ function autoAccel(intFunc) {
 	if (cruiseControl) {
 		if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
 			weCruisin = false;
-			staticArt();
 			drawField(currentLocation, fm, um, lm);
-			stalled = setInterval(generalState, 30);
+			generalState();
 			computerReply("Error. Collision course detected.");
 			return cruiseControl = false;
 		}
 		else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 			weCruisin = false;
-			staticArt();
 			drawField(currentLocation, fm, um, lm);
-			stalled = setInterval(generalState, 30);
+			generalState();
 			takeDamage(20);
 			computerReply("Solar energy: " + inventory[0] + "%",100);
 			return cruiseControl = false;
@@ -1089,7 +1061,6 @@ function autoAccel(intFunc) {
 		else {
 			weCruisin = true;
 			clearInterval(intFunc);
-			staticArt();
 			drawField(currentLocation, fm, um, lm);
 			accelerate();
 			return;
@@ -1097,17 +1068,15 @@ function autoAccel(intFunc) {
 	}
 	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 		weCruisin = false;
-		staticArt();
 		drawField(currentLocation, fm, um, lm);
-		stalled = setInterval(generalState, 30);
+		generalState();
 		takeDamage(20);
 		computerReply("Solar energy: " + inventory[0] + "%",100);
 	}
 	else {
 		weCruisin = false;
-		staticArt();
 		drawField(currentLocation, fm, um, lm);
-		stalled = setInterval(generalState, 30);
+		generalState();
 	}
 };
 
@@ -1141,7 +1110,7 @@ function rotateShape(direction, rAxes, lr) {
 		ctx.translate(500,500);
 	 	ctx.rotate(direction * Math.PI / 180);
 		ctx.translate(-500,-500);
-	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),staticArt(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm);
+	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm);
 	}, 10);
 };
 
@@ -1192,10 +1161,10 @@ function rotateShape(direction, rAxes, lr) {
 	// 	ctx.closePath();
 // }
 
-function staticArt() {
-	ctx.rect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "#000000";
-	ctx.fill();
+// function staticArt() {
+	// ctx.rect(0, 0, canvas.width, canvas.height);
+	// ctx.fillStyle = "#000000";
+	// ctx.fill();
 
 	// Back items
 	// for (var i = 0; i < 3; i++) {
@@ -1212,24 +1181,24 @@ function staticArt() {
 	// }
 
 	//front
-	ctx.beginPath();
-	ctx.moveTo(50, 50);
-	ctx.lineTo(950, 50);
-	ctx.lineTo(950, 950);
-	ctx.lineTo(50, 950);
-	ctx.lineTo(50, 50);
-	ctx.moveTo(50, 350);
-	ctx.lineTo(950, 350);
-	ctx.moveTo(50, 650);
-	ctx.lineTo(950, 650);
-	ctx.moveTo(350, 50);
-	ctx.lineTo(350, 950);
-	ctx.moveTo(650, 50);
-	ctx.lineTo(650, 950);
-	ctx.strokeStyle = "#ffffff";
-	ctx.lineWidth = 2;
-	ctx.stroke();
-	ctx.closePath();
+	// ctx.beginPath();
+	// ctx.moveTo(50, 50);
+	// ctx.lineTo(950, 50);
+	// ctx.lineTo(950, 950);
+	// ctx.lineTo(50, 950);
+	// ctx.lineTo(50, 50);
+	// ctx.moveTo(50, 350);
+	// ctx.lineTo(950, 350);
+	// ctx.moveTo(50, 650);
+	// ctx.lineTo(950, 650);
+	// ctx.moveTo(350, 50);
+	// ctx.lineTo(350, 950);
+	// ctx.moveTo(650, 50);
+	// ctx.lineTo(650, 950);
+	// ctx.strokeStyle = "#ffffff";
+	// ctx.lineWidth = 2;
+	// ctx.stroke();
+	// ctx.closePath();
 
 	// Middle items
 	// for (var i = 0; i < 3; i++) {
@@ -1268,10 +1237,7 @@ function staticArt() {
 	// ctx.fillStyle = "rgba(255, 255, 255, .7)";
 	// ctx.fill();
 	// ctx.closePath();
-
-	
-
-	}
+	// }
 
 // Only shapes here down
 function drawField(pos, fm, um, lm) {
@@ -1574,10 +1540,12 @@ function blackHole(xPos,yPos,size) {
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
-staticArt();
 
 function generalState() {
 	ctx.clearRect(0,0,1000,1000);
+	// ctx.rect(0, 0, canvas.width, canvas.height);
+	// ctx.fillStyle = "rgba(0,0,0,1)";
+	// ctx.fill();
   	ctx.beginPath();
 	ctx.moveTo(50, 50);
 	ctx.lineTo(950, 50);
@@ -1595,7 +1563,6 @@ function generalState() {
 	ctx.strokeStyle = "#ffffff";
 	ctx.lineWidth = 2;
 	ctx.stroke();
-	ctx.closePath();
 
   	// GOING AWAY
 	//back top left
@@ -1711,4 +1678,4 @@ function generalState() {
 };
 
 
-var stalled = setInterval(generalState, 30);
+var stalled = setInterval(generalState, 1000);

@@ -1,5 +1,3 @@
-var alienLocation;
-
 function alienReply(reply, time) {
 		if (!time) {time = 1000;};
 		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += "<span style='color:#ff0000;'>" + reply + "</span><br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
@@ -166,7 +164,7 @@ function conversation(ui) {
 				computerReply("ERROR. BLASTER requires repair.");
 			}
 			else {
-				soundEffect(138.6, 'sawtooth',1.5);
+				soundEffect(138.6, 'sawtooth',2,[.1,.15,0,0]);
 				alienReply("Glorious combat it is then!", 200);
 				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 				alienConversation = false;
@@ -423,6 +421,7 @@ function trading(ui) {
 				computerReply("ERROR. BLASTER requires repair.");
 			}
 			else {
+				soundEffect(138.6, 'sawtooth',2,[.1,.15,0,0]);
 				dishAndTakeDamageDogfight(Math.floor(Math.random()*70)+25);
 				alienReply("NO!", 200);
 				alienConversation = false;
