@@ -779,23 +779,8 @@ function accelerate(){
 		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[8]*75) - (num[8]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm + lm);
 		//back bottom center
 		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm);
-		ctx.moveTo(50 + num[0], 50 + num[0]);
-		ctx.lineTo(950 + num[1], 50 + num[0]);
-		ctx.lineTo(950 + num[1], 950 + num[1]);
-		ctx.lineTo(50 + num[0], 950 + num[1]);
-		ctx.lineTo(50 + num[0], 50 + num[0]);
-		ctx.moveTo(50 + num[0], 350 + num[0]);
-		ctx.lineTo(950 + num[1], 350 + num[0]);
-		ctx.moveTo(50 + num[0], 650 + num[1]);
-		ctx.lineTo(950 + num[1], 650 + num[1]);
-		ctx.moveTo(350 + num[0], 50 + num[0]);
-		ctx.lineTo(350 + num[0], 950 + num[1]);
-		ctx.moveTo(650 + num[1], 50 + num[0]);
-		ctx.lineTo(650 + num[1], 950 + num[1]);
-		ctx.strokeStyle = "rgba(255, 255, 255,"+ ((75-c)/75).toFixed(2) +")";
-		ctx.lineWidth = 2;
-		ctx.stroke();
 		ctx.closePath();
+		
 		ctx.beginPath();
 		ctx.moveTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(950 + (a[0]*75) - num[0], 50 + (a[1]*75) - num[1]);
@@ -856,6 +841,28 @@ function accelerate(){
 		whichArt(oldPlanets[15].posNum,oldPlanets[15].xPos + num[5],oldPlanets[15].yPos,oldPlanets[15].size + num[1],oldPlanets[15].actPos);
 		//middle right
 		whichArt(oldPlanets[16].posNum,oldPlanets[16].xPos + num[4],oldPlanets[16].yPos,oldPlanets[16].size + num[1],oldPlanets[16].actPos);
+		
+		ctx.closePath();
+		ctx.beginPath();
+		ctx.moveTo(50 + num[0], 50 + num[0]);
+		ctx.lineTo(950 + num[1], 50 + num[0]);
+		ctx.lineTo(950 + num[1], 950 + num[1]);
+		ctx.lineTo(50 + num[0], 950 + num[1]);
+		ctx.lineTo(50 + num[0], 50 + num[0]);
+		ctx.moveTo(50 + num[0], 350 + num[0]);
+		ctx.lineTo(950 + num[1], 350 + num[0]);
+		ctx.moveTo(50 + num[0], 650 + num[1]);
+		ctx.lineTo(950 + num[1], 650 + num[1]);
+		ctx.moveTo(350 + num[0], 50 + num[0]);
+		ctx.lineTo(350 + num[0], 950 + num[1]);
+		ctx.moveTo(650 + num[1], 50 + num[0]);
+		ctx.lineTo(650 + num[1], 950 + num[1]);
+		ctx.strokeStyle = "rgba(255, 255, 255,"+ ((75-c)/75).toFixed(2) +")";
+		ctx.lineWidth = 2;
+		ctx.stroke();
+		ctx.closePath();
+		ctx.beginPath();
+
 		//middle center
 
 			switch (direction) {
@@ -1032,9 +1039,9 @@ function accelerate(){
 					}
 				break;
 				default:console.log("Not set up yet");
-			}
-
-		ctx.closePath();
+			};
+			ctx.closePath();
+			
 
 	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),disableButtons(false),autoAccel(movement);
 	}, 15);
