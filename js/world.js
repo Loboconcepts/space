@@ -792,7 +792,7 @@ function accelerate(){
 		ctx.lineTo(350 + num[0], 950 + num[1]);
 		ctx.moveTo(650 + num[1], 50 + num[0]);
 		ctx.lineTo(650 + num[1], 950 + num[1]);
-		ctx.strokeStyle = "rgba(255, 255, 255,1)";
+		ctx.strokeStyle = "rgba(255, 255, 255,"+ ((75-c)/75).toFixed(2) +")";
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		ctx.closePath();
@@ -810,9 +810,11 @@ function accelerate(){
 		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[0]*75) - num[0]);
 		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
-		ctx.strokeStyle = "rgba(255, 255, 255,"+ c/75 +")";
+		ctx.strokeStyle = "rgba(255, 255, 255,"+ (c/75).toFixed(2) +")";
 		ctx.lineWidth = 2;
 		ctx.stroke();
+		ctx.closePath();
+		ctx.beginPath();
 		//   0 1 2  3 4  5
 		// [-3,3,1,-1,2,-2]
 		
