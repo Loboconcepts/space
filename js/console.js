@@ -492,7 +492,8 @@ function harvestRemains() {
 			break;
 	}
 	computerReply(temp3 + ": " + temp2 + " (" + inventory[temp] + ").")
-	return spliceWorldArray(currentLocation-1,"1");
+	spliceWorldArray(currentLocation-1,"1");
+	return generalState();
 }
 
 function harvestResources() {

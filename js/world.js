@@ -619,7 +619,7 @@ function radarAnimation(){
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	drawField(currentLocation, fm, um, lm);
+	  	generalState();
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
 	  	ctx.strokeStyle = "#aaaaff";
@@ -641,7 +641,7 @@ function scannerAnimation() {
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	drawField(currentLocation, fm, um, lm);
+	  	generalState();
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
 	  	ctx.strokeStyle = "#aaffaa";
@@ -659,7 +659,7 @@ function scannerAnimation() {
 		ctx.lineTo(500,1000);
 		ctx.fill();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
+	  if (c > 50) clearInterval(movement),disableButtons(false),generalState();
 	}, 15);
 };
 
@@ -1109,7 +1109,7 @@ function rotateShape(direction, rAxes, lr) {
 		ctx.translate(500,500);
 	 	ctx.rotate(direction * Math.PI / 180);
 		ctx.translate(-500,-500);
-	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm);
+	  if (a > 90 || a < -90) clearInterval(movement),ctx.restore(),shipRotation(rAxes, lr),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 10);
 };
 
