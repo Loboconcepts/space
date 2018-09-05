@@ -72,39 +72,64 @@ function soundEffect() {
 	console.log("disabled");
 };
 
-if (!storyTime) {
-	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
-		if (event.keyCode === 13) {
-			if (lastCommand[0] != document.getElementById('user').value) {
-				lastCommand.unshift(document.getElementById('user').value);
-				if (lastCommand.length>6) {
-					lastCommand.splice(-1,1);
-				}
+function consoleInput(event) {
+	if (event.keyCode === 13) {
+		if (lastCommand[0] != document.getElementById('user').value) {
+			lastCommand.unshift(document.getElementById('user').value);
+			if (lastCommand.length>6) {
+				lastCommand.splice(-1,1);
 			}
-			submitUserInput(document.getElementById('user').value);
-			commandChoice = -1;
 		}
-		if (event.keyCode === 38) {
-			if (commandChoice<lastCommand.length-1) {
-				commandChoice = commandChoice+1;	
-			}
-			document.getElementById('user').value = lastCommand[commandChoice];
+		submitUserInput(document.getElementById('user').value);
+		commandChoice = -1;
+	};
+	if (event.keyCode === 38) {
+		if (commandChoice<lastCommand.length-1) {
+			commandChoice = commandChoice+1;	
 		}
-		if (event.keyCode === 40) {
-			if (commandChoice>0) {
-				commandChoice = commandChoice-1;	
-			}
-			document.getElementById('user').value = lastCommand[commandChoice];
+		document.getElementById('user').value = lastCommand[commandChoice];
+	};
+	if (event.keyCode === 40) {
+		if (commandChoice>0) {
+			commandChoice = commandChoice-1;	
 		}
-	});
-}
-else {
-	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
-		if (event.keyCode === 13) {
-			
-		}
-	});
+		document.getElementById('user').value = lastCommand[commandChoice];
+	};
 };
+
+// if (!storyTime) {
+// 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
+// 		if (event.keyCode === 13) {
+// 			if (lastCommand[0] != document.getElementById('user').value) {
+// 				lastCommand.unshift(document.getElementById('user').value);
+// 				if (lastCommand.length>6) {
+// 					lastCommand.splice(-1,1);
+// 				}
+// 			}
+// 			submitUserInput(document.getElementById('user').value);
+// 			commandChoice = -1;
+// 		}
+// 		if (event.keyCode === 38) {
+// 			if (commandChoice<lastCommand.length-1) {
+// 				commandChoice = commandChoice+1;	
+// 			}
+// 			document.getElementById('user').value = lastCommand[commandChoice];
+// 		}
+// 		if (event.keyCode === 40) {
+// 			if (commandChoice>0) {
+// 				commandChoice = commandChoice-1;	
+// 			}
+// 			document.getElementById('user').value = lastCommand[commandChoice];
+// 		}
+// 	});
+// }
+// else {
+// 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
+// 		if (event.keyCode === 13) {
+			
+// 		}
+// 	});
+// };
 
 
 

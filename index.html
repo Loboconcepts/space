@@ -36,6 +36,7 @@
 	    	z-index:999999;
 	    	display:none;
 	    	text-align: left;
+	    	font-family: cursive;
 
 	    }
 		@media only screen and (max-width: 500px) {
@@ -61,14 +62,14 @@
 		}
 	   </style>
 </head>
-<body style="text-align:center;">
-	<div id="memory"></div>
+<body onkeyup="storyPart()" style="text-align:center;">
+	<div id="memory"><div id="textArea"></div></div>
 	<div class="row">
 		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
 		<!-- <div id="compass"></div> -->
 		<div id="shipConsole"></div>
 	</div>
-	<input style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
+	<input onkeyup="consoleInput(event)" style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
 
 <script src="js/variables.js"></script>
 <script src="js/world.js"></script>

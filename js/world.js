@@ -81,10 +81,10 @@ function generateWorld() {
 		}
 		else {
 			worldArray.push("1");	
-		}
-	}
+		};
+	};
 	worldArray = worldArray.join("");
-}
+};
 
 function axisFinder() {
 	var xyz = [0,0,0];
@@ -97,7 +97,7 @@ function axisFinder() {
 	if (xyz[0] == 1 && xyz[1] == 1) {pitchAxis = z;};
 	if (xyz[0] == 1 && xyz[2] == 1) {pitchAxis = y;};
 	if (xyz[1] == 1 && xyz[2] == 1) {pitchAxis = x;};
-}
+};
 
 function cubeShipPositioning(direction, topfacing, pos, orient) {
 	ctx.clearRect(0, 0, 1000, 1000);
@@ -271,7 +271,6 @@ var movArrArr = [
 ];
 
 function move(a){
-	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var newYPos;
 	var newXPos;
@@ -566,12 +565,11 @@ function move(a){
 			}
 		}
 		ctx.closePath();
-	  if (c > 75) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 75) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function land(a){
-	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var newYPos;
 	var newXPos;
@@ -595,7 +593,6 @@ function land(a){
 };
 
 function solarBlasterAnimation(){
-	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -612,12 +609,11 @@ function solarBlasterAnimation(){
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function radarAnimation(){
-	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -635,12 +631,11 @@ function radarAnimation(){
 		ctx.quadraticCurveTo(500, 600-Math.floor(c/3), 700-(c*2), 650-Math.floor(c*1.3));
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function scannerAnimation() {
-	clearInterval(stalled);
 	var c = 1;
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -664,12 +659,11 @@ function scannerAnimation() {
 		ctx.lineTo(500,1000);
 		ctx.fill();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function takeDamage(howMuch){
-	clearInterval(stalled);
 	var c = 1;
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
@@ -680,12 +674,11 @@ function takeDamage(howMuch){
 	  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
 		ctx.fillRect(0,0,1000,1000);
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function dishAndTakeDamageDogfight(howMuch) {
-	clearInterval(stalled);
 	var c = 1;
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
@@ -707,12 +700,11 @@ function dishAndTakeDamageDogfight(howMuch) {
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function launch(a){
-	clearInterval(stalled);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var newYPos;
 	var newXPos;
@@ -730,12 +722,12 @@ function launch(a){
 		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12),currentLocation);
 		ctx.closePath();
 
-	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),stalled = setInterval(generalState, 30);
+	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation, fm, um, lm),generalState();
 	}, 15);
 };
 
 function accelerate(){
-	clearInterval(stalled);
+	// clearInterval(stalled);
 	switch (direction) {
 		case "N":currentLocation = currentLocation - x;break;
 		case "S":currentLocation = currentLocation + x;break;
@@ -747,7 +739,7 @@ function accelerate(){
 	}
 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
-	else {currentLocation = (currentLocation);	}
+	else {currentLocation = (currentLocation);	};
 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	// drawField(currentLocation, fm, um, lm);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -758,6 +750,7 @@ function accelerate(){
 	disableButtons(true);
 	// document.querySelector("#accelLock").disabled = false;
 
+
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);
 		for (i=0;i<11;i++) {
@@ -766,6 +759,7 @@ function accelerate(){
 		c = c+1;
 		
 	  ctx.clearRect(0,0,1000,1000);
+	  ctx.beginPath();
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
 		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]),currentLocation + um + 2*fm - lm);
@@ -785,8 +779,6 @@ function accelerate(){
 		whichArt(loopView(currentLocation - um + 2*fm + lm),700 + (a[8]*75) - (num[8]),700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm + lm);
 		//back bottom center
 		whichArt(loopView(currentLocation - um + 2*fm),500,700 + (a[8]*75) - (num[8]),100 + (a[8]*75) - (num[8]),currentLocation - um + 2*fm);
-		
-		ctx.beginPath();
 		ctx.moveTo(50 + num[0], 50 + num[0]);
 		ctx.lineTo(950 + num[1], 50 + num[0]);
 		ctx.lineTo(950 + num[1], 950 + num[1]);
@@ -800,6 +792,11 @@ function accelerate(){
 		ctx.lineTo(350 + num[0], 950 + num[1]);
 		ctx.moveTo(650 + num[1], 50 + num[0]);
 		ctx.lineTo(650 + num[1], 950 + num[1]);
+		ctx.strokeStyle = "rgba(255, 255, 255,1)";
+		ctx.lineWidth = 2;
+		ctx.stroke();
+		ctx.closePath();
+		ctx.beginPath();
 		ctx.moveTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(950 + (a[0]*75) - num[0], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(950 + (a[0]*75) - num[0], 950 + (a[0]*75) - num[0]);
@@ -813,7 +810,7 @@ function accelerate(){
 		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[0]*75) - num[0]);
 		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
-		ctx.strokeStyle = "#ffffff";
+		ctx.strokeStyle = "rgba(255, 255, 255,"+ c/75 +")";
 		ctx.lineWidth = 2;
 		ctx.stroke();
 		//   0 1 2  3 4  5
@@ -1677,5 +1674,6 @@ function generalState() {
 	ctx.closePath();
 };
 
+generalState();
 
-var stalled = setInterval(generalState, 1000);
+// var stalled = setInterval(generalState, 1000);
