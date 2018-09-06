@@ -5,7 +5,8 @@ var x = 101;
 // Density of the universe
 var rarityValue = 131;
 //x*x
-var currentLocation = 142516;
+// 142516
+var currentLocation = 136658;
 var i = 0;
 var y = x*x;
 var z = 1;

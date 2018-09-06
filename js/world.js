@@ -1095,6 +1095,7 @@ function rotateShape(direction, rAxes, lr) {
 	var movement = setInterval(function() {		
 		a=a+1
 		ctx.clearRect(-200,-200,1200,1200);
+		backgroundArt();
 		ctx.beginPath();		
 		ctx.moveTo(50, 50);
 		ctx.lineTo(950, 50);
@@ -1686,38 +1687,44 @@ function generalState() {
 };
 
 function drawDistantStar(xPos, yPos, size) {
-	console.log(xPos,yPos,size);
-	ctx.save();
+	// ctx.save();
 	ctx.beginPath();
+	ctx.arc(xPos, yPos, size, size, (10 * Math.PI) , false);
 	ctx.fillStyle = "rgba(255,255,225,1)";
-	ctx.fillRect(xPos, yPos,size, size);
+	// ctx.fillRect(xPos, yPos,size, size);
     ctx.fill();
-    ctx.closePath();
-	ctx.restore();
+    // ctx.strokeStyle='rgba(255,255,195,1)';
+    // ctx.lineWidth=10
+    // ctx.stroke();
+	// ctx.restore();
 };
 
 function backgroundArt() {
 	var xi = 3;
-	while (xi<50) {
+	
 		switch (direction) {
 			case "N":
-				//middle
-				if (loopView(currentLocation-(xi*x))=="2") {drawDistantStar(500, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				//bottom right
-				else if (loopView(currentLocation-(((xi*x)-z)-y))=="2") {drawDistantStar(675, 675, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				// middle right
-				else if (loopView(currentLocation-((xi*x)-z))=="2") {drawDistantStar(675, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				else if (loopView(currentLocation-(((xi*x)-z)+y))=="2") {drawDistantStar(675, 325, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				//middle bottom
-				else if (loopView(currentLocation-((xi*x)-y))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				//middle top
-				else if (loopView(currentLocation-((xi*x)+y))=="2") {drawDistantStar(500, 325, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				//top left
-				else if (loopView(currentLocation-((xi*x)+z)-y)=="2") {drawDistantStar(325, 325, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				else if (loopView(currentLocation-((xi*x)+z))=="2") {drawDistantStar(325, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				//bottom left
-				else if (loopView(currentLocation-((xi*x)+z)+y)=="2") {drawDistantStar(325, 675, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-				else {xi = xi + 1;};
+				while (xi<50) {
+					//middle
+					if (loopView(currentLocation-(xi*x))=="2") {drawDistantStar(500, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					//middle top
+					else if (loopView(currentLocation-((xi*x)+y))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					// middle right
+					else if (loopView(currentLocation-((xi*x)-z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					//middle bottom
+					else if (loopView(currentLocation-((xi*x)-y))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					// middle left
+					else if (loopView(currentLocation-((xi*x)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					// top right
+					else if (loopView(currentLocation-(((xi*x)-z)+y))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					//bottom right
+					else if (loopView(currentLocation-(((xi*x)-z)-y))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					//bottom left
+					else if (loopView(currentLocation-((xi*x)+z)+y)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					//top left
+					else if (loopView(currentLocation-((xi*x)+z)-y)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+					else {xi = xi + 1;};
+				};
 				break;
 			case "S":
 				if (loopView(currentLocation+(xi*x))=="2") {drawDistantStar(500, 500, 9);xi = xi + 1;}
@@ -1781,7 +1788,7 @@ function backgroundArt() {
 				break;
 			default: ;
 		};
-	};
+	
 };
 
 generalState();
