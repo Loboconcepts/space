@@ -188,7 +188,8 @@ function understandUserInput(ui) {
 			break;
 		case "scan":
 			if (isLanded) {computerReply("Scanning...");computerReply(scanPlanet());}
-			else {soundEffect(329.6,'triangle',2,[1,.8,.3,.1]);scannerAnimation();scanUniverse();};
+			else if (!weCruisin) {soundEffect(329.6,'triangle',2,[1,.8,.3,.1]);scannerAnimation();scanUniverse();}
+			else {computerReply("Ignored.")};
 			break;
 		case "thanks":case "thanks you":case "okay thanks":
 			computerReply("You're welcome.");
@@ -216,14 +217,14 @@ function understandUserInput(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case "radar":
-			if (!isLanded) {
+			if (!weCruisin && !isLanded) {
 				soundEffect(440,'triangle',2,[1,.8,.3,.1]);
 				radarAnimation();
 				computerReply("Scanning...");
 				radar();
 			}
 			else {
-				computerReply("ERROR. Cannot RADAR while landed.")
+				computerReply("Ignored.")
 			}
 			break;
 		case "solar energy": case "energy":
