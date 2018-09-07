@@ -60,9 +60,15 @@
 		    	height: auto;
 		    	padding:2px;
 		    	overflow:scroll;
+		    	overflow-x: hidden;
 		    	overflow-y: hidden;
 		    	background-color: #000000;
+		    	-ms-overflow-style: none;
+    			overflow: -moz-scrollbars-none;
 		    }
+		    #shipConsole:-webkit-scrollbar { 
+    			display: none; 
+    		}
 		}
 	   </style>
 </head>
