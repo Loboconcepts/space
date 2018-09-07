@@ -6,7 +6,7 @@ var x = 101;
 var rarityValue = 131;
 //x*x
 // 142516
-var currentLocation = 139509;
+var currentLocation = 955589;
 var i = 0;
 var y = x*x;
 var z = 1;
@@ -14,7 +14,7 @@ var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
 var xAxis = ["UP","S","DOWN","N"];
-var direction = "E";
+var direction = "UP";
 var topfacing = "N";
 var yawAxis;
 var rollAxis;
