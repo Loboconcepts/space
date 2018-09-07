@@ -1946,6 +1946,129 @@ function backgroundArt() {
 				default: break;
 			};
 		break;
+		case "W":
+			switch (direction) {
+				case "N":
+					while (xi<51) {
+						if (loopView(currentLocation-(xi*x))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+y))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)-z))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)-y))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*x)-z)+y))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*x)-z)-y))=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z)+y)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z)-y)=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "S":
+					while (xi<51) {
+						if (loopView(currentLocation+(xi*x))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+y))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)-z))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)-y))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*x)-z)+y))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*x)-z)-y))=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z)+y)=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z)-y)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "UP":
+					while (xi<51) {
+						if (loopView(currentLocation-(xi*y))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)-x))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)-z))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*y)-x)+z))=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*y)-x)-z))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x)+z)=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x)-z)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "DOWN":
+					while (xi<51) {
+						if (loopView(currentLocation+(xi*y))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)-x))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)-z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*y)-x)+z))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*y)-x)-z))=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x)+z)=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x)-z)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				default: break;
+			};
+		break;
+		case "E":
+			switch (direction) {
+				case "N":
+					while (xi<51) {
+						if (loopView(currentLocation-(xi*x))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+y))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)-z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)-y))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*x)-z)+y))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*x)-z)-y))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z)+y)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*x)+z)-y)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "S":
+					while (xi<51) {
+						if (loopView(currentLocation+(xi*x))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+y))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)-z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)-y))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*x)-z)+y))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*x)-z)-y))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z)+y)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*x)+z)-y)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "UP":
+					while (xi<51) {
+						if (loopView(currentLocation-(xi*y))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)-x))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)-z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*y)-x)+z))=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-(((xi*y)-x)-z))=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x)+z)=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation-((xi*y)+x)-z)=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				case "DOWN":
+					while (xi<51) {
+						if (loopView(currentLocation+(xi*y))=="2") {drawDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+z))=="2") {drawDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)-x))=="2") {drawDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)-z))=="2") {drawDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x))=="2") {drawDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*y)-x)+z))=="2") {drawDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+(((xi*y)-x)-z))=="2") {drawDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x)+z)=="2") {drawDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else if (loopView(currentLocation+((xi*y)+x)-z)=="2") {drawDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
+						else {xi = xi + 1;};
+					};
+					break;
+				default: break;
+			};
+		break;
+		default: break;
 	};
 	
 		
