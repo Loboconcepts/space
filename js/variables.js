@@ -6,7 +6,7 @@ var x = 101;
 var rarityValue = 131;
 //x*x
 // 142516
-var currentLocation = 142516;
+var currentLocation = 142011;
 var i = 0;
 var y = x*x;
 var z = 1;
