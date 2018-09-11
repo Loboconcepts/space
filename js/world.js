@@ -286,7 +286,7 @@ function move(a){
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
 
-	  drawDistantStar((500)+(num[48]*randarr[0]), (500)+(num[49]*randarr[0]), (15/(randarr[0]/2)));
+	  // drawDistantStar((500)+(num[48]*randarr[0]), (500)+(num[49]*randarr[0]), (15/(randarr[0]/2)));
 
 	  	// GOING AWAY
 		//back top left
