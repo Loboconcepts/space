@@ -100,7 +100,7 @@ function axisFinder() {
 };
 
 function cubeShipPositioning(direction, topfacing, pos, orient) {
-	ctx.clearRect(0, 0, 1000, 1000);
+	// ctx.clearRect(0, 0, 1000, 1000);
 	// upward movement UM || forward movement FM || lateral movement LM
 	
 	switch (direction) {
@@ -225,16 +225,16 @@ function shipRotation(rAxes, lr) {
 	cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
 }
 
-function switchOrientation() {
-	if (viewOrient == "BACK") {
-		viewOrient = "TOP";
-		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
-	}
-	else {
-		viewOrient = "BACK";
-		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
-	}
-}
+// function switchOrientation() {
+// 	if (viewOrient == "BACK") {
+// 		viewOrient = "TOP";
+// 		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
+// 	}
+// 	else {
+// 		viewOrient = "BACK";
+// 		cubeShipPositioning(direction, topfacing, currentLocation, viewOrient);
+// 	}
+// }
 
 function disableButtons(bool) {
 	if (bool) {
@@ -747,7 +747,6 @@ function accelerate(){
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	};
 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
-	// drawField(currentLocation, fm, um, lm);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
 	var newYPos;
@@ -1445,7 +1444,7 @@ function accelerate(){
 			ctx.closePath();
 			
 
-	  if (c > 75) clearInterval(movement),ctx.clearRect(0,0,1000,1000),disableButtons(false),autoAccel(movement);
+	  if (c > 75) clearInterval(movement),disableButtons(false),autoAccel(movement);
 	}, 15);
 };
 
@@ -1470,8 +1469,7 @@ function autoAccel(intFunc) {
 			weCruisin = true;
 			clearInterval(intFunc);
 			drawField(currentLocation, fm, um, lm);
-			accelerate();
-			return;
+			return accelerate();
 		}
 	}
 	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
