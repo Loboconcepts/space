@@ -356,7 +356,7 @@ function move(a){
 		ctx.moveTo(650 + (a[44]*75) - num[44], 50 + (a[46]*75) - num[46]);
 		ctx.lineTo(650 + (a[45]*75) - num[45], 950 + (a[47]*75) - num[47]);
 		ctx.strokeStyle = "#ffffff";
-		ctx.lineWidth = 2;
+		ctx.lineWidth = 4;
 		ctx.stroke();
 
 		// GOING AWAY
@@ -1197,7 +1197,7 @@ function accelerate(){
 		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
 		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
 		ctx.strokeStyle = "rgba(255, 255, 255,"+ (c/75).toFixed(2) +")";
-		ctx.lineWidth = 2;
+		ctx.lineWidth = 4;
 		ctx.stroke();
 		ctx.closePath();
 		ctx.beginPath();
@@ -1259,7 +1259,7 @@ function accelerate(){
 		ctx.moveTo(650 + num[1], 50 + num[5]);
 		ctx.lineTo(650 + num[1], 950 + num[4]);
 		ctx.strokeStyle = "rgba(255, 255, 255,"+ ((75-c)/75).toFixed(2) +")";
-		ctx.lineWidth = 2;
+		ctx.lineWidth = 4;
 		ctx.stroke();
 		ctx.closePath();
 		ctx.beginPath();
@@ -1511,7 +1511,7 @@ function rotateShape(direction, rAxes, lr) {
 		ctx.moveTo(650, 50);
 		ctx.lineTo(650, 950);
 		ctx.strokeStyle = "#ffffff";
-		ctx.lineWidth = 2;
+		ctx.lineWidth = 4;
 		ctx.stroke();
 		ctx.closePath();
 		drawField(currentLocation, fm, um, lm);
@@ -1971,7 +1971,7 @@ function generalState() {
 	ctx.moveTo(650, 50);
 	ctx.lineTo(650, 950);
 	ctx.strokeStyle = "#ffffff";
-	ctx.lineWidth = 2;
+	ctx.lineWidth = 4;
 	ctx.stroke();
 
   	// GOING AWAY
