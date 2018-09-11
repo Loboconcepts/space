@@ -2088,16 +2088,22 @@ function generalState() {
 };
 
 function drawDistantStar(xPos, yPos, size) {
-	// ctx.save();
+	ctx.save();
 	ctx.beginPath();
 	ctx.arc(xPos, yPos, size, size, (62.8) , false);
 	ctx.fillStyle = "rgba(255,255,225,1)";
 	// ctx.fillRect(xPos, yPos,size, size);
+	// ctx.shadowColor = "#FFFF00" 
+ //    ctx.shadowOffsetX = 0;
+	// ctx.shadowOffsetY = 0;
+	// ctx.shadowBlur = 10; 
     ctx.fill();
-    // ctx.strokeStyle='rgba(255,255,195,1)';
-    // ctx.lineWidth=10
-    // ctx.stroke();
-	// ctx.restore();
+    
+    ctx.strokeStyle='#FFFF00';
+    ctx.lineWidth=1
+    ctx.stroke();
+    ctx.closePath();
+	ctx.restore();
 };
 
 function backgroundArt() {
