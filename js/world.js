@@ -286,6 +286,12 @@ function move(a){
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
 
+	  // background stars
+	  oldStars.forEach(function(el) {
+	  	function sizeMove() {if (Math.floor(11-el.size/2)<2) {return 2} else return Math.floor(11-el.size/2)};
+	  	drawDistantStar(el.xPos+Math.floor(num[48]/2.5)*sizeMove(), el.yPos+Math.floor(num[49]/2.5)*sizeMove(), el.size);
+	  });
+
 	  // drawDistantStar((500)+(num[48]*randarr[0]), (500)+(num[49]*randarr[0]), (15/(randarr[0]/2)));
 
 	  	// GOING AWAY
@@ -1650,6 +1656,7 @@ function rotateShape(direction, rAxes, lr) {
 // Only shapes here down
 function drawField(pos, fm, um, lm) {
 	oldPlanets.length = 0;
+	oldStars.length = 0;
 	//back top left
 	whichArt(loopView(pos + um + 2*fm - lm),300,300,100,pos + um + 2*fm - lm);
 	//back top right
@@ -2104,7 +2111,10 @@ function drawDistantStar(xPos, yPos, size) {
     ctx.stroke();
     ctx.closePath();
 	ctx.restore();
+	if (oldStars.length < 21) {oldStars.push(new SpaceObject(0,xPos,yPos,size));};
 };
+
+var oldStars = [];
 
 function backgroundArt() {
 	var xi = 3;
