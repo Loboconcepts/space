@@ -1,10 +1,3 @@
-
-
-// Disable scrolling.
-// document.ontouchmove = function (e) {
-//   e.preventDefault();
-// }
-
 function preventZoom(e) {
   var t2 = e.timeStamp;
   var t1 = e.currentTarget.dataset.lastTouch || t2;
