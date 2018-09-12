@@ -749,6 +749,57 @@ function launch(a){
 	}, 15);
 };
 
+function warpAnimation(){	
+	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
+	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
+	var newYPos;
+	var newXPos;
+	var c = 0;
+	disableButtons(true);
+	ctx.clearRect(0,0,1000,1000);
+	var movement = setInterval(function() {
+		// drawField(currentLocation, fm, um, lm);
+		for (i=0;i<11;i++) {
+			num[i]=num[i]+a[i];
+		}
+		c = c+1;
+		if (c<2) {backgroundArt();outerBackgroundArt();};
+		ctx.beginPath();
+		ctx.moveTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 950 + (a[0]*75) - num[0]);
+		ctx.lineTo(50 + (a[1]*75) - num[1], 950 + (a[0]*75) - num[0]);
+		ctx.lineTo(50 + (a[1]*75) - num[1], 50 + (a[1]*75) - num[1]);
+		ctx.moveTo(50 + (a[1]*75) - num[1], 350 + (a[2]*75) - num[2]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 350 + (a[2]*75) - num[2]);
+		ctx.moveTo(50 + (a[1]*75) - num[1], 650 + (a[3]*75) - num[3]);
+		ctx.lineTo(950 + (a[0]*75) - num[0], 650 + (a[3]*75) - num[3]);
+		ctx.moveTo(350 + (a[2]*75) - num[2], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(350 + (a[2]*75) - num[2], 950 + (a[0]*75) - num[0]);
+		ctx.moveTo(650 + (a[3]*75) - num[3], 50 + (a[1]*75) - num[1]);
+		ctx.lineTo(650 + (a[3]*75) - num[3], 950 + (a[0]*75) - num[0]);
+		ctx.moveTo(50 + num[5], 50 + num[5]);
+		ctx.lineTo(950 + num[4], 50 + num[5]);
+		ctx.lineTo(950 + num[4], 950 + num[4]);
+		ctx.lineTo(50 + num[5], 950 + num[4]);
+		ctx.lineTo(50 + num[5], 50 + num[5]);
+		ctx.moveTo(50 + num[5], 350 + num[0]);
+		ctx.lineTo(950 + num[4], 350 + num[0]);
+		ctx.moveTo(50 + num[5], 650 + num[1]);
+		ctx.lineTo(950 + num[4], 650 + num[1]);
+		ctx.moveTo(350 + num[0], 50 + num[5]);
+		ctx.lineTo(350 + num[0], 950 + num[4]);
+		ctx.moveTo(650 + num[1], 50 + num[5]);
+		ctx.lineTo(650 + num[1], 950 + num[4]);
+		ctx.strokeStyle = "rgba(255, 255, 255,.5)";
+		ctx.lineWidth = 4;
+		ctx.stroke();
+		ctx.closePath();
+	  if (c > 120) clearInterval(movement),disableButtons(false),autoAccel(movement);
+	}, 15);
+};
+
 // accelfun
 function accelerate(){
 	newStars.length=0;
@@ -774,13 +825,6 @@ function accelerate(){
 	backgroundArt();
 	outerBackgroundArt();
 	disableButtons(true);
-
-	
-	
-	
-	
-	// document.querySelector("#accelLock").disabled = false;
-
 
 	var movement = setInterval(function() {
 		// drawField(currentLocation, fm, um, lm);

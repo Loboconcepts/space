@@ -71,7 +71,7 @@ function understandUserInput(ui) {
 			}
 			else {
 				computerReply("Ignored");
-			}
+			};
 			break;
 		case "accelerate":case "accel":
 			if (!weCruisin && !isLanded) {
@@ -85,11 +85,34 @@ function understandUserInput(ui) {
 					soundEffect([130.8,146.8,164.8,174.6,196.0,220.0,246.9,261.6][Math.floor(Math.random()*[130.8,146.8,164.8,174.6,196.0,220.0,246.9,261.6].length)], 'sine',2,[.8,1,.8,0.3])
 					computerReply("Accelerating.");
 					accelerate();
-				}
+				};
 			}
 			else {
 				computerReply("Ignored");
+			};
+			break;
+		case "warp":
+			if (!weCruisin && !isLanded) {
+				if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
+					computerReply("Error. Intitiating warp through shrapnel will damage craft.");
+				}
+				else if (inventory[0]<11) {
+					computerReply("Not enough solar energy.");
+				}
+				else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+					computerReply("Error. Collision course detected.");
+				}
+				else {
+					inventory[0] = inventory[0]-10;
+					computerReply("Warping.");
+					computerReply("SOLAR ENERGY: " + inventory[0] + "%", 2000);
+					warp(5);
+					warpAnimation();
+				};
 			}
+			else {
+				computerReply("Ignored");
+			};
 			break;
 		case "charge":
 			if (worldArray[currentLocation-1] == "2") {
@@ -454,6 +477,34 @@ function radar() {
 			default: console.log("OK");
 		};
 	};
+};
+
+function warp(power) {
+	let warpLocation;
+	switch (direction) {
+		case "N":
+			warpLocation = currentLocation-(power*x);
+			break;
+		case "S":
+			warpLocation = currentLocation+(power*x);
+			break;
+		case "W":
+			warpLocation = currentLocation-(power*z);
+			break;
+		case "E":
+			warpLocation = currentLocation+(power*z);
+			break;
+		case "UP":
+			warpLocation = currentLocation-(power*y);
+			break;
+		case "DOWN":
+			warpLocation = currentLocation+(power*y);
+			break;
+		default: console.log("OK");
+	};
+	if (warpLocation > worldArray.length) {return currentLocation = warpLocation - worldArray.length;}
+	else if (warpLocation < 1) {return currentLocation = warpLocation + worldArray.length;}
+	else {return currentLocation = warpLocation;	}
 };
 
 function timeOfDay() {
