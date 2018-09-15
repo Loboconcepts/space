@@ -49,36 +49,39 @@
 				max-height: 30% !important;
 			}
 		    #shipView {
-		    	width:40% !important;
+		    	width:90% !important;
 		    	/*height:50% !important;*/
-		    	flex: 1;
+		    	/*flex: 1;*/
 		    	padding: 1em;
 		    }
 		    #shipConsole {
-		    	/*width:48%;*/
-		    	flex: 1;
-		    	height: auto;
+		    	width:90%;
+		    	position:absolute;
+		    	left:10px;
+		    	top:0;
+		    	/*flex: 1;*/
+		    	height: 40px;
 		    	padding:2px;
 		    	overflow:scroll;
+		    	background: transparent;
 		    	overflow-x: hidden;
 		    	overflow-y: hidden;
-		    	background-color: #000000;
 		    	-ms-overflow-style: none;
     			overflow: -moz-scrollbars-none;
 		    }
 		    #shipConsole:-webkit-scrollbar { 
-    			display: none; 
+    			display: none;
     		}
 		}
 	   </style>
 </head>
 <body onkeyup="storyPart()" style="text-align:center;">
 	<div id="memory"><div id="textArea"></div></div>
-	<div class="row">
+	<!-- <div class="row"> -->
 		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
 		<!-- <div id="compass"></div> -->
 		<div id="shipConsole"></div>
-	</div>
+	<!-- </div> -->
 	<input onkeyup="consoleInput(event)" style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
 
 <script src="js/variables.js"></script>
