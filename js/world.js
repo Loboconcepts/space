@@ -1506,18 +1506,31 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			break;
 		case ("2"):
 			ctx.save();
-			ctx.beginPath();
-			ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
-		    ctx.fillStyle = "rgba(255, 255, 245, 1)";
-		 //    ctx.shadowColor = "#FFFF00" 
-		 //    ctx.shadowOffsetX = 0;
-			// ctx.shadowOffsetY = 0;
-			// ctx.shadowBlur = 50; 
-		    ctx.fill();
-		    ctx.strokeStyle='#FFFF00';
+			var rot = Math.PI / 2 * 3;
+		    var x = xPos;
+		    var y = yPos;
+		    var step = Math.PI / 20;
+		    ctx.strokeSyle = "#000";
+		    ctx.beginPath();
+		    ctx.moveTo(xPos, yPos - size/2)
+		    for (i = 0; i < 20; i++) {
+		        x = xPos + Math.cos(rot) * size/2;
+		        y = yPos + Math.sin(rot) * size/2;
+		        ctx.lineTo(x, y)
+		        rot += step
+
+		        x = xPos + Math.cos(rot) * size/2.5;
+		        y = yPos + Math.sin(rot) * size/2.5;
+		        ctx.lineTo(x, y)
+		        rot += step
+		    }
+		    ctx.lineTo(xPos, yPos - size/2)
+		    ctx.closePath();
 		    ctx.lineWidth=Math.floor(size/30);
+		    ctx.strokeStyle='#FFFF00';
 		    ctx.stroke();
-			ctx.closePath();
+		    ctx.fillStyle="rgba(255, 255, 245, 1)";
+		    ctx.fill();
 			ctx.restore();
 			break;
 		case ("3"):
