@@ -44,14 +44,25 @@ function generateCharacter() {
 	ctx.strokeStyle="#000000";
 	ctx.lineWidth=5;
 
-	//hair
+	//tail
 	ctx.beginPath();
-	ctx.fillStyle = hairColor;
-	ctx.moveTo(-hairWidth, -hairHeight);
-	ctx.bezierCurveTo(-hairPuff,hairLength,hairPuff,hairLength,hairWidth,-hairHeight);
-	ctx.quadraticCurveTo(0,-600,-hairWidth,-hairHeight);
+	ctx.fillStyle = skinColor;
+	ctx.moveTo(0,500);
+	ctx.quadraticCurveTo(-100,250,-500,0);
+	ctx.quadraticCurveTo(-300,250,0,500);
     ctx.fill();
     ctx.stroke();
+
+    if (bald) {
+		//hair
+		ctx.beginPath();
+		ctx.fillStyle = hairColor;
+		ctx.moveTo(-hairWidth, -hairHeight);
+		ctx.bezierCurveTo(-hairPuff,hairLength,hairPuff,hairLength,hairWidth,-hairHeight);
+		ctx.quadraticCurveTo(0,-600,-hairWidth,-hairHeight);
+	    ctx.fill();
+	    ctx.stroke();
+	}
 
     //shirt/body
     ctx.beginPath();
@@ -73,15 +84,24 @@ function generateCharacter() {
     ctx.fill();
     ctx.stroke();
     
-
+    var bald = true;
 	//outer face
 	ctx.beginPath();
-	ctx.moveTo(hairPart, -bangsHeight);
-	ctx.quadraticCurveTo(-topheadWidth, -bangs,-topheadWidth, -100);
-	ctx.quadraticCurveTo(-jawWidth, jawHeight, -chinWidth, 300);
-	ctx.quadraticCurveTo(0, chinHeight, chinWidth, 300);
-	ctx.quadraticCurveTo(jawWidth, jawHeight, topheadWidth, -100);
-	ctx.quadraticCurveTo(topheadWidth, -bangs,hairPart, -bangsHeight);
+	if (!bald) {
+		ctx.moveTo(hairPart, -bangsHeight);
+		ctx.quadraticCurveTo(-topheadWidth, -bangs,-topheadWidth, -100);	
+		ctx.quadraticCurveTo(-jawWidth, jawHeight, -chinWidth, 300);
+		ctx.quadraticCurveTo(0, chinHeight, chinWidth, 300);
+		ctx.quadraticCurveTo(jawWidth, jawHeight, topheadWidth, -100);
+		ctx.quadraticCurveTo(topheadWidth, -bangs,hairPart, -bangsHeight);	
+	}
+	else {
+		ctx.moveTo(-topheadWidth, -200);
+		ctx.quadraticCurveTo(-jawWidth, jawHeight, -chinWidth, 300);
+		ctx.quadraticCurveTo(0, chinHeight, chinWidth, 300);
+		ctx.quadraticCurveTo(jawWidth, jawHeight, topheadWidth, -200);
+		ctx.bezierCurveTo(200, -500,-200, -500,-topheadWidth, -200);
+	};
 	// ctx.bezierCurveTo(topheadWidth, -500, -topheadWidth, -500, -topheadWidth, -100);
     ctx.fill();
     ctx.stroke();

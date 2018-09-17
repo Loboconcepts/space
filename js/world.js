@@ -597,14 +597,37 @@ function land(a){
 		}
 		c = c+1;
 	  ctx.clearRect(0,0,1000,1000);
-	  	ctx.rect(0, 0, canvas.width, canvas.height);
-	  	ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
-		ctx.fill();
-	  	whichArt(loopView(currentLocation),500,1200 + (a[53]*75*-1) - (num[53]*-1),1000+num[2],currentLocation);
+	  	// ctx.rect(0, 0, canvas.width, canvas.height);
+	  	// ctx.fillStyle="rgba("+rgbGenerateFromCurPos(currentLocation)[2]+","+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[1]+","+ c/255 +")";
+	  	// ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
+		// ctx.fill();
+	  	whichArt(loopView(currentLocation),500,500+(c*29),1000+(c*57),currentLocation);
 		
 		ctx.closePath();
 
 	  if (c > 255) clearInterval(movement),disableButtons(false);
+	}, 15);
+};
+
+function launch(a){
+	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	var newYPos;
+	var newXPos;
+	var c = 1;
+	disableButtons(true);
+	var movement = setInterval(function() {
+		for (i=0;i<80;i++) {
+			num[i]=num[i]+a[i];
+		}
+		c = c+1;
+	  ctx.clearRect(0,0,1000,1000);
+	 //  	ctx.rect(0, 0, canvas.width, canvas.height);
+	 //  	ctx.fillStyle = "rgb(" + (128 -  Math.floor(c/2)) + ", " + (128 - Math.floor(c/2)) + ", " + (255 - c) + ")";
+		// ctx.fill();
+		whichArt(loopView(currentLocation),500,7895 - (c*29),15535-(c*57),currentLocation);
+		ctx.closePath();
+
+	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
 	}, 15);
 };
 
@@ -635,7 +658,7 @@ function radarAnimation(){
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	generalState();
+	  	drawField(currentLocation);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
 	  	ctx.strokeStyle = "#aaaaff";
@@ -647,7 +670,7 @@ function radarAnimation(){
 		ctx.quadraticCurveTo(500, 600-Math.floor(c/3), 700-(c*2), 650-Math.floor(c*1.3));
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
+	  if (c > 50) clearInterval(movement),disableButtons(false),generalState();
 	}, 15);
 };
 
@@ -657,7 +680,7 @@ function scannerAnimation() {
 	var movement = setInterval(function() {
 		c = c+1;
 		ctx.clearRect(0,0,1000,1000);
-	  	generalState();
+	  	drawField(currentLocation);
 	  	ctx.beginPath();
 	  	ctx.lineWidth=10-Math.floor(c/5);
 	  	ctx.strokeStyle = "#aaffaa";
@@ -717,28 +740,6 @@ function dishAndTakeDamageDogfight(howMuch) {
 		ctx.stroke();
 		ctx.closePath();
 		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
-	}, 15);
-};
-
-function launch(a){
-	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	var newYPos;
-	var newXPos;
-	var c = 1;
-	disableButtons(true);
-	var movement = setInterval(function() {
-		for (i=0;i<80;i++) {
-			num[i]=num[i]+a[i];
-		}
-		c = c+1;
-	  ctx.clearRect(0,0,1000,1000);
-	  	ctx.rect(0, 0, canvas.width, canvas.height);
-	  	ctx.fillStyle = "rgb(" + (128 -  Math.floor(c/2)) + ", " + (128 - Math.floor(c/2)) + ", " + (255 - c) + ")";
-		ctx.fill();
-		whichArt(loopView(currentLocation),500,500 + (2304 - (c*9)),4060-(c*12),currentLocation);
-		ctx.closePath();
-
-	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
 	}, 15);
 };
 
@@ -809,7 +810,7 @@ function accelerate(){
 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	};
-	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+	// cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
 	var newYPos;
@@ -837,23 +838,21 @@ function accelerate(){
 
 
 		if (loopView(currentLocation+((0*fm)+(um*2)))=="2") {drawDistantStar(500, 250-(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)+(lm*2)))=="2") {drawDistantStar(750+(c*4), 500, 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(um*2)))=="2") {drawDistantStar(500, 750+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*2)))=="2") {drawDistantStar(250-(c*4), 500, 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+(((0*fm)+(lm*2))+(um*2)))=="2") {drawDistantStar(750+(c*4), 250-(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+(((0*fm)+(lm*2))-(um*2)))=="2") {drawDistantStar(750+(c*4), 750+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*2))-(um*2))=="2") {drawDistantStar(250-(c*4), 750+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*2))+(um*2))=="2") {drawDistantStar(250-(c*4), 250-(c*4), 15+Math.floor(c/2));}
-		// outer2
-		else if (loopView(currentLocation+((0*fm)+(um*3)))=="2") {drawDistantStar(500, 125-(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)+(lm*3)))=="2") {drawDistantStar(875+(c*4), 500, 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(um*3)))=="2") {drawDistantStar(500, 875+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*3)))=="2") {drawDistantStar(125-(c*4), 500, 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+(((0*fm)+(lm*3))+(um*3)))=="2") {drawDistantStar(875+(c*4), 125-(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+(((0*fm)+(lm*3))-(um*3)))=="2") {drawDistantStar(875+(c*4), 875+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*3))-(um*3))=="2") {drawDistantStar(125-(c*4), 875+(c*4), 15+Math.floor(c/2));}
-		else if (loopView(currentLocation+((0*fm)-(lm*3))+(um*3))=="2") {drawDistantStar(125-(c*4), 125-(c*4), 15+Math.floor(c/2));}
-		else {};
+		if (loopView(currentLocation+((0*fm)+(lm*2)))=="2") {drawDistantStar(750+(c*4), 500, 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(um*2)))=="2") {drawDistantStar(500, 750+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*2)))=="2") {drawDistantStar(250-(c*4), 500, 15+Math.floor(c/2));}
+		if (loopView(currentLocation+(((0*fm)+(lm*2))+(um*2)))=="2") {drawDistantStar(750+(c*4), 250-(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+(((0*fm)+(lm*2))-(um*2)))=="2") {drawDistantStar(750+(c*4), 750+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*2))-(um*2))=="2") {drawDistantStar(250-(c*4), 750+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*2))+(um*2))=="2") {drawDistantStar(250-(c*4), 250-(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)+(um*3)))=="2") {drawDistantStar(500, 125-(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)+(lm*3)))=="2") {drawDistantStar(875+(c*4), 500, 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(um*3)))=="2") {drawDistantStar(500, 875+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*3)))=="2") {drawDistantStar(125-(c*4), 500, 15+Math.floor(c/2));}
+		if (loopView(currentLocation+(((0*fm)+(lm*3))+(um*3)))=="2") {drawDistantStar(875+(c*4), 125-(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+(((0*fm)+(lm*3))-(um*3)))=="2") {drawDistantStar(875+(c*4), 875+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*3))-(um*3))=="2") {drawDistantStar(125-(c*4), 875+(c*4), 15+Math.floor(c/2));}
+		if (loopView(currentLocation+((0*fm)-(lm*3))+(um*3))=="2") {drawDistantStar(125-(c*4), 125-(c*4), 15+Math.floor(c/2));}
 		// NEW ART BEING POSITIONED WHERE OLD ART WAS AND MOVING TO POSITION
 		//back top left
 		whichArt(loopView(currentLocation + um + 2*fm - lm),300 + (a[7]*75) - (num[7]),300 + (a[7]*75) - (num[7]),100 + (a[8]*75) - (num[8]),currentLocation + um + 2*fm - lm);
@@ -1165,6 +1164,8 @@ function autoAccel(intFunc) {
 			weCruisin = true;
 			clearInterval(intFunc);
 			drawField(currentLocation);
+			moves = moves+1;
+			console.log(moves);
 			return accelerate();
 		}
 	}
@@ -1343,6 +1344,26 @@ function rotateShape(direction, rAxes, lr) {
 
 // Only shapes here down
 function drawField(pos) {
+	newStars.forEach(function(el) {drawDistantStar(el.xPos, el.yPos, el.size);});
+
+
+	ctx.beginPath();
+	ctx.moveTo(50, 50);
+	ctx.lineTo(950, 50);
+	ctx.lineTo(950, 950);
+	ctx.lineTo(50, 950);
+	ctx.lineTo(50, 50);
+	ctx.moveTo(50, 350);
+	ctx.lineTo(950, 350);
+	ctx.moveTo(50, 650);
+	ctx.lineTo(950, 650);
+	ctx.moveTo(350, 50);
+	ctx.lineTo(350, 950);
+	ctx.moveTo(650, 50);
+	ctx.lineTo(650, 950);
+	ctx.strokeStyle = "rgba(100, 100, 100,1)";
+	ctx.lineWidth = 4;
+	ctx.stroke();
 	//back top left
 	whichArt(loopView(pos + um + 2*fm - lm),300,300,100,pos + um + 2*fm - lm);
 	//back top right
@@ -1453,7 +1474,7 @@ function drawField(pos) {
 		break;
 		default:console.log("Not set up yet");
 	}
-}
+};
 
 function SpaceObject(posNum,xPos,yPos,size,actPos) {
 	this.posNum = posNum;
@@ -1461,13 +1482,15 @@ function SpaceObject(posNum,xPos,yPos,size,actPos) {
 	this.yPos = yPos;
 	this.size = size;
 	this.actPos = actPos;
-}
+};
 var oldPlanets = [];
 
 function rgbGenerateFromCurPos(curPos) {
-	var temp = curPos.toString();
+	if (curPos > worldArray.length) {var temp = (curPos - worldArray.length).toString();}
+	else if (curPos < 1) {var temp = (curPos + worldArray.length).toString();}
+	else {var temp = curPos.toString();};
 	return [(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*12)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*21)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*16)%206)+50]
-}
+};
 
 // ART DRAWN HERE
 function whichArt(posNum,xPos,yPos,size,actPos) {
@@ -1486,11 +1509,14 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.beginPath();
 			ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
 		    ctx.fillStyle = "rgba(255, 255, 245, 1)";
-		    ctx.shadowColor = "#FFFF00" 
-		    ctx.shadowOffsetX = 0;
-			ctx.shadowOffsetY = 0;
-			ctx.shadowBlur = 50; 
+		 //    ctx.shadowColor = "#FFFF00" 
+		 //    ctx.shadowOffsetX = 0;
+			// ctx.shadowOffsetY = 0;
+			// ctx.shadowBlur = 50; 
 		    ctx.fill();
+		    ctx.strokeStyle='#FFFF00';
+		    ctx.lineWidth=Math.floor(size/30);
+		    ctx.stroke();
 			ctx.closePath();
 			ctx.restore();
 			break;
@@ -1499,11 +1525,14 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true);
 		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.shadowColor = "#0000FF" 
-		    ctx.shadowOffsetX = 0;
-			ctx.shadowOffsetY = 0;
-			ctx.shadowBlur = 100;
+		    // ctx.shadowColor = "#0000FF" 
+		    // ctx.shadowOffsetX = 0;
+			// ctx.shadowOffsetY = 0;
+			// ctx.shadowBlur = 100;
 		    ctx.fill();
+		    ctx.strokeStyle="rgba("+rgbGenerateFromCurPos(actPos)[2]+","+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+", 1)";
+		    ctx.lineWidth=Math.floor(size/30);
+		    ctx.stroke();
 			ctx.closePath();
 			ctx.restore();
 			break;
@@ -1512,10 +1541,10 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.beginPath();
 		    ctx.arc(xPos, yPos, size/2, size/2, Math.PI * 2, true)
 		    ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", .5)";
-		    ctx.shadowColor = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.shadowOffsetX = 0;
-			ctx.shadowOffsetY = 0;
-			ctx.shadowBlur = 100;
+		 //    ctx.shadowColor = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+		 //    ctx.shadowOffsetX = 0;
+			// ctx.shadowOffsetY = 0;
+			// ctx.shadowBlur = 100;
 		    ctx.fill();
 			ctx.closePath();
 			ctx.restore();
@@ -1643,6 +1672,8 @@ generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 
 function generalState() {
+	moves = moves+1;
+	console.log(moves);
 	oldPlanets.length = 0;
 	oldStars.length = 0;
 	newStars.length = 0;
@@ -1813,42 +1844,39 @@ var newStars = [];
 function backgroundArt() {
 	var xi = 3;
 	while (xi<51) {
-		if (loopView(currentLocation+(xi*fm))=="2") {recordDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-um))=="2") {recordDistantStar(500, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-lm))=="2") {recordDistantStar(375, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+um))=="2") {recordDistantStar(500, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+lm))=="2") {recordDistantStar(625, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+(((xi*fm)-lm)-um))=="2") {recordDistantStar(375, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+(((xi*fm)-lm)+um))=="2") {recordDistantStar(375, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+lm)-um)=="2") {recordDistantStar(625, 625, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+lm)+um)=="2") {recordDistantStar(625, 375, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else {xi = xi + 1;};
+		if (loopView(currentLocation+(xi*fm))=="2") {recordDistantStar(500, 500, 5+(30-(Math.floor(xi/5)*3)));}
+		if (loopView(currentLocation+((xi*fm)-um))=="2") {recordDistantStar(500, 625, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-lm))=="2") {recordDistantStar(375, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+um))=="2") {recordDistantStar(500, 375, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+lm))=="2") {recordDistantStar(625, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)-lm)-um))=="2") {recordDistantStar(375, 625, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)-lm)+um))=="2") {recordDistantStar(375, 375, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+lm)-um)=="2") {recordDistantStar(625, 625, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+lm)+um)=="2") {recordDistantStar(625, 375, 5+(10-Math.floor(xi/5)));}
+		xi = xi + 1;
 	};
 };
 
 function outerBackgroundArt() {
 	var xi = 1;
 	while (xi<51) {
-		// outer1
-		if (loopView(currentLocation+((xi*fm)+(um*2)))=="2") {recordDistantStar(500, 250, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+(lm*2)))=="2") {recordDistantStar(750, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(um*2)))=="2") {recordDistantStar(500, 750, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*2)))=="2") {recordDistantStar(250, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+(((xi*fm)+(lm*2))+(um*2)))=="2") {recordDistantStar(750, 250, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+(((xi*fm)+(lm*2))-(um*2)))=="2") {recordDistantStar(750, 750, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*2))-(um*2))=="2") {recordDistantStar(250, 750, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*2))+(um*2))=="2") {recordDistantStar(250, 250, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		// outer2
-		else if (loopView(currentLocation+((xi*fm)+(um*3)))=="2") {recordDistantStar(500, 125, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)+(lm*3)))=="2") {recordDistantStar(875, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(um*3)))=="2") {recordDistantStar(500, 875, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*3)))=="2") {recordDistantStar(125, 500, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-
-		else if (loopView(currentLocation+(((xi*fm)+(lm*3))+(um*3)))=="2") {recordDistantStar(875, 125, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+(((xi*fm)+(lm*3))-(um*3)))=="2") {recordDistantStar(875, 875, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*3))-(um*3))=="2") {recordDistantStar(125, 875, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else if (loopView(currentLocation+((xi*fm)-(lm*3))+(um*3))=="2") {recordDistantStar(125, 125, 5+(10-Math.floor(xi/5)));xi = xi + 1;}
-		else {xi = xi + 1;};
+		if (loopView(currentLocation+((xi*fm)+(um*2)))=="2") {recordDistantStar(500, 250, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+(lm*2)))=="2") {recordDistantStar(750, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(um*2)))=="2") {recordDistantStar(500, 750, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*2)))=="2") {recordDistantStar(250, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)+(lm*2))+(um*2)))=="2") {recordDistantStar(750, 250, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)+(lm*2))-(um*2)))=="2") {recordDistantStar(750, 750, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*2))-(um*2))=="2") {recordDistantStar(250, 750, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*2))+(um*2))=="2") {recordDistantStar(250, 250, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+(um*3)))=="2") {recordDistantStar(500, 125, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)+(lm*3)))=="2") {recordDistantStar(875, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(um*3)))=="2") {recordDistantStar(500, 875, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*3)))=="2") {recordDistantStar(125, 500, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)+(lm*3))+(um*3)))=="2") {recordDistantStar(875, 125, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+(((xi*fm)+(lm*3))-(um*3)))=="2") {recordDistantStar(875, 875, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*3))-(um*3))=="2") {recordDistantStar(125, 875, 5+(10-Math.floor(xi/5)));}
+		if (loopView(currentLocation+((xi*fm)-(lm*3))+(um*3))=="2") {recordDistantStar(125, 125, 5+(10-Math.floor(xi/5)));}
+		xi = xi + 1;
 	};
 };
 
