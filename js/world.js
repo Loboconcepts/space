@@ -25,7 +25,7 @@ canvas.style.width = "100%";
 canvas.style.maxWidth = "500px";
 canvas.style.height = "auto";
 canvas.style.maxHeight = "500px";
-canvas.style.backgroundColor = "#000000";
+canvas.style.backgroundColor = "#000033";
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
@@ -819,7 +819,6 @@ function accelerate(){
 	backgroundArt();
 	outerBackgroundArt();
 	disableButtons(true);
-
 	var movement = setInterval(function() {
 		// drawField(currentLocation);
 		for (i=0;i<11;i++) {
@@ -834,7 +833,10 @@ function accelerate(){
 	  
 	  
 	  ctx.beginPath();
+
+
 	  newStars.forEach(function(el) {drawDistantStar(el.xPos, el.yPos, el.size);});
+	  
 
 
 		if (loopView(currentLocation+((0*fm)+(um*2)))=="2") {drawDistantStar(500, 250-(c*4), 15+Math.floor(c/2));}
@@ -1187,35 +1189,35 @@ function nebulaBackground() {
 	// The canvas element we are drawing into.      
 	var	img = new Image();	
 	
-	// // A puff.
-	// var	Puff = function(p) {				
-	// 	var	opacity,
-	// 		sy = (Math.random()*285)>>0,
-	// 		sx = (Math.random()*285)>>0;
+	// A puff.
+	function Puff(p) {				
+		var	opacity,
+			sy = (Math.random()*285)>>0,
+			sx = (Math.random()*285)>>0;
 		
-	// 	this.p = p;
+		this.p = p;
 				
-	// 	this.move = function(timeFac) {						
-	// 		p = this.p + 0.3 * timeFac;				
-	// 		opacity = (Math.sin(p*0.05)*0.5);						
-	// 		if(opacity <0) {
-	// 			p = opacity = 0;
-	// 			sy = (Math.random()*285)>>0;
-	// 			sx = (Math.random()*285)>>0;
-	// 		}												
-	// 		this.p = p;																			
-	// 		ctx.globalAlpha = opacity;						
-	// 		ctx.drawImage($canvas3[0], sy+p, sy+p, 285-(p*2),285-(p*2), 0,0, w, h);								
-	// 	};
-	// };
+		this.move = function(timeFac) {						
+			p = this.p + 0.3 * timeFac;				
+			opacity = (Math.sin(p*0.05)*0.5);						
+			if(opacity <0) {
+				p = opacity = 0;
+				sy = (Math.random()*285)>>0;
+				sx = (Math.random()*285)>>0;
+			}
+			this.p = p;
+			ctx.globalAlpha = opacity;						
+			ctx.drawImage(ctx, sy+p, sy+p, 285-(p*2),285-(p*2), 0,0, w, h);								
+		};
+	};
 	
-	// var	puffs = [];			
-	// var	sortPuff = function(p1,p2) { return p1.p-p2.p; };	
-	// puffs.push( new Puff(0) );
-	// puffs.push( new Puff(20) );
-	// puffs.push( new Puff(40) );
+	var	puffs = [];			
+	var	sortPuff = function(p1,p2) { return p1.p-p2.p; };	
+	puffs.push( new Puff(0) );
+	puffs.push( new Puff(20) );
+	puffs.push( new Puff(40) );
 	
-	// var	newTime, oldTime = 0, timeFac;
+	var	newTime, oldTime = 0, timeFac;
 			
 	// var	loop = function() {								
 	// 	newTime = new Date().getTime();				
@@ -1234,13 +1236,13 @@ function nebulaBackground() {
 	// 	ctx2.drawImage( $canvas[0] ,0,0,570,570);				
 	// 	setTimeout(loop, 10 );				
 	// };
-	// // Turns out Chrome is much faster doing bitmap work if the bitmap is in an existing canvas rather
-	// // than an IMG, VIDEO etc. So draw the big nebula image into canvas3
-	// var	$canvas3 = $('#canvas3');
-	// var	ctx3 = $canvas3[0].getContext('2d');
-	// $(img).bind('load',null, function() {  ctx3.drawImage(img, 0,0, 570, 570);	loop(); });
+	// loop();
+	// Turns out Chrome is much faster doing bitmap work if the bitmap is in an existing canvas rather
+	// than an IMG, VIDEO etc. So draw the big nebula image into canvas3
+	ctx.drawImage(img, 0,0, 570, 570);	
+	
 	ctx.drawImage(img, 0,0,1000,1000);
-	img.src = '/img/nebula.jpg';
+	img.src = 'img/nebula.jpg';
 
 };
 
