@@ -1,59 +1,66 @@
 //http://www.collectedwebs.com/art/colors/hair/
 var hairColors = ['#090806','#2C222B','#71635A','#B7A69E','#D6C4C2','#CABFB1','#DCD0BA','#FFF5E1','#E6CEA8','#E5C8A8','#DEBC99','#B89778','#A56B46','#B55239','#8D4A43','#91553D','#533D32','#3B3024','#554838','#4E433F','#504444','#6A4E42','#A7856A','#977961',];
 var eyeColors = ['#181818','#906048','#784830','#000000','#601800','#f0f0f0','#7890d8','#c0d8f0','#607860','#a89060','#a8c0f0','#60a8d8','#d8f0a8','#483018','#786060','#90a8d8','#307890','#181848','#301878','#000030','#601818','#90d878','#78d8d8','#a8a878','#fffff0','#d8c078','#609078','#f0d890','#78c060','#f0ffff','#60a8a8','#d8a830','#d87848','#a8f0f0','#f0fff0','#903000','#4890a8'];
-function generateCharacter() {
-	
+function generateAlien(xPos,yPos) {
+	if (!xPos) {xPos = 0};
+	if (!yPos) {yPos = 0};
 
-	var gender;
-	if (gender == null) {genChoice = Math.floor(Math.random() * 2)};
-	var topheadWidth = 230 + Math.floor(Math.random() * 80);
-	var jawHeight = Math.floor(Math.random() * 255);
-	var jawWidth = 250 + Math.floor(Math.random() * 110);
-	var noseWidth = 40 + Math.floor(Math.random() * [80,40][genChoice]);
-	var noseHeight = 40 + Math.floor(Math.random() * 80);
-	var mouthArr = [150 + Math.floor(Math.random() * 50),150 + Math.floor(Math.random() * 70),150 + Math.floor(Math.random() * 50)]
-	var eyesSize = 150 + Math.floor(Math.random() * 50);
-	var hairWidth = topheadWidth + [Math.floor(Math.random() * 50),Math.floor(Math.random() * 150)][genChoice];
-	var neckWidth = 70 + Math.floor(Math.random() * [110,50][genChoice]);
-	var sexyness = 500 + Math.floor(Math.random() * 500);
-	var bodyWidth = 270 + Math.floor(Math.random() * [200,80][genChoice]);
-	var lookDirection = 115;
-	var hairLength = [200,400][genChoice] + Math.floor(Math.random() * [300,500][genChoice]);
-	var bangs = Math.floor(Math.random() * 300);
+	var bald = currentLocation.toString(2)[currentLocation.toString(2).length-1];
+	var tail = currentLocation.toString(2)[currentLocation.toString(2).length-2];
+	var genChoice = currentLocation.toString(2)[currentLocation.toString(2).length-3];
+	var thirdEye = currentLocation.toString(2)[currentLocation.toString(2).length-4];
+	
+	var topheadWidth = 230 + currentLocation%80;
+	var jawHeight = currentLocation%255;
+	var jawWidth = 250 + currentLocation%110;
+	var noseWidth = 40 + currentLocation%[80,40][genChoice];
+	var noseHeight = 40 + currentLocation%80;
+	var mouthArr = [150 + currentLocation%50,150 + currentLocation%70,150 + currentLocation%50]
+	var eyesSize = 150 + currentLocation%50;
+	var hairWidth = topheadWidth + [currentLocation%50,currentLocation%150][genChoice];
+	var neckWidth = 70 + currentLocation%[110,50][genChoice];
+	var sexyness = 500 + currentLocation%500;
+	var bodyWidth = 270 + currentLocation%[200,80][genChoice];
+	var lookDirection = (eyesSize+50)/2;
+	var hairLength = [200,400][genChoice] + currentLocation%[300,500][genChoice];
+	var bangs = currentLocation%300;
 	var bangsHeight = 300;
-	var hairPart = Math.floor(Math.random() * 220);
-	hairPart *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+	var hairPart = currentLocation%220;
+	hairPart *= currentLocation%2 == 1 ? 1 : -1;
 	var eyeShadow = [5,8][genChoice];
-	var hairPuff = Math.max(topheadWidth,jawWidth) + Math.floor(Math.random() * 350);
-	var mouthOpen = 20 + Math.floor(Math.random() * 80);
-	var hairColor = hairColors[Math.floor(Math.random() * hairColors.length)];
+	var hairPuff = Math.max(topheadWidth,jawWidth) + currentLocation%350;
+	var mouthOpen = 20 + currentLocation%80;
+	var hairColor = hairColors[currentLocation%hairColors.length];
 	var skinColor = "rgba("+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[2]+","+rgbGenerateFromCurPos(currentLocation)[1]+", 1)";
 	var shirtColor = "rgb("+ Math.floor(Math.random() * 125) + "," + Math.floor(Math.random() * 125) + "," + Math.floor(Math.random() * 125) + ")";
-	var eyeColor = eyeColors[Math.floor(Math.random() * eyeColors.length)];
+	var eyeColor = eyeColors[currentLocation%eyeColors.length];
 	var lipColor = [skinColor,"#770000"][genChoice];
-	var hairHeight = 270 + Math.floor(Math.random() * 150);
-	var chinHeight = 300 + Math.floor(Math.random() * 100);
-	var chinWidth = 75 + Math.floor(Math.random() * 50);
-	var eyeHeight = Math.floor(Math.random() * 50);
+	var hairHeight = 270 + currentLocation%150;
+	var chinHeight = 300 + currentLocation%100;
+	var chinWidth = 75 + currentLocation%50;
+	var eyeHeight = currentLocation%50;
 
 
 	var physicalAttributes = [topheadWidth,jawHeight,jawWidth,noseWidth,noseHeight,mouthArr,eyesSize,hairWidth,neckWidth,sexyness,bodyWidth,lookDirection,hairLength,bangs,bangsHeight,hairPart,eyeShadow,hairPuff,mouthOpen,hairColor,skinColor,shirtColor,eyeColor,lipColor,hairHeight,chinHeight,chinWidth];
 	
 	ctx.save();
-	ctx.translate(canvas.width/2, canvas.height/2);
+	ctx.translate(canvas.width/2+xPos, canvas.height/2+yPos);
 	ctx.strokeStyle="#000000";
 	ctx.lineWidth=5;
 
-	//tail
-	ctx.beginPath();
-	ctx.fillStyle = skinColor;
-	ctx.moveTo(0,500);
-	ctx.quadraticCurveTo(-100,250,-500,0);
-	ctx.quadraticCurveTo(-300,250,0,500);
-    ctx.fill();
-    ctx.stroke();
+	if (tail==0) {
+		//tail
+		ctx.beginPath();
+		ctx.fillStyle = skinColor;
+		ctx.moveTo(0,500);
+		ctx.quadraticCurveTo(-100,0,-400,0);
+		ctx.quadraticCurveTo(-500,0,-400,100);
+		ctx.quadraticCurveTo(-250,100,0,500);
+	    ctx.fill();
+	    ctx.stroke();
+	}
 
-    if (bald) {
+    if (bald==1) {
 		//hair
 		ctx.beginPath();
 		ctx.fillStyle = hairColor;
@@ -84,10 +91,9 @@ function generateCharacter() {
     ctx.fill();
     ctx.stroke();
     
-    var bald = true;
 	//outer face
 	ctx.beginPath();
-	if (!bald) {
+	if (bald==1) {
 		ctx.moveTo(hairPart, -bangsHeight);
 		ctx.quadraticCurveTo(-topheadWidth, -bangs,-topheadWidth, -100);	
 		ctx.quadraticCurveTo(-jawWidth, jawHeight, -chinWidth, 300);
@@ -106,12 +112,30 @@ function generateCharacter() {
     ctx.fill();
     ctx.stroke();
     ctx.clip();
+
     //nose
     ctx.beginPath();
-	ctx.moveTo(20, -100+eyeHeight);
-	ctx.quadraticCurveTo(noseWidth, 0, noseWidth, noseHeight+eyeHeight);
-	ctx.lineTo(0, noseHeight+eyeHeight);
+    switch (currentLocation%3) {
+    	case 0:
+			ctx.moveTo(20, -100+eyeHeight);
+			ctx.quadraticCurveTo(noseWidth, 0, noseWidth, noseHeight+eyeHeight);
+			ctx.lineTo(0, noseHeight+eyeHeight);
+	    	break;
+    	case 1:
+			ctx.arc(0, 0+eyeHeight, 40, 0, Math.PI * 2, true);
+    	break;
+    	case 2:
+    	console.log("none");
+    	break;
+    	default:
+    	console.log("default");
+    	break;
+
+    };
     ctx.stroke();
+    
+    
+
     //mouth
     ctx.beginPath();
     ctx.fillStyle = "#000000"
@@ -143,6 +167,11 @@ function generateCharacter() {
 	ctx.moveTo(eyesSize+eyeShadow, -100+eyeHeight-eyeShadow);
 	ctx.quadraticCurveTo(100+eyeShadow, -eyesSize+eyeHeight-eyeShadow, 50 - eyeShadow, -100+eyeHeight-eyeShadow);
 	ctx.quadraticCurveTo(80, -50+eyeHeight + eyeShadow, eyesSize+eyeShadow, -100+eyeHeight+eyeShadow);
+	if (thirdEye==1) {
+		ctx.moveTo(-60, -200);
+		ctx.quadraticCurveTo(0, -150+eyeShadow, 60, -200);
+		ctx.quadraticCurveTo(0, -250-eyeShadow, -60, -200);
+	}
 	ctx.fill();
     //eyes
     ctx.fillStyle = "#ffffff"
@@ -153,22 +182,34 @@ function generateCharacter() {
 	ctx.moveTo(eyesSize, -100+eyeHeight);
 	ctx.quadraticCurveTo(100, -eyesSize+eyeHeight, 50, -100+eyeHeight);
 	ctx.quadraticCurveTo(100, -50+eyeHeight, eyesSize, -100+eyeHeight);
+
+	if (thirdEye==1) {
+		ctx.moveTo(-50, -200);
+		ctx.quadraticCurveTo(0, -150, 50, -200);
+		ctx.quadraticCurveTo(0, -250, -50, -200);
+	};
+	
 	ctx.fill();
-    // ctx.stroke();
     ctx.clip();
 
     //cornea
     
     ctx.beginPath();
     ctx.fillStyle = eyeColor;
-    ctx.arc(lookDirection-(160+(eyesSize/3)), -100+eyeHeight, 30, 0, Math.PI * 2, true);
+    ctx.arc(-lookDirection, -100+eyeHeight, 30, 0, Math.PI * 2, true);
     ctx.fill();
     ctx.stroke();
-
     ctx.beginPath();
     ctx.arc(lookDirection, -100+eyeHeight, 30, 0, Math.PI * 2, true);
     ctx.fill();
     ctx.stroke();
+
+	if (thirdEye==1) {
+	    ctx.beginPath();
+	    ctx.arc(0, -200, 20, 0, Math.PI * 2, true);
+	    ctx.fill();
+	    ctx.stroke();
+	}
     // ctx.closePath();
 
     ctx.restore();

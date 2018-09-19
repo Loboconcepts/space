@@ -602,8 +602,15 @@ function land(a){
 	  	// ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
 		// ctx.fill();
 	  	whichArt(loopView(currentLocation),500,500+(c*29),1000+(c*57),currentLocation);
+
+	  	
 		
 		ctx.closePath();
+
+		// if (c > 206 ) {
+	 //  		alienLife(0,(1000-((c-200)*20)))	
+	 //  		console.log((3120-((c-200)*20)));
+	 //  	};
 
 	  if (c > 255) clearInterval(movement),disableButtons(false);
 	}, 15);

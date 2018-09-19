@@ -140,6 +140,7 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully. <br>Welcome to " + planetNamer(), 3800);
 					computerReply(scanPlanet(), 4800);
+					setTimeout(function() {alienLife(0,0)}, 5200);
 					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
 					soundEffect(196.0, 'sine',4,[.3,.7,1,.5]);
 				}
