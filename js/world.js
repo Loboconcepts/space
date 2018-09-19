@@ -25,7 +25,7 @@ canvas.style.width = "100%";
 canvas.style.maxWidth = "500px";
 canvas.style.height = "auto";
 canvas.style.maxHeight = "500px";
-canvas.style.backgroundColor = "#000033";
+canvas.style.backgroundColor = "#000000";
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
