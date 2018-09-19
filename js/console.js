@@ -73,7 +73,7 @@ function understandUserInput(ui) {
 				computerReply("Ignored");
 			};
 			break;
-		case "accelerate":case "accel":
+		case "accelerate":case "accel":case "a":
 			if (!weCruisin && !isLanded) {
 				if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
 					computerReply("Error. Flying through shrapnel will damage craft.");
@@ -194,10 +194,13 @@ function understandUserInput(ui) {
 			computerReply("We are currently at galacube " + currentLocation);
 			break;
 		case "help":case "what":case "instructions":case "manual":
-			computerReply("NAV COMMANDS, STATUS");
+			computerReply("You are in the universe. Capital letters usually implies a console command. Helpful commands: CONTROLS, COMMANDS, STATUS");
 			break;
-		case "controls":case "commands":case "nav commands":case "navigation commands":
-			computerReply("nav commands: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH, SCAN, FIRE, HAIL, HARVEST. Most commands have obvious shortcuts.");
+		case "controls":case "nav":case "nav commands":case "navigation commands":
+			computerReply("nav controls: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH, SCAN, FIRE, HAIL, HARVEST. Most commands have obvious shortcuts.");
+			break;
+		case "actions":case "commands":case "interaction":case "navigation commands":
+			computerReply("commands: SCAN, FIRE, HAIL, HARVEST, CHARGE, RADAR, WARP. You can TRADE with aliens.");
 			break;
 		case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
 			computerReply(timeOfDay() + " Commander.");
