@@ -139,11 +139,14 @@ function understandUserInput(ui) {
 					computerReply("Landing sequence initiated...");
 					land(movArrArr[2]);
 					isLanded = true;
-					computerReply("Land sequence completed successfully. <br>Welcome to " + planetNamer(), 3800);
+					computerReply("Land sequence completed successfully.", 3800);
 					computerReply(scanPlanet(), 4800);
 					if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
 			  			landConversation = true;
-			  			alienReply("Welcome to " + planetNamer() + ".", 5400);
+			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
+			  		}
+			  		else {
+			  			computerReply("Welcome to " + planetNamer() + ".", 5800);
 			  		};
 					// setTimeout(function() {alienLife(0,0)}, 5200);
 					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
