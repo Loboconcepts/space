@@ -607,10 +607,10 @@ function land(a){
 		
 		ctx.closePath();
 
-		// if (c > 206 ) {
-	 //  		alienLife(0,(1000-((c-200)*20)))	
-	 //  		console.log((3120-((c-200)*20)));
-	 //  	};
+		if (c > 205 ) {
+	  		alienLife(0,(1125-((c-200)*20)))	
+	  		console.log((1125-((c-200)*20)));
+	  	};
 
 	  if (c > 255) clearInterval(movement),disableButtons(false);
 	}, 15);
@@ -633,6 +633,11 @@ function launch(a){
 		// ctx.fill();
 		whichArt(loopView(currentLocation),500,7895 - (c*29),15535-(c*57),currentLocation);
 		ctx.closePath();
+
+		if (c < 51 ) {
+	  		alienLife(0,0+c*20);
+	  		console.log(0+(c*20));
+	  	};
 
 	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
 	}, 15);
