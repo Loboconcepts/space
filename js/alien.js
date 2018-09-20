@@ -125,7 +125,7 @@ function generateAlien(xPos,yPos) {
 			ctx.arc(0, 0+eyeHeight, 40, 0, Math.PI * 2, true);
     	break;
     	case 2:
-    	console.log("none");
+    	console.log("no nose");
     	break;
     	default:
     	console.log("default");

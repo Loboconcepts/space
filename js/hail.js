@@ -143,7 +143,7 @@ function conversation(ui) {
 			break;
 		case (ui.toLowerCase().replace(/\?|\!|\./g,'').match(/\btrade\b/) || {}).input:
 			if (harvestedLocations.indexOf(alienLocation.toString(36)) == -1) {
-				offer();
+				offer(alienLocation);
 				alienReply("I require " + dealOrNoDeal[0] + " " + dealOrNoDeal[1] + " for " + dealOrNoDeal[2] + " " + dealOrNoDeal[3]);
 				currentlyTrading = true;	
 			}
@@ -187,10 +187,10 @@ function conversation(ui) {
 
 var dealOrNoDeal = [];
 
-function offer() {
+function offer(xLocation) {
 	dealOrNoDeal = [];
-	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2])+1))*8)
-	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1]) {
+	dealOrNoDeal.push((((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1])+1)+((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-2])+1))*8)
+	switch (xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1]) {
 		case (0):case (5):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
@@ -207,8 +207,8 @@ function offer() {
 			dealOrNoDeal.push("ALL IRON OXIDE, HYDROCARBON, AND HYDROXIDE");
 			break;
 	};
-	dealOrNoDeal.push((((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-1])+1)+((alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-3])+1))*9)
-	switch (alienLocation.toString().split("").map(Number)[alienLocation.toString().split("").length-2]) {
+	dealOrNoDeal.push((((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1])+1)+((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-3])+1))*9)
+	switch (xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-2]) {
 		case (0):case (5):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;

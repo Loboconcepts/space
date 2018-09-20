@@ -608,8 +608,9 @@ function land(a){
 		ctx.closePath();
 
 		if (c > 205 ) {
-	  		alienLife(0,(1125-((c-200)*20)))	
-	  		console.log((1125-((c-200)*20)));
+	  		if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+				generateAlien(0,(1125-((c-200)*20)));
+			};
 	  	};
 
 	  if (c > 255) clearInterval(movement),disableButtons(false);
@@ -635,8 +636,9 @@ function launch(a){
 		ctx.closePath();
 
 		if (c < 51 ) {
-	  		alienLife(0,0+c*20);
-	  		console.log(0+(c*20));
+			if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+	  			generateAlien(0,0+c*20);
+	  		};
 	  	};
 
 	  if (c > 255) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();

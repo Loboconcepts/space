@@ -7,7 +7,8 @@ function submitUserInput(x) {
 function understandUserInput(ui) {
 	document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
 	if (alienConversation && currentlyTrading) {return trading(ui)}
-	else if (alienConversation) {return conversation(ui)};
+	else if (alienConversation) {return conversation(ui)}
+	else if (landConversation) {return landConvo(ui)}
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {
@@ -140,6 +141,10 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully. <br>Welcome to " + planetNamer(), 3800);
 					computerReply(scanPlanet(), 4800);
+					if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+			  			landConversation = true;
+			  			alienReply("Welcome to " + planetNamer() + ".", 5400);
+			  		};
 					// setTimeout(function() {alienLife(0,0)}, 5200);
 					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
 					soundEffect(196.0, 'sine',4,[.3,.7,1,.5]);
@@ -183,11 +188,11 @@ function understandUserInput(ui) {
 				computerReply("Ignored");
 			}
 			break;
-		case "cruise control on":case "cc on":
+		case "cruise control on":case "cc on":case "ccon":
 			cruiseControl=true;
 			computerReply("Cruise control is enabled.");
 			break;
-		case "cruise control off":case "cc off":case "stop":case "s":
+		case "cruise control off":case "cc off":case "ccoff":case "stop":case "s":
 			cruiseControl=false;
 			computerReply("Cruise control is disabled.");
 			break;

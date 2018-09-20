@@ -31,6 +31,7 @@ var commandChoice = -1;
 var cruiseControl = false;
 var isLanded = false;
 var alienConversation = false;
+var landConversation = false;
 var currentlyTrading = false;
 var harvestedLocations = [];
 // [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
