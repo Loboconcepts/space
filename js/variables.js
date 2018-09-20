@@ -33,6 +33,7 @@ var isLanded = false;
 var alienConversation = false;
 var landConversation = false;
 var currentlyTrading = false;
+var dealOrNoDeal = [];
 var harvestedLocations = [];
 // [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 var inventory = [100,0,0,0,0];

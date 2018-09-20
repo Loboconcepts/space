@@ -7,6 +7,7 @@ function submitUserInput(x) {
 function understandUserInput(ui) {
 	document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
 	if (alienConversation && currentlyTrading) {return trading(ui)}
+	else if (landConversation && currentlyTrading) {return landTrading(ui)}
 	else if (alienConversation) {return conversation(ui)}
 	else if (landConversation) {return landConvo(ui)}
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {

@@ -185,8 +185,6 @@ function conversation(ui) {
 	};
 };
 
-var dealOrNoDeal = [];
-
 function offer(xLocation) {
 	dealOrNoDeal = [];
 	dealOrNoDeal.push((((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1])+1)+((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-2])+1))*8)
