@@ -608,7 +608,7 @@ function land(a){
 		ctx.closePath();
 
 		if (c > 205 ) {
-	  		if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+	  		if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
 				generateAlien(0,(1125-((c-200)*20)));
 			};
 	  	};
@@ -636,7 +636,7 @@ function launch(a){
 		ctx.closePath();
 
 		if (c < 51 ) {
-			if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+			if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
 	  			generateAlien(0,0+c*20);
 	  		};
 	  	};
@@ -977,7 +977,7 @@ function accelerate(){
 			switch (direction) {
 				case ("DOWN"):
 					whichArt(oldPlanets[17].posNum,oldPlanets[17].xPos,oldPlanets[17].yPos,oldPlanets[17].size + num[9],oldPlanets[17].actPos);
-					whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos,oldPlanets[18].size + num[9],oldPlanets[18].actPos);
+					whichArt(oldPlanets[18].posNum,oldPlanets[18].xPos,oldPlanets[18].yPos + num[10]*3,oldPlanets[18].size + num[10]*2,oldPlanets[18].actPos);
 				break;
 				case ("UP"):
 					if (c < 30) {
@@ -1173,7 +1173,6 @@ function autoAccel(intFunc) {
 			drawField(currentLocation);
 			generalState();
 			takeDamage(20);
-			computerReply("Solar energy: " + inventory[0] + "%",100);
 			return cruiseControl = false;
 		}
 		else {
@@ -1181,7 +1180,6 @@ function autoAccel(intFunc) {
 			clearInterval(intFunc);
 			drawField(currentLocation);
 			moves = moves+1;
-			console.log(moves);
 			return accelerate();
 		}
 	}
@@ -1190,7 +1188,6 @@ function autoAccel(intFunc) {
 		drawField(currentLocation);
 		generalState();
 		takeDamage(20);
-		computerReply("Solar energy: " + inventory[0] + "%",100);
 	}
 	else {
 		weCruisin = false;
@@ -1763,7 +1760,6 @@ cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
 
 function generalState() {
 	moves = moves+1;
-	console.log(moves);
 	oldPlanets.length = 0;
 	oldStars.length = 0;
 	newStars.length = 0;

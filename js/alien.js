@@ -108,7 +108,7 @@ function generateAlien(xPos,yPos) {
 		ctx.quadraticCurveTo(jawWidth, jawHeight, topheadWidth, -200);
 		ctx.bezierCurveTo(200, -500,-200, -500,-topheadWidth, -200);
 	};
-	// ctx.bezierCurveTo(topheadWidth, -500, -topheadWidth, -500, -topheadWidth, -100);
+
     ctx.fill();
     ctx.stroke();
     ctx.clip();
@@ -130,12 +130,9 @@ function generateAlien(xPos,yPos) {
     	default:
     	console.log("default");
     	break;
-
     };
     ctx.stroke();
     
-    
-
     //mouth
     ctx.beginPath();
     ctx.fillStyle = "#000000"

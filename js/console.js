@@ -80,9 +80,9 @@ function understandUserInput(ui) {
 				if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
 					computerReply("Error. Flying through shrapnel will damage craft.");
 				}
-				else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
-					computerReply("Error. Collision course detected.");
-				}
+				// else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+				// 	computerReply("Error. Collision course detected.");
+				// }
 				else {
 					soundEffect([130.8,146.8,164.8,174.6,196.0,220.0,246.9,261.6][Math.floor(Math.random()*[130.8,146.8,164.8,174.6,196.0,220.0,246.9,261.6].length)], 'sine',2,[.8,1,.8,0.3])
 					computerReply("Accelerating.");
@@ -142,7 +142,7 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully.", 3800);
 					computerReply(scanPlanet(), 4800);
-					if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
+					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
 			  			landConversation = true;
 			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
 			  		}
@@ -180,9 +180,9 @@ function understandUserInput(ui) {
 				if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
 					computerReply("Error. Flying through shrapnel will damage craft.");
 				}
-				else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
-					computerReply("Error. Collision course detected.");
-				}
+				// else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
+				// 	computerReply("Error. Collision course detected.");
+				// }
 				else {
 					computerReply("Accelerating.");
 					accelerate();
@@ -653,6 +653,7 @@ function spliceWorldArray(where, withWhat) {
 function reduceSolarEnergy(howMuch) {
 	inventory[0] = inventory[0] - howMuch;
 	if (inventory[0] < 1) {
+		computerReply("Solar energy: " + inventory[0] + "%",100);
 		computerReply("*CRITICAL DAMAGE*",200);
 		inventory[0] = 0;
 		inventory[1] = 0;
