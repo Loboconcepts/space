@@ -1161,14 +1161,7 @@ function autoAccel(intFunc) {
 	oldStars.length = 0;
 	newStars.length = 0;
 	if (cruiseControl) {
-		if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
-			weCruisin = false;
-			drawField(currentLocation);
-			generalState();
-			computerReply("Error. Collision course detected.");
-			return cruiseControl = false;
-		}
-		else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
+		if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 			weCruisin = false;
 			drawField(currentLocation);
 			generalState();
@@ -1181,19 +1174,20 @@ function autoAccel(intFunc) {
 			drawField(currentLocation);
 			moves = moves+1;
 			return accelerate();
-		}
+		};
 	}
 	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 		weCruisin = false;
 		drawField(currentLocation);
 		generalState();
 		takeDamage(20);
+		return cruiseControl = false;
 	}
 	else {
 		weCruisin = false;
 		drawField(currentLocation);
 		generalState();
-	}
+	};
 };
 
 function nebulaBackground() {

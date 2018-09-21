@@ -35,10 +35,11 @@ var landConversation = false;
 var currentlyTrading = false;
 var dealOrNoDeal = [];
 var harvestedLocations = [];
+var maxSolarPower = 100;
 // [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 var inventory = [100,0,0,0,0];
-// [BLASTER, COMM, CRUISE CONTROL, SCANNER, SONAR]
-var shipWare = [true,true,true,true,true];
+// [[0]-COMM, [1]-BLASTER, [2]-CRUISE CONTROL, [3]-SCANNER, [4]-RADAR, [5]-WARP]
+var shipWare = [false,false,true,false,false,false];
 var goodOrEvil = 0;
 var goodEvil = [false,false];
 var storyTime = false;

@@ -101,8 +101,8 @@ function understandUserInput(ui) {
 				else if (inventory[0]<11) {
 					computerReply("Not enough solar energy.");
 				}
-				else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
-					computerReply("Error. Collision course detected.");
+				else if (!shipWare[5]) {
+					computerReply("Error. Check STATUS.");
 				}
 				else {
 					inventory[0] = inventory[0]-10;
@@ -120,7 +120,7 @@ function understandUserInput(ui) {
 			if (worldArray[currentLocation-1] == "2") {
 				computerReply("Charging...");
 				computerReply("SOLAR ENERGY fully charged.", 1700);
-				inventory[0] = 100;
+				inventory[0] = maxSolarPower;
 				soundEffect(196.0, 'sine',2,[.7,1,.3,0]);
 				soundEffect(329.6, 'sine',2,[.7,1,.3,0]);
 
@@ -177,16 +177,8 @@ function understandUserInput(ui) {
 		case "cc on accel":case "ccon a":
 			cruiseControl=true;
 			if (!weCruisin && !isLanded) {
-				if (worldArray[currentLocation-1] == "d" && direction == "DOWN") {
-					computerReply("Error. Flying through shrapnel will damage craft.");
-				}
-				// else if (worldArray[currentLocation-1] != "1" && direction == "DOWN") {
-				// 	computerReply("Error. Collision course detected.");
-				// }
-				else {
-					computerReply("Accelerating.");
-					accelerate();
-				}
+				computerReply("Accelerating.");
+				accelerate();
 			}
 			else {
 				computerReply("Ignored");
@@ -224,8 +216,8 @@ function understandUserInput(ui) {
 			break;
 		case "scan":
 			if (isLanded) {computerReply("Scanning...");computerReply(scanPlanet());}
-			else if (!weCruisin) {soundEffect(329.6,'triangle',2,[1,.8,.3,.1]);scannerAnimation();scanUniverse();}
-			else {computerReply("Ignored.")};
+			else if (!weCruisin && shipWare[3]) {soundEffect(329.6,'triangle',2,[1,.8,.3,.1]);scannerAnimation();scanUniverse();}
+			else {computerReply("Ignored. Check STATUS.")};
 			break;
 		case "thanks":case "thanks you":case "okay thanks":
 			computerReply("You're welcome.");
@@ -234,14 +226,24 @@ function understandUserInput(ui) {
 			computerReply("Repair what?");
 			break;
 		case "repair gun":case "repair guns":case "repair blaster":case "repair blasters":case "repair weapon":case "repair weapons":
-			if (shipWare[0]) {computerReply("ERROR. Ship BLASTER has no need for repair.");}
+			if (shipWare[1]) {computerReply("ERROR. Ship BLASTER has no need for repair.");}
 			else if (inventory[4] < 1) {computerReply("ERROR. BLASTER repair requires 1 ETERNITY ORB.");}
-			else {computerReply("BLASTER repaired.");shipWare[0] = true;inventory[4] = inventory[4] - 1;};
+			else {computerReply("BLASTER repaired.");shipWare[1] = true;inventory[4] = inventory[4] - 1;};
 			break;
 		case "repair comm":case "repair hail":case "repair communicator":case "repair communications":case "repair com":
-			if (shipWare[1]) {computerReply("ERROR. Ship COMM has no need for repair.");}
+			if (shipWare[0]) {computerReply("ERROR. Ship COMM has no need for repair.");}
 			else if (inventory[4] < 1) {computerReply("ERROR. COMM repair requires 1 ETERNITY ORB.");}
-			else {computerReply("COMM repaired.");shipWare[1] = true;inventory[4] = inventory[4] - 1;};
+			else {computerReply("COMM repaired.");shipWare[0] = true;inventory[4] = inventory[4] - 1;};
+			break;
+		case "repair scan":case "repair scanner":
+			if (shipWare[3]) {computerReply("ERROR. Ship SCANNER has no need for repair.");}
+			else if (inventory[4] < 1) {computerReply("ERROR. SCANNER repair requires 1 ETERNITY ORB.");}
+			else {computerReply("SCANNER repaired.");shipWare[3] = true;inventory[4] = inventory[4] - 1;};
+			break;
+		case "repair scan":case "repair scanner":
+			if (shipWare[2]) {computerReply("ERROR. Ship SCANNER has no need for repair.");}
+			else if (inventory[4] < 1) {computerReply("ERROR. SCANNER repair requires 1 ETERNITY ORB.");}
+			else {computerReply("SCANNER repaired.");shipWare[2] = true;inventory[4] = inventory[4] - 1;};
 			break;
 		case "open the pod bay doors":case "open the pod bay doors hal":
 			computerReply("I'm afraid I can't do that, Commander.");
@@ -253,14 +255,14 @@ function understandUserInput(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case "radar":
-			if (!weCruisin && !isLanded) {
+			if (!weCruisin && !isLanded && shipWare[4]) {
 				soundEffect(440,'triangle',2,[1,.8,.3,.1]);
 				radarAnimation();
 				computerReply("Scanning...");
 				radar();
 			}
 			else {
-				computerReply("Ignored.")
+				computerReply("Ignored. Check STATUS.")
 			}
 			break;
 		case "solar energy": case "energy":
@@ -281,16 +283,20 @@ function understandUserInput(ui) {
 			computerReply("HYDROCARBON: " + inventory[2], 4700);
 			computerReply("HYDROXIDE: " + inventory[3], 5700);
 			computerReply("ETERNITY ORBS: " + inventory[4], 6700);
-			if (shipWare[0]) {computerReply("BLASTER: Good.", 7700);}else{computerReply("BLASTER: ERROR.", 7700);};
-			if (shipWare[1]) {computerReply("COMM: Good.", 8700);}else{computerReply("COMM: ERROR.", 8700);};
+			if (shipWare[0]) {computerReply("COMM: Good.", 7700);}else{computerReply("COMM: ERROR.", 7700);};
+			if (shipWare[1]) {computerReply("BLASTER: Good.", 8700);}else{computerReply("BLASTER: ERROR.", 8700);};
 			if (shipWare[2]) {computerReply("CRUISE CONTROL: Good.", 9700);}else{computerReply("CRUISE CONTROL: ERROR.", 9700);};
 			if (shipWare[3]) {computerReply("SCANNER: Good.", 10700);}else{computerReply("SCANNER: ERROR.", 10700);};
+			if (shipWare[4]) {computerReply("RADAR: Good.", 3700);}else{computerReply("RADAR: ERROR.", 11700);};
+			if (shipWare[5]) {computerReply("WARP: Good.", 3700);}else{computerReply("WARP: ERROR.", 12700);};
 			break;
 		case "ship status":
-			if (shipWare[0]) {computerReply("BLASTER: Good.");}else{computerReply("BLASTER malfunctional.");};
-			if (shipWare[1]) {computerReply("COMM: Good.", 1700);}else{computerReply("COMM malfunctional.", 1700);};
+			if (shipWare[0]) {computerReply("COMM: Good.");}else{computerReply("COMM malfunctional.");};
+			if (shipWare[1]) {computerReply("BLASTER: Good.", 1700);}else{computerReply("BLASTER malfunctional.", 1700);};
 			if (shipWare[2]) {computerReply("CRUISE CONTROL: Good.", 2700);}else{computerReply("CRUISE CONTROL malfunctional.", 2700);};
 			if (shipWare[3]) {computerReply("SCANNER: Good.", 3700);}else{computerReply("SCANNER malfunctional.", 3700);};
+			if (shipWare[4]) {computerReply("RADAR: Good.", 3700);}else{computerReply("RADAR malfunctional.", 4700);};
+			if (shipWare[5]) {computerReply("WARP: Good.", 3700);}else{computerReply("WARP malfunctional.", 5700);};
 			break;
 		case "fire":
 			if (weCruisin) {
@@ -316,6 +322,10 @@ function understandUserInput(ui) {
 		case "hail":
 			if (!weCruisin && !isLanded && shipWare[1]) {hail();}
 			else {computerReply("ERROR. Check STATUS.");};
+			break;
+		case "god mode":
+			computerReply("God Mode enabled. All.");
+			shipWare = [true,true,true,true,true,true];
 			break;
 		case "":
 			break;
