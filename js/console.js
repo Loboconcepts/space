@@ -589,7 +589,7 @@ function harvestResources() {
 			else if (rgbGenerateFromCurPos(currentLocation)[2] > (rgbGenerateFromCurPos(currentLocation)[0] + 2) && rgbGenerateFromCurPos(currentLocation)[2] > (rgbGenerateFromCurPos(currentLocation)[1] + 2)) {
 				harvestedLocations.push(currentLocation.toString(36));
 				if (rgbGenerateFromCurPos(currentLocation)[2] > 200) {increase = Math.floor(Math.random() * 90) + 90;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[3] + ").");}
-				else if (rgbGenerateFromCurPos(currentLocation)[2] > 110) {increase = Math.floor(Math.random() * 70) + 54;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[2] + ").");}
+				else if (rgbGenerateFromCurPos(currentLocation)[2] > 110) {increase = Math.floor(Math.random() * 70) + 54;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[3] + ").");}
 				else {increase = Math.floor(Math.random() * 50) + 18;inventory[3] = inventory[3] + increase; return computerReply("HYDROXIDE: " + increase + " (" + inventory[3] + ").");};
 			}
 			else {harvestedLocations.push(currentLocation.toString(36));inventory[4] = inventory[4] + 1;return computerReply("ETERNITY ORB: " + 1 + " (" + inventory[4] + ").");};}
