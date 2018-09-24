@@ -108,7 +108,7 @@ function understandUserInput(ui) {
 					inventory[0] = inventory[0]-10;
 					computerReply("Warping.");
 					computerReply("SOLAR ENERGY: " + inventory[0] + "%", 2000);
-					warp(5);
+					warp(maxWarp);
 					warpAnimation();
 				};
 			}
@@ -132,6 +132,38 @@ function understandUserInput(ui) {
 			}
 			else {
 				computerReply("No energy source detected.");
+			}
+			break;
+		case "l":
+			if (!weCruisin) {
+				if (!isLanded && (worldArray[currentLocation-1] == "3" || worldArray[currentLocation-1] == "5" || worldArray[currentLocation-1] == "6") && direction == "DOWN") {
+					computerReply("Landing sequence initiated...");
+					land(movArrArr[2]);
+					isLanded = true;
+					computerReply("Land sequence completed successfully.", 3800);
+					computerReply(scanPlanet(), 4800);
+					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
+			  			landConversation = true;
+			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
+			  		}
+			  		else {
+			  			computerReply("Welcome to " + planetNamer() + ".", 5800);
+			  		};
+					// setTimeout(function() {alienLife(0,0)}, 5200);
+					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
+					soundEffect(196.0, 'sine',4,[.3,.7,1,.5]);
+				}
+				else if (isLanded) {
+					computerReply("Launching sequence initiated...", 700);
+					setTimeout(function() {launch(movArrArr[3])}, 1700);
+					computerReply("Launch sequence successful.", 5800);
+					isLanded = false;
+					soundEffect(196.0, 'sine',4,[.3,.7,1,.5],1700);
+					soundEffect(329.6, 'sine',4,[.3,.7,1,.5],1700);
+				}
+				else {
+					computerReply("Error. I am unable to detect a suitable landing surface.");
+				};
 			}
 			break;
 		case "land":
@@ -158,7 +190,7 @@ function understandUserInput(ui) {
 				}
 				else {
 					computerReply("Error. I am unable to detect a suitable landing surface.");
-				}
+				};
 			}
 			break;
 		case "launch":
@@ -172,7 +204,7 @@ function understandUserInput(ui) {
 			}
 			else {
 				computerReply("Error. Already launched.");
-			}
+			};
 			break;
 		case "cc on accel":case "ccon a":
 			cruiseControl=true;
@@ -189,6 +221,7 @@ function understandUserInput(ui) {
 			computerReply("Cruise control is enabled.");
 			break;
 		case "cruise control off":case "cc off":case "ccoff":case "stop":case "s":
+			weCruisin = false;
 			cruiseControl=false;
 			computerReply("Cruise control is disabled.");
 			break;
@@ -302,7 +335,7 @@ function understandUserInput(ui) {
 			if (weCruisin) {
 				computerReply("ERROR. Disable cruise control first.");
 			}
-			else if (!shipWare[0]) {
+			else if (!shipWare[1]) {
 				computerReply("ERROR. Check STATUS.");
 			}
 			else {
@@ -320,12 +353,15 @@ function understandUserInput(ui) {
 			else {computerReply("ERROR. Must be landed to harvest.");};
 			break;
 		case "hail":
-			if (!weCruisin && !isLanded && shipWare[1]) {hail();}
+			if (!weCruisin && !isLanded && shipWare[0]) {hail();}
 			else {computerReply("ERROR. Check STATUS.");};
 			break;
-		case "god mode":
-			computerReply("God Mode enabled. All.");
+		case "godmode":
+			computerReply("God Mode enabled.");
 			shipWare = [true,true,true,true,true,true];
+			goodOrEvil = 10000;
+			maxSolarPower = 1000;
+			inventory = [maxSolarPower,1000,1000,1000,10];
 			break;
 		case "":
 			break;
@@ -338,23 +374,23 @@ function didGoodOrEvil(good,evil) {
 		goodOrEvil = goodOrEvil + good - evil;
 		goodEvil = [false,false];	
 	};
-	switch (true) {
-		case goodOrEvil < -100:
-			return computerReply("Legends of your evil span galaxies...", 2700);
-			break;
-		case goodOrEvil < -50:
-			return computerReply("You've done terrible things...", 2700)
-			break;
-		case goodOrEvil > 50:
-			return computerReply("Your good deeds are known...", 2700)
-			break;
-		case goodOrEvil > 100:
-			return computerReply("Legends of your good span galaxies...", 2700)
-			break;
-		default:
-			return;
-			break;
-	};
+	// switch (true) {
+	// 	case goodOrEvil < -100:
+	// 		return computerReply("Legends of your evil span galaxies...", 2700);
+	// 		break;
+	// 	case goodOrEvil < -50:
+	// 		return computerReply("You've done terrible things...", 2700)
+	// 		break;
+	// 	case goodOrEvil > 50:
+	// 		return computerReply("Your good deeds are known...", 2700)
+	// 		break;
+	// 	case goodOrEvil > 100:
+	// 		return computerReply("Legends of your good span galaxies...", 2700)
+	// 		break;
+	// 	default:
+	// 		return;
+	// 		break;
+	// };
 };
 function computerReply(reply, time) {
 	if (!time) {time = 700;};

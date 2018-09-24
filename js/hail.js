@@ -141,7 +141,7 @@ function conversation(ui) {
 		case "clear":
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
-		case (ui.toLowerCase().replace(/\?|\!|\./g,'').match(/\btrade\b/) || {}).input:
+		case "trade":
 			if (harvestedLocations.indexOf(alienLocation.toString(36)) == -1) {
 				offer(alienLocation);
 				alienReply("I require " + dealOrNoDeal[0] + " " + dealOrNoDeal[1] + " for " + dealOrNoDeal[2] + " " + dealOrNoDeal[3]);

@@ -53,9 +53,13 @@ function generateAlien(xPos,yPos) {
 		ctx.beginPath();
 		ctx.fillStyle = skinColor;
 		ctx.moveTo(0,500);
-		ctx.quadraticCurveTo(-100,0,-400,0);
-		ctx.quadraticCurveTo(-500,0,-400,100);
-		ctx.quadraticCurveTo(-250,100,0,500);
+		ctx.bezierCurveTo(-700,250,-200,-250,-400,-400);
+		ctx.quadraticCurveTo(-490,-450,-500,-350);
+		ctx.bezierCurveTo(-300,-250,-800,250,-0,500);
+		// ctx.quadraticCurveTo(-400,-500,-500,-150);
+		// ctx.quadraticCurveTo(-500,0,-400,100);
+		
+		// ctx.quadraticCurveTo(-250,100,0,500);
 	    ctx.fill();
 	    ctx.stroke();
 	}

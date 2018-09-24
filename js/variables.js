@@ -11,6 +11,40 @@ var moves = 0;
 var i = 0;
 var y = x*x;
 var z = 1;
+
+function generateWorld() {
+	worldArray = [];
+	for (i=0;i<(x*x*x);i++) {
+		if (i == (x*x*x-1)) {
+			worldArray.push("8");
+		}
+		else if (i%rarityValue==0 && i!=0) {
+			worldArray.push("2");
+		}
+		// (currentLocation-1)%rarityValue = 17 & 114. All values = 131. Y axis not working because y > rarityValue.
+		else if ((i%rarityValue==rarityValue-(z%rarityValue) || i%rarityValue==z%rarityValue || i%rarityValue==rarityValue-(x%rarityValue) || i%rarityValue==x%rarityValue || i%rarityValue==rarityValue-(y%rarityValue) || i%rarityValue==y%rarityValue)) {
+			if (i%9==0 || i%6==0 || i%4==0) {
+				worldArray.push("3")
+			}
+			else if (i%7==0) {
+				worldArray.push("4")
+			}
+			else {
+				worldArray.push("1");
+			};
+		}
+		else if (i%65==0) {
+				worldArray.push("x")
+		}
+		else {
+			worldArray.push("1");	
+		};
+	};
+	worldArray = worldArray.join("");
+};
+
+
+
 var viewOrient = "BACK";
 var zAxis = ["UP","E","DOWN","W"];
 var yAxis = ["N","E","S","W"];
@@ -36,10 +70,11 @@ var currentlyTrading = false;
 var dealOrNoDeal = [];
 var harvestedLocations = [];
 var maxSolarPower = 100;
+var maxWarp = 5;
 // [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
 var inventory = [100,0,0,0,0];
 // [[0]-COMM, [1]-BLASTER, [2]-CRUISE CONTROL, [3]-SCANNER, [4]-RADAR, [5]-WARP]
-var shipWare = [false,false,true,false,false,false];
+var shipWare = [true,false,true,false,false,false];
 var goodOrEvil = 0;
 var goodEvil = [false,false];
 var storyTime = false;

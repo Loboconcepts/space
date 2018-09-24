@@ -45,39 +45,7 @@ dataUrl = canvas.toDataURL();
 
 // Determine axis
 
-function generateWorld() {
-	worldArray = [];
-	for (i=0;i<(x*x*x);i++) {
-		if (i == (x*x*x-1)) {
-			worldArray.push("8");
-		}
-		else if (i%rarityValue==0 && i!=0) {
-			worldArray.push("2");
-		}
-		// (currentLocation-1)%rarityValue = 17 & 114. All values = 131. Y axis not working because y > rarityValue.
-		else if ((i%rarityValue==rarityValue-(z%rarityValue) || i%rarityValue==z%rarityValue || i%rarityValue==rarityValue-(x%rarityValue) || i%rarityValue==x%rarityValue || i%rarityValue==rarityValue-(y%rarityValue) || i%rarityValue==y%rarityValue)) {
-			if (i%9==0 || i%6==0 || i%4==0) {
-				worldArray.push("3")
-			}
-			else if (i%7==0) {
-				worldArray.push("4")
-			}
-			else {
-				worldArray.push("1");
-			};
-		}
-		else if (i%256==0) {
-				worldArray.push("x")
-		}
-		else if (i%244==0) {
-				worldArray.push("z")
-		}
-		else {
-			worldArray.push("1");	
-		};
-	};
-	worldArray = worldArray.join("");
-};
+
 
 function axisFinder() {
 	var xyz = [0,0,0];
@@ -1161,27 +1129,18 @@ function autoAccel(intFunc) {
 	oldStars.length = 0;
 	newStars.length = 0;
 	if (cruiseControl) {
-		if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
-			weCruisin = false;
-			drawField(currentLocation);
-			generalState();
-			takeDamage(20);
-			return cruiseControl = false;
-		}
-		else {
-			weCruisin = true;
-			clearInterval(intFunc);
-			drawField(currentLocation);
-			moves = moves+1;
-			return accelerate();
-		};
+		weCruisin = true;
+		clearInterval(intFunc);
+		drawField(currentLocation);
+		moves = moves+1;
+		return accelerate();
 	}
 	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
-		weCruisin = false;
+		// weCruisin = false;
 		drawField(currentLocation);
 		generalState();
-		takeDamage(20);
-		return cruiseControl = false;
+		// takeDamage(20);
+		// return cruiseControl = false;
 	}
 	else {
 		weCruisin = false;
@@ -1560,6 +1519,13 @@ function rgbGenerateFromCurPos(curPos) {
 	return [(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*12)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*21)%206)+50,(((temp[temp.length-1]+1)*(temp[temp.length-2]+1)*(temp[temp.length-3]+1)*16)%206)+50]
 };
 
+function getObjCurrentPos(curPos) {
+	if (curPos > worldArray.length) {var temp = (curPos - worldArray.length).toString();}
+	else if (curPos < 1) {var temp = (curPos + worldArray.length).toString();}
+	else {var temp = curPos.toString();};
+	return temp;
+};
+
 // ART DRAWN HERE
 function whichArt(posNum,xPos,yPos,size,actPos) {
 	// 1 - Nothing
@@ -1630,45 +1596,66 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 			ctx.closePath();
 			ctx.restore();
 			break;
-		case ("z"):
-			ctx.save();
-			ctx.beginPath();
-			ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.fillRect(xPos - size/4, yPos,size/2, size/4);
-		    ctx.closePath();
-		    ctx.beginPath();
-			ctx.arc((xPos - size/4)+1, yPos+size/8, size/8,.5*Math.PI,1.5*Math.PI);
-			ctx.fill();
-			ctx.closePath();
-			ctx.beginPath();
-			ctx.arc((xPos + size/4)-1, yPos+size/8, size/8,1.5*Math.PI,.5*Math.PI);
-			ctx.fill();
-			ctx.closePath();
-		    ctx.beginPath();
-			ctx.arc(xPos, yPos, size/6, Math.PI, false);
-			ctx.fillStyle = "rgba(200, 200, 255, 1)";
-			ctx.fill();
-			ctx.closePath();
-			ctx.restore();
-			break;
 		case ("x"):
-			ctx.save();
-			ctx.beginPath();
-			ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-		    ctx.moveTo(xPos - size/2, yPos - size/4);
-		    ctx.lineTo(xPos, yPos - size/10);
-		    ctx.lineTo(xPos + size/2, yPos + size/4);
-		    ctx.moveTo(xPos + size/2, yPos - size/4);
-		    ctx.lineTo(xPos, yPos - size/10);
-		    ctx.lineTo(xPos - size/2, yPos + size/4);
-		    ctx.fill();
-			ctx.closePath();
-			ctx.beginPath();
-			ctx.arc(xPos, yPos - size/15, size/12, 2 * Math.PI, false);
-			ctx.fillStyle = "rgba(200, 200, 255, 1)";
-			ctx.fill();
-			ctx.closePath();
-			ctx.restore();
+			switch (getObjCurrentPos(actPos)[getObjCurrentPos(actPos).length-2]) {
+				case "0":case "2":case "4":case "6":
+				ctx.save();
+				ctx.beginPath();
+				ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+			    ctx.fillRect(xPos - size/4, yPos,size/2, size/4);
+			    ctx.closePath();
+			    ctx.beginPath();
+				ctx.arc((xPos - size/4)+1, yPos+size/8, size/8,.5*Math.PI,1.5*Math.PI);
+				ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				ctx.arc((xPos + size/4)-1, yPos+size/8, size/8,1.5*Math.PI,.5*Math.PI);
+				ctx.fill();
+				ctx.closePath();
+			    ctx.beginPath();
+				ctx.arc(xPos, yPos, size/6, Math.PI, false);
+				ctx.fillStyle = "rgba(200, 200, 255, 1)";
+				ctx.fill();
+				ctx.closePath();
+				ctx.restore();
+				break;
+				case "5":case "7":case "9":
+				ctx.save();
+				ctx.beginPath();
+				ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+			    ctx.moveTo(xPos - size/2, yPos - size/4);
+			    ctx.lineTo(xPos, yPos - size/10);
+			    ctx.lineTo(xPos + size/2, yPos + size/4);
+			    ctx.moveTo(xPos + size/2, yPos - size/4);
+			    ctx.lineTo(xPos, yPos - size/10);
+			    ctx.lineTo(xPos - size/2, yPos + size/4);
+			    ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				ctx.arc(xPos, yPos - size/15, size/12, 2 * Math.PI, false);
+				ctx.fillStyle = "rgba(200, 200, 255, 1)";
+				ctx.fill();
+				ctx.closePath();
+				ctx.restore();
+				break;
+				case "1":case "3":case "8":
+				ctx.save();
+				ctx.beginPath();
+				ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+			    ctx.moveTo(xPos, yPos - size/4);
+			    ctx.quadraticCurveTo(xPos, yPos, xPos + size/2, yPos + size/3);
+			    ctx.quadraticCurveTo(xPos, yPos, xPos - size/2, yPos + size/3);
+			    ctx.quadraticCurveTo(xPos, yPos, xPos, yPos - size/4);
+			    ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				ctx.arc(xPos, yPos + size/16, size/8, 2 * Math.PI, false);
+				ctx.fillStyle = "rgba(200, 200, 255, 1)";
+				ctx.fill();
+				ctx.closePath();
+				ctx.restore();
+				break;
+			};
 			break;
 		case ("a"):
 			ctx.save();

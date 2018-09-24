@@ -41,7 +41,7 @@ function landConvo(ui) {
 			break;
 		case "trade":
 			landOffer(currentLocation);
-			alienReply("My people will pay " + dealOrNoDeal[2] + " " + dealOrNoDeal[3] + " for your " + dealOrNoDeal[0] + " " + dealOrNoDeal[1]);
+			alienReply("My people humbly offer " + dealOrNoDeal[2] + " " + dealOrNoDeal[3] + " for your " + dealOrNoDeal[0] + " " + dealOrNoDeal[1]);
 			currentlyTrading = true;	
 			break;
 		case "check inventory":case "inventory":case "inv":
@@ -59,7 +59,7 @@ function landConvo(ui) {
 			break;
 		case "mine":case "harvest":case "dig":
 			harvestResources();
-			alienReply("We will not trade with you now.");
+			alienReply("That was rude.");
 			break;
 		case "launch":
 			computerReply("Launching sequence initiated...", 700);
@@ -70,6 +70,7 @@ function landConvo(ui) {
 			soundEffect(329.6, 'sine',4,[.3,.7,1,.5],1700);
 			alienReply("Safe travels.");
 			landConversation = false;
+			break;
 		case "":
 			break;
 		default:
@@ -106,14 +107,14 @@ function landOffer(xLocation) {
 			dealOrNoDeal.push("HYDROXIDE");
 			break;
 		case (9):
-			dealOrNoDeal.push("TECHNOLOGY");
+			dealOrNoDeal.push("a REPAIR");
 			break;
 	};
 	if (dealOrNoDeal[1] == dealOrNoDeal[3] && dealOrNoDeal[1] == "IRON OXIDE") {dealOrNoDeal.splice(1 , 1, "HYDROCARBON");};
 	if (dealOrNoDeal[1] == dealOrNoDeal[3] && dealOrNoDeal[1] == "HYDROCARBON") {dealOrNoDeal.splice(1 , 1, "HYDROXIDE");};
 	if (dealOrNoDeal[1] == dealOrNoDeal[3] && dealOrNoDeal[1] == "HYDROXIDE") {dealOrNoDeal.splice(1 , 1, "IRON OXIDE");};
-	if (dealOrNoDeal[1] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal.splice(3, 1, "UPGRADE");dealOrNoDeal.splice(0, 1, 1);};
-	if (dealOrNoDeal[3] == "TECHNOLOGY") {dealOrNoDeal[0]=dealOrNoDeal[0]*10;};
+	if (dealOrNoDeal[1] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal.splice(3, 1, "an UPGRADE");dealOrNoDeal.splice(0, 1, 1);dealOrNoDeal.splice(2, 1, "");};
+	if (dealOrNoDeal[3] == "a REPAIR") {dealOrNoDeal[0]=dealOrNoDeal[0]*10;};
 };
 
 function landTrading(ui) {
@@ -178,7 +179,7 @@ function landTrading(ui) {
 					goodEvil = [true,false];
 					didGoodOrEvil(5,0);
 				break;
-				case "TECHNOLOGY":
+				case "a REPAIR":
 					let i=0;
 					while (i<shipWare.length) {
 						if (!shipWare[i]) {
@@ -191,15 +192,14 @@ function landTrading(ui) {
 					goodEvil = [true,false];
 					didGoodOrEvil(5,0);
 				break;
-				case "UPGRADE":
+				case "an UPGRADE":
 					maxSolarPower = maxSolarPower + 20;
 					goodEvil = [true,false];
 					didGoodOrEvil(5,0);
 				break;
 			}
 			harvestedLocations.push(currentLocation.toString(36));
-			currentlyTrading = false;
-			alienReply("Thank you.");
+			alienReply("Thank you. Would you like to do that trade again?");
 			break;
 		case "check inventory": case "inventory":
 			computerReply("SOLAR ENERGY: " + inventory[0] + "%");
@@ -263,6 +263,17 @@ function landTrading(ui) {
 				computerReply("Solar energy: " + inventory[0] + "%",2700);
 				if (dealOrNoDeal[3] == "LETTING YOU PASS UNHARMED") {didGoodOrEvil(10,0);}else {didGoodOrEvil(0,50);};
 			};
+			break;
+		case "launch":
+			computerReply("Launching sequence initiated...", 700);
+			setTimeout(function() {launch(movArrArr[3])}, 1700);
+			computerReply("Launch sequence successful.", 5800);
+			isLanded = false;
+			soundEffect(196.0, 'sine',4,[.3,.7,1,.5],1700);
+			soundEffect(329.6, 'sine',4,[.3,.7,1,.5],1700);
+			alienReply("Safe travels.");
+			landConversation = false;
+			currentlyTrading = false;
 			break;
 		case "":
 			break;
