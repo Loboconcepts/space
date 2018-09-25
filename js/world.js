@@ -25,7 +25,7 @@ canvas.style.width = "100%";
 canvas.style.maxWidth = "500px";
 canvas.style.height = "auto";
 canvas.style.maxHeight = "500px";
-canvas.style.backgroundColor = "#000000";
+canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
 // canvas.style.left = (window.innerWidth * 0.5 - W * scale * 0.5) + "px";
 // canvas.style.top = (window.innerHeight * 0.5 - H * scale * 0.5) + "px";
 
@@ -776,6 +776,16 @@ function warpAnimation(){
 	}, 15);
 };
 
+function hexToRgb(hex) {
+    var bigint = parseInt(hex.substring(0,2), 16);
+    var r = parseInt(hex.substring(0,2), 16);
+    var g = parseInt(hex.substring(2,4), 16);
+    var b = parseInt(hex.substring(4,6), 16);
+
+    return r + "," + g + "," + b;
+}
+var newColorRGB;
+
 // accelfun
 function accelerate(){
 	newStars.length=0;
@@ -793,11 +803,13 @@ function accelerate(){
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	};
 	// cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
+	canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
 	var newYPos;
 	var newXPos;
 	var c = 0;
+	// newColorRGB = hexToRgb(bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))])
 	backgroundArt();
 	outerBackgroundArt();
 	disableButtons(true);
@@ -815,6 +827,12 @@ function accelerate(){
 	  
 	  
 	  ctx.beginPath();
+
+	 //  ctx.fillStyle = "rgba("+newColorRGB+",."+Math.floor((c/77)*100)+")";
+	 //  console.log(newColorRGB);
+		// ctx.fillRect(0,0,1000,1000);
+	 //    ctx.fill();
+
 
 
 	  newStars.forEach(function(el) {drawDistantStar(el.xPos, el.yPos, el.size);});
@@ -1738,6 +1756,16 @@ function blackHole(xPos,yPos,size) {
 axisFinder();
 generateWorld();
 cubeShipPositioning(direction,topfacing, currentLocation, viewOrient);
+
+function getBackgroundColor() {
+	var temp = (41*parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))).toString(4)
+	while (temp.length < 6) {
+		temp = temp.split('')
+		temp.unshift("0");
+		temp = temp.join('');	
+	};
+	return "#" + temp;
+}
 
 function generalState() {
 	moves = moves+1;
