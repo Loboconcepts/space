@@ -3,7 +3,7 @@
 <head>
 	<title>Space</title>
 	   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-	   <script src="js/variables.js"></script>
+	   
 
 	   <style type="text/css">
 	   	html, body {
@@ -84,11 +84,15 @@
 	   </style>
 </head>
 <body onkeyup="storyPart()" style="text-align:center;">
+	
+	
 	<div id="memory"><div id="textArea"></div></div>
 	<div class="row">
 		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
+		
 		<!-- <div id="compass"></div> -->
-		<div id="shipConsole"></div>
+		<div id="shipConsole"><img style="width:100%;height:100%;margin:0 auto;" id="loading" src="img/loading.gif"></div>
+		<script src="js/variables.js"></script>
 	</div>
 	<input onkeyup="consoleInput(event)" style="font-family: monospace;background-color:#000000; color:#00ff00;width:208px;outline:none;border:none;" autofocus id="user" type="text" name="user" autocomplete="off" value=""><br>
 
@@ -112,6 +116,8 @@ counts[num] = counts[num] ? counts[num] + 1 : 1;
 console.log("empty stars land gas aliens totalsize\n",counts[1], counts[2], counts[3], counts[4], counts['z']+counts['x'], worldArray.length);
 computerReply("You're finally awake.<br>System booting...");
 computerReply(timeOfDay() + " Commander. All systems go. Input HELP for help.", 2200);
+
+document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 	
 </script>
 

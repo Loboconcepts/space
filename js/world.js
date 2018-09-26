@@ -734,6 +734,7 @@ function warpAnimation(){
 	var c = 0;
 	disableButtons(true);
 	ctx.clearRect(0,0,1000,1000);
+	canvas.style.backgroundColor = "#cccccc";
 	var movement = setInterval(function() {
 		// drawField(currentLocation);
 		for (i=0;i<11;i++) {
@@ -772,7 +773,7 @@ function warpAnimation(){
 		ctx.lineWidth = 4;
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 120) clearInterval(movement),disableButtons(false),autoAccel(movement);
+	  if (c > 120) clearInterval(movement),disableButtons(false),autoAccel(movement),canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
 	}, 15);
 };
 

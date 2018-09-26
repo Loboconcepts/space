@@ -59,7 +59,7 @@ function landConvo(ui) {
 			break;
 		case "mine":case "harvest":case "dig":
 			harvestResources();
-			alienReply("That was rude.");
+			alienReply("...");
 			break;
 		case "launch":
 			computerReply("Launching sequence initiated...", 700);

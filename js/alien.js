@@ -31,8 +31,8 @@ function generateAlien(xPos,yPos) {
 	var hairPuff = Math.max(topheadWidth,jawWidth) + currentLocation%350;
 	var mouthOpen = 20 + currentLocation%80;
 	var hairColor = hairColors[currentLocation%hairColors.length];
-	var skinColor = "rgba("+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[2]+","+rgbGenerateFromCurPos(currentLocation)[1]+", 1)";
-	var shirtColor = "rgba("+rgbGenerateFromCurPos(currentLocation*moves)[2]+","+rgbGenerateFromCurPos(currentLocation*moves)[0]+","+rgbGenerateFromCurPos(currentLocation*moves)[1]+", 1)";
+	var skinColor = "rgba("+rgbGenerateFromCurPos(currentLocation)[0]%256+","+rgbGenerateFromCurPos(currentLocation)[2]%256+","+rgbGenerateFromCurPos(currentLocation)[1]%256+", 1)";
+	var shirtColor = "rgba("+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[2]/2)+","+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[0]/2)+","+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[1]/2)+", 1)";
 	var eyeColor = eyeColors[currentLocation%eyeColors.length];
 	var lipColor = [skinColor,"#770000"][genChoice];
 	var hairHeight = 270 + currentLocation%150;
