@@ -198,7 +198,6 @@ function landTrading(ui) {
 					didGoodOrEvil(5,0);
 				break;
 			}
-			harvestedLocations.push(currentLocation.toString(36));
 			alienReply("Thank you. Would you like to do that trade again?");
 			break;
 		case "check inventory": case "inventory":
