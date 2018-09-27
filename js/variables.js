@@ -88,8 +88,11 @@ var story = ["What initially hits you is an intense smell of ozone, like Earth j
 
 var alienLocation;
 
-var context=new AudioContext();
 
+
+//enable this for sound
+
+// var context=new AudioContext();
 // function sound(frequency,type,duration,wv){
 // 	var odd=null;
 // 	var gdd=null;
@@ -112,6 +115,8 @@ var context=new AudioContext();
 // 	if (!delay) {delay = 0;};
 // 	return setTimeout(function(){sound(frequency,type,duration,wv)}, delay);
 // };
+
+//disable this and enable above
 function soundEffect() {
 	console.log("disabled");
 };
