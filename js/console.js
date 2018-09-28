@@ -142,7 +142,7 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully.", 3800);
 					computerReply(scanPlanet(), 4800);
-					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
+					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 			  			landConversation = true;
 			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
 			  		}
@@ -174,7 +174,7 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully.", 3800);
 					computerReply(scanPlanet(), 4800);
-					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
+					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 			  			landConversation = true;
 			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
 			  		}

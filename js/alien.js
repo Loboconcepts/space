@@ -5,10 +5,11 @@ function generateAlien(xPos,yPos) {
 	if (!xPos) {xPos = 0};
 	if (!yPos) {yPos = 0};
 
-	var bald = currentLocation.toString(2)[currentLocation.toString(2).length-1];
-	var tail = currentLocation.toString(2)[currentLocation.toString(2).length-2];
-	var genChoice = currentLocation.toString(2)[currentLocation.toString(2).length-3];
-	var thirdEye = currentLocation.toString(2)[currentLocation.toString(2).length-4];
+	var bald = currentLocation.toString(2)[currentLocation.toString(2).length-2]>0;
+	var tail = currentLocation.toString(2)[currentLocation.toString(2).length-3]>0;
+	var genChoice = currentLocation.toString(2)[currentLocation.toString(2).length-4];
+	var thirdEye = currentLocation.toString(2)[currentLocation.toString(2).length-5]>0;
+	var scaryEyes = currentLocation.toString(2)[currentLocation.toString(2).length-6]>0;
 	
 	var topheadWidth = 230 + currentLocation%90;
 	var jawHeight = currentLocation%285;
@@ -48,7 +49,7 @@ function generateAlien(xPos,yPos) {
 	ctx.strokeStyle="#000000";
 	ctx.lineWidth=5;
 
-	if (tail==0) {
+	if (tail==true) {
 		//tail
 		ctx.beginPath();
 		ctx.fillStyle = skinColor;
@@ -64,7 +65,7 @@ function generateAlien(xPos,yPos) {
 	    ctx.stroke();
 	}
 
-    if (bald==1) {
+    if (bald==true) {
 		//hair
 		ctx.beginPath();
 		ctx.fillStyle = hairColor;
@@ -97,7 +98,7 @@ function generateAlien(xPos,yPos) {
     
 	//outer face
 	ctx.beginPath();
-	if (bald==1) {
+	if (bald==true) {
 		ctx.moveTo(hairPart, -bangsHeight);
 		ctx.quadraticCurveTo(-topheadWidth, -bangs,-topheadWidth, -100);	
 		ctx.quadraticCurveTo(-jawWidth, jawHeight, -chinWidth, 300);
@@ -168,14 +169,19 @@ function generateAlien(xPos,yPos) {
 	ctx.moveTo(eyesSize+eyeShadow, -100+eyeHeight-eyeShadow);
 	ctx.quadraticCurveTo(100+eyeShadow, -eyesSize+eyeHeight-eyeShadow, 50 - eyeShadow, -100+eyeHeight-eyeShadow);
 	ctx.quadraticCurveTo(80, -50+eyeHeight + eyeShadow, eyesSize+eyeShadow, -100+eyeHeight+eyeShadow);
-	if (thirdEye==1) {
+	if (thirdEye==true) {
 		ctx.moveTo(-60, -200);
 		ctx.quadraticCurveTo(0, -150+eyeShadow, 60, -200);
 		ctx.quadraticCurveTo(0, -250-eyeShadow, -60, -200);
 	}
 	ctx.fill();
     //eyes
-    ctx.fillStyle = "#ffffff"
+    if (scaryEyes==true) {
+    	ctx.fillStyle = "#555555"	
+    }
+    else {
+    	ctx.fillStyle = "#ffffff"	
+    };
     ctx.beginPath();
 	ctx.moveTo(-eyesSize, -100+eyeHeight);
 	ctx.quadraticCurveTo(-100, -eyesSize+eyeHeight, -50, -100+eyeHeight);
@@ -184,7 +190,7 @@ function generateAlien(xPos,yPos) {
 	ctx.quadraticCurveTo(100, -eyesSize+eyeHeight, 50, -100+eyeHeight);
 	ctx.quadraticCurveTo(100, -50+eyeHeight, eyesSize, -100+eyeHeight);
 
-	if (thirdEye==1) {
+	if (thirdEye==true) {
 		ctx.moveTo(-50, -200);
 		ctx.quadraticCurveTo(0, -150, 50, -200);
 		ctx.quadraticCurveTo(0, -250, -50, -200);
@@ -205,7 +211,7 @@ function generateAlien(xPos,yPos) {
     ctx.fill();
     ctx.stroke();
 
-	if (thirdEye==1) {
+	if (thirdEye==true) {
 	    ctx.beginPath();
 	    ctx.arc(0, -200, 20, 0, Math.PI * 2, true);
 	    ctx.fill();

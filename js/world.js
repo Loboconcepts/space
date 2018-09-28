@@ -576,7 +576,7 @@ function land(a){
 		ctx.closePath();
 
 		if (c > 205 ) {
-	  		if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
+	  		if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 				generateAlien(0,(1125-((c-200)*20)));
 			};
 	  	};
@@ -604,7 +604,7 @@ function launch(a){
 		ctx.closePath();
 
 		if (c < 51 ) {
-			if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4<2)){
+			if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 	  			generateAlien(0,0+c*20);
 	  		};
 	  	};
