@@ -10,9 +10,9 @@ function generateAlien(xPos,yPos) {
 	var genChoice = currentLocation.toString(2)[currentLocation.toString(2).length-3];
 	var thirdEye = currentLocation.toString(2)[currentLocation.toString(2).length-4];
 	
-	var topheadWidth = 230 + currentLocation%80;
-	var jawHeight = currentLocation%255;
-	var jawWidth = 250 + currentLocation%110;
+	var topheadWidth = 230 + currentLocation%90;
+	var jawHeight = currentLocation%285;
+	var jawWidth = 250 + currentLocation%160;
 	var noseWidth = 40 + currentLocation%[80,40][genChoice];
 	var noseHeight = 40 + currentLocation%80;
 	var mouthArr = [150 + currentLocation%50,150 + currentLocation%70,150 + currentLocation%50]
@@ -31,7 +31,7 @@ function generateAlien(xPos,yPos) {
 	var hairPuff = Math.max(topheadWidth,jawWidth) + currentLocation%350;
 	var mouthOpen = 20 + currentLocation%80;
 	var hairColor = hairColors[currentLocation%hairColors.length];
-	var skinColor = "rgba("+rgbGenerateFromCurPos(currentLocation)[0]%256+","+rgbGenerateFromCurPos(currentLocation)[2]%256+","+rgbGenerateFromCurPos(currentLocation)[1]%256+", 1)";
+	var skinColor = "rgba("+rgbGenerateFromCurPos(currentLocation)[1]%256+","+rgbGenerateFromCurPos(currentLocation)[2]%256+","+rgbGenerateFromCurPos(currentLocation)[0]%256+", 1)";
 	var shirtColor = "rgba("+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[2]/2)+","+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[0]/2)+","+Math.floor(rgbGenerateFromCurPos(currentLocation*moves)[1]/2)+", 1)";
 	var eyeColor = eyeColors[currentLocation%eyeColors.length];
 	var lipColor = [skinColor,"#770000"][genChoice];
