@@ -40,7 +40,7 @@ function landConvo(ui) {
 			document.getElementById("shipConsole").innerHTML = "";
 			break;
 		case "trade":
-			landOffer(currentLocation);
+			landOffer();
 			alienReply("My people humbly offer " + dealOrNoDeal[2] + " " + dealOrNoDeal[3] + " for your " + dealOrNoDeal[0] + " " + dealOrNoDeal[1]);
 			currentlyTrading = true;	
 			break;
@@ -61,7 +61,7 @@ function landConvo(ui) {
 			harvestResources();
 			alienReply("...");
 			break;
-		case "launch":
+		case "launch":case "l":
 			computerReply("Launching sequence initiated...", 700);
 			setTimeout(function() {launch(movArrArr[3])}, 1700);
 			computerReply("Launch sequence successful.", 5800);
@@ -78,10 +78,10 @@ function landConvo(ui) {
 	};
 };
 
-function landOffer(xLocation) {
+function landOffer() {
 	dealOrNoDeal = [];
-	dealOrNoDeal.push((((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1])+1)+((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-2])+1))*5);
-	switch (xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1]) {
+	dealOrNoDeal.push((((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1])+1)+((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-2])+1))*5);
+	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1]) {
 		case (0):case (3):case (6):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
@@ -95,8 +95,8 @@ function landOffer(xLocation) {
 			dealOrNoDeal.push("ETERNITY ORB");
 			break;
 	};
-	dealOrNoDeal.push((((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-1])+1)+((xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-3])+1))*7);
-	switch (xLocation.toString().split("").map(Number)[xLocation.toString().split("").length-2]) {
+	dealOrNoDeal.push((((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1])+1)+((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-3])+1))*7);
+	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-2]) {
 		case (0):case (3):case (6):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
@@ -114,7 +114,7 @@ function landOffer(xLocation) {
 	if (dealOrNoDeal[1] == dealOrNoDeal[3] && dealOrNoDeal[1] == "HYDROCARBON") {dealOrNoDeal.splice(1 , 1, "HYDROXIDE");};
 	if (dealOrNoDeal[1] == dealOrNoDeal[3] && dealOrNoDeal[1] == "HYDROXIDE") {dealOrNoDeal.splice(1 , 1, "IRON OXIDE");};
 	if (dealOrNoDeal[1] == "ETERNITY ORB") {dealOrNoDeal[0] = dealOrNoDeal.splice(3, 1, "an UPGRADE");dealOrNoDeal.splice(0, 1, 1);dealOrNoDeal.splice(2, 1, "");};
-	if (dealOrNoDeal[3] == "a REPAIR") {dealOrNoDeal[0]=dealOrNoDeal[0]*10;};
+	if (dealOrNoDeal[3] == "a REPAIR") {dealOrNoDeal[0]=dealOrNoDeal[0]*10;dealOrNoDeal.splice(2, 1, "");};
 };
 
 function landTrading(ui) {
@@ -193,7 +193,8 @@ function landTrading(ui) {
 					didGoodOrEvil(5,0);
 				break;
 				case "an UPGRADE":
-					maxSolarPower = maxSolarPower + 20;
+					maxSolarPower = maxSolarPower + 50;
+					computerReply("MAXIMUM SOLAR POWER INCRESED BY 50%",1700);
 					goodEvil = [true,false];
 					didGoodOrEvil(5,0);
 				break;

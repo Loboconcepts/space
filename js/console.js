@@ -2,6 +2,9 @@ function submitUserInput(x) {
 	understandUserInput(x);
 	document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;
 	document.getElementById("user").value = "";
+	while (document.getElementById('shipConsole').children.length > 20) {
+		document.getElementById('shipConsole').firstChild.remove();
+	};
 };
 
 function understandUserInput(ui) {
@@ -273,10 +276,20 @@ function understandUserInput(ui) {
 			else if (inventory[4] < 1) {computerReply("ERROR. SCANNER repair requires 1 ETERNITY ORB.");}
 			else {computerReply("SCANNER repaired.");shipWare[3] = true;inventory[4] = inventory[4] - 1;};
 			break;
-		case "repair scan":case "repair scanner":
-			if (shipWare[2]) {computerReply("ERROR. Ship SCANNER has no need for repair.");}
-			else if (inventory[4] < 1) {computerReply("ERROR. SCANNER repair requires 1 ETERNITY ORB.");}
-			else {computerReply("SCANNER repaired.");shipWare[2] = true;inventory[4] = inventory[4] - 1;};
+		case "repair cc":case "repair cruise control":
+			if (shipWare[2]) {computerReply("ERROR. Ship CRUISE CONTROL has no need for repair.");}
+			else if (inventory[4] < 1) {computerReply("ERROR. CRUISE CONTROL repair requires 1 ETERNITY ORB.");}
+			else {computerReply("CRUISE CONTROL repaired.");shipWare[2] = true;inventory[4] = inventory[4] - 1;};
+			break;
+		case "repair radar":
+			if (shipWare[4]) {computerReply("ERROR. Ship RADAR has no need for repair.");}
+			else if (inventory[4] < 1) {computerReply("ERROR. RADAR repair requires 1 ETERNITY ORB.");}
+			else {computerReply("RADAR repaired.");shipWare[4] = true;inventory[4] = inventory[4] - 1;};
+			break;
+		case "repair warp":
+			if (shipWare[5]) {computerReply("ERROR. Ship WARP has no need for repair.");}
+			else if (inventory[4] < 1) {computerReply("ERROR. WARP repair requires 1 ETERNITY ORB.");}
+			else {computerReply("WARP repaired.");shipWare[5] = true;inventory[4] = inventory[4] - 1;};
 			break;
 		case "open the pod bay doors":case "open the pod bay doors hal":
 			computerReply("I'm afraid I can't do that, Commander.");
@@ -699,9 +712,9 @@ function spliceWorldArray(where, withWhat) {
 function reduceSolarEnergy(howMuch) {
 	inventory[0] = inventory[0] - howMuch;
 	if (inventory[0] < 1) {
+		inventory[0] = 0;
 		computerReply("Solar energy: " + inventory[0] + "%",100);
 		computerReply("*CRITICAL DAMAGE*",200);
-		inventory[0] = 0;
 		inventory[1] = 0;
 		inventory[2] = 0;
 		inventory[3] = 0;
@@ -711,6 +724,14 @@ function reduceSolarEnergy(howMuch) {
 			shipWare[0] = false;
 			computerReply("*BLASTER CRITICALLY DAMAGED*",2700);
 		}
+		else if (shipWare[5]) {
+			shipWare[5] = false;
+			computerReply("*WARP CRITICALLY DAMAGED*",2700);
+		}
+		else if (shipWare[3]) {
+			shipWare[3] = false;
+			computerReply("*SCANNER CRITICALLY DAMAGED*",2700);
+		}
 		else if (shipWare[1]) {
 			shipWare[1] = false;
 			computerReply("*COMMUNICATIONS CRITICALLY DAMAGED*",2700);
@@ -718,10 +739,6 @@ function reduceSolarEnergy(howMuch) {
 		else if (shipWare[2]) {
 			shipWare[2] = false;
 			computerReply("*CRUISE CONTROL CRITICALLY DAMAGED*",2700);
-		}
-		else if (shipWare[3]) {
-			shipWare[3] = false;
-			computerReply("*SCANNER CRITICALLY DAMAGED*",2700);
 		};
 	};
 };
