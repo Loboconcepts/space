@@ -81,7 +81,7 @@ function landConvo(ui) {
 function landOffer() {
 	dealOrNoDeal = [];
 	dealOrNoDeal.push((((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1])+1)+((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-2])+1))*5);
-	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1]) {
+	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-2]) {
 		case (0):case (3):case (6):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
@@ -96,7 +96,7 @@ function landOffer() {
 			break;
 	};
 	dealOrNoDeal.push((((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1])+1)+((currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-3])+1))*7);
-	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-2]) {
+	switch (currentLocation.toString().split("").map(Number)[currentLocation.toString().split("").length-1]) {
 		case (0):case (3):case (6):
 			dealOrNoDeal.push("IRON OXIDE");
 			break;
