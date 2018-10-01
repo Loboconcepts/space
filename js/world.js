@@ -1908,6 +1908,7 @@ function generalState() {
 		break;
 		default:console.log("Not set up yet");
 	}
+	if (!isLanded && (worldArray[currentLocation-1] == "3") && direction == "DOWN") {lifeInit();};
 	ctx.closePath();
 };
 

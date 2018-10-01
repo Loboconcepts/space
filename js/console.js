@@ -171,7 +171,7 @@ function understandUserInput(ui) {
 			break;
 		case "land":
 			if (!weCruisin) {
-				if (!isLanded && (worldArray[currentLocation-1] == "3" || worldArray[currentLocation-1] == "5" || worldArray[currentLocation-1] == "6") && direction == "DOWN") {
+				if (!isLanded && (worldArray[currentLocation-1] == "3") && direction == "DOWN") {
 					computerReply("Landing sequence initiated...");
 					land(movArrArr[2]);
 					isLanded = true;
