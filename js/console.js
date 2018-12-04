@@ -232,10 +232,10 @@ function understandUserInput(ui) {
 			computerReply("We are currently at galacube " + currentLocation);
 			break;
 		case "help":case "what":case "instructions":case "manual":
-			computerReply("You are in the universe. Capital letters usually implies a console command. Helpful commands: CONTROLS, COMMANDS, STATUS");
+			computerReply("You are in the universe. Capitalized words indicate console commands. Helpful commands: CONTROLS, COMMANDS, STATUS");
 			break;
 		case "controls":case "nav":case "nav commands":case "navigation commands":
-			computerReply("nav controls: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH, SCAN, FIRE, HAIL, HARVEST. Most commands have obvious shortcuts.");
+			computerReply("nav controls: ACCELERATE, YAW LEFT, YAW RIGHT, PITCH UP, PITCH DOWN, ROLL LEFT, ROLL RIGHT, CRUISE CONTROL ON, CRUISE CONTROL OFF, STOP or 'S', LAND, LAUNCH. Most commands have obvious shortcuts.");
 			break;
 		case "actions":case "commands":case "interaction":case "navigation commands":
 			computerReply("commands: SCAN, FIRE, HAIL, HARVEST, CHARGE, RADAR, WARP. You can TRADE with aliens.");
@@ -321,7 +321,7 @@ function understandUserInput(ui) {
 			computerReply("HYDROXIDE: " + inventory[3], 3700);
 			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 			break;
-		case "status":
+		case "status","error":
 			computerReply("Direction: " + direction);
 			computerReply("Orientation: " + topfacing, 1700);
 			computerReply("SOLAR ENERGY: " + inventory[0] + "%",2700);
@@ -329,20 +329,20 @@ function understandUserInput(ui) {
 			computerReply("HYDROCARBON: " + inventory[2], 4700);
 			computerReply("HYDROXIDE: " + inventory[3], 5700);
 			computerReply("ETERNITY ORBS: " + inventory[4], 6700);
-			if (shipWare[0]) {computerReply("COMM: Good.", 7700);}else{computerReply("COMM: ERROR.", 7700);};
-			if (shipWare[1]) {computerReply("BLASTER: Good.", 8700);}else{computerReply("BLASTER: ERROR.", 8700);};
-			if (shipWare[2]) {computerReply("CRUISE CONTROL: Good.", 9700);}else{computerReply("CRUISE CONTROL: ERROR.", 9700);};
-			if (shipWare[3]) {computerReply("SCANNER: Good.", 10700);}else{computerReply("SCANNER: ERROR.", 10700);};
-			if (shipWare[4]) {computerReply("RADAR: Good.", 3700);}else{computerReply("RADAR: ERROR.", 11700);};
-			if (shipWare[5]) {computerReply("WARP: Good.", 3700);}else{computerReply("WARP: ERROR.", 12700);};
+			if (shipWare[0]) {computerReply("COMM: Online.", 7700);}else{computerReply("COMM: Offline.", 7700);};
+			if (shipWare[1]) {computerReply("BLASTER: Online.", 8700);}else{computerReply("BLASTER: Offline.", 8700);};
+			if (shipWare[2]) {computerReply("CRUISE CONTROL: Online.", 9700);}else{computerReply("CRUISE CONTROL: Offline.", 9700);};
+			if (shipWare[3]) {computerReply("SCANNER: Online.", 10700);}else{computerReply("SCANNER: Offline.", 10700);};
+			if (shipWare[4]) {computerReply("RADAR: Online.", 3700);}else{computerReply("RADAR: Offline.", 11700);};
+			if (shipWare[5]) {computerReply("WARP: Online.", 3700);}else{computerReply("WARP: Offline.", 12700);};
 			break;
 		case "ship status":
-			if (shipWare[0]) {computerReply("COMM: Good.");}else{computerReply("COMM malfunctional.");};
-			if (shipWare[1]) {computerReply("BLASTER: Good.", 1700);}else{computerReply("BLASTER malfunctional.", 1700);};
-			if (shipWare[2]) {computerReply("CRUISE CONTROL: Good.", 2700);}else{computerReply("CRUISE CONTROL malfunctional.", 2700);};
-			if (shipWare[3]) {computerReply("SCANNER: Good.", 3700);}else{computerReply("SCANNER malfunctional.", 3700);};
-			if (shipWare[4]) {computerReply("RADAR: Good.", 3700);}else{computerReply("RADAR malfunctional.", 4700);};
-			if (shipWare[5]) {computerReply("WARP: Good.", 3700);}else{computerReply("WARP malfunctional.", 5700);};
+			if (shipWare[0]) {computerReply("COMM: Online.");}else{computerReply("COMM: Offline.");};
+			if (shipWare[1]) {computerReply("BLASTER: Online.", 1700);}else{computerReply("BLASTER: Offline.", 1700);};
+			if (shipWare[2]) {computerReply("CRUISE CONTROL: Online.", 2700);}else{computerReply("CRUISE CONTROL: Offline.", 2700);};
+			if (shipWare[3]) {computerReply("SCANNER: Online.", 3700);}else{computerReply("SCANNER: Offline.", 3700);};
+			if (shipWare[4]) {computerReply("RADAR: Online.", 3700);}else{computerReply("RADAR: Offline.", 4700);};
+			if (shipWare[5]) {computerReply("WARP: Online.", 3700);}else{computerReply("WARP: Offline.", 5700);};
 			break;
 		case "fire":
 			if (weCruisin) {
