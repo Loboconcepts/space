@@ -1,0 +1,22 @@
+{
+  "name": "space",
+  "version": "1.0.0",
+  "description": "var rows = speeches.filter(ifTermExists); \t\tfunction ifTermExists(row) { \t\t  \treturn row.term == ui.toLowerCase().replace(/\\?|\\!|\\./g,''); \t\t}",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loboconcepts/space.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Loboconcepts/space/issues"
+  },
+  "homepage": "https://github.com/Loboconcepts/space#readme",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  }
+}
