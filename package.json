@@ -4,7 +4,8 @@
   "description": "var rows = speeches.filter(ifTermExists); \t\tfunction ifTermExists(row) { \t\t  \treturn row.term == ui.toLowerCase().replace(/\\?|\\!|\\./g,''); \t\t}",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/Loboconcepts/space#readme",
   "dependencies": {
     "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "electron": "^3.0.10",
+    "electron-packager": "^13.0.0"
   }
 }
