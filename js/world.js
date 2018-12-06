@@ -615,6 +615,7 @@ function launch(a){
 
 function solarBlasterAnimation(){
 	var c = 1;
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -630,12 +631,13 @@ function solarBlasterAnimation(){
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),consoleGlow(),generalState();
 	}, 15);
 };
 
 function radarAnimation(){
 	var c = 1;
+	canvas.style.boxShadow = "rgb(190, 190, 250) 0px 0px 200px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -652,12 +654,13 @@ function radarAnimation(){
 		ctx.quadraticCurveTo(500, 600-Math.floor(c/3), 700-(c*2), 650-Math.floor(c*1.3));
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),generalState();
+	  if (c > 50) clearInterval(movement),disableButtons(false),consoleGlow(),generalState();
 	}, 15);
 };
 
 function scannerAnimation() {
 	var c = 1;
+	canvas.style.boxShadow = "rgb(190, 255, 190) 0px 0px 200px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -680,12 +683,13 @@ function scannerAnimation() {
 		ctx.lineTo(500,1000);
 		ctx.fill();
 		ctx.closePath();
-	  if (c > 50) clearInterval(movement),disableButtons(false),generalState();
+	  if (c > 50) clearInterval(movement),disableButtons(false),consoleGlow(),generalState();
 	}, 15);
 };
 
 function takeDamage(howMuch){
 	var c = 1;
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -695,12 +699,13 @@ function takeDamage(howMuch){
 	  	ctx.fillStyle = "rgba(150, 150, 255, .1)";
 		ctx.fillRect(0,0,1000,1000);
 		ctx.closePath();
-	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
+	  if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),consoleGlow(),generalState();
 	}, 15);
 };
 
 function dishAndTakeDamageDogfight(howMuch) {
 	var c = 1;
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -721,11 +726,12 @@ function dishAndTakeDamageDogfight(howMuch) {
 		ctx.fill();
 		ctx.stroke();
 		ctx.closePath();
-		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),generalState();
+		if (c > 20) clearInterval(movement),disableButtons(false),drawField(currentLocation),consoleGlow(),generalState();
 	}, 15);
 };
 
-function warpAnimation(){	
+function warpAnimation(){
+	canvas.style.boxShadow = "rgb(255, 255, 255) 0px 0px 200px";
 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
@@ -773,7 +779,7 @@ function warpAnimation(){
 		ctx.lineWidth = 4;
 		ctx.stroke();
 		ctx.closePath();
-	  if (c > 120) clearInterval(movement),disableButtons(false),autoAccel(movement),canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
+	  if (c > 120) clearInterval(movement),disableButtons(false),consoleGlow(),autoAccel(movement),canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
 	}, 15);
 };
 
@@ -803,6 +809,7 @@ function accelerate(){
 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	};
+	consoleGlow();
 	// cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -1975,6 +1982,25 @@ function outerBackgroundArt() {
 		if (loopView(currentLocation+((xi*fm)-(lm*3))+(um*3))=="2") {recordDistantStar(125, 125, 5+(10-Math.floor(xi/5)));}
 		xi = xi + 1;
 	};
+};
+
+function consoleGlow() {
+	if (worldArray[currentLocation-1]) {
+		switch (worldArray[currentLocation-1]) {
+			case "2":
+				canvas.style.boxShadow = "rgb(255, 255, 245) 0px 0px 200px";
+				break;
+			case "3":
+				canvas.style.boxShadow = "rgb("+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[1]+","+rgbGenerateFromCurPos(currentLocation)[2]+") 0px 0px 200px";
+				console.log();
+				break;
+			default:
+				canvas.style.boxShadow = "rgb(190, 190, 190) 0px 0px 200px";
+				break;
+		};
+
+	};
+	
 };
 
 generalState();

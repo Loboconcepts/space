@@ -10,10 +10,14 @@
 		  	width:  100%;
 		  	height: 100%;
 		  	margin: 0px;
-		  	background-color:#999999;
+		  	background-color:#737373;
 			color:#ffffff;
 			overflow-x: hidden;
 			overflow-y: hidden;
+			/*background-image: url("img/bg-sp-1.jpg");
+			background-position: top center;
+    		background-size: 797px 693px;
+    		background-repeat: no-repeat;*/
 		}
 
 		body {
@@ -118,7 +122,7 @@ function reportWorld() {
 reportWorld();
 computerReply("You're finally awake.<br>System booting...");
 computerReply(timeOfDay() + " Commander. All systems go. Input HELP for help.", 2200);
-
+consoleGlow();
 document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 	
 </script>
