@@ -809,6 +809,7 @@ function accelerate(){
 	if (currentLocation > worldArray.length) {currentLocation = (currentLocation - worldArray.length);}
 	else if (currentLocation < 1) {currentLocation = (currentLocation + worldArray.length);}
 	else {currentLocation = (currentLocation);	};
+
 	consoleGlow();
 	// cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	canvas.style.backgroundColor = "#"+bgColors[parseInt(currentLocation.toString().substring(currentLocation.toString().length-2))];
@@ -821,6 +822,7 @@ function accelerate(){
 	backgroundArt();
 	outerBackgroundArt();
 	disableButtons(true);
+	
 	var movement = setInterval(function() {
 		// drawField(currentLocation);
 		for (i=0;i<11;i++) {
@@ -1159,18 +1161,18 @@ function autoAccel(intFunc) {
 		clearInterval(intFunc);
 		drawField(currentLocation);
 		moves = moves+1;
-		return accelerate();
+		return accelerate();	
 	}
 	else if (collideableObjects.indexOf(worldArray[currentLocation-1]) > -1) {
 		// weCruisin = false;
-		drawField(currentLocation);
+		
 		generalState();
 		// takeDamage(20);
 		// return cruiseControl = false;
 	}
 	else {
 		weCruisin = false;
-		drawField(currentLocation);
+		
 		generalState();
 	};
 };
