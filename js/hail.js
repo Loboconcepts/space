@@ -1,6 +1,6 @@
 function alienReply(reply, time) {
 		if (!time) {time = 1000;};
-		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += "<span style='color:#ff0000;'>" + reply + "</span><br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
+		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += "<span style='color:#ff3333;'>" + reply + "</span><br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
 	};
 
 function hail() {
@@ -160,7 +160,7 @@ function conversation(ui) {
 			if (weCruisin) {
 				computerReply("ERROR. Disable cruise control first.");
 			}
-			else if (!shipWare[0]) {
+			else if (!shipWare[1]) {
 				computerReply("ERROR. BLASTER requires repair.");
 			}
 			else {
@@ -415,7 +415,7 @@ function trading(ui) {
 			if (weCruisin) {
 				computerReply("ERROR. Disable cruise control first.");
 			}
-			else if (!shipWare[0]) {
+			else if (!shipWare[1]) {
 				computerReply("ERROR. BLASTER requires repair.");
 			}
 			else {

@@ -321,7 +321,7 @@ function understandUserInput(ui) {
 			computerReply("HYDROXIDE: " + inventory[3], 3700);
 			computerReply("ETERNITY ORBS: " + inventory[4], 4700);
 			break;
-		case "status","error":
+		case "status": case"error":
 			computerReply("Direction: " + direction);
 			computerReply("Orientation: " + topfacing, 1700);
 			computerReply("SOLAR ENERGY: " + inventory[0] + "%",2700);

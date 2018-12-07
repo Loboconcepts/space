@@ -1991,16 +1991,14 @@ function consoleGlow() {
 				canvas.style.boxShadow = "rgb(255, 255, 225) 0px 0px 200px 70px";
 				break;
 			case "3":
-				canvas.style.boxShadow = "rgb("+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[1]+","+rgbGenerateFromCurPos(currentLocation)[2]+") 0px 0px 200px 15px";
+				canvas.style.boxShadow = "rgb("+rgbGenerateFromCurPos(currentLocation)[0]+","+rgbGenerateFromCurPos(currentLocation)[1]+","+rgbGenerateFromCurPos(currentLocation)[2]+") 0px 0px 200px 10px";
 				console.log();
 				break;
 			default:
-				canvas.style.boxShadow = "rgb(190, 190, 190) 0px 0px 200px 10px";
+				canvas.style.boxShadow = "rgb(190, 190, 190) 0px 0px 200px 5px";
 				break;
 		};
-
 	};
-	
 };
 
 generalState();
