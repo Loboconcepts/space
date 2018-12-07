@@ -615,7 +615,7 @@ function launch(a){
 
 function solarBlasterAnimation(){
 	var c = 1;
-	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px 200px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -637,7 +637,7 @@ function solarBlasterAnimation(){
 
 function radarAnimation(){
 	var c = 1;
-	canvas.style.boxShadow = "rgb(190, 190, 250) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(190, 190, 250) 0px 0px 200px 70px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -660,7 +660,7 @@ function radarAnimation(){
 
 function scannerAnimation() {
 	var c = 1;
-	canvas.style.boxShadow = "rgb(190, 255, 190) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(190, 255, 190) 0px 0px 200px 70px";
 	disableButtons(true);
 	var movement = setInterval(function() {
 		c = c+1;
@@ -689,7 +689,7 @@ function scannerAnimation() {
 
 function takeDamage(howMuch){
 	var c = 1;
-	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px 200px";
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -705,7 +705,7 @@ function takeDamage(howMuch){
 
 function dishAndTakeDamageDogfight(howMuch) {
 	var c = 1;
-	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(255, 150, 50) 0px 0px 200px 200px";
 	reduceSolarEnergy(howMuch);
 	disableButtons(true);
 	var movement = setInterval(function() {
@@ -731,7 +731,7 @@ function dishAndTakeDamageDogfight(howMuch) {
 };
 
 function warpAnimation(){
-	canvas.style.boxShadow = "rgb(255, 255, 255) 0px 0px 200px";
+	canvas.style.boxShadow = "rgb(255, 255, 255) 0px 0px 200px 300px";
 	cubeShipPositioning(direction,topfacing,currentLocation,viewOrient);
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0];
 	var a = [-3,3,1,-1,6,-6,1.34,1,-1,10,15];
@@ -1915,7 +1915,6 @@ function generalState() {
 		break;
 		default:console.log("Not set up yet");
 	}
-	if (!isLanded && (worldArray[currentLocation-1] == "3") && direction == "DOWN") {lifeInit();};
 	ctx.closePath();
 };
 

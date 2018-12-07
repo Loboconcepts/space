@@ -3,13 +3,51 @@ function alienReply(reply, time) {
 		return setTimeout(function(){document.getElementById("shipConsole").innerHTML += "<span style='color:#ff3333;'>" + reply + "</span><br>"; document.getElementById("shipConsole").scrollTop = document.getElementById("shipConsole").scrollHeight;}, time);
 	};
 
+function greetingOrTip() {
+	switch ((alienLocation*3)%10) {
+		case 0:
+		return alienReply("Try CCON A in your ship console for speed.");
+		break;
+		case 1:
+		return alienReply("It's less evil to hail an enemy before attacking them.");
+		break;
+		case 2:
+		return alienReply("I heard that you can harvest ETERNITY ORBS on some planets.");
+		break;
+		case 3:
+		return alienReply("Rumor has it that brighter planets have more resources.");
+		break;
+		case 4:
+		return alienReply("I've heard there is a black hole somewhere.");
+		break;
+		case 5:
+		return alienReply("The SCANNER tells you in which direction something is the closest.");
+		break;
+		case 6:
+		return alienReply("The RADAR tells you how far in front of you is the closest object.");
+		break;
+		case 7:
+		return alienReply("You can CHARGE your solar energy when next to a star.");
+		break;
+		case 8:
+		return alienReply("You must be facing DOWN towards a planet to land on it.");
+		break;
+		case 9:
+		return alienReply("Greetings.")
+		break;
+		default:
+		return alienReply("Greetings.")
+		break;
+	};
+};
+
 function hail() {
 	switch (direction) {
 		case "N":
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*x))=="2" || loopView(currentLocation-(xi*x))=="3" || loopView(currentLocation-(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*x))=="a" || loopView(currentLocation-(xi*x))=="z" || loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*x))=="x") {alienLocation = currentLocation-(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -17,7 +55,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*x))=="2" || loopView(currentLocation+(xi*x))=="3" || loopView(currentLocation+(xi*x))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*x))=="a" || loopView(currentLocation+(xi*x))=="z" || loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*x))=="x") {alienLocation = currentLocation+(xi*x); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -25,7 +63,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*z))=="2" || loopView(currentLocation-(xi*z))=="3" || loopView(currentLocation-(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*z))=="a" || loopView(currentLocation-(xi*z))=="z" || loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*z))=="x") {alienLocation = currentLocation-(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -33,7 +71,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*z))=="2" || loopView(currentLocation+(xi*z))=="3" || loopView(currentLocation+(xi*z))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*z))=="a" || loopView(currentLocation+(xi*z))=="z" || loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*z))=="x") {alienLocation = currentLocation+(xi*z); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -41,7 +79,7 @@ function hail() {
 			var xi = 1;
 			while (xi<3) {
 				if (loopView(currentLocation-(xi*y))=="2" || loopView(currentLocation-(xi*y))=="3" || loopView(currentLocation-(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation-(xi*y))=="a" || loopView(currentLocation-(xi*y))=="z" || loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation-(xi*y))=="x") {alienLocation = currentLocation-(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -49,7 +87,7 @@ function hail() {
 			var xi = 0;
 			while (xi<3) {
 				if (loopView(currentLocation+(xi*y))=="2" || loopView(currentLocation+(xi*y))=="3" || loopView(currentLocation+(xi*y))=="4") {return computerReply("Error. Nothing within hailing range.");}
-				else if (loopView(currentLocation+(xi*y))=="a" || loopView(currentLocation+(xi*y))=="z" || loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return alienReply("Greetings.");}}
+				else if (loopView(currentLocation+(xi*y))=="x") {alienLocation = currentLocation+(xi*y); if (goodOrEvil < -100){takeDamage(Math.floor(Math.random()*70)+25);computerReply("Solar energy: " + inventory[0] + "%",1700);return alienReply("Die scum!",200)}else{alienConversation = true;return greetingOrTip();}}
 				else {xi = xi + 1;}
 			}
 			break;
@@ -112,6 +150,9 @@ function conversation(ui) {
 			break;
 		case "where am i":case "where are we":
 			alienReply("In the galaxy.");
+			break;
+		case "cool":
+			alienReply("Yes.");
 			break;
 		case "thank you":case "thanks":
 			alienReply("You're welcome.");
