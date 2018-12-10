@@ -197,23 +197,7 @@ function shipRotation(rAxes, lr) {
 // 	}
 // }
 
-function disableButtons(bool) {
-	if (bool) {
-		if (!cruiseControl || !weCruisin) {
-			document.getElementById("user").disabled = true;	
-		}
-		// for (i=0;i<document.querySelectorAll("button").length;i++) {
-		// 	document.querySelectorAll("button")[i].disabled = true;
-		// }
-	};
-	if (!bool) {
-		document.getElementById("user").disabled = false;
-		document.getElementById("user").focus();
-		// for (i=0;i<document.querySelectorAll("button").length;i++) {
-		// 	document.querySelectorAll("button")[i].disabled = false;
-		// }
-	};
-}
+
 
 function loopView(isWhat) {
 	if (isWhat > worldArray.length) {return worldArray[(isWhat - worldArray.length)-1];}

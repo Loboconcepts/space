@@ -376,6 +376,14 @@ function understandUserInput(ui) {
 			maxSolarPower = 1000;
 			inventory = [maxSolarPower,1000,1000,1000,10];
 			break;
+		case "sound on":
+			computerReply("Audio enabled.");
+			soundOn = true;
+			break;
+		case "sound off":
+			computerReply("Audio disabled.");
+			soundOn = false;
+			break;
 		case "":
 			break;
 		default:

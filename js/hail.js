@@ -4,40 +4,45 @@ function alienReply(reply, time) {
 	};
 
 function greetingOrTip() {
-	switch ((alienLocation*3)%10) {
-		case 0:
-		return alienReply("Try CCON A in your ship console for speed.");
-		break;
-		case 1:
-		return alienReply("It's less evil to hail an enemy before attacking them.");
-		break;
-		case 2:
-		return alienReply("I heard that you can harvest ETERNITY ORBS on some planets.");
-		break;
-		case 3:
-		return alienReply("Rumor has it that brighter planets have more resources.");
-		break;
-		case 4:
-		return alienReply("I've heard there is a black hole somewhere.");
-		break;
-		case 5:
-		return alienReply("The SCANNER tells you in which direction something is the closest.");
-		break;
-		case 6:
-		return alienReply("The RADAR tells you how far in front of you is the closest object.");
-		break;
-		case 7:
-		return alienReply("You can CHARGE your solar energy when next to a star.");
-		break;
-		case 8:
-		return alienReply("You must be facing DOWN towards a planet to land on it.");
-		break;
-		case 9:
-		return alienReply("Greetings.")
-		break;
-		default:
-		return alienReply("Greetings.")
-		break;
+	if ((alienLocation > worldArray.length-200) || (alienLocation < 200)) {
+		return alienReply("I think a black hole is nearby.");
+	}
+	else {
+		switch (alienLocation.toString()[alienLocation.toString().length-3]) {
+			case "0":
+			return alienReply("Try CCON A in your ship console for speed.");
+			break;
+			case "1":
+			return alienReply("It is less evil to hail an enemy before attacking them.");
+			break;
+			case "2":
+			return alienReply("I have heard that you can harvest ETERNITY ORBS on some planets.");
+			break;
+			case "3":
+			return alienReply("Rumor has it that brighter planets have more resources.");
+			break;
+			case "4":
+			return alienReply("I have heard there is a black hole somewhere.");
+			break;
+			case "5":
+			return alienReply("The SCANNER tells you in which direction something is the closest.");
+			break;
+			case "6":
+			return alienReply("The RADAR tells you how far in front of you is the closest object.");
+			break;
+			case "7":
+			return alienReply("You can CHARGE your solar energy when next to a star.");
+			break;
+			case "8":
+			return alienReply("You must be facing DOWN towards a planet to land on it.");
+			break;
+			case "9":
+			return alienReply(story[storyChapter]);
+			break;
+			default:
+			return alienReply("I think a black hole is nearby.")
+			break;
+		};
 	};
 };
 

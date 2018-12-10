@@ -81,10 +81,10 @@ var inventory = [100,0,0,0,0];
 var shipWare = [true,false,true,false,false,false];
 var goodOrEvil = 0;
 var goodEvil = [false,false];
-var storyTime = false;
 var storyChapter = 0;
-var story = ["What initially hits you is an intense smell of ozone, like Earth just following a thunderstorm.<br><br>You open your eyes, unsure of where you are.","1","2","3","4","5"];
-
+var story = ["You seem lost, friend."];
+var soundOn = false;
+var inputDisabled = false;
 
 var alienLocation;
 
@@ -92,45 +92,45 @@ var alienLocation;
 
 //enable this for sound
 
-// var context=new AudioContext();
-// function sound(frequency,type,duration,wv){
-// 	var odd=null;
-// 	var gdd=null;
-// 	var waveArray = new Float32Array(5);
-// 	waveArray[0] = wv[0];
-// 	waveArray[1] = wv[1];
-// 	waveArray[2] = wv[2];
-// 	waveArray[3] = wv[3];
-// 	waveArray[4] = 0;
-// 	odd=context.createOscillator();
-// 	gdd=context.createGain();
-// 	odd.type=type;
-// 	odd.connect(gdd);
-// 	odd.frequency.value=frequency;
-// 	gdd.connect(context.destination);
-// 	odd.start(0);
-// 	gdd.gain.setValueCurveAtTime(waveArray, context.currentTime, duration);
-// };
-// function soundEffect(frequency,type,duration,wv,delay) {
-// 	if (!delay) {delay = 0;};
-// 	return setTimeout(function(){sound(frequency,type,duration,wv)}, delay);
-// };
-
-//disable this and enable above
-function soundEffect() {
-	console.log("disabled");
+var context=new AudioContext();
+function sound(frequency,type,duration,wv){
+	var odd=null;
+	var gdd=null;
+	var waveArray = new Float32Array(5);
+	waveArray[0] = wv[0];
+	waveArray[1] = wv[1];
+	waveArray[2] = wv[2];
+	waveArray[3] = wv[3];
+	waveArray[4] = 0;
+	odd=context.createOscillator();
+	gdd=context.createGain();
+	odd.type=type;
+	odd.connect(gdd);
+	odd.frequency.value=frequency;
+	gdd.connect(context.destination);
+	odd.start(0);
+	gdd.gain.setValueCurveAtTime(waveArray, context.currentTime, duration);
 };
+function soundEffect(frequency,type,duration,wv,delay) {
+	if (soundOn) {
+		if (!delay) {delay = 0;};
+		return setTimeout(function(){sound(frequency,type,duration,wv)}, delay);	
+	};
+};
+
 
 function consoleInput(event) {
 	if (event.keyCode === 13) {
-		if (lastCommand[0] != document.getElementById('user').value) {
-			lastCommand.unshift(document.getElementById('user').value);
-			if (lastCommand.length>6) {
-				lastCommand.splice(-1,1);
-			}
-		}
-		submitUserInput(document.getElementById('user').value);
-		commandChoice = -1;
+		if (!inputDisabled) {
+			if (lastCommand[0] != document.getElementById('user').value) {
+				lastCommand.unshift(document.getElementById('user').value);
+				if (lastCommand.length>6) {
+					lastCommand.splice(-1,1);
+				};
+			};
+			submitUserInput(document.getElementById('user').value);
+			commandChoice = -1;			
+		};
 	};
 	if (event.keyCode === 38) {
 		if (commandChoice<lastCommand.length-1) {
@@ -145,6 +145,24 @@ function consoleInput(event) {
 		document.getElementById('user').value = lastCommand[commandChoice];
 	};
 };
+
+function disableButtons(bool) {
+	if (bool) {
+		if (!cruiseControl || !weCruisin) {
+			inputDisabled = true;	
+		}
+		// for (i=0;i<document.querySelectorAll("button").length;i++) {
+		// 	document.querySelectorAll("button")[i].disabled = true;
+		// }
+	};
+	if (!bool) {
+		inputDisabled = false;
+		document.getElementById("user").focus();
+		// for (i=0;i<document.querySelectorAll("button").length;i++) {
+		// 	document.querySelectorAll("button")[i].disabled = false;
+		// }
+	};
+}
 
 // if (!storyTime) {
 // 	document.getElementById("user").addEventListener("keyup", function(event) {event.preventDefault();
