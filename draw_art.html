@@ -122,12 +122,16 @@ canvas.style.maxHeight = "500px";
 canvas.style.backgroundColor = "#000000";
 var ctx = canvas.getContext("2d");
 
-whichArt(500,500,1000);
+var actPos;
 
-function whichArt(xPos,yPos,size) {
+function rgbGenerateFromCurPos(x) {
+	return [200,230,100];
+};
+
+function regularShip(xPos,yPos,size) {
 	ctx.save();
-	ctx.beginPath();
 	ctx.fillStyle = "rgba(255,0,0, 1)";
+	ctx.beginPath();
     ctx.fillRect(xPos - size/4, yPos,size/2, size/4);
     ctx.closePath();
     ctx.beginPath();
@@ -145,6 +149,33 @@ function whichArt(xPos,yPos,size) {
 	ctx.closePath();
 	ctx.restore();
 };
+
+function whichArt(xPos,yPos,size) {
+	ctx.save();
+	ctx.beginPath();
+	ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-50)+","+(rgbGenerateFromCurPos(actPos)[1]-50)+","+(rgbGenerateFromCurPos(actPos)[2]-50)+", 1)";
+    ctx.moveTo(xPos+size/12, yPos - size/4);
+    ctx.quadraticCurveTo(xPos+size/3, yPos, xPos + size/3, yPos + size/3);
+    ctx.quadraticCurveTo(xPos, yPos, xPos - size/3, yPos + size/3);
+    ctx.quadraticCurveTo(xPos-size/3, yPos, xPos-size/12, yPos - size/4);
+    ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+    ctx.moveTo(xPos, yPos-size/3);
+    ctx.quadraticCurveTo(xPos+size/10, yPos, xPos, yPos + size/3);
+    ctx.quadraticCurveTo(xPos-size/10, yPos, xPos, yPos - size/3);
+    ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.arc(xPos, yPos - size/4, size/12, Math.PI, false);
+	ctx.fillStyle = "rgba(200, 200, 255, 1)";
+	ctx.fill();
+	ctx.closePath();
+	ctx.restore();
+};
+
+whichArt(500,500,1000);
 	
 </script>
 
