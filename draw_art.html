@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Space</title>
+	   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+	   
+
+	   <style type="text/css">
+	   	html, body {
+		  	width:  100%;
+		  	height: 100%;
+		  	margin: 0;
+		  	background-color:#ffffff;
+			color:#ffffff;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			
+			background-position: top center;
+    		background-size: 794px 694px;
+    		background-repeat: no-repeat;
+		}
+
+		body {
+		  position: relative;
+		}
+
+		canvas {
+			-moz-transition: all 1s ease-in;
+			-o-transition: all 1s ease-in;
+			-webkit-transition: all 1s ease-in;
+			transition: all 1s ease-in;
+		}
+		#shipConsole {
+	    	margin:10px auto 0;
+	    	overflow:scroll;
+	    	overflow-y: hidden;
+	    	overflow-x: hidden;
+	    	background:#000000;
+	    	color:#00ff00;
+	    	width:200px;
+	    	height:160px;
+	    	padding:5px;
+	    	font-family: monospace;
+	    	text-align:left;
+	    	background-color:#000000;
+	    }
+	    #memory {
+	    	z-index:999999;
+	    	display:none;
+	    	text-align: left;
+	    	font-family: cursive;
+	    }
+	    #textArea {
+	    	width:400px;
+	    	margin: 0 auto;
+	    	max-width: 92%;
+	    }
+	    .row {
+			margin: 10px 0 0 0;
+			}
+		@media only screen and (max-width: 500px) {
+			html, body {
+				background-position: top center;
+	    		background-size: contain;
+	    		background-repeat: no-repeat;
+			}
+			.row {
+				margin: 5px 0 0 0;
+				height:40% !important;
+			}
+		    #shipView {
+		    	width:auto !important;
+		    	height:89% !important;
+		    	max-height:80% !important;
+		    	padding: 1em;
+		    }
+		    #shipConsole {
+		    	width:70%;
+		    	position:absolute;
+		    	left:30px;
+		    	top:0;
+		    	height: 40px;
+		    	padding:2px;
+		    	overflow:scroll;
+		    	background: transparent;
+		    	overflow-x: hidden;
+		    	overflow-y: hidden;
+		    	-ms-overflow-style: none;
+    			overflow: -moz-scrollbars-none;
+		    }
+		    #shipConsole:-webkit-scrollbar { 
+    			display: none;
+    		}
+		}
+	   </style>
+</head>
+<body style="text-align:center;">
+	
+	
+	<!-- <div id="memory"><div id="textArea"></div></div> -->
+	<div class="row">
+		<canvas id="shipView">Your browser does not support the HTML5 canvas tag.</canvas>
+		
+		<!-- <div id="compass"></div> -->
+		
+		
+	</div>
+	
+<!-- <script src="js/life.js"></script> -->
+
+<script type="text/javascript">
+var W = H = 1000;
+var scale = Math.min(window.innerHeight/H, window.innerWidth/W);
+var canvas = document.getElementById("shipView");
+canvas.width = W;
+canvas.height = H;
+canvas.style.position = "relative";
+canvas.style.width = "100%";
+canvas.style.maxWidth = "500px";
+canvas.style.height = "auto";
+canvas.style.maxHeight = "500px";
+canvas.style.backgroundColor = "#000000";
+var ctx = canvas.getContext("2d");
+
+whichArt(500,500,1000);
+
+function whichArt(xPos,yPos,size) {
+	ctx.save();
+	ctx.beginPath();
+	ctx.fillStyle = "rgba(255,0,0, 1)";
+    ctx.fillRect(xPos - size/4, yPos,size/2, size/4);
+    ctx.closePath();
+    ctx.beginPath();
+	ctx.arc((xPos - size/4)+1, yPos+size/8, size/8,.5*Math.PI,1.5*Math.PI);
+	ctx.fill();
+	ctx.closePath();
+	ctx.beginPath();
+	ctx.arc((xPos + size/4)-1, yPos+size/8, size/8,1.5*Math.PI,.5*Math.PI);
+	ctx.fill();
+	ctx.closePath();
+    ctx.beginPath();
+	ctx.arc(xPos, yPos, size/6, Math.PI, false);
+	ctx.fillStyle = "rgba(200, 200, 255, 1)";
+	ctx.fill();
+	ctx.closePath();
+	ctx.restore();
+};
+	
+</script>
+
+
+</body>
+</html>
