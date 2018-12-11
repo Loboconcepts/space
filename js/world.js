@@ -537,6 +537,36 @@ function move(a){
 	}, 15);
 };
 
+var treeRand = 0.6;
+
+function drawTree(startX, startY, len, angle,treeNum) {
+
+	branchWidth = 10
+	ctx.beginPath();
+	ctx.save();
+	ctx.lineWidth = branchWidth;
+	ctx.translate(startX, startY);
+	ctx.rotate(angle * Math.PI/180);
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, -len);
+	ctx.strokeStyle = "brown";
+	ctx.fillStyle = "green";
+	ctx.stroke();
+
+	if(len < 3) {
+	    ctx.beginPath();
+	    ctx.arc(0, -len, 10, 0, Math.PI/2);
+	    ctx.fill();
+	    ctx.restore();
+	    return;
+	}
+
+	drawTree(0, -len, len*treeRand,angle+10, branchWidth*0.3);
+	drawTree(0, -len, len*treeRand,angle-10,-branchWidth*0.3);
+
+	ctx.restore();
+}
+
 function land(a){
 	var num = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	var newYPos;
@@ -554,6 +584,8 @@ function land(a){
 	  	// ctx.fillStyle = "rgb(" + Math.floor(c/2) + ", " + Math.floor(c/2) + ", " + c + ")";
 		// ctx.fill();
 	  	whichArt(loopView(currentLocation),500,500+(c*29),1000+(c*57),currentLocation);
+	  	drawTree(500,800,c,0,0);
+		
 
 	  	
 		
@@ -1641,13 +1673,13 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 				ctx.beginPath();
 			    ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-50)+","+(rgbGenerateFromCurPos(actPos)[1]-50)+","+(rgbGenerateFromCurPos(actPos)[2]-50)+", 1)";
 			    ctx.moveTo(xPos - size/2, yPos - size/4);
-			    ctx.lineTo(xPos, yPos + size/60);
+			    ctx.lineTo(xPos, yPos + size/30);
 			    ctx.lineTo(xPos + size/2, yPos + size/4);
 			    ctx.fill();
 			    ctx.closePath();
 				ctx.beginPath();
 			    ctx.moveTo(xPos + size/2, yPos - size/4);
-			    ctx.lineTo(xPos, yPos + size/60);
+			    ctx.lineTo(xPos, yPos + size/30);
 			    ctx.lineTo(xPos - size/2, yPos + size/4);
 			    ctx.fill();
 				ctx.closePath();

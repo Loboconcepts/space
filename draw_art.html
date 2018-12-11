@@ -25,10 +25,6 @@
 		}
 
 		canvas {
-			-moz-transition: all 1s ease-in;
-			-o-transition: all 1s ease-in;
-			-webkit-transition: all 1s ease-in;
-			transition: all 1s ease-in;
 		}
 		#shipConsole {
 	    	margin:10px auto 0;
@@ -150,32 +146,47 @@ function regularShip(xPos,yPos,size) {
 	ctx.restore();
 };
 
-function whichArt(xPos,yPos,size) {
+function drawTree(startX, startY, len, angle) {
+	branchWidth = 10
+	ctx.beginPath();
 	ctx.save();
-	ctx.beginPath();
-	ctx.moveTo(xPos-size/3, yPos);
-	ctx.bezierCurveTo(xPos-size/6,yPos+size/3, xPos+size/6,yPos+size/3, xPos+size/3, yPos);
-	ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-50)+","+(rgbGenerateFromCurPos(actPos)[1]-50)+","+(rgbGenerateFromCurPos(actPos)[2]-50)+", 1)";
-	ctx.fill();
-	ctx.beginPath();
-	ctx.moveTo(xPos, yPos - size/10);
-	ctx.bezierCurveTo(xPos-size/2,yPos-size/10, xPos-size/2,yPos+size/6, xPos, yPos+ size/6);
-	ctx.moveTo(xPos, yPos - size/10);
-	ctx.bezierCurveTo(xPos+size/2,yPos-size/10, xPos+size/2,yPos+size/6, xPos, yPos+ size/6);
-	ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-	ctx.fill();
-	ctx.closePath();
-    ctx.beginPath();
-	ctx.arc(xPos, yPos, size/6, Math.PI, false);
-	ctx.moveTo(xPos - size/6, yPos);
-	ctx.bezierCurveTo(xPos - size/10,yPos+size/15, xPos + size/10,yPos+size/15, xPos + size/6,yPos);
-	ctx.fillStyle = "rgba(200, 200, 255, 1)";
-	ctx.fill();
-	ctx.closePath();
+	ctx.lineWidth = branchWidth;
+	ctx.translate(startX, startY);
+	ctx.rotate(angle * Math.PI/180);
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, -len);
+	ctx.strokeStyle = "brown";
+	ctx.fillStyle = "green";
+	ctx.stroke();
+
+	if(len < 3) {
+	    ctx.beginPath();
+	    ctx.arc(0, -len, 10, 0, Math.PI/2);
+	    ctx.fill();
+	    ctx.restore();
+	    return;
+	}
+
+	drawTree(0, -len, len*Math.random(),angle+10, branchWidth*0.8);
+	drawTree(0, -len, len*Math.random(),angle-10,-branchWidth*0.8);
+
 	ctx.restore();
+}
+
+
+
+function whichArt(xPos,yPos,size) {
+	
 };
 
-whichArt(500,500,1000);
+drawTree(100,800,120,0);
+drawTree(300,800,120,0);
+drawTree(500,800,120,0);
+drawTree(700,800,120,0);
+drawTree(900,800,120,0);
+
+
+// whichArt(500,500,1000);
 	
 </script>
 

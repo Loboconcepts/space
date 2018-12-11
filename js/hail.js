@@ -10,31 +10,40 @@ function greetingOrTip() {
 	else {
 		switch (alienLocation.toString()[alienLocation.toString().length-3]) {
 			case "0":
-			return alienReply("Try CCON A in your ship console for speed.");
+			alienReply("Try CCON A in your ship console for speed.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "1":
-			return alienReply("It is less evil to hail an enemy before attacking them.");
+			alienReply("It is less evil to hail an enemy before attacking them.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "2":
-			return alienReply("I have heard that you can harvest ETERNITY ORBS on some planets.");
+			alienReply("I have heard that you can harvest ETERNITY ORBS on some planets.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "3":
-			return alienReply("Rumor has it that brighter planets have more resources.");
+			alienReply("Rumor has it that brighter planets have more resources.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "4":
-			return alienReply("I have heard there is a black hole somewhere.");
+			alienReply("I have heard there is a black hole somewhere.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "5":
-			return alienReply("The SCANNER tells you in which direction something is the closest.");
+			alienReply("The SCANNER tells you in which direction something is the closest.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "6":
-			return alienReply("The RADAR tells you how far in front of you is the closest object.");
+			alienReply("The RADAR tells you how far in front of you is the closest object.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "7":
-			return alienReply("You can CHARGE your solar energy when next to a star.");
+			alienReply("You can CHARGE your solar energy when next to a star.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "8":
-			return alienReply("You must be facing DOWN towards a planet to land on it.");
+			alienReply("You must be facing DOWN towards a planet to land on it.");
+			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			break;
 			case "9":
 			return alienReply(story[storyChapter]);
