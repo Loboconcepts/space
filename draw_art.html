@@ -14,80 +14,12 @@
 			color:#ffffff;
 			overflow-x: hidden;
 			overflow-y: hidden;
-			
-			background-position: top center;
-    		background-size: 794px 694px;
-    		background-repeat: no-repeat;
 		}
-
 		body {
 		  position: relative;
 		}
-
-		canvas {
-		}
-		#shipConsole {
-	    	margin:10px auto 0;
-	    	overflow:scroll;
-	    	overflow-y: hidden;
-	    	overflow-x: hidden;
-	    	background:#000000;
-	    	color:#00ff00;
-	    	width:200px;
-	    	height:160px;
-	    	padding:5px;
-	    	font-family: monospace;
-	    	text-align:left;
-	    	background-color:#000000;
-	    }
-	    #memory {
-	    	z-index:999999;
-	    	display:none;
-	    	text-align: left;
-	    	font-family: cursive;
-	    }
-	    #textArea {
-	    	width:400px;
-	    	margin: 0 auto;
-	    	max-width: 92%;
-	    }
-	    .row {
-			margin: 10px 0 0 0;
-			}
-		@media only screen and (max-width: 500px) {
-			html, body {
-				background-position: top center;
-	    		background-size: contain;
-	    		background-repeat: no-repeat;
-			}
-			.row {
-				margin: 5px 0 0 0;
-				height:40% !important;
-			}
-		    #shipView {
-		    	width:auto !important;
-		    	height:89% !important;
-		    	max-height:80% !important;
-		    	padding: 1em;
-		    }
-		    #shipConsole {
-		    	width:70%;
-		    	position:absolute;
-		    	left:30px;
-		    	top:0;
-		    	height: 40px;
-		    	padding:2px;
-		    	overflow:scroll;
-		    	background: transparent;
-		    	overflow-x: hidden;
-		    	overflow-y: hidden;
-		    	-ms-overflow-style: none;
-    			overflow: -moz-scrollbars-none;
-		    }
-		    #shipConsole:-webkit-scrollbar { 
-    			display: none;
-    		}
-		}
+	    
+		
 	   </style>
 </head>
 <body style="text-align:center;">
@@ -115,7 +47,6 @@ canvas.style.width = "100%";
 canvas.style.maxWidth = "500px";
 canvas.style.height = "auto";
 canvas.style.maxHeight = "500px";
-canvas.style.backgroundColor = "#000000";
 var ctx = canvas.getContext("2d");
 
 var actPos;
@@ -146,32 +77,39 @@ function regularShip(xPos,yPos,size) {
 	ctx.restore();
 };
 
-function drawTree(startX, startY, len, angle) {
-	branchWidth = 10
-	ctx.beginPath();
-	ctx.save();
-	ctx.lineWidth = branchWidth;
-	ctx.translate(startX, startY);
-	ctx.rotate(angle * Math.PI/180);
-	ctx.moveTo(0, 0);
-	ctx.lineTo(0, -len);
-	ctx.strokeStyle = "brown";
-	ctx.fillStyle = "green";
-	ctx.stroke();
+var treeRand = 0.7;
+var branchWidth = 10;
 
-	if(len < 3) {
-	    ctx.beginPath();
-	    ctx.arc(0, -len, 10, 0, Math.PI/2);
-	    ctx.fill();
-	    ctx.restore();
-	    return;
-	}
+// function drawTree(startX, startY, len, angle,width) {
 
-	drawTree(0, -len, len*Math.random(),angle+10, branchWidth*0.8);
-	drawTree(0, -len, len*Math.random(),angle-10,-branchWidth*0.8);
+	
+// 	ctx.lineWidth = width;
+// 	branchWidth = branchWidth*0.5;
+// 	ctx.beginPath();
+// 	ctx.save();
+// 	ctx.translate(startX, startY);
+	
+// 	ctx.rotate(angle * Math.PI/180);
+// 	ctx.moveTo(0, 0);
+// 	ctx.lineTo(0, -len);
+// 	ctx.strokeStyle = "brown";
+// 	ctx.fillStyle = "green";
+// 	ctx.stroke();
 
-	ctx.restore();
-}
+// 	if(len < 3) {
+// 	    ctx.beginPath();
+// 	    ctx.arc(0, -len, 10, 0, Math.PI/2);
+// 	    ctx.fill();
+// 	    ctx.restore();
+// 	    return;
+// 	}
+	
+
+// 	drawTree(0, -len, len*treeRand,angle+15, branchWidth);
+// 	drawTree(0, -len, len*treeRand,angle-15,-branchWidth);
+
+// 	ctx.restore();
+// }
 
 
 
@@ -179,11 +117,165 @@ function whichArt(xPos,yPos,size) {
 	
 };
 
-drawTree(100,800,120,0);
-drawTree(300,800,120,0);
-drawTree(500,800,120,0);
-drawTree(700,800,120,0);
-drawTree(900,800,120,0);
+/*
+
+    Algorithmic Tree - 1.0.0
+    drawing trees algorithmically on the HTML5 canvas
+
+    License       : GPL
+    Developer     : Sameer Borate: http://codediesel.com
+    Web Site      : http://codediesel.com
+
+ */
+
+var tree = {
+
+    canvas:     '',
+    ctx:        '',
+    height:     0,
+    width:      0,
+    spread:     0.6,
+    drawLeaves: true,
+    leavesColor:'',
+    leaveType:  this.MEDIUM_LEAVES,
+    
+    MAX_BRANCH_WIDTH:   20,
+    SMALL_LEAVES:       10,
+    MEDIUM_LEAVES:      200,
+    BIG_LEAVES:         500,
+    THIN_LEAVES:        900,
+    
+    /**
+     * @member draw
+     * tree.draw() initializes the tree structure
+     *
+     * @param {object} ctx      the canvas context
+     * @param {integer} h       height of the canvas
+     * @param {integer} w       width of the canvas
+     * @param {float} spread    how much the tree branches are spread
+     *                          Ranges from 0.3 - 1.
+     * @param {boolean} leaves  draw leaves if set to true    
+     *
+     */
+    draw : function(ctx, h, w, spread, leaves, leaveType) {
+        // Set how much the tree branches are spread
+        if(spread >= 0.3 && spread <= 1) {
+            this.spread = spread;
+        }
+        
+        if(leaves === true || leaves === false) {
+            this.drawLeaves = leaves;
+        }
+        
+        if(leaveType == this.SMALL_LEAVES || 
+           leaveType == this.MEDIUM_LEAVES || 
+           leaveType == this.BIG_LEAVES || 
+           leaveType == this.THIN_LEAVES) {
+            this.leaveType = leaveType;
+        }
+        
+        this.ctx = ctx;
+        this.height = h;
+        this.width = w;
+        this.ctx.clearRect(0,0,this.width,this.height);
+        ctx.strokeStyle = "#332929";
+        // Center the tree in the window
+        this.ctx.translate(this.width/2,this.height);
+        // Set the leaves to a random color
+        this.leavesColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+        // Set branch thickness
+        this.ctx.lineWidth = 1 + (Math.random() * this.MAX_BRANCH_WIDTH);
+        this.ctx.lineJoin = 'round';
+        
+        this.branch(0);
+    },
+    
+    /**
+     * @member branch
+     * tree.branch() main tree drawing function
+     *
+     * @param {String} depth the maimum depth the tree can branch,
+     *        Keep this value near 12, larger value take linger to render.
+     *
+     */
+    branch : function(depth) {
+        if (depth < 12) 
+        {
+            this.ctx.beginPath();
+            this.ctx.moveTo(0,0);
+            this.ctx.lineTo(0,-(this.height)/10);
+            this.ctx.stroke();
+            
+            this.ctx.translate(0,-this.height/10);
+            // Random integer from -0.1 to 0.1
+            var randomN = -(Math.random() * 0.2) + 0.1;
+
+            this.ctx.rotate(randomN); 
+
+            if ((Math.random() * 1) < this.spread)
+            {
+                // Draw the left branches
+                this.ctx.rotate(-0.3);
+                this.ctx.scale(0.7,0.7);
+                this.ctx.save();
+                this.branch(depth + 1);
+                // Draw the right branches
+                this.ctx.restore();  
+                this.ctx.rotate(0.6);
+                this.ctx.save();
+                this.branch(depth + 1);   
+                this.ctx.restore();        
+            }
+            else 
+            { 
+                this.branch(depth);
+            }
+
+        }
+        else
+        {   
+            // Now that we have done drawing branches, draw the leaves
+            if(this.drawLeaves) {
+                var lengthFactor = 200;
+                if(this.leaveType === this.THIN_LEAVES) {
+                    lengthFactor = 10;
+                }
+                this.ctx.fillStyle = this.leavesColor;
+                this.ctx.fillRect(0, 0, this.leaveType, lengthFactor);
+                this.ctx.stroke();
+            }
+        }
+    }
+};
+
+function drawTree() {
+    var drawLeaves = true;
+    var treeSpread = 0.6;
+    var temp  = '1';
+    var leaveType = '';
+
+    switch(temp) {
+        case '1': leaveType = tree.SMALL_LEAVES;
+                break;
+        case '2': leaveType = tree.MEDIUM_LEAVES;
+                break;
+        case '3': leaveType = tree.BIG_LEAVES;
+                break;
+        case '4': leaveType = tree.THIN_LEAVES;
+                break;
+        default:leaveType = tree.MEDIUM_LEAVES;
+    }
+
+    ctx.save();
+    tree.draw(ctx,height,width,treeSpread,drawLeaves,leaveType);
+    ctx.restore();
+}
+var height = 1000;
+var width = 1000;  
+
+// drawTree(500,800,220,0,branchWidth);
+drawTree();
+
 
 
 // whichArt(500,500,1000);
