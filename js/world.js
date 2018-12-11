@@ -1611,6 +1611,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 		case ("x"):
 			switch (getObjCurrentPos(actPos)[getObjCurrentPos(actPos).length-2]) {
 				case "0":case "2":case "4":case "6":
+				// Cornerless Hoverstar
 				ctx.save();
 				ctx.beginPath();
 				ctx.moveTo(xPos-size/3, yPos);
@@ -1635,6 +1636,7 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 				ctx.restore();
 				break;
 				case "5":case "7":case "9":
+				// Flat-X Starseeker
 				ctx.save();
 				ctx.beginPath();
 			    ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-50)+","+(rgbGenerateFromCurPos(actPos)[1]-50)+","+(rgbGenerateFromCurPos(actPos)[2]-50)+", 1)";
@@ -1672,17 +1674,33 @@ function whichArt(posNum,xPos,yPos,size,actPos) {
 				ctx.restore();
 				break;
 				case "1":case "3":case "8":
+				// Quadwing Cruiser
 				ctx.save();
 				ctx.beginPath();
-				ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
-			    ctx.moveTo(xPos, yPos - size/4);
-			    ctx.quadraticCurveTo(xPos, yPos, xPos + size/2, yPos + size/3);
-			    ctx.quadraticCurveTo(xPos, yPos, xPos - size/2, yPos + size/3);
-			    ctx.quadraticCurveTo(xPos, yPos, xPos, yPos - size/4);
+				ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-50)+","+(rgbGenerateFromCurPos(actPos)[1]-50)+","+(rgbGenerateFromCurPos(actPos)[2]-50)+", 1)";
+			    ctx.moveTo(xPos+size/12, yPos - size/4);
+			    ctx.quadraticCurveTo(xPos+size/3, yPos, xPos + size/3, yPos + size/3);
+			    ctx.quadraticCurveTo(xPos, yPos, xPos - size/3, yPos + size/3);
+			    ctx.quadraticCurveTo(xPos-size/3, yPos, xPos-size/12, yPos - size/4);
 			    ctx.fill();
 				ctx.closePath();
 				ctx.beginPath();
-				ctx.arc(xPos, yPos + size/16, size/8, 2 * Math.PI, false);
+				ctx.fillStyle = "rgba("+(rgbGenerateFromCurPos(actPos)[0]-25)+","+(rgbGenerateFromCurPos(actPos)[1]-25)+","+(rgbGenerateFromCurPos(actPos)[2]-25)+", 1)";
+			    ctx.moveTo(xPos+size/12, yPos-size/4);
+			    ctx.quadraticCurveTo(xPos+size/10, yPos, xPos+size/12, yPos + size/6);
+			    ctx.quadraticCurveTo(xPos, yPos+size/4, xPos-size/12, yPos + size/6);
+			    ctx.quadraticCurveTo(xPos-size/10, yPos, xPos-size/12, yPos - size/4);
+			    ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				ctx.fillStyle = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
+			    ctx.moveTo(xPos, yPos-size/3);
+			    ctx.quadraticCurveTo(xPos+size/10, yPos, xPos, yPos + size/3);
+			    ctx.quadraticCurveTo(xPos-size/10, yPos, xPos, yPos - size/3);
+			    ctx.fill();
+				ctx.closePath();
+				ctx.beginPath();
+				ctx.arc(xPos, yPos - size/4, size/12, Math.PI, false);
 				ctx.fillStyle = "rgba(200, 200, 255, 1)";
 				ctx.fill();
 				ctx.closePath();
