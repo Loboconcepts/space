@@ -130,8 +130,7 @@ function whichArt(xPos,yPos,size) {
 
 var tree = {
 
-    canvas:     '',
-    ctx:        '',
+    
     height:     0,
     width:      0,
     spread:     0.6,
@@ -177,17 +176,17 @@ var tree = {
         this.ctx = ctx;
         this.height = h;
         this.width = w;
-        this.ctx.clearRect(0,0,this.width,this.height);
+        // this.ctx.clearRect(0,0,this.width,this.height);
         ctx.strokeStyle = "#332929";
         // Center the tree in the window
         this.ctx.translate(this.width/2,this.height);
         // Set the leaves to a random color
-        this.leavesColor = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+        this.leavesColor = "rgba("+rgbGenerateFromCurPos(actPos)[0]+","+rgbGenerateFromCurPos(actPos)[1]+","+rgbGenerateFromCurPos(actPos)[2]+", 1)";
         // Set branch thickness
-        this.ctx.lineWidth = 1 + (Math.random() * this.MAX_BRANCH_WIDTH);
+        this.ctx.lineWidth = 2 + (Math.random() * this.MAX_BRANCH_WIDTH);
         this.ctx.lineJoin = 'round';
         
-        this.branch(0);
+        this.branch(2);
     },
     
     /**
@@ -222,6 +221,7 @@ var tree = {
                 // Draw the right branches
                 this.ctx.restore();  
                 this.ctx.rotate(0.6);
+
                 this.ctx.save();
                 this.branch(depth + 1);   
                 this.ctx.restore();        
@@ -248,33 +248,67 @@ var tree = {
     }
 };
 
-function drawTree() {
-    var drawLeaves = true;
-    var treeSpread = 0.6;
-    var temp  = '1';
-    var leaveType = '';
+// function drawTree() {
+//     var temp  = '1';
+//     var leaveType = '';
 
-    switch(temp) {
-        case '1': leaveType = tree.SMALL_LEAVES;
-                break;
-        case '2': leaveType = tree.MEDIUM_LEAVES;
-                break;
-        case '3': leaveType = tree.BIG_LEAVES;
-                break;
-        case '4': leaveType = tree.THIN_LEAVES;
-                break;
-        default:leaveType = tree.MEDIUM_LEAVES;
+//     switch(temp) {
+//         case '1': leaveType = tree.SMALL_LEAVES;
+//                 break;
+//         case '2': leaveType = tree.MEDIUM_LEAVES;
+//                 break;
+//         case '3': leaveType = tree.BIG_LEAVES;
+//                 break;
+//         case '4': leaveType = tree.THIN_LEAVES;
+//                 break;
+//         default:leaveType = tree.MEDIUM_LEAVES;
+//     }
+
+//     ctx.save();
+//     tree.draw(ctx,1000,1000,0.6,true,tree.BIG_LEAVES);
+//     ctx.restore();
+// }
+
+ctx.save();
+tree.draw(ctx,1000,1000,0.7,true,500);
+ctx.restore();
+
+var planetGrowth = {
+
+    draw : function(ctx) {
+        this.ctx = ctx;
+        this.height = 1000;
+        this.width = 1000;
+        ctx.strokeStyle = "#000000";
+        this.ctx.translate(500,0);
+        this.ctx.lineJoin = 'round';
+        this.river(9);
+        
+
+    },
+    river : function(depth) {
+        if (depth > 0) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(0,1000);
+            this.ctx.lineWidth = depth*2;
+            this.ctx.lineTo(0,depth * 100);
+            this.ctx.stroke(); 
+            this.ctx.translate(0,-depth*20);
+            var randomN = -(Math.random() * 0.2) + 0.1;
+
+            this.ctx.rotate(randomN); 
+            this.ctx.save();
+            this.river(depth - 1);   
+            this.ctx.restore(); 
+        }
+        
     }
 
-    ctx.save();
-    tree.draw(ctx,height,width,treeSpread,drawLeaves,leaveType);
-    ctx.restore();
-}
-var height = 1000;
-var width = 1000;  
 
-// drawTree(500,800,220,0,branchWidth);
-drawTree();
+};
+
+// planetGrowth.draw(ctx);
+
 
 
 
