@@ -7,7 +7,7 @@ var x = 101;
 var rarityValue = 131;
 //x*x
 // 152717
-var currentLocation = 152717;
+var currentLocation = 142517;
 var moves = 0;
 var i = 0;
 var y = x*x;
@@ -81,8 +81,8 @@ var inventory = [100,0,0,0,0];
 var shipWare = [true,false,true,false,false,false];
 var goodOrEvil = 0;
 var goodEvil = [false,false];
-var storyChapter = 0;
-var story = ["You seem lost, friend."];
+
+var questing = false;
 var soundOn = false;
 var inputDisabled = false;
 

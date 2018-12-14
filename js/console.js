@@ -13,6 +13,7 @@ function understandUserInput(ui) {
 	else if (landConversation && currentlyTrading) {return landTrading(ui)}
 	else if (alienConversation) {return conversation(ui)}
 	else if (landConversation) {return landConvo(ui)}
+	else if (questing) {return quest(ui)}
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {

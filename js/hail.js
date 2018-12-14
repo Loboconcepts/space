@@ -9,47 +9,38 @@ function greetingOrTip() {
 	}
 	else {
 		switch (alienLocation.toString()[alienLocation.toString().length-3]) {
-			case "0":
-			alienReply("Try CCON A in your ship console for speed.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "1":
-			alienReply("It is less evil to hail an enemy before attacking them.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "2":
-			alienReply("I have heard that you can harvest ETERNITY ORBS on some planets.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "3":
-			alienReply("Rumor has it that brighter planets have more resources.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "4":
-			alienReply("I have heard there is a black hole somewhere.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "5":
-			alienReply("The SCANNER tells you in which direction something is the closest.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "6":
-			alienReply("The RADAR tells you how far in front of you is the closest object.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "7":
-			alienReply("You can CHARGE your solar energy when next to a star.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "8":
-			alienReply("You must be facing DOWN towards a planet to land on it.");
-			return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
-			break;
-			case "9":
-			return alienReply(story[storyChapter]);
-			break;
+			// case "0":
+			// alienReply("Try CCON A in your ship console.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "1":
+			// alienReply("It is less evil to HAIL an enemy before attacking them.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "2":
+			// alienReply("I have heard that you can HARVEST ETERNITY ORBS on some planets.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "5":
+			// alienReply("The SCANNER tells you in which direction something is the closest.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "6":
+			// alienReply("The RADAR tells you how far in front of you is the closest object.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "7":
+			// alienReply("You can CHARGE your solar energy when next to a star.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
+			// case "8":
+			// alienReply("You must be facing DOWN towards a planet to LAND on it.");
+			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
+			// break;
 			default:
-			return alienReply("I think a black hole is nearby.")
+			alienConversation = false;
+			questing = true;
+			return alienReply(story[storyChapter]);
 			break;
 		};
 	};
