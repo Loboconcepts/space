@@ -1,5 +1,5 @@
 var storyChapter = 0;
-var story = ["You appear to be lost.","Why should I help you?","You can keep asking all you want."];
+var story = ["You appear to be lost.","Why should I help you?","Why don't you ask what you can do for me?"];
 
 function quest(ui) {
 	switch (storyChapter) {
