@@ -14,6 +14,7 @@ function understandUserInput(ui) {
 	else if (alienConversation) {return conversation(ui)}
 	else if (landConversation) {return landConvo(ui)}
 	else if (questing) {return quest(ui)}
+	else if (tutorial) {return consoleTutorial(ui)}
 	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {
@@ -384,6 +385,11 @@ function understandUserInput(ui) {
 		case "sound off":
 			computerReply("Audio disabled.");
 			soundOn = false;
+			break;
+		case "toothpick":case "toothpick please":case "i need a toothpick":case "give me a toothpick":
+			computerReply("ERROR: TOOTHPICK reservoir depleted.");
+			computerReply("Recommended action: Find a TOOTHPICK.",2200);
+			computerReply("Input HELP for commands.",3200);
 			break;
 		case "":
 			break;

@@ -33,17 +33,22 @@
 		#shipConsole {
 	    	margin:10px auto 0;
 	    	overflow:scroll;
-	    	overflow-y: hidden;
 	    	overflow-x: hidden;
 	    	background:#000000;
 	    	color:#00ff00;
-	    	width:200px;
+	    	width:400px;
 	    	height:160px;
 	    	padding:5px;
+	    	padding-right: 17px;
+	    	box-sizing: content-box;
 	    	font-family: monospace;
 	    	text-align:left;
 	    	background-color:#000000;
 	    }
+	    ::-webkit-scrollbar {
+		    width: 0px;
+		    background: transparent;
+		}
 	    #memory {
 	    	z-index:999999;
 	    	display:none;
@@ -129,13 +134,34 @@ function reportWorld() {
 reportWorld();
 computerReply("You're finally awake.<br>Scanning vitals...");
 computerReply("HR: 90bpm", 2200);
-computerReply("RR: 20bpm", 2400);
-computerReply("BP: 110/60mmHg", 2600);
-computerReply("MAP: 70mmHg", 2800);
-computerReply("O2 Sat: 98%", 3000);
-computerReply("Temp: 98.6", 3200);
-computerReply("A&O: x4", 3400);
-computerReply("EEG: 8Hz", 3600);
+computerReply("RR: 20bpm", 2300);
+computerReply("BP: 110/60mmHg", 2400);
+computerReply("PPV: 30mmHg", 2500);
+computerReply("MAP: 70mmHg",2600);
+computerReply("O2 Sat: 98%", 2700);
+computerReply("Temp: 98.6", 2800);
+computerReply("BG: 100mg/dL", 2900);
+computerReply("A&O: x4", 3000);
+computerReply("UOP: 50mL/h", 3100);
+computerReply("EEG: 8Hz", 3200);
+computerReply("Teeth: Minor non-antigenic foreign object found.", 3400);
+computerReply("Recommended intervention: TOOTHPICK.", 4800);
+computerReply("Input TOOTHPICK in console.", 6200);
+function consoleTutorial(ui) {
+	switch(ui) {
+		case "toothpick":
+			computerReply("ERROR: TOOTHPICK reservoir depleted.");
+			computerReply("Recommended action: Find a TOOTHPICK.",2800);
+			computerReply("Input HELP for commands.",4600);
+			tutorial = false;
+			break;
+		default:
+			computerReply("Input TOOTHPICK in console.");
+			break;
+	}
+
+}
+
 consoleGlow();
 document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 	

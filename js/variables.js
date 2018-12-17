@@ -83,6 +83,7 @@ var goodOrEvil = 0;
 var goodEvil = [false,false];
 
 var questing = false;
+var tutorial = true;
 var soundOn = false;
 var inputDisabled = false;
 
