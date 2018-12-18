@@ -205,6 +205,12 @@ function loopView(isWhat) {
 	else {return worldArray[(isWhat-1)];	}
 };
 
+function loopViewNum(isWhat) {
+	if (isWhat > worldArray.length) {return (isWhat - worldArray.length);}
+	else if (isWhat < 1) {return (isWhat + worldArray.length);}
+	else {return (isWhat);	}
+};
+
 //for oganization
 var n = 0;
 
@@ -562,7 +568,10 @@ function land(a){
 		ctx.closePath();
 
 		if (c > 205 ) {
-	  		if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
+			if (storyLocations.indexOf(currentLocation.toString(36)) != -1) {
+				generateAlien(0,(1125-((c-200)*20)));
+			}
+	  		else if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 				generateAlien(0,(1125-((c-200)*20)));
 			};
 	  	};
@@ -590,7 +599,10 @@ function launch(a){
 		ctx.closePath();
 
 		if (c < 51 ) {
-			if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
+			if (storyLocations.indexOf(currentLocation.toString(36)) != -1) {
+				generateAlien(0,0+c*20);
+			}
+			else if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 	  			generateAlien(0,0+c*20);
 	  		};
 	  	};

@@ -8,14 +8,15 @@ function submitUserInput(x) {
 };
 
 function understandUserInput(ui) {
+	let uiFormat = ui.toLowerCase().replace(/\?|\!|\./g,'');
 	document.getElementById("shipConsole").innerHTML += "&dash;" + ui + "<br>";
-	if (alienConversation && currentlyTrading) {return trading(ui)}
-	else if (landConversation && currentlyTrading) {return landTrading(ui)}
-	else if (alienConversation) {return conversation(ui)}
-	else if (landConversation) {return landConvo(ui)}
-	else if (questing) {return quest(ui)}
-	else if (tutorial) {return consoleTutorial(ui)}
-	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
+	if (alienConversation && currentlyTrading) {return trading(uiFormat)}
+	else if (landConversation && currentlyTrading) {return landTrading(uiFormat)}
+	else if (alienConversation) {return conversation(uiFormat)}
+	else if (landConversation) {return landConvo(uiFormat)}
+	else if (questing) {return quest(uiFormat)}
+	else if (tutorial) {return consoleTutorial(uiFormat)}
+	switch (uiFormat) {
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {
 				computerReply("Yawing Left");
@@ -149,10 +150,10 @@ function understandUserInput(ui) {
 					computerReply(scanPlanet(), 4800);
 					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 			  			landConversation = true;
-			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
+			  			alienReply("Greetings! Welcome to " + planetNamer(currentLocation) + ".", 5800);
 			  		}
 			  		else {
-			  			computerReply("Welcome to " + planetNamer() + ".", 5800);
+			  			computerReply("Welcome to " + planetNamer(currentLocation) + ".", 5800);
 			  		};
 					// setTimeout(function() {alienLife(0,0)}, 5200);
 					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
@@ -179,12 +180,16 @@ function understandUserInput(ui) {
 					isLanded = true;
 					computerReply("Land sequence completed successfully.", 3800);
 					computerReply(scanPlanet(), 4800);
-					if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
+					if (storyLocations.indexOf(currentLocation.toString(36)) != -1) {
+						landConversation = true;
+			  			alienReply("Greetings! Welcome to " + planetNamer(currentLocation) + ".", 5800);
+					}
+					else if ((currentLocation.toString()[currentLocation.toString().length-1]%3==0) || (currentLocation.toString()[currentLocation.toString().length-1]%4==0)){
 			  			landConversation = true;
-			  			alienReply("Greetings! Welcome to " + planetNamer() + ".", 5800);
+			  			alienReply("Greetings! Welcome to " + planetNamer(currentLocation) + ".", 5800);
 			  		}
 			  		else {
-			  			computerReply("Welcome to " + planetNamer() + ".", 5800);
+			  			computerReply("Welcome to " + planetNamer(currentLocation) + ".", 5800);
 			  		};
 					// setTimeout(function() {alienLife(0,0)}, 5200);
 					soundEffect(130.8, 'sine',4,[.3,.7,1,.5]);
@@ -393,6 +398,9 @@ function understandUserInput(ui) {
 			break;
 		case "":
 			break;
+		case "nearest":
+			computerReply(nearestPlanet());
+			break;
 		default:
 			computerReply("Does not compute.");
 	};
@@ -481,6 +489,67 @@ function scanUniverse() {
 		else if (loopView(currentLocation+((xi*y)+x)-z)!="1") {return computerReply("The nearest object is DOWN.");}
 		else if (loopView(currentLocation+((xi*y)+x))!="1") {return computerReply("The nearest object is DOWN.");}
 		else if (loopView(currentLocation+((xi*y)+x)+z)!="1") {return computerReply("The nearest object is DOWN.");}
+		else {xi = xi + 1;};
+	};
+};
+
+function scanUniverseSpecific(distance,objectNum, objectName) {
+	var xi = distance;
+	while (xi<20) {
+		if (loopView(currentLocation-(xi*x))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-(xi*x))];}
+		else if (loopView(currentLocation+(xi*x))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+(xi*x))];}
+		else if (loopView(currentLocation-(xi*z))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-(xi*z))];}
+		else if (loopView(currentLocation+(xi*z))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+(xi*z))];}
+		else if (loopView(currentLocation-(xi*y))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-(xi*y))];}
+		else if (loopView(currentLocation+(xi*y))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+(xi*y))];}
+		else if (loopView(currentLocation-(((xi*x)-z)-y))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-(((xi*x)-z)-y))];}
+		else if (loopView(currentLocation-((xi*x)-z))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)-z))];}
+		else if (loopView(currentLocation-(((xi*x)-z)+y))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-(((xi*x)-z)+y))];}
+		else if (loopView(currentLocation-((xi*x)-y))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)-y))];}
+		else if (loopView(currentLocation-((xi*x)+y))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)+y))];}
+		else if (loopView(currentLocation-((xi*x)+z)-y)==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)+z)-y)];}
+		else if (loopView(currentLocation-((xi*x)+z))==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)+z))];}
+		else if (loopView(currentLocation-((xi*x)+z)+y)==objectNum) {return [objectName,xi,"NORTH",loopViewNum(currentLocation-((xi*x)+z)+y)];}
+		else if (loopView(currentLocation+(((xi*x)-z)-y))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+(((xi*x)-z)-y))];}
+		else if (loopView(currentLocation+((xi*x)-z))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)-z))];}
+		else if (loopView(currentLocation+(((xi*x)-z)+y))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+(((xi*x)-z)+y))];}
+		else if (loopView(currentLocation+((xi*x)-y))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)-y))];}
+		else if (loopView(currentLocation+((xi*x)+y))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)+y))];}
+		else if (loopView(currentLocation+((xi*x)+z)-y)==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)+z)-y)];}
+		else if (loopView(currentLocation+((xi*x)+z))==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)+z))];}
+		else if (loopView(currentLocation+((xi*x)+z)+y)==objectNum) {return [objectName,xi,"SOUTH",loopViewNum(currentLocation+((xi*x)+z)+y)];}
+		else if (loopView(currentLocation-(((xi*z)-x)-y))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-(((xi*z)-x)-y))];}
+		else if (loopView(currentLocation-((xi*z)-x))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)-x))];}
+		else if (loopView(currentLocation-(((xi*z)-x)+y))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-(((xi*z)-x)+y))];}
+		else if (loopView(currentLocation-((xi*z)-y))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)-y))];}
+		else if (loopView(currentLocation-((xi*z)+y))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)+y))];}
+		else if (loopView(currentLocation-((xi*z)+x)-y)==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)+x)-y)];}
+		else if (loopView(currentLocation-((xi*z)+x))==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)+x))];}
+		else if (loopView(currentLocation-((xi*z)+x)+y)==objectNum) {return [objectName,xi,"WEST",loopViewNum(currentLocation-((xi*z)+x)+y)];}
+		else if (loopView(currentLocation+(((xi*z)-x)-y))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+(((xi*z)-x)-y))];}
+		else if (loopView(currentLocation+((xi*z)-x))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)-x))];}
+		else if (loopView(currentLocation+(((xi*z)-x)+y))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+(((xi*z)-x)+y))];}
+		else if (loopView(currentLocation+((xi*z)-y))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)-y))];}
+		else if (loopView(currentLocation+((xi*z)+y))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)+y))];}
+		else if (loopView(currentLocation+((xi*z)+x)-y)==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)+x)-y)];}
+		else if (loopView(currentLocation+((xi*z)+x))==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)+x))];}
+		else if (loopView(currentLocation+((xi*z)+x)+y)==objectNum) {return [objectName,xi,"EAST",loopViewNum(currentLocation+((xi*z)+x)+y)];}
+		else if (loopView(currentLocation-(((xi*y)-x)-z))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-(((xi*y)-x)-z))];}
+		else if (loopView(currentLocation-((xi*y)-x))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)-x))];}
+		else if (loopView(currentLocation-(((xi*y)-x)+z))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-(((xi*y)-x)+z))];}
+		else if (loopView(currentLocation-((xi*y)-z))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)-z))];}
+		else if (loopView(currentLocation-((xi*y)+z))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)+z))];}
+		else if (loopView(currentLocation-((xi*y)+x)-z)==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)+x)-z)];}
+		else if (loopView(currentLocation-((xi*y)+x))==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)+x))];}
+		else if (loopView(currentLocation-((xi*y)+x)+z)==objectNum) {return [objectName,xi,"UP",loopViewNum(currentLocation-((xi*y)+x)+z)];}
+		else if (loopView(currentLocation+(((xi*y)-x)-z))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+(((xi*y)-x)-z))];}
+		else if (loopView(currentLocation+((xi*y)-x))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)-x))];}
+		else if (loopView(currentLocation+(((xi*y)-x)+z))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+(((xi*y)-x)+z))];}
+		else if (loopView(currentLocation+((xi*y)-z))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)-z))];}
+		else if (loopView(currentLocation+((xi*y)+z))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)+z))];}
+		else if (loopView(currentLocation+((xi*y)+x)-z)==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)+x)-z)];}
+		else if (loopView(currentLocation+((xi*y)+x))==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)+x))];}
+		else if (loopView(currentLocation+((xi*y)+x)+z)==objectNum) {return [objectName,xi,"DOWN",loopViewNum(currentLocation+((xi*y)+x)+z)];}
 		else {xi = xi + 1;};
 	};
 };
@@ -776,8 +845,8 @@ function scanPlanet() {
 	
 };
 
-function planetNamer() {
-	var sp = currentLocation.toString().split("");
+function planetNamer(loc) {
+	var sp = loc.toString().split("");
 	var v1 = ['br','','cr','dr','','fr','gr','','pr','','str','','tr','bl','','cl','fl','','gl','','pl','sl','sc','sk','sm','sn','sp','st','sw','ch','','sh','th','wh','','ex','b','c','d','','f','g','h','','i','j','','k','l','m','n','','p','q','r','s','t','','v','w','x','y','z'];
 	var vv = ['a','ae','ai','ao','au','e','ea','ee','ei','eo','eu','i','ia','ie','io','iu','o','oa','oe','oi','oo','ou','u','ua','ue','ui','uo'];
 	var v2 = ['th','','he','an','','in','','er','on','re','','ed','nd','ha','','at','en','es','','of','nt','','ti','','to','le','','is','','ou','ar','','as','de','rt','','ve','the','','and','tha','','ent','ion','tio','for','nde','has','nce','tis','oft','men',''];
@@ -792,8 +861,3 @@ function planetNamer() {
 	}
 	return name.toUpperCase();
 };
-
-
-
-
-

@@ -2,8 +2,8 @@ function alienLife(xPos,yPos) {
 
 	if (!xPos) {xPos = 0};
 	if (!yPos) {yPos = 0};
-	if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5){
-		generateAlien(xPos,yPos);
+	if (currentLocation.toString(10)[currentLocation.toString(10).length-1]>5) {
+		return generateAlien(xPos,yPos);
 	};
 };
 

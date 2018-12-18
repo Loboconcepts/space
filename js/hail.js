@@ -11,31 +11,24 @@ function greetingOrTip() {
 		switch (alienLocation.toString()[alienLocation.toString().length-3]) {
 			// case "0":
 			// alienReply("Try CCON A in your ship console.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "1":
 			// alienReply("It is less evil to HAIL an enemy before attacking them.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "2":
 			// alienReply("I have heard that you can HARVEST ETERNITY ORBS on some planets.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "5":
 			// alienReply("The SCANNER tells you in which direction something is the closest.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "6":
 			// alienReply("The RADAR tells you how far in front of you is the closest object.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "7":
 			// alienReply("You can CHARGE your solar energy when next to a star.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			// case "8":
 			// alienReply("You must be facing DOWN towards a planet to LAND on it.");
-			// return alienReply(["How can I help?","What do you need?","What can I do for you?"][Math.floor(Math.random()*3)],2000)
 			// break;
 			default:
 			alienConversation = false;
@@ -104,7 +97,7 @@ function hail() {
 };
 
 function conversation(ui) {
-	switch (ui.toLowerCase().replace(/\?|\!|\./g,'')) {
+	switch (ui) {
 		case "yl":case "yaw left":
 			if (!weCruisin && !isLanded) {
 				alienReply("Farewell");
@@ -155,6 +148,9 @@ function conversation(ui) {
 			break;
 		case "where am i":case "where are we":
 			alienReply("In the galaxy.");
+			break;
+		case "toothpick":case "do you have a toothpick":case "i need a toothpick":case "can i have a toothpick":
+			alienReply("I cannot help you.");
 			break;
 		case "cool":
 			alienReply("Yes.");

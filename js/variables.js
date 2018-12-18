@@ -73,6 +73,7 @@ var landConversation = false;
 var currentlyTrading = false;
 var dealOrNoDeal = [];
 var harvestedLocations = [];
+var storyLocations = [];
 var maxSolarPower = 100;
 var maxWarp = 10;
 // [SOLARPOWER, IRON OXIDE, HYDROCARBON, HYDROXIDE, ETERNITY ORB]
@@ -83,7 +84,7 @@ var goodOrEvil = 0;
 var goodEvil = [false,false];
 
 var questing = false;
-var tutorial = true;
+var tutorial = false;
 var soundOn = false;
 var inputDisabled = false;
 
