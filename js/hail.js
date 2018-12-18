@@ -155,9 +155,6 @@ function conversation(ui) {
 		case "cool":
 			alienReply("Yes.");
 			break;
-		case "thank you":case "thanks":
-			alienReply("You're welcome.");
-			break;
 		case "hello":case "hi":case "yo":case "howdy":case "good morning":case "good midday":case "good afternoon":case "good evening":
 			alienReply(timeOfDay() + ".");
 			break;
